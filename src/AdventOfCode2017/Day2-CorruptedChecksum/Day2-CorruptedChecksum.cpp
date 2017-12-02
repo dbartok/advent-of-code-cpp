@@ -25,6 +25,31 @@ unsigned checkSumDiffSmallestLargest(const RowsOfNumbers& rows)
 	return checkSum;
 }
 
+unsigned sumEvenlyDivisbleValues(const RowsOfNumbers& rows)
+{
+	unsigned sum = 0;
+
+	for (const auto& row : rows)
+	{
+		for (size_t i = 0; i < row.size(); i++)
+		{
+			for (size_t j = i + 1; j < row.size(); j++)
+			{
+				unsigned dividend = std::max(row[i], row[j]);
+				unsigned divisor = std::min(row[i], row[j]);
+
+				if (dividend % divisor == 0)
+				{
+					sum += dividend / divisor;
+					break;
+				}
+			}
+		}
+	}
+
+	return sum;
+}
+
 
 int main()
 {
@@ -40,4 +65,5 @@ int main()
 	}
 
 	std::cout << "First part: " << checkSumDiffSmallestLargest(inputRows) << std::endl;
+	std::cout << "Second part: " << sumEvenlyDivisbleValues(inputRows) << std::endl;
 }
