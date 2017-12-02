@@ -16,4 +16,13 @@ public:
 		Assert::AreEqual(9u, sumOfDigitsMatchNextDigit("91212129"));
 	}
 
+	TEST_METHOD(sumOfDigitsMatchHalfwayRoundDigit_SimpleTests)
+	{
+		Assert::AreEqual(6u, sumOfDigitsMatchHalfwayRoundDigit("1212"));
+		Assert::AreEqual(0u, sumOfDigitsMatchHalfwayRoundDigit("1221"));
+		Assert::AreEqual(4u, sumOfDigitsMatchHalfwayRoundDigit("123425"));
+		Assert::AreEqual(12u, sumOfDigitsMatchHalfwayRoundDigit("123123"));
+		Assert::AreEqual(4u, sumOfDigitsMatchHalfwayRoundDigit("12131415"));
+	}
+
 };
