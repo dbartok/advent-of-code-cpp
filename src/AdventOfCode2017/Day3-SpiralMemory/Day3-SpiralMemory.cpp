@@ -1,5 +1,7 @@
 #include "Day3-SpiralMemory.h"
 
+#include "StressTestWriter.h"
+
 #include <fstream>
 #include <iostream>
 #include <algorithm>
@@ -70,13 +72,21 @@ unsigned stepsToCarryBack(unsigned location)
     return radiusOfRing + distanceFromMiddleOfSection;
 }
 
+unsigned stressTestFirstValueGreaterThan(unsigned threshold)
+{
+    StressTestWriter writer{};
+    writer.writeUntil(threshold);
+    return writer.getLastWritten();
+}
+
 
 int main()
 {
     std::fstream fileIn("input.txt");
-    unsigned inputLocation;
+    unsigned input;
 
-    fileIn >> inputLocation;
+    fileIn >> input;
 
-    std::cout << "First part: " << stepsToCarryBack(inputLocation) << std::endl;
+    std::cout << "First part: " << stepsToCarryBack(input) << std::endl;
+    std::cout << "Second part: " << stressTestFirstValueGreaterThan(input) << std::endl;
 }

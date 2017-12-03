@@ -219,6 +219,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Day3-SpiralMemory.cpp" />
+    <ClCompile Include="Head.cpp" />
+    <ClCompile Include="InfiniteGrid.cpp" />
+    <ClCompile Include="InfiniteGridUtil.cpp" />
+    <ClCompile Include="StressTestWriter.cpp" />
     <ClCompile Include="test_Day3-SpiralMemory.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -228,6 +232,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day3-SpiralMemory.h" />
+    <ClInclude Include="Head.h" />
+    <ClInclude Include="InfiniteGrid.h" />
+    <ClInclude Include="InfiniteGridUtil.h" />
+    <ClInclude Include="StressTestWriter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

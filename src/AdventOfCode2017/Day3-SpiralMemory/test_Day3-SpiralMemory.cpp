@@ -21,4 +21,12 @@ public:
         Assert::AreEqual(2u, stepsToCarryBack(9u));
         Assert::AreEqual(4u, stepsToCarryBack(25u));
     }
+
+    TEST_METHOD(stressTestFirstValueGreaterThan_SimpleTests)
+    {
+        Assert::AreEqual(4u, stressTestFirstValueGreaterThan(2u));
+        Assert::AreEqual(26u, stressTestFirstValueGreaterThan(25u));
+        Assert::AreEqual(304u, stressTestFirstValueGreaterThan(147u));
+        Assert::AreEqual(806u, stressTestFirstValueGreaterThan(747u));
+    }
 };
