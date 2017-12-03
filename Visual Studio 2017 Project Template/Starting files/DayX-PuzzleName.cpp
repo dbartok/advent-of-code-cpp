@@ -3,27 +3,33 @@
 #include <fstream>
 #include <iostream>
 
+namespace AdventOfCode
+{
 
-//TODO: Implement actual functions / classes
+//TODO: Implement actual functions
 int solution1(int input)
 {
-	return input + 1;
+    return input + 1;
 }
 
 int solution2(int input)
 {
-	return input + 2;
+    return input + 2;
+}
+
 }
 
 
 //TODO: Implement parsing and driver
 int main()
 {
-	std::fstream fileIn("input.txt");
-	int puzzleInput;
+    namespace AoC = AdventOfCode;
 
-	fileIn >> puzzleInput;
+    std::fstream fileIn("input.txt");
+    int puzzleInput;
 
-	std::cout << "First part: " << solution1(puzzleInput) << std::endl;
-	std::cout << "Second part: " << solution2(puzzleInput) << std::endl;
+    fileIn >> puzzleInput;
+
+    std::cout << "First part: " << AoC::solution1(puzzleInput) << std::endl;
+    std::cout << "Second part: " << AoC::solution2(puzzleInput) << std::endl;
 }
