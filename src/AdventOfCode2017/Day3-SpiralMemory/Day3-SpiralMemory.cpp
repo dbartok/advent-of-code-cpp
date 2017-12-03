@@ -3,7 +3,25 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <cmath>
+#include <cassert>
 
+unsigned previousOddNumber(unsigned number)
+{
+	assert(number >= 1);
+
+	return (number % 2 == 1) ? number : number - 1;
+}
+
+unsigned nextOddNumber(unsigned number)
+{
+	return (number % 2 == 1) ? number : number + 1;
+}
+
+unsigned safeUnsignedDistance(unsigned a, unsigned b)
+{
+	return std::max(a, b) - std::min(a, b);
+}
 
 unsigned stepsToCarryBack(unsigned location)
 {
@@ -12,29 +30,44 @@ unsigned stepsToCarryBack(unsigned location)
 		return 0;
 	}
 
-	unsigned squareSideLength = 3;
-	unsigned totalElements = 1;
+	double sqrtOfLocation = std::sqrt(location);
+	assert(sqrtOfLocation <= std::numeric_limits<unsigned>::max());
 
-	while (true)
-	{
-		unsigned numElementsOnPerimeter = (squareSideLength - 1) * 4;
+	// Side length of the ring containing the location
+	unsigned outerRingLength = nextOddNumber(static_cast<unsigned>(std::ceil(sqrtOfLocation)));
 
-		if (totalElements + numElementsOnPerimeter >= location)
-		{
-			break;
-		}
+	// Side length of the previous ring
+	unsigned innerRingLength = previousOddNumber(static_cast<unsigned>(std::floor(sqrtOfLocation)));
 
-		totalElements += numElementsOnPerimeter;
-		squareSideLength += 2;
-	}
+	unsigned totalElementsInInnerRings = innerRingLength * innerRingLength;
 
-	unsigned locationInRing = location - totalElements;
-	unsigned locationInSide = locationInRing % (squareSideLength - 1);
-	unsigned radiusOfSquare = squareSideLength / 2;
+	// Location in the ring as if the first element of the ring was numbered as 1:
+	//      8 7 6 5
+	//	    * * * * *  4
+	//		*       *  3
+	//		*	    *  2
+	//		*	    *  1
+	//		* * * * *  0 or 16
+	unsigned locationRelativeInRing = location - totalElementsInInnerRings;
 
-	unsigned distanceFromMiddleOfSide = std::max(radiusOfSquare, locationInSide) - std::min(radiusOfSquare, locationInSide);
+	// Rings can also be thought of as being composed of 4 sections like this:
+	//      8 7 6 5
+	//	    - - - -|  4
+	//		|	   |  3
+	//		|	   |  2
+	//		|	   |  1
+	//		|- - - -  0 or 16
+	unsigned locationRelativeInRingSection = locationRelativeInRing % (outerRingLength - 1);
 
-	unsigned steps = radiusOfSquare + distanceFromMiddleOfSide;
+	unsigned radiusOfRing = outerRingLength / 2;
+
+	// With the numbering above, the radius also marks the middle point of a ring section
+	unsigned middlePointOfRingSection = radiusOfRing;
+
+	unsigned distanceFromMiddleOfSection = safeUnsignedDistance(locationRelativeInRingSection, middlePointOfRingSection);
+
+	// Outwards component + Perimeter component
+	return radiusOfRing + distanceFromMiddleOfSection;
 }
 
 
