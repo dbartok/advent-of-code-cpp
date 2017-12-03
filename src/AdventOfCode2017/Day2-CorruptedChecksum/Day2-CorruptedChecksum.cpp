@@ -6,6 +6,9 @@
 #include <string>
 #include <algorithm>
 
+namespace AdventOfCode
+{
+
 unsigned checkSumDiffSmallestLargest(const RowsOfNumbers& rows)
 {
     unsigned checkSum = 0;
@@ -50,20 +53,24 @@ unsigned sumEvenlyDivisbleValues(const RowsOfNumbers& rows)
     return sum;
 }
 
+}
+
 
 int main()
 {
+    namespace AoC = AdventOfCode;
+
     std::fstream fileIn("input.txt");
-    RowsOfNumbers inputRows;
+    AoC::RowsOfNumbers inputRows;
 
     std::string lineBuffer;
     while (std::getline(fileIn, lineBuffer))
     {
-        RowOfNumbers row;
-        parseStringIntoVector(lineBuffer, row);
+        AoC::RowOfNumbers row;
+        AoC::Utils::parseStringIntoVector(lineBuffer, row);
         inputRows.push_back(std::move(row));
     }
 
-    std::cout << "First part: " << checkSumDiffSmallestLargest(inputRows) << std::endl;
-    std::cout << "Second part: " << sumEvenlyDivisbleValues(inputRows) << std::endl;
+    std::cout << "First part: " << AoC::checkSumDiffSmallestLargest(inputRows) << std::endl;
+    std::cout << "Second part: " << AoC::sumEvenlyDivisbleValues(inputRows) << std::endl;
 }

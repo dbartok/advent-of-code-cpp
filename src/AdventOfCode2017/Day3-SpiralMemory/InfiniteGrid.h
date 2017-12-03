@@ -2,6 +2,9 @@
 
 #include <unordered_map>
 
+namespace AdventOfCode
+{
+
 template <class T>
 class InfiniteGrid
 {
@@ -58,4 +61,6 @@ void InfiniteGrid<T>::setValue(int x, int y, T value)
     {
         foundIter->second = std::move(value);
     }
+}
+
 }

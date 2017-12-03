@@ -3,6 +3,7 @@
 #include "Utils.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+namespace AoC = AdventOfCode;
 
 namespace Microsoft
 {
@@ -39,13 +40,13 @@ public:
         std::string inputInts{"1 2 3 4 5"};
         std::vector<int> resultInts;
         std::vector<int> expectedInts{ 1, 2, 3, 4, 5 };
-        parseStringIntoVector(inputInts, resultInts);
+        AoC::Utils::parseStringIntoVector(inputInts, resultInts);
         Assert::AreEqual(expectedInts, resultInts);
 
         std::string inputStrings{ "ab cd e f" };
         std::vector<std::string> resultStrings;
         std::vector<std::string> expectedStrings{ "ab", "cd", "e", "f" };
-        parseStringIntoVector(inputStrings, resultStrings);
+        AoC::Utils::parseStringIntoVector(inputStrings, resultStrings);
         Assert::AreEqual(expectedStrings, resultStrings);
     }
 

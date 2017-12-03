@@ -2,6 +2,9 @@
 
 #include "InfiniteGrid.h"
 
+namespace AdventOfCode
+{
+
 template <typename T>
 static T sumOfAllNeighbors(const InfiniteGrid<T>& grid, const std::pair<int, int>& position)
 {
@@ -21,4 +24,6 @@ static T sumOfAllNeighbors(const InfiniteGrid<T>& grid, const std::pair<int, int
     }
 
     return sum;
+}
+
 }

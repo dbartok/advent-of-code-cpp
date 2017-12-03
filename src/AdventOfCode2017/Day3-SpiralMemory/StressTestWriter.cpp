@@ -2,6 +2,9 @@
 
 #include "InfiniteGridUtil.h"
 
+namespace AdventOfCode
+{
+
 StressTestWriter::StressTestWriter()
     : m_grid{}
     , m_lastWritten{0}
@@ -51,4 +54,6 @@ void StressTestWriter::writeUntil(unsigned threshold)
 unsigned StressTestWriter::getLastWritten() const
 {
     return m_lastWritten;
+}
+
 }

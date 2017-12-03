@@ -2,6 +2,9 @@
 
 #include <utility>
 
+namespace AdventOfCode
+{
+
 enum class Direction
 {
     UP,
@@ -26,3 +29,4 @@ public:
     void turnLeft();
 };
 
+}

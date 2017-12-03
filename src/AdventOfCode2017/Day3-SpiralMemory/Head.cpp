@@ -2,6 +2,9 @@
 
 #include <cassert>
 
+namespace AdventOfCode
+{
+
 Head::Head(std::pair<int, int> position, Direction direction)
     : m_position(std::move(position))
     , m_direction(direction)
@@ -61,4 +64,6 @@ void Head::turnLeft()
             // Enum has invalid value
             assert(false);
     }
+}
+
 }

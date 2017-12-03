@@ -3,6 +3,9 @@
 #include <fstream>
 #include <iostream>
 
+namespace AdventOfCode
+{
+
 unsigned sumOfDigitsMatchNextDigit(const std::string& digitsString)
 {
     unsigned sum = 0;
@@ -42,13 +45,18 @@ unsigned sumOfDigitsMatchHalfwayRoundDigit(const std::string& digitsString)
     return sum;
 }
 
+}
+
+
 int main()
 {
+    namespace AoC = AdventOfCode;
+
     std::fstream fileIn("input.txt");
     std::string digitsString;
 
     fileIn >> digitsString;
 
-    std::cout << "First part: " << sumOfDigitsMatchNextDigit(digitsString) << std::endl;
-    std::cout << "Second part: " << sumOfDigitsMatchHalfwayRoundDigit(digitsString) << std::endl;
+    std::cout << "First part: " << AoC::sumOfDigitsMatchNextDigit(digitsString) << std::endl;
+    std::cout << "Second part: " << AoC::sumOfDigitsMatchHalfwayRoundDigit(digitsString) << std::endl;
 }

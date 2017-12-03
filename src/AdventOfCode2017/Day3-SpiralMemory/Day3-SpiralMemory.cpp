@@ -8,6 +8,9 @@
 #include <cmath>
 #include <cassert>
 
+namespace AdventOfCode
+{
+
 unsigned previousOddNumber(unsigned number)
 {
     assert(number >= 1);
@@ -79,14 +82,18 @@ unsigned stressTestFirstValueGreaterThan(unsigned threshold)
     return writer.getLastWritten();
 }
 
+}
+
 
 int main()
 {
+    namespace AoC = AdventOfCode;
+
     std::fstream fileIn("input.txt");
     unsigned input;
 
     fileIn >> input;
 
-    std::cout << "First part: " << stepsToCarryBack(input) << std::endl;
-    std::cout << "Second part: " << stressTestFirstValueGreaterThan(input) << std::endl;
+    std::cout << "First part: " << AoC::stepsToCarryBack(input) << std::endl;
+    std::cout << "Second part: " << AoC::stressTestFirstValueGreaterThan(input) << std::endl;
 }

@@ -4,6 +4,11 @@
 #include <string>
 #include <sstream>
 
+namespace AdventOfCode
+{
+namespace Utils
+{
+
 template <typename T>
 void parseStringIntoVector(const std::string& inputString, std::vector<T>& outputVector)
 {
@@ -14,4 +19,7 @@ void parseStringIntoVector(const std::string& inputString, std::vector<T>& outpu
     {
         outputVector.push_back(std::move(element));
     }
+}
+
+}
 }
