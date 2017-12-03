@@ -10,22 +10,22 @@ namespace VisualStudio
 {
 namespace CppUnitTestFramework
 {
-	template <typename T>
-	std::wstring ToString(const std::vector<T> v)
-	{
-		std::wstringstream s;
+    template <typename T>
+    std::wstring ToString(const std::vector<T> v)
+    {
+        std::wstringstream s;
 
-		for (size_t i = 0; i < v.size(); i++)
-		{
-			s << ToString(v[i]);
-			if (i != v.size() - 1)
-			{
-				s << ", ";
-			}
-		}
+        for (size_t i = 0; i < v.size(); i++)
+        {
+            s << ToString(v[i]);
+            if (i != v.size() - 1)
+            {
+                s << ", ";
+            }
+        }
 
-		return s.str();
-	}
+        return s.str();
+    }
 }
 }
 }
@@ -34,19 +34,19 @@ TEST_CLASS(Utils)
 {
 public:
 
-	TEST_METHOD(parseStringIntoVector_SimpleTests)
-	{
-		std::string inputInts{"1 2 3 4 5"};
-		std::vector<int> resultInts;
-		std::vector<int> expectedInts{ 1, 2, 3, 4, 5 };
-		parseStringIntoVector(inputInts, resultInts);
-		Assert::AreEqual(expectedInts, resultInts);
+    TEST_METHOD(parseStringIntoVector_SimpleTests)
+    {
+        std::string inputInts{"1 2 3 4 5"};
+        std::vector<int> resultInts;
+        std::vector<int> expectedInts{ 1, 2, 3, 4, 5 };
+        parseStringIntoVector(inputInts, resultInts);
+        Assert::AreEqual(expectedInts, resultInts);
 
-		std::string inputStrings{ "ab cd e f" };
-		std::vector<std::string> resultStrings;
-		std::vector<std::string> expectedStrings{ "ab", "cd", "e", "f" };
-		parseStringIntoVector(inputStrings, resultStrings);
-		Assert::AreEqual(expectedStrings, resultStrings);
-	}
+        std::string inputStrings{ "ab cd e f" };
+        std::vector<std::string> resultStrings;
+        std::vector<std::string> expectedStrings{ "ab", "cd", "e", "f" };
+        parseStringIntoVector(inputStrings, resultStrings);
+        Assert::AreEqual(expectedStrings, resultStrings);
+    }
 
 };
