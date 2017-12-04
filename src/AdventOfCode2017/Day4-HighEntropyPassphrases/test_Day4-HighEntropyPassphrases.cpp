@@ -24,4 +24,18 @@ public:
         Assert::AreEqual(2u, AoC::numPassphrasesNoDuplicateWords(passphrases));
     }
 
+    TEST_METHOD(numPassphrasesNoAnagramWords_SimpleTests)
+    {
+        std::vector<std::string> passphrases =
+        {
+            "abcde fghij",
+            "abcde xyz ecdab",
+            "a ab abc abd abf abj",
+            "iiii oiii ooii oooi oooo",
+            "oiii ioii iioi iiio"
+        };
+
+        Assert::AreEqual(3u, AoC::numPassphrasesNoAnagramWords(passphrases));
+    }
+
 };
