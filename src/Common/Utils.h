@@ -10,7 +10,7 @@ namespace Utils
 {
 
 template <typename T>
-void parseStringIntoVector(const std::string& inputString, std::vector<T>& outputVector)
+void splitStringIntoVector(const std::string& inputString, std::vector<T>& outputVector)
 {
     std::istringstream inputStringStream(inputString);
 

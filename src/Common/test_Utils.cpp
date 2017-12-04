@@ -35,18 +35,18 @@ TEST_CLASS(Utils)
 {
 public:
 
-    TEST_METHOD(parseStringIntoVector_SimpleTests)
+    TEST_METHOD(splitStringIntoVector_SimpleTests)
     {
         std::string inputInts{"1 2 3 4 5"};
         std::vector<int> resultInts;
         std::vector<int> expectedInts{ 1, 2, 3, 4, 5 };
-        AoC::Utils::parseStringIntoVector(inputInts, resultInts);
+        AoC::Utils::splitStringIntoVector(inputInts, resultInts);
         Assert::AreEqual(expectedInts, resultInts);
 
         std::string inputStrings{ "ab cd e f" };
         std::vector<std::string> resultStrings;
         std::vector<std::string> expectedStrings{ "ab", "cd", "e", "f" };
-        AoC::Utils::parseStringIntoVector(inputStrings, resultStrings);
+        AoC::Utils::splitStringIntoVector(inputStrings, resultStrings);
         Assert::AreEqual(expectedStrings, resultStrings);
     }
 
