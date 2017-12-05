@@ -2,7 +2,9 @@
 Allows to easily create a new VS project for each day's programming puzzle, which can then be collected in a VS solution.
 The template contains some placeholder files, and three configurations:  
 - The Debug and Relase configurations are standard, and are used to run the application.  
-- The Test configuration is used for running the unit tests, because in the other configurations they are not discovered.
+- The Test configuration is used for running the unit tests, because in the other configurations they are not discovered.  
+All three configurations are working in both x86 and x64.  
+Note: In the Visual Studio Menu, "Test -> Test Settings -> Default Processor Architecture" has to always be set to the same platform as selected for the Test configuration.
 
 ## To use the template:
 1. Go into the AdventOfCode folder and add the contents to a zip file called AdventOfCode.zip
