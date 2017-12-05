@@ -5,6 +5,7 @@
 namespace AdventOfCode
 {
 
-unsigned jumpInstructionsIncreasing(std::vector<int> instructions);
+unsigned stepsInstructionsIncreasing(const std::vector<int>& instructions);
+unsigned stepsInstructionsIncreasingDecreasing(const std::vector<int>& instructions);
 
 }
