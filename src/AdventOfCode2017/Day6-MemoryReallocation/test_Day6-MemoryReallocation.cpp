@@ -15,4 +15,10 @@ public:
         Assert::AreEqual(5u, AoC::numUniqueRedistributions(banks));
     }
 
+    TEST_METHOD(cyclesUntilReoccurs_SimpleTests)
+    {
+        AoC::MemoryBanks banks{2, 4, 1, 2};
+        Assert::AreEqual(4u, AoC::cyclesUntilReoccurs(banks));
+    }
+
 };

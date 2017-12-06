@@ -75,6 +75,30 @@ unsigned numUniqueRedistributions(MemoryBanks banks)
     return banksOccurences.size();
 }
 
+unsigned cyclesUntilReoccurs(MemoryBanks banks)
+{
+    if (banks.empty())
+    {
+        return 1;
+    }
+
+    std::vector<MemoryBanks> allCyclesInOrder;
+
+    while (true)
+    {
+        // Could also store the unordered_set (in the same way as in part 1) in addition to the vector to improve lookup time here
+        auto foundIter = std::find(allCyclesInOrder.begin(), allCyclesInOrder.end(), banks);
+        if (foundIter != allCyclesInOrder.end())
+        {
+            return allCyclesInOrder.end() - foundIter;
+        }
+
+        allCyclesInOrder.push_back(banks);
+
+        redistribute(banks);
+    }
+}
+
 }
 
 
@@ -92,4 +116,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numUniqueRedistributions(inputBanks) << std::endl;
+    std::cout << "Second part: " << AoC::cyclesUntilReoccurs(inputBanks) << std::endl;
 }
