@@ -21,7 +21,7 @@ private:
     {
         std::string name;
         int weight;
-        std::vector<TreeNodeSharedPtr> children;
+        std::vector<TreeNodeSharedPtr> childrenSharedPtrs;
 
         int totalSubtreeWeight = 0;
 
@@ -33,18 +33,18 @@ private:
         return lhs->weight < rhs->weight;
     };
 
-    static bool equalsNodeSharedPtrTotalSubtreeWeight(const TreeNodeSharedPtr& lhs, const TreeNodeSharedPtr& rhs)
-    {
-        return lhs->totalSubtreeWeight == rhs->totalSubtreeWeight;
-    };
-
     TreeNodeSharedPtr m_root;
 
     void recalculateSubtreeWeights(const TreeNodeSharedPtr& nodeSharedPtr);
-    boost::optional<int> traverseForCorrectWeight(const TreeNodeSharedPtr& nodeSharedPtr, int difference);
+
+    // Recursively traverse a non-empty tree to find a single weight that causes an imbalance
+    // Returns the right weight value for the weight if found or boost::none if no such weight was found
+    boost::optional<int> traverseForCorrectWeight(const TreeNodeSharedPtr& nodeSharedPtr, int difference) const;
 public:
     WeightedTree(TreeNodeSharedPtr m_root);
-    int getRightWeightForSingleWrongWeight();
+
+    // Returns the right weight value for the single weight that causes an imbalance
+    int getRightWeightForSingleWrongWeight() const;
     
     static WeightedTree fromNodeDescriptors(const std::vector<NodeDescriptor>& nodeDescriptors);
 };

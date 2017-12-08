@@ -50,4 +50,48 @@ public:
         Assert::AreEqual(expectedStrings, resultStrings);
     }
 
+    TEST_METHOD(allElementsEqual_RangeIsEqual_ReturnTrue)
+    {
+        std::string emptyString{""};
+        Assert::IsTrue(AoC::Utils::allElementsEqual(emptyString.cbegin(), emptyString.cend()));
+
+        std::vector<int> emptyVector;
+        Assert::IsTrue(AoC::Utils::allElementsEqual(emptyVector.cbegin(), emptyVector.cend()));
+
+        std::string oneElementString{"t"};
+        Assert::IsTrue(AoC::Utils::allElementsEqual(oneElementString.cbegin(), oneElementString.cend()));
+
+        std::vector<int> oneElementVector{11};
+        Assert::IsTrue(AoC::Utils::allElementsEqual(oneElementVector.cbegin(), oneElementVector.cend()));
+
+        std::string allTheSameLettersString{"aaaaaa"};
+        Assert::IsTrue(AoC::Utils::allElementsEqual(allTheSameLettersString.cbegin(), allTheSameLettersString.cend()));
+
+        std::vector<int> allTheSameElementsVector{12, 12, 12, 12};
+        Assert::IsTrue(AoC::Utils::allElementsEqual(allTheSameElementsVector.cbegin(), allTheSameElementsVector.cend()));
+
+        std::vector<double> equalDoublesWithThresholdVector{1.0, 0.999, 1.002, 1.05};
+        Assert::IsTrue(AoC::Utils::allElementsEqual(equalDoublesWithThresholdVector.cbegin(), equalDoublesWithThresholdVector.cend(),
+            [](double lhs, double rhs) 
+        {
+            return std::fabs(lhs - rhs) < 0.1;
+        }));
+    }
+
+    TEST_METHOD(allElementsEqual_RangeIsNotEqual_ReturnFalse)
+    {
+        std::string differentLetters{"aabcdefa"};
+        Assert::IsFalse(AoC::Utils::allElementsEqual(differentLetters.cbegin(), differentLetters.cend()));
+
+        std::vector<int> differentElementsVector{12, 13, 12, 14};
+        Assert::IsFalse(AoC::Utils::allElementsEqual(differentElementsVector.cbegin(), differentElementsVector.cend()));
+
+        std::vector<double> farDifferentDoubles{1.7, 0.999, 1.25, 1.05};
+        Assert::IsFalse(AoC::Utils::allElementsEqual(farDifferentDoubles.cbegin(), farDifferentDoubles.cend(),
+            [](double lhs, double rhs)
+        {
+            return std::fabs(lhs - rhs) < 0.1;
+        }));
+    }
+    
 };

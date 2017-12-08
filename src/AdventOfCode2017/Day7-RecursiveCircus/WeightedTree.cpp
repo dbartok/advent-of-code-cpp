@@ -1,7 +1,10 @@
 #include "WeightedTree.h"
 
+#include "../../Common/Utils.h"
+
 #include <unordered_map>
 #include <unordered_set>
+#include <numeric>
 
 namespace AdventOfCode
 {
@@ -21,53 +24,73 @@ WeightedTree::WeightedTree(TreeNodeSharedPtr root)
 
 void WeightedTree::recalculateSubtreeWeights(const TreeNodeSharedPtr& nodeSharedPtr)
 {
-    nodeSharedPtr->totalSubtreeWeight = nodeSharedPtr->weight;
-
-    for (const auto& childSharedPtr : nodeSharedPtr->children)
+    for (const auto& childSharedPtr : nodeSharedPtr->childrenSharedPtrs)
     {
         recalculateSubtreeWeights(childSharedPtr);
     }
 
-    for (const auto& childSharedPtr : nodeSharedPtr->children)
+    nodeSharedPtr->totalSubtreeWeight = std::accumulate(nodeSharedPtr->childrenSharedPtrs.cbegin(), nodeSharedPtr->childrenSharedPtrs.cend(), nodeSharedPtr->weight,
+        [](int sum, const TreeNodeSharedPtr& childSharedPtr)
     {
-        nodeSharedPtr->totalSubtreeWeight += childSharedPtr->totalSubtreeWeight;
-    }
+        return sum + childSharedPtr->totalSubtreeWeight;
+    });
 }
 
-boost::optional<int> WeightedTree::traverseForCorrectWeight(const TreeNodeSharedPtr& nodeSharedPtr, int weightExtra)
+boost::optional<int> WeightedTree::traverseForCorrectWeight(const TreeNodeSharedPtr& nodeSharedPtr, int weightExtra) const
 {
-    const std::vector<TreeNodeSharedPtr>& children = nodeSharedPtr->children;
+    const std::vector<TreeNodeSharedPtr>& childrenSharedPtrs = nodeSharedPtr->childrenSharedPtrs;
+    bool balancedSoFar = (weightExtra == 0);
 
-    // TODO: Can be extracted to Utils
-    if (children.size() == 0 || std::equal(children.cbegin() + 1, children.cend(), children.cbegin(), &WeightedTree::equalsNodeSharedPtrTotalSubtreeWeight))
+    // Exactly one child, skip forward
+    if (childrenSharedPtrs.size() == 1)
     {
-        return nodeSharedPtr->weight - weightExtra;
+        return traverseForCorrectWeight(childrenSharedPtrs.front(), weightExtra);
     }
 
-    if (children.size() == 1)
+    bool areAllChildrenEqualSubtreeWeight = Utils::allElementsEqual(childrenSharedPtrs.cbegin(), childrenSharedPtrs.cend(), 
+        [](const TreeNodeSharedPtr& lhs, const TreeNodeSharedPtr& rhs)
     {
-        return traverseForCorrectWeight(nodeSharedPtr->children.front(), weightExtra);
+        return lhs->totalSubtreeWeight == rhs->totalSubtreeWeight;
+    });
+
+
+    // Children are balanced, meaning there are no further imbalances down the tree
+    if (areAllChildrenEqualSubtreeWeight)
+    {
+        // There weren't any imbalances to begin with, so there is no weight to balance in this subtree
+        if (weightExtra == 0)
+        {
+            return boost::none;
+        }
+        // This is the node that has to be balanced, return the correct weight for it
+        else
+        {
+            return nodeSharedPtr->weight - weightExtra;
+        }
     }
 
-    if (children.size() == 2)
+    // Two imbalanced children
+    if (childrenSharedPtrs.size() == 2)
     {
         std::vector<TreeNodeSharedPtr>::const_iterator minIter, maxIter;
-        std::tie(minIter, maxIter) = std::minmax_element(children.begin(), children.end(), &WeightedTree::lessCompareNodeSharedPtrWeight);
+        std::tie(minIter, maxIter) = std::minmax_element(childrenSharedPtrs.cbegin(), childrenSharedPtrs.cend(), &WeightedTree::lessCompareNodeSharedPtrWeight);
         int weightExtraMin = (*minIter)->totalSubtreeWeight - (*maxIter)->totalSubtreeWeight;
         int weightExtraMax = (*maxIter)->totalSubtreeWeight - (*minIter)->totalSubtreeWeight;
 
+        // Balanced so far, traverse both ways
         if (weightExtra == 0)
         {
-            boost::optional<int> balanceMinResult = traverseForCorrectWeight(*minIter, weightExtraMin);
-            boost::optional<int> balanceMaxResult = traverseForCorrectWeight(*maxIter, weightExtraMax);
+            boost::optional<int> traverseMinResult = traverseForCorrectWeight(*minIter, weightExtraMin);
+            boost::optional<int> traverseMaxResult = traverseForCorrectWeight(*maxIter, weightExtraMax);
 
-            if (balanceMaxResult.is_initialized() && balanceMinResult.is_initialized())
+            if (traverseMaxResult.is_initialized() && traverseMinResult.is_initialized())
             {
                 throw std::runtime_error("A valid corrected value was found for more than one weight.");
             }
 
-            return balanceMinResult.is_initialized() ? balanceMinResult : balanceMaxResult;
+            return traverseMinResult.is_initialized() ? traverseMinResult : traverseMaxResult;
         }
+        // There is already an imbalance, traverse only in the direction where the same imbalance could still be corrected
         else
         {
             if (weightExtraMin == weightExtra)
@@ -80,22 +103,26 @@ boost::optional<int> WeightedTree::traverseForCorrectWeight(const TreeNodeShared
             }
             else
             {
-                throw std::runtime_error("Unbalanced node with two children found in an already differently unbalanced branch.");
+                throw std::runtime_error("Imbalanced node with two children found in an already differently imbalanced branch.");
             }
         }
     }
 
-    if (children.size() >= 3)
+    // Three or more children with an imbalance somewhere
+    if (childrenSharedPtrs.size() >= 3)
     {
-        std::unordered_map<int, TreeNodeSharedPtr> nodeSharedPtrToSubtreeWeightMap;
-        std::unordered_set<int> weightSet;
+        // Determine child with the unique subtree weight, because that's the direction where the imbalance is
+        // We also need the value of the non-unique subtree weight so that we know the weight difference
+        std::unordered_map<int, TreeNodeSharedPtr> nodeSharedPtrToSubtreeWeightMap; // Nodes with potentially unique subtree weight
+        std::unordered_set<int> uniqueWeightSet;
         int nonUniqueSubtreeWeight = -1;
 
-        for (const auto& childSharedPtr : children)
+        for (const auto& childSharedPtr : childrenSharedPtrs)
         {
             bool insertionTookPlace;
-            std::tie(std::ignore, insertionTookPlace) = weightSet.insert(childSharedPtr->totalSubtreeWeight);
+            std::tie(std::ignore, insertionTookPlace) = uniqueWeightSet.insert(childSharedPtr->totalSubtreeWeight);
 
+            // This child doesn't have a unique subtree weight
             if (!insertionTookPlace)
             {
                 nonUniqueSubtreeWeight = childSharedPtr->totalSubtreeWeight;
@@ -107,6 +134,7 @@ boost::optional<int> WeightedTree::traverseForCorrectWeight(const TreeNodeShared
             }
         }
 
+        // Only the child with the unique subtere weight remains in the map at this point
         if (nodeSharedPtrToSubtreeWeightMap.size() != 1)
         {
             throw std::runtime_error("Node with three or more children but no single unique subtree weight found.");
@@ -114,20 +142,26 @@ boost::optional<int> WeightedTree::traverseForCorrectWeight(const TreeNodeShared
 
         assert(nonUniqueSubtreeWeight != -1);
 
-        TreeNodeSharedPtr uniqueWeightNodeSharedPtr = nodeSharedPtrToSubtreeWeightMap.begin()->second;
-        int newWeightExtra = uniqueWeightNodeSharedPtr->totalSubtreeWeight - nonUniqueSubtreeWeight;
+        TreeNodeSharedPtr uniqueWeightNodeSharedPtr = nodeSharedPtrToSubtreeWeightMap.cbegin()->second;
+        int imbalancedChildWeightExtra = uniqueWeightNodeSharedPtr->totalSubtreeWeight - nonUniqueSubtreeWeight;
 
-        if (weightExtra != 0 && newWeightExtra != weightExtra)
+        if (weightExtra != 0 && imbalancedChildWeightExtra != weightExtra)
         {
-            throw std::runtime_error("Unbalanced node with three or more children found in an already differently unbalanced branch.");
+            throw std::runtime_error("Imbalanced node with three or more children found in an already differently imbalanced branch.");
         }
 
-        return traverseForCorrectWeight(uniqueWeightNodeSharedPtr, newWeightExtra);
+        // Traverse in the only direction where the imbalance can be corrected
+        return traverseForCorrectWeight(uniqueWeightNodeSharedPtr, imbalancedChildWeightExtra);
     }
 }
 
-int WeightedTree::getRightWeightForSingleWrongWeight()
+int WeightedTree::getRightWeightForSingleWrongWeight() const
 {
+    if (m_root == nullptr)
+    {
+        throw std::runtime_error("Tree is empty.");
+    }
+
     boost::optional<int> traverseResult = traverseForCorrectWeight(m_root, 0);
 
     if (!traverseResult.is_initialized())
@@ -168,7 +202,7 @@ WeightedTree WeightedTree::fromNodeDescriptors(const std::vector<NodeDescriptor>
 
         for (const auto& childName : nodeDescriptor.childrenNames)
         {
-            nodeSharedPtr->children.push_back(allNodes.at(childName));
+            nodeSharedPtr->childrenSharedPtrs.push_back(allNodes.at(childName));
 
             allNodesWithoutParents.erase(childName);
         }
@@ -179,7 +213,7 @@ WeightedTree WeightedTree::fromNodeDescriptors(const std::vector<NodeDescriptor>
         throw std::runtime_error("There are either zero or more than one tree roots.");
     }
 
-    TreeNodeSharedPtr root = allNodesWithoutParents.begin()->second;
+    TreeNodeSharedPtr root = allNodesWithoutParents.cbegin()->second;
     return WeightedTree{std::move(root)};
 }
 

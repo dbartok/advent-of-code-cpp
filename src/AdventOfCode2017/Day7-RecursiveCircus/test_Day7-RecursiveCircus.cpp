@@ -7,7 +7,7 @@ namespace AoC = AdventOfCode;
 
 TEST_CLASS(Day7RecursiveCircus)
 {
-public:
+private:
     std::vector<AoC::NodeDescriptor> m_nodeDescriptors =
     {
         {"pbga", 66, {}},
@@ -24,6 +24,8 @@ public:
         {"gyxo", 61, {}},
         {"cntj", 57, {}}
     };
+
+public:
 
     TEST_METHOD(nameOfBottomProgram_SimpleTests)
     {
