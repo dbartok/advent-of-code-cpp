@@ -8,11 +8,13 @@ namespace AdventOfCode
 
 struct NodeDescriptor
 {
-    std::string parentName;
+    std::string name;
+    int weight;
     std::vector<std::string> childrenNames;
 
-    NodeDescriptor(std::string parentName, std::vector<std::string> childrenNames);
-    static NodeDescriptor fromString(const std::string& descriptorString);
+    NodeDescriptor(std::string name, int weight, std::vector<std::string> childrenNames);
+
+    static NodeDescriptor fromString(const std::string& nodeDescriptorString);
 };
 
 }

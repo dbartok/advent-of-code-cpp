@@ -17,12 +17,18 @@
     <ClCompile Include="test_Day7-RecursiveCircus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WeightedTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="NodeDescriptor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day7-RecursiveCircus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeightedTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NodeDescriptor.h">

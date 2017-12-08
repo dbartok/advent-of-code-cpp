@@ -9,5 +9,6 @@ namespace AdventOfCode
 {
 
 std::string nameOfBottomProgram(const std::vector<NodeDescriptor>& nodeDescriptors);
+int correctWeightOfWrongWeight(const std::vector<NodeDescriptor>& nodeDescriptors);
 
 }
