@@ -36,4 +36,9 @@ int Processor::largestRegister() const
     return maxValueIter->second;
 }
 
+int Processor::globalMaxValueOfRegisters() const
+{
+    return m_state.getGlobalMaxValueOfRegisters();
+}
+
 }

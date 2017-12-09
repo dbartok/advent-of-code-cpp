@@ -1,13 +1,26 @@
 #include "State.h"
 
+#include <algorithm>
+
 const State::RegisterValueToNameMap& State::getRegisterValueToNameMap() const
 {
     return m_registerValueToNameMap;
 }
 
-int& State::registerValue(const std::string& registerName)
+void State::addToRegister(const std::string& registerName, int addend)
 {
-    return m_registerValueToNameMap[registerName];
+    int& registerValue = m_registerValueToNameMap[registerName];
+    registerValue += addend;
+
+    m_globalMaxValueOfRegisters = std::max(m_globalMaxValueOfRegisters, registerValue);
+}
+
+void State::substractFromRegister(const std::string& registerName, int subtrahend)
+{
+    int& registerValue = m_registerValueToNameMap[registerName];
+    registerValue -= subtrahend;
+
+    m_globalMaxValueOfRegisters = std::max(m_globalMaxValueOfRegisters, registerValue);
 }
 
 int State::registerValue(const std::string& registerName) const
@@ -19,4 +32,9 @@ int State::registerValue(const std::string& registerName) const
     }
 
     return foundIter->second;
+}
+
+int State::getGlobalMaxValueOfRegisters() const
+{
+    return m_globalMaxValueOfRegisters;
 }

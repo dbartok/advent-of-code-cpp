@@ -11,6 +11,7 @@ public:
     Processor(std::vector<Instruction> instructions);
     void run();
     int largestRegister() const;
+    int globalMaxValueOfRegisters() const;
 
 private:
     std::vector<Instruction> m_instructions;

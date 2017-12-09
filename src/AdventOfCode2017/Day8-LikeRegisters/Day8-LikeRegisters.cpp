@@ -16,6 +16,13 @@ int largestRegisterAfterCompletion(const std::vector<Instruction>& instructions)
     return processor.largestRegister();
 }
 
+int largestRegisterDuringExecution(const std::vector<Instruction>& instructions)
+{
+    Processor processor{instructions};
+    processor.run();
+    return processor.globalMaxValueOfRegisters();
+}
+
 }
 
 
@@ -34,4 +41,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::largestRegisterAfterCompletion(inputInsructions) << std::endl;
+    std::cout << "Second part: " << AoC::largestRegisterDuringExecution(inputInsructions) << std::endl;
 }

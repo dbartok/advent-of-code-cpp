@@ -13,15 +13,13 @@ Operation::Operation(std::string target, std::string name, int argument)
 
 void Operation::execute(State& state) const
 {
-    int& targetRegisterValue = state.registerValue(m_target);
-
     if (m_name == "inc")
     {
-        targetRegisterValue += m_argument;
+        state.addToRegister(m_target, m_argument);
     }
     else if(m_name == "dec")
     {
-        targetRegisterValue -= m_argument;
+        state.substractFromRegister(m_target, m_argument);
     }
     else
     {
