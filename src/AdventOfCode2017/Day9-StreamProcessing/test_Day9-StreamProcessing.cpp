@@ -21,4 +21,15 @@ public:
         Assert::AreEqual(3u, AoC::totalScoreForAllGroups("{{<a!>},{<a!>},{<a!>},{<ab>}}"));
     }
 
+    TEST_METHOD(totalGarbageCount_SimpleTests)
+    {
+        Assert::AreEqual(0u, AoC::totalGarbageCount("<>"));
+        Assert::AreEqual(17u, AoC::totalGarbageCount("<random characters>"));
+        Assert::AreEqual(3u, AoC::totalGarbageCount("<<<<>"));
+        Assert::AreEqual(2u, AoC::totalGarbageCount("<{!>}>"));
+        Assert::AreEqual(0u, AoC::totalGarbageCount("<!!>"));
+        Assert::AreEqual(0u, AoC::totalGarbageCount("<!!!>>"));
+        Assert::AreEqual(10u, AoC::totalGarbageCount("<{o\"i!a,<{i<a>"));
+    }
+
 };

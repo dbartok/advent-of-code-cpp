@@ -64,6 +64,48 @@ unsigned totalScoreForAllGroups(const std::string& groupedString)
     return totalScore;
 }
 
+unsigned totalGarbageCount(const std::string& groupedString)
+{
+    bool insideGarbage = false;
+    unsigned garbageCount = 0;
+
+    for (size_t i = 0; i < groupedString.size(); ++i)
+    {
+        char c = groupedString[i];
+
+        if (insideGarbage)
+        {
+            switch (c)
+            {
+                case '!':
+                    ++i;
+                    break;
+
+                case '>':
+                    insideGarbage = false;
+                    break;
+
+                default:
+                    ++garbageCount;
+            }
+        }
+        else
+        {
+            switch (c)
+            {
+                case '<':
+                    insideGarbage = true;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
+    return garbageCount;
+}
+
 }
 
 
@@ -77,4 +119,5 @@ int main()
     fileIn >> groupedStringInput;
 
     std::cout << "First part: " << AoC::totalScoreForAllGroups(groupedStringInput) << std::endl;
+    std::cout << "Second part: " << AoC::totalGarbageCount(groupedStringInput) << std::endl;
 }
