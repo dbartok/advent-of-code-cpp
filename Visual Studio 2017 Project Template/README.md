@@ -18,3 +18,6 @@ The Debug and Release configurations in the new project should build and run.
 Both of the placeholder unit tests should be discovered and passing when the tests are run from VS in the Test configuration.  
 5. Rename the files in VS to correspond to the given day's puzzle
 6. Use the TODOs in the code as guidance on how to use the skeleton files
+
+## Visual Studio settings
+In order to help with keeping the coding style consistent, the Visual Studio C++ Text Editor settings used throughout the repository can be imported to Visual Studio from `Settings\TextEditorCPP.vssettings`.
