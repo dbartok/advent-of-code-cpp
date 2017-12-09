@@ -48,7 +48,7 @@ std::string nameOfBottomProgram(const std::vector<NodeDescriptor>& nodeDescripto
 int correctWeightOfWrongWeight(const std::vector<NodeDescriptor>& nodeDescriptors)
 {
     WeightedTree weightedTree = WeightedTree::fromNodeDescriptors(nodeDescriptors);
-    return weightedTree.getRightWeightForSingleWrongWeight();
+    return weightedTree.getCorrectWeightForSingleWrongWeight();
 }
 
 }

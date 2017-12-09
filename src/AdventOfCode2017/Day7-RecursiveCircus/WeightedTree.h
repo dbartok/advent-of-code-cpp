@@ -13,40 +13,42 @@ namespace AdventOfCode
 
 class WeightedTree
 {
-private:
+public:
     struct TreeNode;
     using TreeNodeSharedPtr = std::shared_ptr<TreeNode>;
+    using TreeNodeWeakPtr = std::weak_ptr<TreeNode>;
 
     struct TreeNode
     {
         std::string name;
         int weight;
-        std::vector<TreeNodeSharedPtr> childrenSharedPtrs;
 
-        int totalSubtreeWeight = 0;
+        std::vector<TreeNodeSharedPtr> childrenSharedPtrs;
+        boost::optional<TreeNodeWeakPtr> parentWeakPtr;
+
+        int totalSubtreeWeight;
 
         TreeNode(std::string name, int weight);
+
+        // Returns the sibling count for the node, including itself in the count
+        int totalSiblingCount() const;
     };
 
-    static bool lessCompareNodeSharedPtrWeight(const TreeNodeSharedPtr& lhs, const TreeNodeSharedPtr& rhs)
-    {
-        return lhs->weight < rhs->weight;
-    };
+    WeightedTree(TreeNodeSharedPtr m_root);
 
+    // Returns the correct weight value for the single weight that causes an imbalance
+    int getCorrectWeightForSingleWrongWeight() const;
+
+    static WeightedTree fromNodeDescriptors(const std::vector<NodeDescriptor>& nodeDescriptors);
+
+private:
     TreeNodeSharedPtr m_root;
 
     void recalculateSubtreeWeights(const TreeNodeSharedPtr& nodeSharedPtr);
 
     // Recursively traverse a non-empty tree to find a single weight that causes an imbalance
-    // Returns the right weight value for the weight if found or boost::none if no such weight was found
-    boost::optional<int> traverseForCorrectWeight(const TreeNodeSharedPtr& nodeSharedPtr, int difference) const;
-public:
-    WeightedTree(TreeNodeSharedPtr m_root);
-
-    // Returns the right weight value for the single weight that causes an imbalance
-    int getRightWeightForSingleWrongWeight() const;
-    
-    static WeightedTree fromNodeDescriptors(const std::vector<NodeDescriptor>& nodeDescriptors);
+    // Returns the correct weight value for the single wrong weight
+    int traverseForCorrectWeight(const TreeNodeSharedPtr& nodeSharedPtr, int weightSurplus) const;
 };
 
 }

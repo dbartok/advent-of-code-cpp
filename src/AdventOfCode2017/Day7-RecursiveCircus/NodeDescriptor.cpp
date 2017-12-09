@@ -8,9 +8,9 @@ namespace AdventOfCode
 {
 
 NodeDescriptor::NodeDescriptor(std::string name, int weight, std::vector<std::string> childrenNames)
-    : name(std::move(name))
-    , weight(weight)
-    , childrenNames(std::move(childrenNames))
+    : name{std::move(name)}
+    , weight{weight}
+    , childrenNames{std::move(childrenNames)}
 {
 
 }
