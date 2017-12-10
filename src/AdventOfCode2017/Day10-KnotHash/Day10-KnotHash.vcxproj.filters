@@ -17,7 +17,7 @@
     <ClCompile Include="test_Day10-KnotHash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Knotter.cpp">
+    <ClCompile Include="KnotHasher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -25,7 +25,7 @@
     <ClInclude Include="Day10-KnotHash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Knotter.h">
+    <ClInclude Include="KnotHasher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

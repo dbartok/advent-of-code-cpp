@@ -17,8 +17,16 @@ public:
 
     TEST_METHOD(firstTwoMultipliedAfterKnotting_0Length_NoElementsAreMoved)
     {
-        std::vector<unsigned> lengths = {2, 0, 3};
+        std::vector<unsigned> lengths = {3, 0, 2};
         Assert::AreEqual(4u, AoC::firstTwoMultipliedAfterKnotting(5, lengths));
+    }
+
+    TEST_METHOD(knotHashDenseString_SimpleTests)
+    {
+        Assert::AreEqual(std::string("a2582a3a0e66e6e86e3812dcb672a272"), AoC::knotHashDenseString(""));
+        Assert::AreEqual(std::string("33efeb34ea91902bb2f59c9920caa6cd"), AoC::knotHashDenseString("AoC 2017"));
+        Assert::AreEqual(std::string("3efbe78a8d82f29979031a4aa0b16a9d"), AoC::knotHashDenseString("1,2,3"));
+        Assert::AreEqual(std::string("63960835bcdc130f0b66d7ff4f6a5a8e"), AoC::knotHashDenseString("1,2,4"));
     }
 
 };

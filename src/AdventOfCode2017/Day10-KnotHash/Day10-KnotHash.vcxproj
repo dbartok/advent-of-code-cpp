@@ -223,7 +223,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Day10-KnotHash.cpp" />
-    <ClCompile Include="Knotter.cpp" />
+    <ClCompile Include="KnotHasher.cpp" />
     <ClCompile Include="test_Day10-KnotHash.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -235,7 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day10-KnotHash.h" />
-    <ClInclude Include="Knotter.h" />
+    <ClInclude Include="KnotHasher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
