@@ -67,7 +67,7 @@ int main()
     while (std::getline(fileIn, lineBuffer))
     {
         AoC::RowOfNumbers row;
-        AoC::Utils::splitStringIntoVector(lineBuffer, row);
+        AoC::Utils::splitStringIntoTypedVector(lineBuffer, row);
         inputRows.push_back(std::move(row));
     }
 

@@ -35,18 +35,33 @@ TEST_CLASS(Utils)
 {
 public:
 
-    TEST_METHOD(splitStringIntoVector_SimpleTests)
+    TEST_METHOD(splitStringIntoTypedVector_DefaultDelimiterTests)
     {
         std::string inputInts{"1 2 3 4 5"};
         std::vector<int> resultInts;
         std::vector<int> expectedInts{ 1, 2, 3, 4, 5 };
-        AoC::Utils::splitStringIntoVector(inputInts, resultInts);
+        AoC::Utils::splitStringIntoTypedVector(inputInts, resultInts);
         Assert::AreEqual(expectedInts, resultInts);
 
         std::string inputStrings{ "ab cd e f" };
         std::vector<std::string> resultStrings;
         std::vector<std::string> expectedStrings{ "ab", "cd", "e", "f" };
-        AoC::Utils::splitStringIntoVector(inputStrings, resultStrings);
+        AoC::Utils::splitStringIntoTypedVector(inputStrings, resultStrings);
+        Assert::AreEqual(expectedStrings, resultStrings);
+    }
+
+    TEST_METHOD(splitStringIntoTypedVector_NonDefaultDelimiterTests)
+    {
+        std::string inputInts{"1,2,3,4,5"};
+        std::vector<int> resultInts;
+        std::vector<int> expectedInts{1, 2, 3, 4, 5};
+        AoC::Utils::splitStringIntoTypedVector(inputInts, resultInts, ',');
+        Assert::AreEqual(expectedInts, resultInts);
+
+        std::string inputStrings{"ab-cd-e-f"};
+        std::vector<std::string> resultStrings;
+        std::vector<std::string> expectedStrings{"ab", "cd", "e", "f"};
+        AoC::Utils::splitStringIntoTypedVector(inputStrings, resultStrings, '-');
         Assert::AreEqual(expectedStrings, resultStrings);
     }
 

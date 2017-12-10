@@ -56,7 +56,7 @@ unsigned numPassphrasesMatchingVerifier(const std::vector<std::string>& passphra
     for (const auto& passphrase : passphrases)
     {
         std::vector<std::string> words;
-        Utils::splitStringIntoVector(passphrase, words);
+        Utils::splitStringIntoTypedVector(passphrase, words);
 
         if (verifierFunc(words))
         {

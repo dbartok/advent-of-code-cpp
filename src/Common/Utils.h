@@ -10,13 +10,17 @@ namespace Utils
 {
 
 template <typename T>
-void splitStringIntoVector(const std::string& inputString, std::vector<T>& outputVector)
+void splitStringIntoTypedVector(const std::string& inputString, std::vector<T>& outputVector, char delimiter = ' ')
 {
     std::istringstream inputStringStream(inputString);
+    std::string token;
 
     T element;
-    while (inputStringStream >> element)
+    while (std::getline(inputStringStream, token, delimiter))
     {
+        std::istringstream conversionStringStream(token);
+        conversionStringStream >> element;
+
         outputVector.push_back(std::move(element));
     }
 }
