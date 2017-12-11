@@ -6,6 +6,7 @@
 namespace AdventOfCode
 {
 
-int numStepsFromStart(const std::vector<std::string>& path);
+int numStepsFromStartAtEnd(const std::vector<std::string>& path);
+int maxNumStepsFromStart(const std::vector<std::string>& path);
 
 }
