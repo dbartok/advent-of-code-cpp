@@ -3,25 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day1-InverseCaptcha", "Day1-InverseCaptcha\Day1-InverseCaptcha.vcxproj", "{E157DBC3-3E58-4A10-ABD3-A597C6752F36}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day01-InverseCaptcha", "Day01-InverseCaptcha\Day01-InverseCaptcha.vcxproj", "{E157DBC3-3E58-4A10-ABD3-A597C6752F36}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day2-CorruptedChecksum", "Day2-CorruptedChecksum\Day2-CorruptedChecksum.vcxproj", "{B542145C-B60E-4B0B-AD47-67FD721CA448}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day02-CorruptedChecksum", "Day02-CorruptedChecksum\Day02-CorruptedChecksum.vcxproj", "{B542145C-B60E-4B0B-AD47-67FD721CA448}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "..\Common\Common.vcxproj", "{CACB5746-DED5-4746-82AA-8AA8F76CEC06}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day3-SpiralMemory", "Day3-SpiralMemory\Day3-SpiralMemory.vcxproj", "{34E55C7E-2267-4862-81C0-2270AAD9C586}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day03-SpiralMemory", "Day03-SpiralMemory\Day03-SpiralMemory.vcxproj", "{34E55C7E-2267-4862-81C0-2270AAD9C586}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day4-HighEntropyPassphrases", "Day4-HighEntropyPassphrases\Day4-HighEntropyPassphrases.vcxproj", "{00105898-5BEA-4DD8-86A0-E4A73B42FF9C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day04-HighEntropyPassphrases", "Day04-HighEntropyPassphrases\Day04-HighEntropyPassphrases.vcxproj", "{00105898-5BEA-4DD8-86A0-E4A73B42FF9C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day5-MazeOfTrampolines", "Day5-MazeOfTrampolines\Day5-MazeOfTrampolines.vcxproj", "{4A023829-02DC-4DC0-B388-B023F1C0A68E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day05-MazeOfTrampolines", "Day05-MazeOfTrampolines\Day05-MazeOfTrampolines.vcxproj", "{4A023829-02DC-4DC0-B388-B023F1C0A68E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day6-MemoryReallocation", "Day6-MemoryReallocation\Day6-MemoryReallocation.vcxproj", "{E3112216-81FD-465A-8732-375605FE2483}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day06-MemoryReallocation", "Day06-MemoryReallocation\Day06-MemoryReallocation.vcxproj", "{E3112216-81FD-465A-8732-375605FE2483}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day7-RecursiveCircus", "Day7-RecursiveCircus\Day7-RecursiveCircus.vcxproj", "{07BFE542-3AA5-49C1-B479-E5CB38331457}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day07-RecursiveCircus", "Day07-RecursiveCircus\Day07-RecursiveCircus.vcxproj", "{07BFE542-3AA5-49C1-B479-E5CB38331457}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day8-LikeRegisters", "Day8-LikeRegisters\Day8-LikeRegisters.vcxproj", "{971810EA-0811-4EF8-B21F-279C6016D148}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day08-LikeRegisters", "Day08-LikeRegisters\Day08-LikeRegisters.vcxproj", "{971810EA-0811-4EF8-B21F-279C6016D148}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day9-StreamProcessing", "Day9-StreamProcessing\Day9-StreamProcessing.vcxproj", "{B8015A32-0B74-4C51-BFDA-A488AA51A199}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day09-StreamProcessing", "Day09-StreamProcessing\Day09-StreamProcessing.vcxproj", "{B8015A32-0B74-4C51-BFDA-A488AA51A199}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day10-KnotHash", "Day10-KnotHash\Day10-KnotHash.vcxproj", "{F374A5D2-BBD2-437A-967F-3CB294205F5A}"
 EndProject
