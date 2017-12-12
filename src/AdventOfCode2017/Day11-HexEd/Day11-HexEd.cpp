@@ -7,6 +7,17 @@
 
 namespace AdventOfCode
 {
+// Coordinates are defined as following:
+//
+//      -----+ (0, -2) +-----
+//            \   n   /
+// (-1, -1) nw +-----+ ne (1, -1)
+//            /       \
+//      -----+  0, 0   +-----
+//            \       /
+//  (-1, 1) sw +-----+ se (1, 1)
+//            /   s   \
+//      -----+ (0, 2)  +-----
 
 void applyStep(const std::string& step, std::pair<int, int>& coordinates)
 {
@@ -48,30 +59,34 @@ void applyStep(const std::string& step, std::pair<int, int>& coordinates)
 
 int distanceFromStart(std::pair<int, int> coordinates)
 {
+    // We can calculate the distance as if the coordinates were in the bottom right quadrant
     coordinates.first = std::abs(coordinates.first);
     coordinates.second = std::abs(coordinates.second);
 
-    int diagonalDistance = std::min(coordinates.first, coordinates.second);
-    coordinates.first -= diagonalDistance;
-    coordinates.second -= diagonalDistance;
+    // Calculate diagonal distance component
+    int diagonalComponentLength = std::min(coordinates.first, coordinates.second);
 
-    int totalDistance = diagonalDistance;
-    if (coordinates.first == 0)
+    // After subtracting the diagonal component, either only a vertical or only the horizontal can remain, but never both
+    coordinates.first -= diagonalComponentLength;
+    coordinates.second -= diagonalComponentLength;
+
+    int nonDiagonalComponentLength = 0;
+    if (coordinates.first == 0) // Only vertical component remains
     {
         assert(coordinates.second % 2 == 0);
-        totalDistance += coordinates.second / 2;
+        nonDiagonalComponentLength = coordinates.second / 2;
     }
-    else if (coordinates.second == 0)
+    else if (coordinates.second == 0) // Only horizontal component remains
     {
         assert(coordinates.first % 2 == 0);
-        totalDistance += coordinates.first;
+        nonDiagonalComponentLength = coordinates.first;
     }
     else
     {
         assert(false);
     }
 
-    return totalDistance;
+    return diagonalComponentLength + nonDiagonalComponentLength;
 }
 
 int numStepsFromStartAtEnd(const std::vector<std::string>& path)
