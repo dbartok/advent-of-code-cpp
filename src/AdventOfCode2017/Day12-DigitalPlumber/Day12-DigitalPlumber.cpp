@@ -13,6 +13,12 @@ unsigned numNodesInGroupNodeZero(const std::vector<std::string>& neighborsLines)
     return villageGraph.numNodesInGroupContainingNode(0);
 }
 
+unsigned numTotalGroups(const std::vector<std::string>& neighborsLines)
+{
+    VillageGraph villageGraph = VillageGraph::fromNeighborsLines(neighborsLines);
+    return villageGraph.numTotalGroups();
+}
+
 }
 
 
@@ -30,4 +36,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numNodesInGroupNodeZero(inputNeighborsLines) << std::endl;
+    std::cout << "Second part: " << AoC::numTotalGroups(inputNeighborsLines) << std::endl;
 }

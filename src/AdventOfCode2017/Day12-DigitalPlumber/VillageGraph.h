@@ -19,6 +19,7 @@ public:
 
     VillageGraph(NeighborSetToNodeID neighborSets);
     unsigned numNodesInGroupContainingNode(NodeIDType nodeID) const;
+    unsigned numTotalGroups() const;
 
     static VillageGraph fromNeighborsLines(const std::vector<std::string>& neighborsLines);
 

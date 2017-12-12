@@ -14,10 +14,26 @@ VillageGraph::VillageGraph(NeighborSetToNodeID neighborSets)
 
 unsigned VillageGraph::numNodesInGroupContainingNode(NodeIDType nodeID) const
 {
-    NodeIDSet visitedNodeIDs{nodeID};
+    NodeIDSet visitedNodeIDs{};
     dfsRecordVisitedNodes(nodeID, visitedNodeIDs);
 
     return visitedNodeIDs.size();
+}
+
+unsigned VillageGraph::numTotalGroups() const
+{
+    unsigned numGroups = 0;
+    NodeIDSet visitedNodeIDs{};
+    for (NodeIDType nodeID = 0; nodeID < m_neighborSets.size(); ++nodeID)
+    {
+        if (visitedNodeIDs.find(nodeID) == visitedNodeIDs.end())
+        {
+            ++numGroups;
+            dfsRecordVisitedNodes(nodeID, visitedNodeIDs);
+        }
+    }
+
+    return numGroups;
 }
 
 VillageGraph VillageGraph::fromNeighborsLines(const std::vector<std::string>& neighborsLines)
@@ -55,11 +71,12 @@ VillageGraph VillageGraph::fromNeighborsLines(const std::vector<std::string>& ne
 
 void VillageGraph::dfsRecordVisitedNodes(NodeIDType startNodeID, NodeIDSet& visitedNodeIDs) const
 {
+    visitedNodeIDs.insert(startNodeID);
+
     for (const auto& neighborNodeID : m_neighborSets[startNodeID])
     {
         if (visitedNodeIDs.find(neighborNodeID) == visitedNodeIDs.end())
         {
-            visitedNodeIDs.insert(neighborNodeID);
             dfsRecordVisitedNodes(neighborNodeID, visitedNodeIDs);
         }
     }
