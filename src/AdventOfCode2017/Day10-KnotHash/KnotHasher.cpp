@@ -71,7 +71,8 @@ std::string KnotHasher::denseHashStringAfterMultipleRounds(unsigned numRounds)
         executeHashRound();
     }
 
-    return elementsAsDenseHashString();
+    std::vector<unsigned char> denseBytes = createDenseHashBytes();
+    return bytesToStandardString(denseBytes);
 }
 
 void KnotHasher::circularReverseHashResultNumbers(size_t beginPos, size_t endPos)
@@ -95,7 +96,7 @@ void KnotHasher::circularReverseHashResultNumbers(size_t beginPos, size_t endPos
     }
 }
 
-std::string KnotHasher::elementsAsDenseHashString()
+std::vector<unsigned char> KnotHasher::createDenseHashBytes()
 {
     assert(m_hashResultNumbers.size() <= MAX_LIST_SIZE_THAT_FITS_IN_A_BYTE);
     assert(m_hashResultNumbers.size() % m_blockSize == 0);
@@ -112,9 +113,14 @@ std::string KnotHasher::elementsAsDenseHashString()
         denseHashBytes.push_back(blockValue);
     }
 
+    return denseHashBytes;
+}
+
+std::string KnotHasher::bytesToStandardString(const std::vector<unsigned char>& bytes)
+{
     std::ostringstream denseHashStringStream;
 
-    for (auto byte : denseHashBytes)
+    for (auto byte : bytes)
     {
         denseHashStringStream << std::setfill('0') << std::setw(2) << std::hex << static_cast<unsigned>(byte);
     }

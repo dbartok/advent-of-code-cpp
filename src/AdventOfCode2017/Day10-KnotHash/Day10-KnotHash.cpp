@@ -22,6 +22,8 @@ unsigned firstTwoMultipliedAfterKnotting(size_t listSize, const std::vector<unsi
 {
     std::vector<unsigned char> bytesToHash;
     bytesToHash.reserve(lengths.size());
+
+    // Lengths are taken directly from the input, so we need to validate the numbers
     std::transform(lengths.cbegin(), lengths.cend(), std::back_inserter(bytesToHash), [](unsigned lengthElem) 
     {
         if (lengthElem > 255)
@@ -32,6 +34,8 @@ unsigned firstTwoMultipliedAfterKnotting(size_t listSize, const std::vector<unsi
         return static_cast<unsigned char>(lengthElem);
     });
 
+    // We are only interested in the first round of the hashing, so the block size is actually irrelevant as long as it's valid
+    // Let's use 1 as the block size as that can divide any number of elements, therefore always valid
     KnotHasher knotHasher{bytesToHash, listSize, 1};
     knotHasher.executeHashRound();
     return knotHasher.firstTwoMultiplied();
@@ -44,11 +48,14 @@ std::string knotHashDenseString(const std::string& stringToHash)
 
     std::vector<unsigned char> bytesToHash;
     bytesToHash.reserve(stringToHashTrimmed.size());
+
+    // Each character is converted to a byte
     std::transform(stringToHashTrimmed.cbegin(), stringToHashTrimmed.cend(), std::back_inserter(bytesToHash), [](char c)
     {
         return static_cast<unsigned char>(c);
     });
 
+    // Add the extra bytes defined in the puzzle
     bytesToHash.insert(bytesToHash.end(), EXTRA_SALT_BYTES.cbegin(), EXTRA_SALT_BYTES.cend());
 
     KnotHasher knotHasher{bytesToHash};
