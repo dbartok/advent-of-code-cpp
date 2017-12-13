@@ -14,6 +14,11 @@ public:
         Assert::AreEqual(24u, AoC::severityOfWholeTrip(m_scannerRangeLines));
     }
 
+    TEST_METHOD(smallestDelayNotToGetCaught_SimpleTests)
+    {
+        Assert::AreEqual(10u, AoC::smallestDelayNotToGetCaught(m_scannerRangeLines));
+    }
+
 private:
     std::vector<std::string> m_scannerRangeLines =
     {

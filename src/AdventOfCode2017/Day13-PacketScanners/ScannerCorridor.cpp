@@ -21,44 +21,43 @@ unsigned ScannerCorridor::severityOfWholeTrip() const
         unsigned range;
         std::tie(depth, range) = depthRangePair;
 
-        if (range == 0)
-        {
-            continue;
-        }
-
-        if (range == 1)
-        {
-            severity += depth * range;
-            continue;
-        }
-
-        // Number of steps the scanner has taken since last being at the top
-        unsigned scannerNumStepsFromTop = depth % (2 * (range - 1));
-
-        unsigned scannerPos;
-
-        // Scanner in the first half of its path
-        if (scannerNumStepsFromTop <= range - 1)
-        {
-            scannerPos = scannerNumStepsFromTop;
-        }
-
-        // Scanner in the second half of its path
-        else
-        {
-            // Number of steps the scanner has taken since last being at the bottom
-            unsigned scannerNumStepsFromBottom = scannerNumStepsFromTop - (range - 1);
-
-            scannerPos = (range - 1) - scannerNumStepsFromBottom;
-        }
-
-        if (scannerPos == 0)
+        if (isCaught(range, depth))
         {
             severity += depth * range;
         }
     }
 
     return severity;
+}
+
+unsigned ScannerCorridor::smallestDelayNotToGetCaught() const
+{
+    unsigned smallestDelay = 0;
+    while (true)
+    {
+        bool isEverCaught = false;
+        for (const auto& depthRangePair : m_rangeToDepthMap)
+        {
+            unsigned depth;
+            unsigned range;
+            std::tie(depth, range) = depthRangePair;
+
+            if (isCaught(range, depth, smallestDelay))
+            {
+                isEverCaught = true;
+                break;
+            }
+        }
+
+        if (!isEverCaught)
+        {
+            break;
+        }
+
+        ++smallestDelay;
+    }
+
+    return smallestDelay;
 }
 
 ScannerCorridor ScannerCorridor::fromScannerRangeLines(const std::vector<std::string> scannerRangeLines)
@@ -77,6 +76,11 @@ ScannerCorridor ScannerCorridor::fromScannerRangeLines(const std::vector<std::st
         unsigned depth = boost::lexical_cast<unsigned>(tokens[0]);
         unsigned range = boost::lexical_cast<unsigned>(tokens[1]);
 
+        if (range < 2)
+        {
+            throw std::runtime_error("Range less than 2 is invalid.");
+        }
+
         bool insertionTookPlace;
         std::tie(std::ignore, insertionTookPlace) = rangeToDepthMap.insert(std::make_pair(depth, range));
         if (!insertionTookPlace)
@@ -86,6 +90,36 @@ ScannerCorridor ScannerCorridor::fromScannerRangeLines(const std::vector<std::st
     }
 
     return ScannerCorridor{std::move(rangeToDepthMap)};
+}
+
+bool ScannerCorridor::isCaught(unsigned range, unsigned depth, unsigned delay)
+{
+    unsigned totalStepsInPath = (2 * (range - 1));
+
+    // Smallest delay value that has the equivalent effect
+    unsigned minEquivalentDelay = delay % totalStepsInPath;
+
+    // Number of steps the scanner has taken since last being at the top
+    unsigned scannerNumStepsFromTop = (depth + minEquivalentDelay) % totalStepsInPath;
+
+    unsigned scannerPos;
+
+    // Scanner in the first half of its path
+    if (scannerNumStepsFromTop <= range - 1)
+    {
+        scannerPos = scannerNumStepsFromTop;
+    }
+
+    // Scanner in the second half of its path
+    else
+    {
+        // Number of steps the scanner has taken since last being at the bottom
+        unsigned scannerNumStepsFromBottom = scannerNumStepsFromTop - (range - 1);
+
+        scannerPos = (range - 1) - scannerNumStepsFromBottom;
+    }
+
+    return scannerPos == 0;
 }
 
 }

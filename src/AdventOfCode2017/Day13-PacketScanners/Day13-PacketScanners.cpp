@@ -14,6 +14,12 @@ unsigned severityOfWholeTrip(const std::vector<std::string>& scannerRangeLines)
     return scannerCorrider.severityOfWholeTrip();
 }
 
+unsigned smallestDelayNotToGetCaught(const std::vector<std::string>& scannerRangeLines)
+{
+    ScannerCorridor scannerCorrider = ScannerCorridor::fromScannerRangeLines(scannerRangeLines);
+    return scannerCorrider.smallestDelayNotToGetCaught();
+}
+
 }
 
 
@@ -31,4 +37,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::severityOfWholeTrip(inputScannerRangeLines) << std::endl;
+    std::cout << "Second part: " << AoC::smallestDelayNotToGetCaught(inputScannerRangeLines) << std::endl;
 }
