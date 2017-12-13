@@ -29,9 +29,9 @@ int Processor::largestRegister() const
     }
 
     auto maxValueIter = std::max_element(registerValueToNameMap.begin(), registerValueToNameMap.end(), [](const auto& lhs, const auto& rhs)
-    {
-        return lhs.second < rhs.second;
-    });
+                                         {
+                                             return lhs.second < rhs.second;
+                                         });
 
     return maxValueIter->second;
 }

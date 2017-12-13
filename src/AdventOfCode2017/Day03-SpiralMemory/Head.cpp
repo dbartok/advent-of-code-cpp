@@ -6,8 +6,8 @@ namespace AdventOfCode
 {
 
 Head::Head(std::pair<int, int> position, Direction direction)
-    : m_position(std::move(position))
-    , m_direction(direction)
+    : m_position{std::move(position)}
+    , m_direction{direction}
 {
 
 }

@@ -8,6 +8,13 @@ namespace AdventOfCode
 template <class T>
 class InfiniteGrid
 {
+public:
+    // Get a copy of the value at the given coordinates
+    // If the value is unset, return the default-initialized value of T
+    T getValue(int x, int y) const;
+
+    // Set value at the given coordinates
+    void setValue(int x, int y, T value);
 
 private:
     using IntPair = std::pair<int, int>;
@@ -22,13 +29,6 @@ private:
     };
 
     std::unordered_map<IntPair, T, SimpleIntPairHash> m_valueToCoordinateMap;
-public:
-    // Get a copy of the value at the given coordinates
-    // If the value is unset, return the default-initialized value of T
-    T getValue(int x, int y) const;
-
-    // Set value at the given coordinates
-    void setValue(int x, int y, T value);
 };
 
 template <class T>

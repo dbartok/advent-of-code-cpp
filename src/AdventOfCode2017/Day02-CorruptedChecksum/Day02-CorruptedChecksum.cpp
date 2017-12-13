@@ -1,4 +1,5 @@
 #include "Day02-CorruptedChecksum.h"
+
 #include "../../Common/Utils.h"
 
 #include <fstream>

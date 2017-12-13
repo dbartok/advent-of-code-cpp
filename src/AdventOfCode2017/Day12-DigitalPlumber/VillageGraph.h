@@ -26,7 +26,7 @@ public:
 private:
     NeighborSetToNodeID m_neighborSets;
 
-    void dfsRecordVisitedNodes(NodeIDType startNodeID, NodeIDSet& visitedNodeIDs) const;    
+    void dfsRecordVisitedNodes(NodeIDType startNodeID, NodeIDSet& visitedNodeIDs) const;
 };
 
 }

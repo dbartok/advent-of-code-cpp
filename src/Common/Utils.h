@@ -42,9 +42,9 @@ template <typename Iterator>
 bool allElementsEqual(Iterator first, Iterator last)
 {
     return allElementsEqual(first, last, [](const auto& lhs, const auto& rhs)
-    {
-        return lhs == rhs;
-    });
+                            {
+                                return lhs == rhs;
+                            });
 }
 
 }

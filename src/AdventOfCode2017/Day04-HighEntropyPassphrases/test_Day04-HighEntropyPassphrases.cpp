@@ -14,7 +14,7 @@ public:
 
     TEST_METHOD(numPassphrasesNoDuplicateWords_SimpleTests)
     {
-        std::vector<std::string> passphrases = 
+        std::vector<std::string> passphrases =
         {
             "aa bb cc dd ee",
             "aa bb cc dd aa",

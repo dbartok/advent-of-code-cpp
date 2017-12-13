@@ -7,6 +7,18 @@ namespace AoC = AdventOfCode;
 
 TEST_CLASS(Day07RecursiveCircus)
 {
+public:
+
+    TEST_METHOD(nameOfBottomProgram_SimpleTests)
+    {
+        Assert::AreEqual(std::string("tknk"), AoC::nameOfBottomProgram(m_nodeDescriptors));
+    }
+
+    TEST_METHOD(correctWeightOfWrongWeightProgram_SimpleTests)
+    {
+        Assert::AreEqual(60, AoC::correctWeightOfWrongWeight(m_nodeDescriptors));
+    }
+
 private:
     std::vector<AoC::NodeDescriptor> m_nodeDescriptors =
     {
@@ -24,17 +36,5 @@ private:
         {"gyxo", 61, {}},
         {"cntj", 57, {}}
     };
-
-public:
-
-    TEST_METHOD(nameOfBottomProgram_SimpleTests)
-    {
-        Assert::AreEqual(std::string("tknk"), AoC::nameOfBottomProgram(m_nodeDescriptors));
-    }
-
-    TEST_METHOD(correctWeightOfWrongWeightProgram_SimpleTests)
-    {
-        Assert::AreEqual(60, AoC::correctWeightOfWrongWeight(m_nodeDescriptors));
-    }  
 
 };

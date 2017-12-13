@@ -19,7 +19,7 @@ public:
 
 private:
     Operation m_operation;
-    Condition m_condition;    
+    Condition m_condition;
 };
 
 }

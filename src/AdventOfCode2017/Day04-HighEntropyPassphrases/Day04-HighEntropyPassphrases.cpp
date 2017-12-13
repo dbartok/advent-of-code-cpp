@@ -41,10 +41,10 @@ bool areNoAnagramWords(const std::vector<std::string>& words)
     std::vector<std::string> wordsWithLettersSorted;
     wordsWithLettersSorted.reserve(words.size());
     std::transform(words.begin(), words.end(), std::back_inserter(wordsWithLettersSorted), [](std::string s)
-    {
-        std::sort(s.begin(), s.end());
-        return s;
-    });
+                   {
+                       std::sort(s.begin(), s.end());
+                       return s;
+                   });
 
     return areNoDuplicateWords(wordsWithLettersSorted);
 }

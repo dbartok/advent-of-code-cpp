@@ -106,10 +106,10 @@ void WeightedTree::recalculateSubtreeWeights(const TreeNodeSharedPtr& nodeShared
     }
 
     nodeSharedPtr->totalSubtreeWeight = std::accumulate(nodeSharedPtr->childrenSharedPtrs.cbegin(), nodeSharedPtr->childrenSharedPtrs.cend(), nodeSharedPtr->weight,
-        [](int sum, const TreeNodeSharedPtr& childSharedPtr)
-    {
-        return sum + childSharedPtr->totalSubtreeWeight;
-    });
+                                                        [](int sum, const TreeNodeSharedPtr& childSharedPtr)
+                                                        {
+                                                            return sum + childSharedPtr->totalSubtreeWeight;
+                                                        });
 }
 
 int WeightedTree::traverseForCorrectWeight(const TreeNodeSharedPtr& nodeSharedPtr, int weightSurplus) const
@@ -123,11 +123,11 @@ int WeightedTree::traverseForCorrectWeight(const TreeNodeSharedPtr& nodeSharedPt
         return traverseForCorrectWeight(childrenSharedPtrs.front(), weightSurplus);
     }
 
-    bool areAllChildrenEqualSubtreeWeight = Utils::allElementsEqual(childrenSharedPtrs.cbegin(), childrenSharedPtrs.cend(), 
-        [](const TreeNodeSharedPtr& lhs, const TreeNodeSharedPtr& rhs)
-    {
-        return lhs->totalSubtreeWeight == rhs->totalSubtreeWeight;
-    });
+    bool areAllChildrenEqualSubtreeWeight = Utils::allElementsEqual(childrenSharedPtrs.cbegin(), childrenSharedPtrs.cend(),
+                                                                    [](const TreeNodeSharedPtr& lhs, const TreeNodeSharedPtr& rhs)
+                                                                    {
+                                                                        return lhs->totalSubtreeWeight == rhs->totalSubtreeWeight;
+                                                                    });
 
 
     // Children are balanced, meaning there are no further imbalances down the tree

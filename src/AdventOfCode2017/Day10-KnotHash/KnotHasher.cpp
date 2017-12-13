@@ -90,7 +90,7 @@ void KnotHasher::circularReverseHashResultNumbers(size_t beginPos, size_t endPos
     for (unsigned i = 0; i < numSwaps; ++i)
     {
         std::swap(m_hashResultNumbers[beginPos], m_hashResultNumbers[endPos]);
-        
+
         beginPos = (beginPos == m_hashResultNumbers.size() - 1) ? 0 : beginPos + 1;
         endPos = (endPos == 0) ? m_hashResultNumbers.size() - 1 : endPos - 1;
     }
@@ -105,10 +105,10 @@ std::vector<unsigned char> KnotHasher::createDenseHashBytes()
     for (size_t i = 0; i < m_hashResultNumbers.size(); i += m_blockSize)
     {
         auto blockBeginIter = m_hashResultNumbers.begin() + i;
-        unsigned char blockValue = std::accumulate(blockBeginIter + 1, blockBeginIter + m_blockSize, *blockBeginIter, [](unsigned char acc, unsigned char elem) 
-        {
-            return acc ^= elem;
-        });
+        unsigned char blockValue = std::accumulate(blockBeginIter + 1, blockBeginIter + m_blockSize, *blockBeginIter, [](unsigned char acc, unsigned char elem)
+                                                   {
+                                                       return acc ^= elem;
+                                                   });
 
         denseHashBytes.push_back(blockValue);
     }

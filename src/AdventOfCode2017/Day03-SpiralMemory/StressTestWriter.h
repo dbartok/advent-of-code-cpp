@@ -8,6 +8,11 @@ namespace AdventOfCode
 
 class StressTestWriter
 {
+public:
+    StressTestWriter();
+    void writeUntil(unsigned threshold);
+    unsigned getLastWritten() const;
+
 private:
     InfiniteGrid<unsigned> m_grid;
     unsigned m_lastWritten;
@@ -17,10 +22,6 @@ private:
     unsigned m_remainingStepsUntilTurn;
 
     void executeNextTurn();
-public:
-    StressTestWriter();
-    void writeUntil(unsigned threshold);
-    unsigned getLastWritten() const;
 };
 
 }

@@ -12,7 +12,9 @@
 
 namespace
 {
-    std::vector<unsigned char> EXTRA_SALT_BYTES = {17, 31, 73, 47, 23};
+
+std::vector<unsigned char> EXTRA_SALT_BYTES = {17, 31, 73, 47, 23};
+
 }
 
 namespace AdventOfCode
@@ -24,15 +26,15 @@ unsigned firstTwoMultipliedAfterKnotting(size_t listSize, const std::vector<unsi
     bytesToHash.reserve(lengths.size());
 
     // Lengths are taken directly from the input, so we need to validate the numbers
-    std::transform(lengths.cbegin(), lengths.cend(), std::back_inserter(bytesToHash), [](unsigned lengthElem) 
-    {
-        if (lengthElem > 255)
-        {
-            throw std::runtime_error("An input is larger than 255.");
-        }
+    std::transform(lengths.cbegin(), lengths.cend(), std::back_inserter(bytesToHash), [](unsigned lengthElem)
+                   {
+                       if (lengthElem > 255)
+                       {
+                           throw std::runtime_error("An input is larger than 255.");
+                       }
 
-        return static_cast<unsigned char>(lengthElem);
-    });
+                       return static_cast<unsigned char>(lengthElem);
+                   });
 
     // We are only interested in the first round of the hashing, so the block size is actually irrelevant as long as it's valid
     // Let's use 1 as the block size as that can divide any number of elements, therefore always valid
@@ -51,9 +53,9 @@ std::string knotHashDenseString(const std::string& stringToHash)
 
     // Each character is converted to a byte
     std::transform(stringToHashTrimmed.cbegin(), stringToHashTrimmed.cend(), std::back_inserter(bytesToHash), [](char c)
-    {
-        return static_cast<unsigned char>(c);
-    });
+                   {
+                       return static_cast<unsigned char>(c);
+                   });
 
     // Add the extra bytes defined in the puzzle
     bytesToHash.insert(bytesToHash.end(), EXTRA_SALT_BYTES.cbegin(), EXTRA_SALT_BYTES.cend());

@@ -17,7 +17,7 @@ void Operation::execute(State& state) const
     {
         state.addToRegister(m_target, m_argument);
     }
-    else if(m_name == "dec")
+    else if (m_name == "dec")
     {
         state.substractFromRegister(m_target, m_argument);
     }

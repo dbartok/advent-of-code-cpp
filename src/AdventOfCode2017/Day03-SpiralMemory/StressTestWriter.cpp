@@ -15,18 +15,6 @@ StressTestWriter::StressTestWriter()
     m_grid.setValue(0, 0, 1);
 }
 
-void StressTestWriter::executeNextTurn()
-{
-    if (m_head.getDirection() == Direction::DOWN || m_head.getDirection() == Direction::UP)
-    {
-        ++m_totalStepsUntilTurn;
-    }
-
-    m_remainingStepsUntilTurn = m_totalStepsUntilTurn;
-    m_head.turnLeft();
-}
-
-
 void StressTestWriter::writeUntil(unsigned threshold)
 {
     while (true)
@@ -54,6 +42,17 @@ void StressTestWriter::writeUntil(unsigned threshold)
 unsigned StressTestWriter::getLastWritten() const
 {
     return m_lastWritten;
+}
+
+void StressTestWriter::executeNextTurn()
+{
+    if (m_head.getDirection() == Direction::DOWN || m_head.getDirection() == Direction::UP)
+    {
+        ++m_totalStepsUntilTurn;
+    }
+
+    m_remainingStepsUntilTurn = m_totalStepsUntilTurn;
+    m_head.turnLeft();
 }
 
 }

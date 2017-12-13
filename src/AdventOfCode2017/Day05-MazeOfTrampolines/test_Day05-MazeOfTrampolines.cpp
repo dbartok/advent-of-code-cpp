@@ -7,9 +7,6 @@ namespace AoC = AdventOfCode;
 
 TEST_CLASS(Day05MazeOfTrampolines)
 {
-private:
-    std::vector<int> m_instructions{0, 3,  0,  1, -3};
-
 public:
 
     TEST_METHOD(jumpInstructionsIncreasing_SimpleTests)
@@ -21,5 +18,8 @@ public:
     {
         Assert::AreEqual(10u, AoC::stepsInstructionsIncreasingDecreasing(m_instructions));
     }
+
+private:
+    std::vector<int> m_instructions{0, 3,  0,  1, -3};
 
 };

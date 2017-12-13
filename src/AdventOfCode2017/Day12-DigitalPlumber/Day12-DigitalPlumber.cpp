@@ -28,7 +28,7 @@ int main()
 
     std::fstream fileIn("input.txt");
     std::vector<std::string> inputNeighborsLines;
-    
+
     std::string lineBuffer;
     while (std::getline(fileIn, lineBuffer))
     {

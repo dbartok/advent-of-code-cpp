@@ -20,4 +20,5 @@ Both of the placeholder unit tests should be discovered and passing when the tes
 6. Use the TODOs in the code as guidance on how to use the skeleton files
 
 ## Visual Studio settings
-In order to help with keeping the coding style consistent, the Visual Studio C++ Text Editor settings used throughout the repository can be imported to Visual Studio from `Settings\TextEditorCPP.vssettings`.
+In order to help with keeping the coding style consistent, the Visual Studio C++ Text Editor settings used throughout the repository can be imported to Visual Studio from `Settings\TextEditorCPP.vssettings`.  
+[Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer) is recommended with the "Remove on save" option enabled to make sure no trailing whitespaces are present in the files.

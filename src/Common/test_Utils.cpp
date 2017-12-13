@@ -11,22 +11,24 @@ namespace VisualStudio
 {
 namespace CppUnitTestFramework
 {
-    template <typename T>
-    std::wstring ToString(const std::vector<T> v)
+
+template <typename T>
+std::wstring ToString(const std::vector<T> v)
+{
+    std::wstringstream s;
+
+    for (size_t i = 0; i < v.size(); i++)
     {
-        std::wstringstream s;
-
-        for (size_t i = 0; i < v.size(); i++)
+        s << ToString(v[i]);
+        if (i != v.size() - 1)
         {
-            s << ToString(v[i]);
-            if (i != v.size() - 1)
-            {
-                s << ", ";
-            }
+            s << ", ";
         }
-
-        return s.str();
     }
+
+    return s.str();
+}
+
 }
 }
 }
@@ -39,13 +41,13 @@ public:
     {
         std::string inputInts{"1 2 3 4 5"};
         std::vector<int> resultInts;
-        std::vector<int> expectedInts{ 1, 2, 3, 4, 5 };
+        std::vector<int> expectedInts{1, 2, 3, 4, 5};
         AoC::Utils::splitStringIntoTypedVector(inputInts, resultInts);
         Assert::AreEqual(expectedInts, resultInts);
 
-        std::string inputStrings{ "ab cd e f" };
+        std::string inputStrings{"ab cd e f"};
         std::vector<std::string> resultStrings;
-        std::vector<std::string> expectedStrings{ "ab", "cd", "e", "f" };
+        std::vector<std::string> expectedStrings{"ab", "cd", "e", "f"};
         AoC::Utils::splitStringIntoTypedVector(inputStrings, resultStrings);
         Assert::AreEqual(expectedStrings, resultStrings);
     }
@@ -87,10 +89,10 @@ public:
 
         std::vector<double> equalDoublesWithThresholdVector{1.0, 0.999, 1.002, 1.05};
         Assert::IsTrue(AoC::Utils::allElementsEqual(equalDoublesWithThresholdVector.cbegin(), equalDoublesWithThresholdVector.cend(),
-            [](double lhs, double rhs) 
-        {
-            return std::fabs(lhs - rhs) < 0.1;
-        }));
+                                                    [](double lhs, double rhs)
+                                                    {
+                                                        return std::fabs(lhs - rhs) < 0.1;
+                                                    }));
     }
 
     TEST_METHOD(allElementsEqual_RangeIsNotEqual_ReturnFalse)
@@ -103,10 +105,10 @@ public:
 
         std::vector<double> farDifferentDoubles{1.7, 0.999, 1.25, 1.05};
         Assert::IsFalse(AoC::Utils::allElementsEqual(farDifferentDoubles.cbegin(), farDifferentDoubles.cend(),
-            [](double lhs, double rhs)
-        {
-            return std::fabs(lhs - rhs) < 0.1;
-        }));
+                                                     [](double lhs, double rhs)
+                                                     {
+                                                         return std::fabs(lhs - rhs) < 0.1;
+                                                     }));
     }
-    
+
 };

@@ -58,9 +58,9 @@ VillageGraph VillageGraph::fromNeighborsLines(const std::vector<std::string>& ne
 
         std::vector<NodeIDType> neighbors;
         std::transform(tokens.cbegin() + 2, tokens.cend(), std::back_inserter(neighbors), [](const std::string& nodeIDString)
-        {
-            return boost::lexical_cast<NodeIDType>(nodeIDString);
-        });
+                       {
+                           return boost::lexical_cast<NodeIDType>(nodeIDString);
+                       });
 
         NodeIDSet neighborSet{std::make_move_iterator(neighbors.begin()), std::make_move_iterator(neighbors.end())};
         neighborSets.push_back(std::move(neighborSet));

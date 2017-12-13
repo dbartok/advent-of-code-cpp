@@ -15,10 +15,6 @@ enum class Direction
 
 class Head
 {
-private:
-    std::pair<int, int> m_position;
-    Direction m_direction;
-
 public:
     Head(std::pair<int, int> m_position, Direction m_direction);
 
@@ -27,6 +23,10 @@ public:
 
     void step();
     void turnLeft();
+
+private:
+    std::pair<int, int> m_position;
+    Direction m_direction;
 };
 
 }
