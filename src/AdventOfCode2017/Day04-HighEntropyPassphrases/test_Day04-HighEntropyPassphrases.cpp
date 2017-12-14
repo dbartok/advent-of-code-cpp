@@ -1,9 +1,13 @@
-#include "CppUnitTest.h"
-
 #include "Day04-HighEntropyPassphrases.h"
+
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include "CppUnitTest.h"
 
 #include <vector>
 #include <string>
+END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace AoC = AdventOfCode;

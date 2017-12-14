@@ -3,12 +3,16 @@
 #include "KnotHasher.h"
 #include "../../Common/Utils.h"
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
 
 #include <fstream>
 #include <iostream>
 #include <vector>
 #include <string>
+END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
 {

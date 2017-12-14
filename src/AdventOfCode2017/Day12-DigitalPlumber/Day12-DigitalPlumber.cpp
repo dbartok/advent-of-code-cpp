@@ -1,8 +1,12 @@
 #include "Day12-DigitalPlumber.h"
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <fstream>
 #include <iostream>
 #include <string>
+END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {

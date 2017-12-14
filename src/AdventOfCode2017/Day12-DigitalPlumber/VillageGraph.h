@@ -1,7 +1,11 @@
 #pragma once
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <vector>
 #include <unordered_set>
+END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {

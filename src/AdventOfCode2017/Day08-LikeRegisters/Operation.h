@@ -2,7 +2,11 @@
 
 #include "State.h"
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <functional>
+END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {

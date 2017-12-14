@@ -2,11 +2,15 @@
 
 #include "NodeDescriptor.h"
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/optional.hpp>
 
 #include <string>
 #include <vector>
 #include <memory>
+END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {

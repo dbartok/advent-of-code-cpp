@@ -1,6 +1,10 @@
-#include "CppUnitTest.h"
-
 #include "Day13-PacketScanners.h"
+
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include "CppUnitTest.h"
+END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace AoC = AdventOfCode;

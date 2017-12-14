@@ -2,10 +2,14 @@
 
 #include "../../Common/Utils.h"
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <algorithm>
+END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {

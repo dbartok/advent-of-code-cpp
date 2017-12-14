@@ -1,8 +1,12 @@
 #include "Day05-MazeOfTrampolines.h"
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <fstream>
 #include <iostream>
 #include <functional>
+END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {

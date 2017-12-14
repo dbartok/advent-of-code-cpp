@@ -2,11 +2,15 @@
 
 #include "WeightedTree.h"
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <algorithm>
 #include <unordered_set>
+END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {

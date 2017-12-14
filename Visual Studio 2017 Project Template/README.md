@@ -22,3 +22,37 @@ Both of the placeholder unit tests should be discovered and passing when the tes
 ## Visual Studio settings
 In order to help with keeping the coding style consistent, the Visual Studio C++ Text Editor settings used throughout the repository can be imported to Visual Studio from `Settings\TextEditorCPP.vssettings`.  
 [Trailing Whitespace Visualizer](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.TrailingWhitespaceVisualizer) is recommended with the "Remove on save" option enabled to make sure no trailing whitespaces are present in the files.
+
+## Warnings & Code Analysis
+All warnings are enabled (/Wall) along with extensive Code Analysis (Microsoft All Rules and also Core C++ Check).
+
+### Ignoring warnings in libraries
+
+Both the standard library and boost produce several externally unfixable warnings when compiled with /Wall.
+We are also not interested in the Code Analysis warning messages for libraries.
+Unfortunately, there is currently no easy way in VS to disable warning messages for all included libraries. 
+Therefore, whenever a header from a library is included, the include has to be surrounded with disable warning directives.
+
+There are some convenience macros available for this in `Common/DisableLibraryWarningsMacros.h`.  
+For the includes surrounded by these macros, the following warnings will be disabled:  
+- Externally unfixable warnings  
+- All Code Analysis warnings originating from the Microsoft All Rules analysis  
+- All Core C++ Check warnings
+
+Example usage:  
+
+```cpp
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include <boost/functional/hash/hash.hpp>
+#include <boost/algorithm/string.hpp>
+
+#include <vector>
+#include <string>
+END_LIBRARIES_DISABLE_WARNINGS
+```
+
+See the following links from Microsoft for more information:  
+[How to: Enable and Disable Code Analysis for Specific C/C++ Warnings](https://msdn.microsoft.com/en-us/library/zyhb0b82(v=vs.100).aspx)  
+[Managing warnings in the C++ Core Guidelines Checker](https://blogs.msdn.microsoft.com/vcblog/2017/08/14/managing-warnings-in-the-c-core-guidelines-checker/)

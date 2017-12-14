@@ -1,6 +1,10 @@
 #include "Processor.h"
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <algorithm>
+END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {

@@ -1,6 +1,10 @@
 #pragma once
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <unordered_map>
+END_LIBRARIES_DISABLE_WARNINGS
 
 class State
 {

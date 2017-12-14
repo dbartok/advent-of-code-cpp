@@ -1,6 +1,10 @@
 #include "Instruction.h"
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
+END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {

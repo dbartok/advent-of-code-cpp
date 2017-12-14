@@ -2,11 +2,15 @@
 
 #include "StressTestWriter.h"
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <fstream>
 #include <iostream>
 #include <algorithm>
 #include <cmath>
 #include <cassert>
+END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {

@@ -1,9 +1,13 @@
 #include "KnotHasher.h"
 
+#include "../../Common/DisableLibraryWarningsMacros.h"
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <numeric>
 #include <cassert>
 #include <sstream>
 #include <iomanip>
+END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
