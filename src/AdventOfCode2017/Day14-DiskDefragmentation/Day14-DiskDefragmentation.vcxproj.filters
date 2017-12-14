@@ -11,24 +11,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Day10-KnotHash.cpp">
+    <ClCompile Include="Day14-DiskDefragmentation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_Day10-KnotHash.cpp">
+    <ClCompile Include="test_Day14-DiskDefragmentation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="KnotHasher.cpp">
+    <ClCompile Include="DefragmenterGrid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Day10-Main.cpp">
+    <ClCompile Include="..\Day10-KnotHash\Day10-KnotHash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Day10-KnotHash\KnotHasher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Day10-KnotHash.h">
+    <ClInclude Include="Day14-DiskDefragmentation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KnotHasher.h">
+    <ClInclude Include="DefragmenterGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Day10-KnotHash\Day10-KnotHash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Day10-KnotHash\KnotHasher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

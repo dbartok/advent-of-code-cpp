@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day12-DigitalPlumber", "Day
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day13-PacketScanners", "Day13-PacketScanners\Day13-PacketScanners.vcxproj", "{6A73B587-9004-4C17-9195-C6BB5FF04839}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day14-DiskDefragmentation", "Day14-DiskDefragmentation\Day14-DiskDefragmentation.vcxproj", "{66CB3005-B1A2-4731-BF10-9428C3DC2D83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -209,6 +211,18 @@ Global
 		{6A73B587-9004-4C17-9195-C6BB5FF04839}.Test|x64.Build.0 = Test|x64
 		{6A73B587-9004-4C17-9195-C6BB5FF04839}.Test|x86.ActiveCfg = Test|Win32
 		{6A73B587-9004-4C17-9195-C6BB5FF04839}.Test|x86.Build.0 = Test|Win32
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83}.Debug|x64.ActiveCfg = Debug|x64
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83}.Debug|x64.Build.0 = Debug|x64
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83}.Debug|x86.ActiveCfg = Debug|Win32
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83}.Debug|x86.Build.0 = Debug|Win32
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83}.Release|x64.ActiveCfg = Release|x64
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83}.Release|x64.Build.0 = Release|x64
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83}.Release|x86.ActiveCfg = Release|Win32
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83}.Release|x86.Build.0 = Release|Win32
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83}.Test|x64.ActiveCfg = Test|x64
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83}.Test|x64.Build.0 = Test|x64
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83}.Test|x86.ActiveCfg = Test|Win32
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83}.Test|x86.Build.0 = Test|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
