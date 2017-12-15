@@ -6,8 +6,6 @@
 #include "../../Common/DisableLibraryWarningsMacros.h"
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
-#include <fstream>
-#include <iostream>
 #include <sstream>
 #include <iomanip>
 #include <bitset>
@@ -86,18 +84,4 @@ unsigned numRegionsOfAdjcacentSquares(const std::string& keyString)
     return defragmenterGrid.numRegionsOfAdjcacentSquares();
 }
 
-}
-
-
-int main()
-{
-    namespace AoC = AdventOfCode;
-
-    std::fstream fileIn("input.txt");
-    std::string inputKeyString;
-
-    fileIn >> inputKeyString;
-
-    std::cout << "First part: " << AoC::numSquaresUsed(inputKeyString) << std::endl;
-    std::cout << "Second part: " << AoC::numRegionsOfAdjcacentSquares(inputKeyString) << std::endl;
 }

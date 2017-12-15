@@ -247,6 +247,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Day04-HighEntropyPassphrases.cpp" />
+    <ClCompile Include="Day04-Main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="test_Day04-HighEntropyPassphrases.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

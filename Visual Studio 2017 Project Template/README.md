@@ -13,7 +13,7 @@ Note: In the Visual Studio Menu, "Test -> Test Settings -> Default Processor Arc
 3. Create a new project from VS, with the template "AdventOfCode" that is now available to select
 4. Copy the contents of the "Starting files" folder to the root of the newly created project  
 At this point, from inside VS, you should now be able to open the placeholder files in the newly created project:  
-DayX-PuzzleName.h, DayX-PuzzleName.cpp and test_DayX-PuzzleName.cpp  
+DayX-PuzzleName.h, DayX-PuzzleName.cpp, DayX-Main.cpp and test_DayX-PuzzleName.cpp  
 The Debug and Release configurations in the new project should build and run.  
 Both of the placeholder unit tests should be discovered and passing when the tests are run from VS in the Test configuration.  
 5. Rename the files in VS to correspond to the given day's puzzle

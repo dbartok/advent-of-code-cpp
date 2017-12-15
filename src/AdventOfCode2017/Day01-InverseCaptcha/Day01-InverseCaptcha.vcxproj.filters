@@ -17,6 +17,9 @@
     <ClCompile Include="test_Day01-InverseCaptcha.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Day01-Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day01-InverseCaptcha.h">

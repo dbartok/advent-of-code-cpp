@@ -5,8 +5,6 @@
 #include "../../Common/DisableLibraryWarningsMacros.h"
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
-#include <fstream>
-#include <iostream>
 #include <algorithm>
 #include <cmath>
 #include <cassert>
@@ -86,18 +84,4 @@ unsigned stressTestFirstValueGreaterThan(unsigned threshold)
     return writer.getLastWritten();
 }
 
-}
-
-
-int main()
-{
-    namespace AoC = AdventOfCode;
-
-    std::fstream fileIn("input.txt");
-    unsigned input;
-
-    fileIn >> input;
-
-    std::cout << "First part: " << AoC::stepsToCarryBack(input) << std::endl;
-    std::cout << "Second part: " << AoC::stressTestFirstValueGreaterThan(input) << std::endl;
 }

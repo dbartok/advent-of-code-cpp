@@ -17,6 +17,9 @@
     <ClCompile Include="test_Day15-DuelingGenerators.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Day15-Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day15-DuelingGenerators.h">

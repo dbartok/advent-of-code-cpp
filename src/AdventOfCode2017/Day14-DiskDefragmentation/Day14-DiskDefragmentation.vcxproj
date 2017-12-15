@@ -249,6 +249,10 @@
     <ClCompile Include="..\Day10-KnotHash\Day10-KnotHash.cpp" />
     <ClCompile Include="..\Day10-KnotHash\KnotHasher.cpp" />
     <ClCompile Include="Day14-DiskDefragmentation.cpp" />
+    <ClCompile Include="Day14-Main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="DefragmenterGrid.cpp" />
     <ClCompile Include="test_Day14-DiskDefragmentation.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

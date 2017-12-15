@@ -3,9 +3,7 @@
 #include "../../Common/DisableLibraryWarningsMacros.h"
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
-#include <fstream>
-#include <iostream>
-#include <string>
+// Add library includes here
 END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -23,22 +21,4 @@ unsigned numTotalGroups(const std::vector<std::string>& neighborsLines)
     return villageGraph.numTotalGroups();
 }
 
-}
-
-
-int main()
-{
-    namespace AoC = AdventOfCode;
-
-    std::fstream fileIn("input.txt");
-    std::vector<std::string> inputNeighborsLines;
-
-    std::string lineBuffer;
-    while (std::getline(fileIn, lineBuffer))
-    {
-        inputNeighborsLines.push_back(lineBuffer);
-    }
-
-    std::cout << "First part: " << AoC::numNodesInGroupNodeZero(inputNeighborsLines) << std::endl;
-    std::cout << "Second part: " << AoC::numTotalGroups(inputNeighborsLines) << std::endl;
 }

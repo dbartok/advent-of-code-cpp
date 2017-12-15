@@ -3,8 +3,7 @@
 #include "../../Common/DisableLibraryWarningsMacros.h"
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
-#include <fstream>
-#include <iostream>
+// Add library includes here
 END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -49,18 +48,4 @@ unsigned sumOfDigitsMatchHalfwayRoundDigit(const std::string& digitsString)
     return sum;
 }
 
-}
-
-
-int main()
-{
-    namespace AoC = AdventOfCode;
-
-    std::fstream fileIn("input.txt");
-    std::string digitsString;
-
-    fileIn >> digitsString;
-
-    std::cout << "First part: " << AoC::sumOfDigitsMatchNextDigit(digitsString) << std::endl;
-    std::cout << "Second part: " << AoC::sumOfDigitsMatchHalfwayRoundDigit(digitsString) << std::endl;
 }

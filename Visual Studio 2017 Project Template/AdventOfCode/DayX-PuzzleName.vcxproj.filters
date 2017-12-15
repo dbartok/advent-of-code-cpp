@@ -17,6 +17,9 @@
     <ClCompile Include="test_DayX-PuzzleName.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DayX-Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DayX-PuzzleName.h">

@@ -17,6 +17,9 @@
     <ClCompile Include="test_Day04-HighEntropyPassphrases.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Day04-Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day04-HighEntropyPassphrases.h">

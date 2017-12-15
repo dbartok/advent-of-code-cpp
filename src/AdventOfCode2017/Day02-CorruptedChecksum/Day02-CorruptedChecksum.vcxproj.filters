@@ -17,6 +17,9 @@
     <ClCompile Include="test_Day02-CorruptedChecksum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Day02-Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day02-CorruptedChecksum.h">

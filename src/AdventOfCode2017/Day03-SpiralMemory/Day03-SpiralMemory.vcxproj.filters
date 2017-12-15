@@ -29,6 +29,9 @@
     <ClCompile Include="InfiniteGridUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Day03-Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day03-SpiralMemory.h">

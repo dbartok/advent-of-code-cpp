@@ -26,6 +26,9 @@
     <ClCompile Include="..\Day10-KnotHash\KnotHasher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Day14-Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day14-DiskDefragmentation.h">

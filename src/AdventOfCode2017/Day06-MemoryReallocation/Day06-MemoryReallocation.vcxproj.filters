@@ -17,6 +17,9 @@
     <ClCompile Include="test_Day06-MemoryReallocation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Day06-Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day06-MemoryReallocation.h">

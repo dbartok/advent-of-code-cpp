@@ -3,8 +3,6 @@
 #include "../../Common/DisableLibraryWarningsMacros.h"
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
-#include <fstream>
-#include <iostream>
 #include <functional>
 END_LIBRARIES_DISABLE_WARNINGS
 
@@ -37,22 +35,4 @@ unsigned stepsInstructionsIncreasingDecreasing(const std::vector<int>& instructi
     return stepsWithInstructionModifierFunc(instructions, [](int& i) { i >= 3 ? --i : ++i; });
 }
 
-}
-
-
-int main()
-{
-    namespace AoC = AdventOfCode;
-
-    std::fstream fileIn("input.txt");
-    std::vector<int> inputInstructions;
-
-    int inputOffset;
-    while (fileIn >> inputOffset)
-    {
-        inputInstructions.push_back(inputOffset);
-    }
-
-    std::cout << "First part: " << AoC::stepsInstructionsIncreasing(inputInstructions) << std::endl;
-    std::cout << "Second part: " << AoC::stepsInstructionsIncreasingDecreasing(inputInstructions) << std::endl;
 }

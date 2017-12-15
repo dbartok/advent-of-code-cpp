@@ -5,8 +5,6 @@
 #include "../../Common/DisableLibraryWarningsMacros.h"
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
-#include <fstream>
-#include <iostream>
 #include <unordered_set>
 #include <tuple>
 #include <functional>
@@ -81,22 +79,4 @@ unsigned numPassphrasesNoAnagramWords(const std::vector<std::string>& passphrase
     return numPassphrasesMatchingVerifier(passphrases, areNoAnagramWords);
 }
 
-}
-
-
-int main()
-{
-    namespace AoC = AdventOfCode;
-
-    std::fstream fileIn("input.txt");
-
-    std::string lineBuffer;
-    std::vector<std::string> lines;
-    while (std::getline(fileIn, lineBuffer))
-    {
-        lines.push_back(std::move(lineBuffer));
-    }
-
-    std::cout << "First part: " << AoC::numPassphrasesNoDuplicateWords(lines) << std::endl;
-    std::cout << "Second part: " << AoC::numPassphrasesNoAnagramWords(lines) << std::endl;
 }

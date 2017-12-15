@@ -248,6 +248,10 @@
   <ItemGroup>
     <ClCompile Include="Condition.cpp" />
     <ClCompile Include="Day08-LikeRegisters.cpp" />
+    <ClCompile Include="Day08-Main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Instruction.cpp" />
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="Processor.cpp" />

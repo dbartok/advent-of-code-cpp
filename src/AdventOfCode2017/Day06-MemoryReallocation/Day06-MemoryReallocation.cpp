@@ -5,8 +5,6 @@
 BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/functional/hash/hash.hpp>
 
-#include <fstream>
-#include <iostream>
 #include <unordered_set>
 #include <algorithm>
 END_LIBRARIES_DISABLE_WARNINGS
@@ -103,22 +101,4 @@ unsigned cyclesUntilReoccurs(MemoryBanks banks)
     }
 }
 
-}
-
-
-int main()
-{
-    namespace AoC = AdventOfCode;
-
-    std::fstream fileIn("input.txt");
-    AoC::MemoryBanks inputBanks;
-
-    unsigned inputBank;
-    while (fileIn >> inputBank)
-    {
-        inputBanks.push_back(inputBank);
-    }
-
-    std::cout << "First part: " << AoC::numUniqueRedistributions(inputBanks) << std::endl;
-    std::cout << "Second part: " << AoC::cyclesUntilReoccurs(inputBanks) << std::endl;
 }

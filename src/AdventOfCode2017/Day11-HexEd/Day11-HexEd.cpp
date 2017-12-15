@@ -3,10 +3,8 @@
 #include "../../Common/DisableLibraryWarningsMacros.h"
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
-#include <boost/algorithm/string.hpp>
-
-#include <fstream>
-#include <iostream>
+#include <algorithm>
+#include <cassert>
 END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -119,21 +117,4 @@ int maxNumStepsFromStart(const std::vector<std::string>& path)
     return maxDistance;
 }
 
-}
-
-
-int main()
-{
-    namespace AoC = AdventOfCode;
-
-    std::fstream fileIn("input.txt");
-
-    std::string commaSeparatedPath;
-    fileIn >> commaSeparatedPath;
-
-    std::vector<std::string> inputPath;
-    boost::split(inputPath, commaSeparatedPath, boost::is_any_of(","));
-
-    std::cout << "First part: " << AoC::numStepsFromStartAtEnd(inputPath) << std::endl;
-    std::cout << "Second part: " << AoC::maxNumStepsFromStart(inputPath) << std::endl;
 }

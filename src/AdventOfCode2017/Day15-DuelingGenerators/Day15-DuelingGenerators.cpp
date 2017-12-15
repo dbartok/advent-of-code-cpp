@@ -6,8 +6,6 @@ BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include <fstream>
-#include <iostream>
 #include <string>
 #include <vector>
 #include <cassert>
@@ -105,23 +103,4 @@ unsigned judgeFinalCountWithCriteria(unsigned generatorAStart, unsigned generato
     return judgeFinalCount(generatorAStart, generatorBStart, CRITERIA_NUM_ROUNDS, true);
 }
 
-}
-
-
-int main()
-{
-    namespace AoC = AdventOfCode;
-
-    std::fstream fileIn("input.txt");
-
-    std::string generatorAStartLine;
-    std::getline(fileIn, generatorAStartLine);
-    const unsigned generatorAStartInput = AoC::generatorStartFromLine(generatorAStartLine);
-
-    std::string generatorBStartLine;
-    std::getline(fileIn, generatorBStartLine);
-    const unsigned generatorBStartInput = AoC::generatorStartFromLine(generatorBStartLine);
-
-    std::cout << "First part: " << AoC::judgeFinalCountNoCriteria(generatorAStartInput, generatorBStartInput) << std::endl;
-    std::cout << "Second part: " << AoC::judgeFinalCountWithCriteria(generatorAStartInput, generatorBStartInput) << std::endl;
 }

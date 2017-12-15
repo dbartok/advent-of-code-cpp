@@ -246,6 +246,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Day07-Main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Day07-RecursiveCircus.cpp" />
     <ClCompile Include="NodeDescriptor.cpp" />
     <ClCompile Include="test_Day07-RecursiveCircus.cpp">

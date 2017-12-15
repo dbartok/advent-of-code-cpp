@@ -6,9 +6,6 @@
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
-
-#include <vector>
-#include <string>
 END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
