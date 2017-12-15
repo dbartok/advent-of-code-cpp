@@ -57,7 +57,7 @@ std::vector<bool> hexStringDigitsToBoolVector(const std::string& hexString)
     return boolVector;
 }
 
-unsigned numSquaresUsed(const std::string& keyString)
+DefragmenterGrid::DiskGrid createDiskGridFromKeyString(const std::string& keyString)
 {
     DefragmenterGrid::DiskGrid diskGrid;
 
@@ -69,8 +69,21 @@ unsigned numSquaresUsed(const std::string& keyString)
         diskGrid.push_back(std::move(row));
     }
 
+    return diskGrid;
+}
+
+unsigned numSquaresUsed(const std::string& keyString)
+{
+    DefragmenterGrid::DiskGrid diskGrid = createDiskGridFromKeyString(keyString);
     DefragmenterGrid defragmenterGrid{std::move(diskGrid)};
     return defragmenterGrid.numSquaresUsed();
+}
+
+unsigned numRegionsOfAdjcacentSquares(const std::string& keyString)
+{
+    DefragmenterGrid::DiskGrid diskGrid = createDiskGridFromKeyString(keyString);
+    DefragmenterGrid defragmenterGrid{std::move(diskGrid)};
+    return defragmenterGrid.numRegionsOfAdjcacentSquares();
 }
 
 }
@@ -86,4 +99,5 @@ int main()
     fileIn >> inputKeyString;
 
     std::cout << "First part: " << AoC::numSquaresUsed(inputKeyString) << std::endl;
+    std::cout << "Second part: " << AoC::numRegionsOfAdjcacentSquares(inputKeyString) << std::endl;
 }

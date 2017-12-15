@@ -15,7 +15,14 @@ public:
 
     TEST_METHOD(numSquaresUsed_SimpleTests)
     {
-        Assert::AreEqual(8108u, AoC::numSquaresUsed("flqrgnkx"));
+        Assert::AreEqual(8108u, AoC::numSquaresUsed(m_keyString));
     }
 
+    TEST_METHOD(numRegionsOfAdjcacentSquares_SimpleTests)
+    {
+        Assert::AreEqual(1242u, AoC::numRegionsOfAdjcacentSquares(m_keyString));
+    }
+
+private:
+    const std::string m_keyString = "flqrgnkx";
 };

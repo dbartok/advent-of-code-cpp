@@ -17,10 +17,14 @@ public:
 
     DefragmenterGrid(DiskGrid diskGrid) noexcept;
     unsigned numSquaresUsed() const;
+    unsigned numRegionsOfAdjcacentSquares() const;
 
 private:
     DiskGrid m_diskGrid;
 
+    bool isRectangle() const;
+
+    static void clearRegion(DiskGrid& diskGrid, size_t i, size_t j);
 };
 
 }

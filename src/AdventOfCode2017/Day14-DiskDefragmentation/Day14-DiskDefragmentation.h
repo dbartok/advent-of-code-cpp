@@ -10,5 +10,6 @@ namespace AdventOfCode
 {
 
 unsigned numSquaresUsed(const std::string& keyString);
+unsigned numRegionsOfAdjcacentSquares(const std::string& keyString);
 
 }
