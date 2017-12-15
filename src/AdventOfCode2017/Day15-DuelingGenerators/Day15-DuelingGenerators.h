@@ -5,6 +5,7 @@
 namespace AdventOfCode
 {
 
-unsigned judgeFinalCount(unsigned aStart, unsigned bStart);
+unsigned judgeFinalCountNoCriteria(unsigned aStart, unsigned bStart);
+unsigned judgeFinalCountWithCriteria(unsigned aStart, unsigned bStart);
 
 }

@@ -13,9 +13,17 @@ TEST_CLASS(Day15DuelingGenerators)
 {
 public:
 
-    TEST_METHOD(judgeFinalCount_SimpleTests)
+    TEST_METHOD(judgeFinalCountNoCriteria_SimpleTests)
     {
-        Assert::AreEqual(588u, AoC::judgeFinalCount(65, 8921));
+        Assert::AreEqual(588u, AoC::judgeFinalCountNoCriteria(m_generatorAStart, m_generatorBStart));
     }
 
+    TEST_METHOD(judgeFinalCountWithCriteria_SimpleTests)
+    {
+        Assert::AreEqual(309u, AoC::judgeFinalCountWithCriteria(m_generatorAStart, m_generatorBStart));
+    }
+
+private:
+    const unsigned m_generatorAStart = 65;
+    const unsigned m_generatorBStart = 8921;
 };

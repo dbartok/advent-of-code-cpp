@@ -19,9 +19,13 @@ namespace
 const unsigned GENERATOR_A_MULTIPLIER = 16807;
 const unsigned GENERATOR_B_MULTIPLIER = 48271;
 
+const unsigned GENERATOR_A_MULTIPLE_CRITERION = 4;
+const unsigned GENERATOR_B_MULTIPLE_CRITERION = 8;
+
 const unsigned GENERATOR_MODULUS = 2'147'483'647;
 
-const unsigned NUM_ROUNDS = 40'000'000;
+const unsigned NO_CRITERIA_NUM_ROUNDS = 40'000'000;
+const unsigned CRITERIA_NUM_ROUNDS = 5'000'000;
 
 const unsigned JUDGE_NUM_BINARY_DIGITS_TO_MATCH = 16;
 
@@ -43,7 +47,26 @@ unsigned generatorStartFromLine(const std::string& line)
     return boost::lexical_cast<unsigned>(tokens[4]);
 }
 
-unsigned judgeFinalCount(unsigned generatorAStart, unsigned generatorBStart)
+constexpr uint64_t generateNextValue(uint64_t prevValue, unsigned multiplier, unsigned multipleCriterion) noexcept
+{
+    uint64_t currValue{};
+    while (true)
+    {
+        currValue = (prevValue * multiplier) % GENERATOR_MODULUS;
+
+        if (currValue % multipleCriterion == 0)
+        {
+            break;
+        }
+
+        prevValue = currValue;
+    }
+
+    return currValue;
+
+}
+
+unsigned judgeFinalCount(unsigned generatorAStart, unsigned generatorBStart, unsigned numRounds, bool isUsingCriteria)
 {
     const double judgeModulusDouble = (pow(2, JUDGE_NUM_BINARY_DIGITS_TO_MATCH));
     assert(judgeModulusDouble <= std::numeric_limits<unsigned>::max());
@@ -55,10 +78,10 @@ unsigned judgeFinalCount(unsigned generatorAStart, unsigned generatorBStart)
 
     unsigned judgeScore = 0;
 
-    for (unsigned i = 0; i < NUM_ROUNDS; ++i)
+    for (unsigned i = 0; i < numRounds; ++i)
     {
-        const uint64_t generatorACurrValue = (generatorAPrevValue * GENERATOR_A_MULTIPLIER) % GENERATOR_MODULUS;
-        const uint64_t generatorBCurrValue = (generatorBPrevValue * GENERATOR_B_MULTIPLIER) % GENERATOR_MODULUS;
+        const uint64_t generatorACurrValue = generateNextValue(generatorAPrevValue, GENERATOR_A_MULTIPLIER, isUsingCriteria ? GENERATOR_A_MULTIPLE_CRITERION : 1);
+        const uint64_t generatorBCurrValue = generateNextValue(generatorBPrevValue, GENERATOR_B_MULTIPLIER, isUsingCriteria ? GENERATOR_B_MULTIPLE_CRITERION : 1);
 
         if (generatorACurrValue % judgeModulus == generatorBCurrValue % judgeModulus)
         {
@@ -70,6 +93,16 @@ unsigned judgeFinalCount(unsigned generatorAStart, unsigned generatorBStart)
     }
 
     return judgeScore;
+}
+
+unsigned judgeFinalCountNoCriteria(unsigned generatorAStart, unsigned generatorBStart)
+{
+    return judgeFinalCount(generatorAStart, generatorBStart, NO_CRITERIA_NUM_ROUNDS, false);
+}
+
+unsigned judgeFinalCountWithCriteria(unsigned generatorAStart, unsigned generatorBStart)
+{
+    return judgeFinalCount(generatorAStart, generatorBStart, CRITERIA_NUM_ROUNDS, true);
 }
 
 }
@@ -89,5 +122,6 @@ int main()
     std::getline(fileIn, generatorBStartLine);
     const unsigned generatorBStartInput = AoC::generatorStartFromLine(generatorBStartLine);
 
-    std::cout << "First part: " << AoC::judgeFinalCount(generatorAStartInput, generatorBStartInput) << std::endl;
+    std::cout << "First part: " << AoC::judgeFinalCountNoCriteria(generatorAStartInput, generatorBStartInput) << std::endl;
+    std::cout << "Second part: " << AoC::judgeFinalCountWithCriteria(generatorAStartInput, generatorBStartInput) << std::endl;
 }
