@@ -23,6 +23,12 @@ public:
         Assert::AreEqual(std::string{"ceadb"}, AoC::orderAfterDanceMovesRepetitions(m_danceMoveStrings, 2u, 5u));
     }
 
+    TEST_METHOD(orderAfterDanceMovesRepetitions_RepetitionsLargerThanCycleSize)
+    {
+        Assert::AreEqual(std::string{"ceadb"}, AoC::orderAfterDanceMovesRepetitions(m_danceMoveStrings, 6u, 5u));
+        Assert::AreEqual(std::string{"ceadb"}, AoC::orderAfterDanceMovesRepetitions(m_danceMoveStrings, 10u, 5u));
+    }
+
 private:
     const std::vector<std::string> m_danceMoveStrings =
     {
