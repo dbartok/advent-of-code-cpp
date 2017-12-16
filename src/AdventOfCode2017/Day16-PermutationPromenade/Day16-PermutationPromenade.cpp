@@ -23,10 +23,15 @@ std::vector<DanceMove::SharedPtr> danceMoveSharedPtrsFromStrings (const std::vec
     return danceMoveSharedPtrs;
 }
 
-std::string orderAfterDanceMoves(const std::vector<std::string>& danceMoveStrings, unsigned numParticipants)
+std::string orderAfterDanceMovesSingleRepetition(const std::vector<std::string>& danceMoveStrings, unsigned numParticipants)
+{
+    return orderAfterDanceMovesRepetitions(danceMoveStrings, 1, numParticipants);
+}
+
+std::string orderAfterDanceMovesRepetitions(const std::vector<std::string>& danceMoveStrings, unsigned numRepetitions, unsigned numParticipants)
 {
     std::vector<DanceMove::SharedPtr> danceMoves = danceMoveSharedPtrsFromStrings(danceMoveStrings);
-    DanceCoordinator danceCoordinator{std::move(danceMoves), numParticipants};
+    DanceCoordinator danceCoordinator{danceMoves, numRepetitions, numParticipants};
     danceCoordinator.executeMoves();
     return danceCoordinator.currentOrderString();
 }

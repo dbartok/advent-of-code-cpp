@@ -13,12 +13,17 @@ namespace
 {
 
 const unsigned DEFAULT_NUM_PARTICIPANTS = 16;
+const unsigned DEFAULT_NUM_REPETITIONS = 1'000'000'000;
 
 }
 
 namespace AdventOfCode
 {
 
-std::string orderAfterDanceMoves(const std::vector<std::string>& danceMoveStrings, unsigned numParticipants = DEFAULT_NUM_PARTICIPANTS);
+std::string orderAfterDanceMovesSingleRepetition(const std::vector<std::string>& danceMoveStrings, unsigned numParticipants = DEFAULT_NUM_PARTICIPANTS);
+
+std::string orderAfterDanceMovesRepetitions(const std::vector<std::string>& danceMoveStrings,
+                                            unsigned numRepetitions = DEFAULT_NUM_REPETITIONS,
+                                            unsigned numParticipants = DEFAULT_NUM_PARTICIPANTS);
 
 }

@@ -10,8 +10,9 @@ END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-DanceCoordinator::DanceCoordinator(std::vector<DanceMove::SharedPtr> danceMoves, unsigned numParticipants)
+DanceCoordinator::DanceCoordinator(std::vector<DanceMove::SharedPtr> danceMoves, unsigned numRepetitions, unsigned numParticipants)
     : m_danceMoves{std::move(danceMoves)}
+    , m_numRepetitions{numRepetitions}
     , m_names(numParticipants) // Size constructor
 {
     char programName = 'a';
@@ -22,9 +23,12 @@ DanceCoordinator::DanceCoordinator(std::vector<DanceMove::SharedPtr> danceMoves,
 
 void DanceCoordinator::executeMoves()
 {
-    for (const auto& danceMove : m_danceMoves)
+    for (unsigned i = 0; i < m_numRepetitions; ++i)
     {
-        danceMove->execute(m_names);
+        for (const auto& danceMove : m_danceMoves)
+        {
+            danceMove->execute(m_names);
+        }
     }
 }
 

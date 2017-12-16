@@ -21,5 +21,6 @@ int main()
     std::vector<std::string> inputDanceMovesStrings;
     boost::split(inputDanceMovesStrings, commaSeparatedDanceMoves, boost::is_any_of(","));
 
-    std::cout << "First part: " << AoC::orderAfterDanceMoves(inputDanceMovesStrings) << std::endl;
+    std::cout << "First part: " << AoC::orderAfterDanceMovesSingleRepetition(inputDanceMovesStrings) << std::endl;
+    std::cout << "Second part: " << AoC::orderAfterDanceMovesRepetitions(inputDanceMovesStrings) << std::endl;
 }
