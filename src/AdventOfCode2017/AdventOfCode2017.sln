@@ -35,6 +35,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day14-DiskDefragmentation",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day15-DuelingGenerators", "Day15-DuelingGenerators\Day15-DuelingGenerators.vcxproj", "{A70697D1-4DEA-41F4-BF4C-11493EDC2A3A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day16-PermutationPromenade", "Day16-PermutationPromenade\Day16-PermutationPromenade.vcxproj", "{06D1543E-860F-438E-9146-FC654518B520}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -237,6 +239,18 @@ Global
 		{A70697D1-4DEA-41F4-BF4C-11493EDC2A3A}.Test|x64.Build.0 = Test|x64
 		{A70697D1-4DEA-41F4-BF4C-11493EDC2A3A}.Test|x86.ActiveCfg = Test|Win32
 		{A70697D1-4DEA-41F4-BF4C-11493EDC2A3A}.Test|x86.Build.0 = Test|Win32
+		{06D1543E-860F-438E-9146-FC654518B520}.Debug|x64.ActiveCfg = Debug|x64
+		{06D1543E-860F-438E-9146-FC654518B520}.Debug|x64.Build.0 = Debug|x64
+		{06D1543E-860F-438E-9146-FC654518B520}.Debug|x86.ActiveCfg = Debug|Win32
+		{06D1543E-860F-438E-9146-FC654518B520}.Debug|x86.Build.0 = Debug|Win32
+		{06D1543E-860F-438E-9146-FC654518B520}.Release|x64.ActiveCfg = Release|x64
+		{06D1543E-860F-438E-9146-FC654518B520}.Release|x64.Build.0 = Release|x64
+		{06D1543E-860F-438E-9146-FC654518B520}.Release|x86.ActiveCfg = Release|Win32
+		{06D1543E-860F-438E-9146-FC654518B520}.Release|x86.Build.0 = Release|Win32
+		{06D1543E-860F-438E-9146-FC654518B520}.Test|x64.ActiveCfg = Test|x64
+		{06D1543E-860F-438E-9146-FC654518B520}.Test|x64.Build.0 = Test|x64
+		{06D1543E-860F-438E-9146-FC654518B520}.Test|x86.ActiveCfg = Test|Win32
+		{06D1543E-860F-438E-9146-FC654518B520}.Test|x86.Build.0 = Test|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
