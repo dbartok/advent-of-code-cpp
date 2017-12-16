@@ -26,7 +26,7 @@ public:
     DanceMove& operator=(DanceMove&&) = default;
     virtual ~DanceMove() = default;
 
-    virtual void execute(std::vector<std::string>& namesInOrder) const = 0;
+    virtual void execute(std::string& nameOrderString) const = 0;
 
     static SharedPtr sharedPtrFromString(const std::string& danceMoveString);
 };
@@ -42,7 +42,7 @@ public:
     SpinMove& operator=(SpinMove&&) = default;
     virtual ~SpinMove() = default;
 
-    virtual void execute(std::vector<std::string>& namesInOrder) const;
+    virtual void execute(std::string& nameOrderString) const;
 
 private:
     unsigned m_offset;
@@ -59,7 +59,7 @@ public:
     ExchangeMove& operator=(ExchangeMove&&) = default;
     virtual ~ExchangeMove() = default;
 
-    virtual void execute(std::vector<std::string>& namesInOrder) const;
+    virtual void execute(std::string& nameOrderString) const;
 
 private:
     unsigned m_pos1;
@@ -77,7 +77,7 @@ public:
     PartnerMove& operator=(PartnerMove&&) = default;
     virtual ~PartnerMove() = default;
 
-    virtual void execute(std::vector<std::string>& namesInOrder) const;
+    virtual void execute(std::string& nameOrderString) const;
 
 private:
     std::string m_name1;

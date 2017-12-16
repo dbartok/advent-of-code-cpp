@@ -62,18 +62,18 @@ SpinMove::SpinMove(unsigned offset) noexcept
 
 }
 
-void SpinMove::execute(std::vector<std::string>& namesInOrder) const
+void SpinMove::execute(std::string& nameOrderString) const
 {
-    if (namesInOrder.empty())
+    if (nameOrderString.empty())
     {
         return;
     }
 
-    auto namesInOrderOriginal{namesInOrder};
+    auto namesInOrderOriginal{nameOrderString};
 
-    for (size_t i = 0; i < namesInOrder.size(); ++i)
+    for (size_t i = 0; i < nameOrderString.size(); ++i)
     {
-        namesInOrder[(i + m_offset) % namesInOrder.size()] = namesInOrderOriginal[i];
+        nameOrderString[(i + m_offset) % nameOrderString.size()] = namesInOrderOriginal[i];
     }
 }
 
@@ -85,14 +85,14 @@ ExchangeMove::ExchangeMove(unsigned pos1, unsigned pos2) noexcept
 
 }
 
-void ExchangeMove::execute(std::vector<std::string>& namesInOrder) const
+void ExchangeMove::execute(std::string& nameOrderString) const
 {
-    if (namesInOrder.size() < std::max(m_pos1, m_pos2))
+    if (nameOrderString.size() < std::max(m_pos1, m_pos2))
     {
         throw std::runtime_error("Too few elements.");
     }
 
-    std::swap(namesInOrder[m_pos1], namesInOrder[m_pos2]);
+    std::swap(nameOrderString[m_pos1], nameOrderString[m_pos2]);
 }
 
 
@@ -103,17 +103,17 @@ PartnerMove::PartnerMove(std::string name1, std::string name2) noexcept
 
 }
 
-void PartnerMove::execute(std::vector<std::string>& namesInOrder) const
+void PartnerMove::execute(std::string& nameOrderString) const
 {
-    const auto name1Iter = std::find(namesInOrder.begin(), namesInOrder.end(), m_name1);
-    const auto name2Iter = std::find(namesInOrder.begin(), namesInOrder.end(), m_name2);
+    const size_t name1Pos = nameOrderString.find(m_name1);
+    const size_t name2Pos = nameOrderString.find(m_name2);
 
-    if (name1Iter == namesInOrder.end() || name2Iter == namesInOrder.end())
+    if (name1Pos == std::string::npos || name2Pos == std::string::npos)
     {
         throw std::runtime_error("Both named elements need to be present.");
     }
 
-    std::swap(*name1Iter, *name2Iter);
+    std::swap(nameOrderString[name1Pos], nameOrderString[name2Pos]);
 }
 
 }

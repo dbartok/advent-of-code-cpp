@@ -13,12 +13,12 @@ namespace AdventOfCode
 DanceCoordinator::DanceCoordinator(std::vector<DanceMove::SharedPtr> danceMoves, unsigned numRepetitions, unsigned numParticipants)
     : m_danceMoves{std::move(danceMoves)}
     , m_numRepetitions{numRepetitions}
-    , m_names(numParticipants) // Size constructor
+    , m_nameOrderString(numParticipants, ' ') // Fill constructor
 {
-    char programName = 'a';
-    assert(static_cast<int>(numParticipants) <= 'z' - programName);
+    const char firstProgramName = 'a';
+    assert(static_cast<int>(numParticipants) <= 'z' - firstProgramName);
 
-    std::generate(m_names.begin(), m_names.end(), [&programName]() noexcept { return programName++; });
+    std::iota(m_nameOrderString.begin(), m_nameOrderString.end(), firstProgramName);
 }
 
 void DanceCoordinator::executeMoves()
@@ -27,14 +27,14 @@ void DanceCoordinator::executeMoves()
     {
         for (const auto& danceMove : m_danceMoves)
         {
-            danceMove->execute(m_names);
+            danceMove->execute(m_nameOrderString);
         }
     }
 }
 
-std::string DanceCoordinator::currentOrderString() const
+const std::string& DanceCoordinator::getNameOrderString() const noexcept
 {
-    return std::accumulate(m_names.cbegin(), m_names.cend(), std::string{""}, [](const std::string& orderString, const std::string name) {return orderString + name; });
+    return m_nameOrderString;
 }
 
 }

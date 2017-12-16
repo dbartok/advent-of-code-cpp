@@ -33,7 +33,7 @@ std::string orderAfterDanceMovesRepetitions(const std::vector<std::string>& danc
     std::vector<DanceMove::SharedPtr> danceMoves = danceMoveSharedPtrsFromStrings(danceMoveStrings);
     DanceCoordinator danceCoordinator{danceMoves, numRepetitions, numParticipants};
     danceCoordinator.executeMoves();
-    return danceCoordinator.currentOrderString();
+    return danceCoordinator.getNameOrderString();
 }
 
 }

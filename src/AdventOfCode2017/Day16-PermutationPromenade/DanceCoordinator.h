@@ -16,13 +16,13 @@ class DanceCoordinator
 public:
     DanceCoordinator(std::vector<DanceMove::SharedPtr> danceMoves, unsigned numRepetitions, unsigned numParticipants);
     void executeMoves();
-    std::string currentOrderString() const;
+    const std::string& getNameOrderString() const noexcept;
 
 private:
     std::vector<DanceMove::SharedPtr> m_danceMoves;
     unsigned m_numRepetitions;
 
-    std::vector<std::string> m_names;
+    std::string m_nameOrderString;
 };
 
 }
