@@ -48,11 +48,11 @@ public:
 private:
     TreeNodeSharedPtr m_root;
 
-    void recalculateSubtreeWeights(const TreeNodeSharedPtr& nodeSharedPtr);
+    void recalculateSubtreeWeightsForNode(TreeNode& node);
 
     // Recursively traverse a non-empty tree to find a single weight that causes an imbalance
     // Returns the correct weight value for the single wrong weight
-    int traverseForCorrectWeight(const TreeNodeSharedPtr& nodeSharedPtr, int weightSurplus) const;
+    int traverseForCorrectWeightFromNode(const TreeNode& currentNode, int weightSurplus) const;
 };
 
 }

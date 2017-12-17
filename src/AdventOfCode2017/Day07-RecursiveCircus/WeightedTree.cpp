@@ -43,7 +43,7 @@ int WeightedTree::TreeNode::totalSiblingCount() const
 WeightedTree::WeightedTree(TreeNodeSharedPtr root)
     : m_root{std::move(root)}
 {
-    recalculateSubtreeWeights(m_root);
+    recalculateSubtreeWeightsForNode(*m_root);
 }
 
 int WeightedTree::getCorrectWeightForSingleWrongWeight() const
@@ -53,7 +53,7 @@ int WeightedTree::getCorrectWeightForSingleWrongWeight() const
         throw std::runtime_error("Tree is empty.");
     }
 
-    return traverseForCorrectWeight(m_root, 0);
+    return traverseForCorrectWeightFromNode(*m_root, 0);
 }
 
 WeightedTree WeightedTree::fromNodeDescriptors(const std::vector<NodeDescriptor>& nodeDescriptors)
@@ -66,7 +66,7 @@ WeightedTree WeightedTree::fromNodeDescriptors(const std::vector<NodeDescriptor>
         TreeNodeSharedPtr newNodeSharedPtr = std::make_shared<TreeNode>(nodeDescriptor.name, nodeDescriptor.weight);
 
         bool insertionTookPlace;
-        std::tie(std::ignore, insertionTookPlace) = allNodes.insert(std::make_pair(newNodeSharedPtr->name, newNodeSharedPtr));
+        std::tie(std::ignore, insertionTookPlace) = allNodes.insert(std::make_pair(nodeDescriptor.name, std::move(newNodeSharedPtr)));
 
         if (!insertionTookPlace)
         {
@@ -102,29 +102,29 @@ WeightedTree WeightedTree::fromNodeDescriptors(const std::vector<NodeDescriptor>
     return WeightedTree{std::move(root)};
 }
 
-void WeightedTree::recalculateSubtreeWeights(const TreeNodeSharedPtr& nodeSharedPtr)
+void WeightedTree::recalculateSubtreeWeightsForNode(TreeNode& node)
 {
-    for (const auto& childSharedPtr : nodeSharedPtr->childrenSharedPtrs)
+    for (const auto& childSharedPtr : node.childrenSharedPtrs)
     {
-        recalculateSubtreeWeights(childSharedPtr);
+        recalculateSubtreeWeightsForNode(*childSharedPtr);
     }
 
-    nodeSharedPtr->totalSubtreeWeight = std::accumulate(nodeSharedPtr->childrenSharedPtrs.cbegin(), nodeSharedPtr->childrenSharedPtrs.cend(), nodeSharedPtr->weight,
+    node.totalSubtreeWeight = std::accumulate(node.childrenSharedPtrs.cbegin(), node.childrenSharedPtrs.cend(), node.weight,
                                                         [](int sum, const TreeNodeSharedPtr& childSharedPtr)
                                                         {
                                                             return sum + childSharedPtr->totalSubtreeWeight;
                                                         });
 }
 
-int WeightedTree::traverseForCorrectWeight(const TreeNodeSharedPtr& nodeSharedPtr, int weightSurplus) const
+int WeightedTree::traverseForCorrectWeightFromNode(const TreeNode& currentNode, int weightSurplus) const
 {
-    const std::vector<TreeNodeSharedPtr>& childrenSharedPtrs = nodeSharedPtr->childrenSharedPtrs;
+    const std::vector<TreeNodeSharedPtr>& childrenSharedPtrs = currentNode.childrenSharedPtrs;
     bool balancedSoFar = (weightSurplus == 0);
 
     // Exactly one child, skip forward
     if (childrenSharedPtrs.size() == 1)
     {
-        return traverseForCorrectWeight(childrenSharedPtrs.front(), weightSurplus);
+        return traverseForCorrectWeightFromNode(*childrenSharedPtrs.front(), weightSurplus);
     }
 
     bool areAllChildrenEqualSubtreeWeight = Utils::allElementsEqual(childrenSharedPtrs.cbegin(), childrenSharedPtrs.cend(),
@@ -144,13 +144,13 @@ int WeightedTree::traverseForCorrectWeight(const TreeNodeSharedPtr& nodeSharedPt
         }
 
         // If the wrong node is an only child, changing its weight is equivalent to changing the weight of its parent
-        if (nodeSharedPtr->totalSiblingCount() == 1)
+        if (currentNode.totalSiblingCount() == 1)
         {
             throw std::runtime_error("The wrong weight is ambiguous - it could both be a node and its parent.");
         }
 
         // This is the node that has to be balanced, return the correct weight for it
-        return nodeSharedPtr->weight - weightSurplus;
+        return currentNode.weight - weightSurplus;
     }
 
     // Two imbalanced children
@@ -203,7 +203,7 @@ int WeightedTree::traverseForCorrectWeight(const TreeNodeSharedPtr& nodeSharedPt
         }
 
         // Traverse in the only direction where the imbalance can be corrected
-        return traverseForCorrectWeight(uniqueWeightNodeSharedPtr, imbalancedChildWeightExtra);
+        return traverseForCorrectWeightFromNode(*uniqueWeightNodeSharedPtr, imbalancedChildWeightExtra);
     }
 }
 
