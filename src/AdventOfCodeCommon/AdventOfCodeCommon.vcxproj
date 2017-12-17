@@ -30,10 +30,10 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{cacb5746-ded5-4746-82aa-8aa8f76cec06}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Common</RootNamespace>
+    <RootNamespace>AdventOfCodeCommon</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <ProjectSubType>NativeUnitTestProject</ProjectSubType>
-    <ProjectName>Common</ProjectName>
+    <ProjectName>AdventOfCodeCommon</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

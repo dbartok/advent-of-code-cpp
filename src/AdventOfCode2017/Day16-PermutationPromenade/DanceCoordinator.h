@@ -2,7 +2,7 @@
 
 #include "DanceMove.h"
 
-#include "../../Common/DisableLibraryWarningsMacros.h"
+#include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
 // Add library includes here

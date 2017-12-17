@@ -1,6 +1,6 @@
 #include "Day16-PermutationPromenade.h"
 
-#include "../../Common/DisableLibraryWarningsMacros.h"
+#include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include "CppUnitTest.h"

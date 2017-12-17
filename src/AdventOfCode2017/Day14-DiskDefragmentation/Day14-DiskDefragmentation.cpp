@@ -1,9 +1,9 @@
 #include "Day14-DiskDefragmentation.h"
 
 #include "DefragmenterGrid.h"
-#include "../Day10-KnotHash/Day10-KnotHash.h"
+#include <AdventOfCode2017/Day10-KnotHash/Day10-KnotHash.h>
 
-#include "../../Common/DisableLibraryWarningsMacros.h"
+#include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <sstream>

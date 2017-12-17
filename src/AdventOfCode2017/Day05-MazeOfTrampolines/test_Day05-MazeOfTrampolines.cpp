@@ -1,6 +1,6 @@
 #include "Day05-MazeOfTrampolines.h"
 
-#include "../../Common/DisableLibraryWarningsMacros.h"
+#include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include "CppUnitTest.h"

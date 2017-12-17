@@ -42,7 +42,7 @@ For the includes surrounded by these macros, the following warnings will be disa
 Example usage:  
 
 ```cpp
-#include "../../Common/DisableLibraryWarningsMacros.h"
+#include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/functional/hash/hash.hpp>

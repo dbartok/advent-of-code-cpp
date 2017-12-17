@@ -1,6 +1,6 @@
 #include "Day06-MemoryReallocation.h"
 
-#include "../../Common/DisableLibraryWarningsMacros.h"
+#include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/functional/hash/hash.hpp>

@@ -3,39 +3,41 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day01-InverseCaptcha", "Day01-InverseCaptcha\Day01-InverseCaptcha.vcxproj", "{E157DBC3-3E58-4A10-ABD3-A597C6752F36}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdventOfCodeCommon", "AdventOfCodeCommon\AdventOfCodeCommon.vcxproj", "{CACB5746-DED5-4746-82AA-8AA8F76CEC06}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day02-CorruptedChecksum", "Day02-CorruptedChecksum\Day02-CorruptedChecksum.vcxproj", "{B542145C-B60E-4B0B-AD47-67FD721CA448}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AdventOfCode2017", "AdventOfCode2017", "{55904875-D27A-4052-A99D-C4B43B186A6C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "..\Common\Common.vcxproj", "{CACB5746-DED5-4746-82AA-8AA8F76CEC06}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day01-InverseCaptcha", "AdventOfCode2017\Day01-InverseCaptcha\Day01-InverseCaptcha.vcxproj", "{E157DBC3-3E58-4A10-ABD3-A597C6752F36}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day03-SpiralMemory", "Day03-SpiralMemory\Day03-SpiralMemory.vcxproj", "{34E55C7E-2267-4862-81C0-2270AAD9C586}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day02-CorruptedChecksum", "AdventOfCode2017\Day02-CorruptedChecksum\Day02-CorruptedChecksum.vcxproj", "{B542145C-B60E-4B0B-AD47-67FD721CA448}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day04-HighEntropyPassphrases", "Day04-HighEntropyPassphrases\Day04-HighEntropyPassphrases.vcxproj", "{00105898-5BEA-4DD8-86A0-E4A73B42FF9C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day03-SpiralMemory", "AdventOfCode2017\Day03-SpiralMemory\Day03-SpiralMemory.vcxproj", "{34E55C7E-2267-4862-81C0-2270AAD9C586}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day05-MazeOfTrampolines", "Day05-MazeOfTrampolines\Day05-MazeOfTrampolines.vcxproj", "{4A023829-02DC-4DC0-B388-B023F1C0A68E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day04-HighEntropyPassphrases", "AdventOfCode2017\Day04-HighEntropyPassphrases\Day04-HighEntropyPassphrases.vcxproj", "{00105898-5BEA-4DD8-86A0-E4A73B42FF9C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day06-MemoryReallocation", "Day06-MemoryReallocation\Day06-MemoryReallocation.vcxproj", "{E3112216-81FD-465A-8732-375605FE2483}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day05-MazeOfTrampolines", "AdventOfCode2017\Day05-MazeOfTrampolines\Day05-MazeOfTrampolines.vcxproj", "{4A023829-02DC-4DC0-B388-B023F1C0A68E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day07-RecursiveCircus", "Day07-RecursiveCircus\Day07-RecursiveCircus.vcxproj", "{07BFE542-3AA5-49C1-B479-E5CB38331457}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day06-MemoryReallocation", "AdventOfCode2017\Day06-MemoryReallocation\Day06-MemoryReallocation.vcxproj", "{E3112216-81FD-465A-8732-375605FE2483}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day08-LikeRegisters", "Day08-LikeRegisters\Day08-LikeRegisters.vcxproj", "{971810EA-0811-4EF8-B21F-279C6016D148}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day07-RecursiveCircus", "AdventOfCode2017\Day07-RecursiveCircus\Day07-RecursiveCircus.vcxproj", "{07BFE542-3AA5-49C1-B479-E5CB38331457}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day09-StreamProcessing", "Day09-StreamProcessing\Day09-StreamProcessing.vcxproj", "{B8015A32-0B74-4C51-BFDA-A488AA51A199}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day08-LikeRegisters", "AdventOfCode2017\Day08-LikeRegisters\Day08-LikeRegisters.vcxproj", "{971810EA-0811-4EF8-B21F-279C6016D148}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day10-KnotHash", "Day10-KnotHash\Day10-KnotHash.vcxproj", "{F374A5D2-BBD2-437A-967F-3CB294205F5A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day09-StreamProcessing", "AdventOfCode2017\Day09-StreamProcessing\Day09-StreamProcessing.vcxproj", "{B8015A32-0B74-4C51-BFDA-A488AA51A199}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day11-HexEd", "Day11-HexEd\Day11-HexEd.vcxproj", "{210601CD-5073-4A1B-BD22-E89B603A22F3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day10-KnotHash", "AdventOfCode2017\Day10-KnotHash\Day10-KnotHash.vcxproj", "{F374A5D2-BBD2-437A-967F-3CB294205F5A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day12-DigitalPlumber", "Day12-DigitalPlumber\Day12-DigitalPlumber.vcxproj", "{13C81FB0-9159-42C0-BFD6-1A562A4A5255}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day11-HexEd", "AdventOfCode2017\Day11-HexEd\Day11-HexEd.vcxproj", "{210601CD-5073-4A1B-BD22-E89B603A22F3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day13-PacketScanners", "Day13-PacketScanners\Day13-PacketScanners.vcxproj", "{6A73B587-9004-4C17-9195-C6BB5FF04839}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day12-DigitalPlumber", "AdventOfCode2017\Day12-DigitalPlumber\Day12-DigitalPlumber.vcxproj", "{13C81FB0-9159-42C0-BFD6-1A562A4A5255}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day14-DiskDefragmentation", "Day14-DiskDefragmentation\Day14-DiskDefragmentation.vcxproj", "{66CB3005-B1A2-4731-BF10-9428C3DC2D83}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day13-PacketScanners", "AdventOfCode2017\Day13-PacketScanners\Day13-PacketScanners.vcxproj", "{6A73B587-9004-4C17-9195-C6BB5FF04839}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day15-DuelingGenerators", "Day15-DuelingGenerators\Day15-DuelingGenerators.vcxproj", "{A70697D1-4DEA-41F4-BF4C-11493EDC2A3A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day14-DiskDefragmentation", "AdventOfCode2017\Day14-DiskDefragmentation\Day14-DiskDefragmentation.vcxproj", "{66CB3005-B1A2-4731-BF10-9428C3DC2D83}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day16-PermutationPromenade", "Day16-PermutationPromenade\Day16-PermutationPromenade.vcxproj", "{06D1543E-860F-438E-9146-FC654518B520}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day15-DuelingGenerators", "AdventOfCode2017\Day15-DuelingGenerators\Day15-DuelingGenerators.vcxproj", "{A70697D1-4DEA-41F4-BF4C-11493EDC2A3A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day16-PermutationPromenade", "AdventOfCode2017\Day16-PermutationPromenade\Day16-PermutationPromenade.vcxproj", "{06D1543E-860F-438E-9146-FC654518B520}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,18 @@ Global
 		Test|x86 = Test|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Debug|x64.ActiveCfg = Debug|x64
+		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Debug|x64.Build.0 = Debug|x64
+		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Debug|x86.ActiveCfg = Debug|Win32
+		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Debug|x86.Build.0 = Debug|Win32
+		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Release|x64.ActiveCfg = Release|x64
+		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Release|x64.Build.0 = Release|x64
+		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Release|x86.ActiveCfg = Release|Win32
+		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Release|x86.Build.0 = Release|Win32
+		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Test|x64.ActiveCfg = Test|x64
+		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Test|x64.Build.0 = Test|x64
+		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Test|x86.ActiveCfg = Test|Win32
+		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Test|x86.Build.0 = Test|Win32
 		{E157DBC3-3E58-4A10-ABD3-A597C6752F36}.Debug|x64.ActiveCfg = Debug|x64
 		{E157DBC3-3E58-4A10-ABD3-A597C6752F36}.Debug|x64.Build.0 = Debug|x64
 		{E157DBC3-3E58-4A10-ABD3-A597C6752F36}.Debug|x86.ActiveCfg = Debug|Win32
@@ -71,18 +85,6 @@ Global
 		{B542145C-B60E-4B0B-AD47-67FD721CA448}.Test|x64.Build.0 = Test|x64
 		{B542145C-B60E-4B0B-AD47-67FD721CA448}.Test|x86.ActiveCfg = Test|Win32
 		{B542145C-B60E-4B0B-AD47-67FD721CA448}.Test|x86.Build.0 = Test|Win32
-		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Debug|x64.ActiveCfg = Debug|x64
-		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Debug|x64.Build.0 = Debug|x64
-		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Debug|x86.ActiveCfg = Debug|Win32
-		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Debug|x86.Build.0 = Debug|Win32
-		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Release|x64.ActiveCfg = Release|x64
-		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Release|x64.Build.0 = Release|x64
-		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Release|x86.ActiveCfg = Release|Win32
-		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Release|x86.Build.0 = Release|Win32
-		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Test|x64.ActiveCfg = Test|x64
-		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Test|x64.Build.0 = Test|x64
-		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Test|x86.ActiveCfg = Test|Win32
-		{CACB5746-DED5-4746-82AA-8AA8F76CEC06}.Test|x86.Build.0 = Test|Win32
 		{34E55C7E-2267-4862-81C0-2270AAD9C586}.Debug|x64.ActiveCfg = Debug|x64
 		{34E55C7E-2267-4862-81C0-2270AAD9C586}.Debug|x64.Build.0 = Debug|x64
 		{34E55C7E-2267-4862-81C0-2270AAD9C586}.Debug|x86.ActiveCfg = Debug|Win32
@@ -254,6 +256,24 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E157DBC3-3E58-4A10-ABD3-A597C6752F36} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{B542145C-B60E-4B0B-AD47-67FD721CA448} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{34E55C7E-2267-4862-81C0-2270AAD9C586} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{00105898-5BEA-4DD8-86A0-E4A73B42FF9C} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{4A023829-02DC-4DC0-B388-B023F1C0A68E} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{E3112216-81FD-465A-8732-375605FE2483} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{07BFE542-3AA5-49C1-B479-E5CB38331457} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{971810EA-0811-4EF8-B21F-279C6016D148} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{B8015A32-0B74-4C51-BFDA-A488AA51A199} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{F374A5D2-BBD2-437A-967F-3CB294205F5A} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{210601CD-5073-4A1B-BD22-E89B603A22F3} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{13C81FB0-9159-42C0-BFD6-1A562A4A5255} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{6A73B587-9004-4C17-9195-C6BB5FF04839} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{66CB3005-B1A2-4731-BF10-9428C3DC2D83} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{A70697D1-4DEA-41F4-BF4C-11493EDC2A3A} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{06D1543E-860F-438E-9146-FC654518B520} = {55904875-D27A-4052-A99D-C4B43B186A6C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C73BC1FB-06D6-478E-B2D0-DE1E761743D4}

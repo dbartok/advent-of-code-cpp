@@ -1,6 +1,6 @@
 #include "DayX-PuzzleName.h" //TODO: Change to the name of the puzzle
 
-#include "../../Common/DisableLibraryWarningsMacros.h"
+#include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
 // Add library includes here
