@@ -17,4 +17,5 @@ int main()
     fileIn >> inputStepsForward;
 
     std::cout << "First part: " << AoC::valueAfterLastWritten(inputStepsForward) << std::endl;
+    std::cout << "Second part: " << AoC::valueAfterZeroAfterManyInsertions(inputStepsForward) << std::endl;
 }

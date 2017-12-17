@@ -18,4 +18,9 @@ public:
         Assert::AreEqual(638u, AoC::valueAfterLastWritten(3u));
     }
 
+    TEST_METHOD(valueAfterZeroAfterManyInsertions_ThreeStepsForward)
+    {
+        Assert::AreEqual(1222153u, AoC::valueAfterZeroAfterManyInsertions(3u));
+    }
+
 };
