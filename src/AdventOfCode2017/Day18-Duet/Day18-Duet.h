@@ -1,0 +1,15 @@
+#pragma once
+
+#include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
+
+BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include <vector>
+#include <string>
+END_LIBRARIES_DISABLE_WARNINGS
+
+namespace AdventOfCode
+{
+
+int valueOfFirstRecoveredFrequency(const std::vector<std::string>& instructionStrings);
+
+}
