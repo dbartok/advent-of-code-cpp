@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::valueOfFirstRecoveredFrequency(inputInstructionStrings) << std::endl;
+    std::cout << "Second part: " << AoC::numTimesProgram1Sent(inputInstructionStrings) << std::endl;
 }

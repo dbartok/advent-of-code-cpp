@@ -32,6 +32,12 @@
     <ClCompile Include="AssemblyProgramState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DuetProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DuetMessageQueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day18-Duet.h">
@@ -47,6 +53,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AssemblyProgramState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DuetProcessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DuetMessageQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RegisterValueType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

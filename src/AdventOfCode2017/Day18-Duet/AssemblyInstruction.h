@@ -98,6 +98,34 @@ public:
     virtual void execute(AssemblyProgramState& state) const override;
 };
 
+class SendInstruction : public SingleArgInstruction
+{
+public:
+    using SingleArgInstruction::SingleArgInstruction;
+
+    SendInstruction(const SendInstruction&) = default;
+    SendInstruction(SendInstruction&&) = default;
+    SendInstruction& operator=(const SendInstruction&) = default;
+    SendInstruction& operator=(SendInstruction&&) = default;
+    virtual ~SendInstruction() = default;
+
+    virtual void execute(AssemblyProgramState& state) const override;
+};
+
+class ReceiveInstruction : public SingleArgInstruction
+{
+public:
+    using SingleArgInstruction::SingleArgInstruction;
+
+    ReceiveInstruction(const ReceiveInstruction&) = default;
+    ReceiveInstruction(ReceiveInstruction&&) = default;
+    ReceiveInstruction& operator=(const ReceiveInstruction&) = default;
+    ReceiveInstruction& operator=(ReceiveInstruction&&) = default;
+    virtual ~ReceiveInstruction() = default;
+
+    virtual void execute(AssemblyProgramState& state) const override;
+};
+
 class SetInstruction : public DoubleArgInstruction
 {
 public:

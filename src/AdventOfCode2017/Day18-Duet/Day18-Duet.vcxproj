@@ -255,6 +255,8 @@
     </ClCompile>
     <ClCompile Include="Day18-Duet.cpp" />
     <ClCompile Include="AssemblyProgramState.cpp" />
+    <ClCompile Include="DuetMessageQueue.cpp" />
+    <ClCompile Include="DuetProcessor.cpp" />
     <ClCompile Include="test_Day18-Duet.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -270,6 +272,9 @@
     <ClInclude Include="AssemblyProgram.h" />
     <ClInclude Include="Day18-Duet.h" />
     <ClInclude Include="AssemblyProgramState.h" />
+    <ClInclude Include="DuetMessageQueue.h" />
+    <ClInclude Include="DuetProcessor.h" />
+    <ClInclude Include="RegisterValueType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

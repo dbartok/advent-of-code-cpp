@@ -15,7 +15,7 @@ AssemblyProgramParser::AssemblyProgramParser(std::vector<std::string> instructio
 
 }
 
-AssemblyProgram AssemblyProgramParser::createProgram()
+AssemblyProgram AssemblyProgramParser::createProgram() const
 {
     std::vector<AssemblyInstruction::SharedPtr> instructions;
 
@@ -44,7 +44,12 @@ AssemblyProgram AssemblyProgramParser::createProgram()
     return AssemblyProgram{instructions};
 }
 
-bool AssemblyProgramParser::validateInstruction(const std::string & instructionName, const std::vector<std::string> & args)
+AssemblyInstruction::SharedPtr AssemblyProgramParser::createCustomInstruction(const std::string&, const std::vector<std::string>&) const noexcept
+{
+    return nullptr;
+}
+
+bool AssemblyProgramParser::validateInstruction(const std::string & instructionName, const std::vector<std::string> & args) const
 {
     if (instructionName == "set" || instructionName == "add" || instructionName == "mul" || instructionName == "mod" || instructionName == "jgz")
     {
@@ -64,13 +69,8 @@ bool AssemblyProgramParser::validateInstruction(const std::string & instructionN
     return true;
 }
 
-AssemblyInstruction::SharedPtr AssemblyProgramParser::createInstruction(const std::string& instructionName, const std::vector<std::string>& args)
+AssemblyInstruction::SharedPtr AssemblyProgramParser::createDefaultInstruction(const std::string& instructionName, const std::vector<std::string>& args) const
 {
-    if (!validateInstruction(instructionName, args))
-    {
-        return nullptr;
-    }
-
     if (instructionName == "set")
     {
         return std::make_shared<SetInstruction>(args[0], args[1]);
@@ -91,13 +91,54 @@ AssemblyInstruction::SharedPtr AssemblyProgramParser::createInstruction(const st
     {
         return std::make_shared<JumpGreaterThanZeroInstruction>(args[0], args[1]);
     }
-    else if (instructionName == "snd")
+    else
+    {
+        return nullptr;
+    }
+}
+
+AssemblyInstruction::SharedPtr AssemblyProgramParser::createInstruction(const std::string& instructionName, const std::vector<std::string>& args) const
+{
+    if (!validateInstruction(instructionName, args))
+    {
+        return nullptr;
+    }
+
+    auto customInstruction = createCustomInstruction(instructionName, args);
+
+    if (customInstruction)
+    {
+        return customInstruction;
+    }
+
+    return createDefaultInstruction(instructionName, args);
+}
+
+AssemblyInstruction::SharedPtr SoundProgramParser::createCustomInstruction(const std::string& instructionName, const std::vector<std::string>& args) const noexcept
+{
+    if (instructionName == "snd")
     {
         return std::make_shared<SoundInstruction>(args[0]);
     }
     else if (instructionName == "rcv")
     {
         return std::make_shared<RecoverInstruction>(args[0]);
+    }
+    else
+    {
+        return nullptr;
+    }
+}
+
+AssemblyInstruction::SharedPtr MessageQueueProgramParser::createCustomInstruction(const std::string& instructionName, const std::vector<std::string>& args) const noexcept
+{
+    if (instructionName == "snd")
+    {
+        return std::make_shared<SendInstruction>(args[0]);
+    }
+    else if (instructionName == "rcv")
+    {
+        return std::make_shared<ReceiveInstruction>(args[0]);
     }
     else
     {

@@ -89,6 +89,26 @@ void RecoverInstruction::execute(AssemblyProgramState& state) const
     }
 }
 
+void SendInstruction::execute(AssemblyProgramState& state) const
+{
+    state.messageQueue().sendMessage(state.getOpposingProgramID(), m_arg.asValue(state));
+    ++state.numTimesSent();
+}
+
+void ReceiveInstruction::execute(AssemblyProgramState& state) const
+{
+    boost::optional<RegisterValueType> receivedValue = state.messageQueue().tryReceiveMessage(state.programID());
+    if (!receivedValue)
+    {
+        state.executionState() = ExecutionState::BLOCKED;
+    }
+    else
+    {
+        *m_arg.asRegisterValueSharedPtr(state) = receivedValue.get();
+    }
+
+}
+
 void SetInstruction::execute(AssemblyProgramState& state) const
 {
     *m_arg1.asRegisterValueSharedPtr(state) = m_arg2.asValue(state);

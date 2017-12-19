@@ -1,5 +1,6 @@
 #include "Day18-Duet.h"
 
+#include "DuetProcessor.h"
 #include "AssemblyProgramParser.h"
 #include "AssemblyProgram.h"
 
@@ -12,14 +13,26 @@ END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-int valueOfFirstRecoveredFrequency(const std::vector<std::string>& instructionStrings)
+RegisterValueType valueOfFirstRecoveredFrequency(const std::vector<std::string>& instructionStrings)
 {
-    AssemblyProgramParser parser{instructionStrings};
+    SoundProgramParser parser{instructionStrings};
     AssemblyProgram program = parser.createProgram();
 
-    program.runUntilTerminated();
+    program.runUntilHalts();
 
     return program.lastRecoveredFrequency();
+}
+
+unsigned numTimesProgram1Sent(const std::vector<std::string>& instructionStrings)
+{
+    MessageQueueProgramParser parser{instructionStrings};
+    AssemblyProgram program = parser.createProgram();
+
+    DuetProcessor duetProcessor{program};
+
+    duetProcessor.run();
+
+    return duetProcessor.numTimesProgram1Sent();
 }
 
 }

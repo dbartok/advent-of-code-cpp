@@ -29,7 +29,23 @@ public:
             "jgz a -2"
         };
 
-        Assert::AreEqual(4, AoC::valueOfFirstRecoveredFrequency(instructionStrings));
+        Assert::AreEqual(4ll, AoC::valueOfFirstRecoveredFrequency(instructionStrings));
+    }
+
+    TEST_METHOD(numTimesProgram1Sent_SimpleTests)
+    {
+        std::vector<std::string> instructionStrings =
+        {
+            "snd 1",
+            "snd 2",
+            "snd p",
+            "rcv a",
+            "rcv b",
+            "rcv c",
+            "rcv d"
+        };
+
+        Assert::AreEqual(3u, AoC::numTimesProgram1Sent(instructionStrings));
     }
 
 };

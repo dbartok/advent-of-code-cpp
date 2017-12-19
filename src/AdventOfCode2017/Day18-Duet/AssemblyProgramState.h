@@ -1,5 +1,8 @@
 #pragma once
 
+#include "RegisterValueType.h"
+#include "DuetMessageQueue.h"
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
@@ -12,15 +15,15 @@ END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-using RegisterValueType = long long;
-
 enum class ExecutionState
 {
     RUNNING,
+    BLOCKED,
+    UNABLE_TO_PROGRESS,
     TERMINATED
 };
 
-struct AssemblyProgramState
+class AssemblyProgramState
 {
 public:
     AssemblyProgramState() noexcept;
@@ -30,8 +33,20 @@ public:
 
     ExecutionState& executionState() noexcept;
     int& instructionIndex() noexcept;
-    boost::optional<int>& lastPlayedFrequency() noexcept;
-    const boost::optional<int>& lastPlayedFrequency() const noexcept;
+    boost::optional<RegisterValueType>& lastPlayedFrequency() noexcept;
+    unsigned& numTimesSent() noexcept;
+
+    ExecutionState getExecutionState() const noexcept;
+    const boost::optional<RegisterValueType>& getLastPlayedFrequency() const noexcept;
+    unsigned getNumTimesSent() const noexcept;
+
+    void initalizeProgramID(unsigned programID);
+    unsigned& programID();
+
+    void initMessageQueue(DuetMessageQueue::SharedPtr messageQueueSharedPtr) noexcept;
+    DuetMessageQueue& messageQueue();
+
+    unsigned getOpposingProgramID();
 
 private:
     using RegisterNameToValueMap = std::unordered_map<std::string, std::shared_ptr<RegisterValueType>>;
@@ -39,7 +54,11 @@ private:
     ExecutionState m_executionState;
     int m_instructionIndex;
     RegisterNameToValueMap m_registerNameToValue;
-    boost::optional<int> m_lastPlayedFrequency;
+    boost::optional<RegisterValueType> m_lastPlayedFrequency;
+    unsigned m_numTimesSent;
+
+    boost::optional<unsigned> m_programID;
+    DuetMessageQueue::SharedPtr m_messageQueueSharedPtr;
 };
 
 }
