@@ -13,6 +13,7 @@
 //
 // 4061 - enumerator 'identifier' in switch of enum 'enumeration' is not explicitly handled by a case label
 // 4365 - 'action' : conversion from 'type_1' to 'type_2', signed/unsigned mismatch
+// 4464 - relative include path contains '..'
 // 4514 - 'function' : unreferenced inline function has been removed
 // 4571 - Informational: catch(...) semantics changed since Visual C++ 7.1; structured exceptions (SEH) are no longer caught
 // 4619 - #pragma warning: there is no warning number 'number'
@@ -28,7 +29,7 @@
 // 5027 - 'type': move assignment operator was implicitly defined as deleted
 // 5031 - #pragma warning(pop): likely mismatch, popping warning state pushed in different file
 // 5039 - pointer or reference to potentially throwing function passed to extern C function under -EHc.
-#define UNFIXABLE_WARNINGS_ENCOUNTERED_IN_LIBRARIES 4061 4365 4514 4571 4619 4623 4625 4626 4668 4710 4774 4820 4996 5026 5027 5031 5039
+#define UNFIXABLE_WARNINGS_ENCOUNTERED_IN_LIBRARIES 4061 4365 4464 4514 4571 4619 4623 4625 4626 4668 4710 4774 4820 4996 5026 5027 5031 5039
 
 
 #define BEGIN_LIBRARIES_DISABLE_WARNINGS \
