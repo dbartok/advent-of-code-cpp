@@ -18,4 +18,11 @@ std::string lettersVisited(const std::vector<std::string>& diagramLines)
     return pipeDiagramTraverser.getLettersVisitedSequence();
 }
 
+unsigned totalNumStepsForPacket(const std::vector<std::string>& diagramLines)
+{
+    PipeDiagramTraverser pipeDiagramTraverser{diagramLines};
+    pipeDiagramTraverser.traverse();
+    return pipeDiagramTraverser.getNumStepsTaken();
+}
+
 }

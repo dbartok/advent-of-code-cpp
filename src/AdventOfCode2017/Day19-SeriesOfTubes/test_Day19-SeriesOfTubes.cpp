@@ -15,18 +15,23 @@ public:
 
     TEST_METHOD(lettersVisited_SimpleTests)
     {
-        const std::vector<std::string> diagramLines =
-        {
-            "     |          ",
-            "     |  +--+    ",
-            "     A  |  C    ",
-            " F---|----E|--+ ",
-            "     |  |  |  D ",
-            "     +B-+  +--+ ",
-            "                "
-        };
-
-        Assert::AreEqual(std::string{"ABCDEF"}, AoC::lettersVisited(diagramLines));
+        Assert::AreEqual(std::string{"ABCDEF"}, AoC::lettersVisited(m_diagramLines));
     }
 
+    TEST_METHOD(totalNumStepsForPacket_SimpleTests)
+    {
+        Assert::AreEqual(38u, AoC::totalNumStepsForPacket(m_diagramLines));
+    }
+
+private:
+    const std::vector<std::string> m_diagramLines =
+    {
+        "     |          ",
+        "     |  +--+    ",
+        "     A  |  C    ",
+        " F---|----E|--+ ",
+        "     |  |  |  D ",
+        "     +B-+  +--+ ",
+        "                "
+    };
 };

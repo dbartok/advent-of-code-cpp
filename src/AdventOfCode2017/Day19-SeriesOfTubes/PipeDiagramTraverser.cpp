@@ -20,6 +20,7 @@ PipeDiagramTraverser::PipeDiagramTraverser(std::vector<std::string> pipeDiagramL
     , m_currentCoords{}
     , m_currentDirection{Direction::DOWN}
     , m_lettersVisitedSequence{}
+    , m_numStepsTaken{0}
 {
 
 }
@@ -47,6 +48,13 @@ void PipeDiagramTraverser::traverse()
 
         const char currentChar = m_pipeDiagramLines[m_currentCoords.second][m_currentCoords.first];
 
+        if (currentChar == ' ')
+        {
+            break;
+        }
+
+        ++m_numStepsTaken;
+
         if (isPath(currentChar))
         {
             if (std::isupper(currentChar))
@@ -64,7 +72,7 @@ void PipeDiagramTraverser::traverse()
         }
         else
         {
-            break;
+            throw std::runtime_error("Unknown character encountered.");
         }
 
         stepInCurrentDirection();
@@ -75,6 +83,11 @@ void PipeDiagramTraverser::traverse()
 std::string PipeDiagramTraverser::getLettersVisitedSequence() const
 {
     return m_lettersVisitedSequence;
+}
+
+unsigned PipeDiagramTraverser::getNumStepsTaken() const noexcept
+{
+    return m_numStepsTaken;
 }
 
 bool PipeDiagramTraverser::isPath(char currentChar) noexcept

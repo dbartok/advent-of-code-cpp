@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::lettersVisited(inputDiagramLines) << std::endl;
+    std::cout << "Second part: " << AoC::totalNumStepsForPacket(inputDiagramLines) << std::endl;
 }

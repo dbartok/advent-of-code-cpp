@@ -17,6 +17,7 @@ public:
     PipeDiagramTraverser(std::vector<std::string> pipeDiagramLines) noexcept;
     void traverse();
     std::string getLettersVisitedSequence() const;
+    unsigned getNumStepsTaken() const noexcept;
 
     static bool isPath(char currentChar) noexcept;
 private:
@@ -36,7 +37,9 @@ private:
 
     Coordinates m_currentCoords;
     Direction m_currentDirection;
+
     std::string m_lettersVisitedSequence;
+    unsigned m_numStepsTaken;
 
     void resetToStartingCoords();
     bool switchDirection();
