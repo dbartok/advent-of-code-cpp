@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::particleIDClosestToOriginLongTerm(inputParticleLines) << std::endl;
+    std::cout << "Second part: " << AoC::numParticlesLeftAfterCollisions(inputParticleLines) << std::endl;
 }

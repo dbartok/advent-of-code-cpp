@@ -3,7 +3,10 @@
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include <boost/functional/hash/hash.hpp>
+
 #include <algorithm>
+#include <unordered_map>
 END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -26,6 +29,15 @@ void ParticleSystem::simulate(unsigned numSteps)
     }
 }
 
+void ParticleSystem::simulateWithCollisions(unsigned numSteps)
+{
+    for (unsigned i = 0; i < numSteps; ++i)
+    {
+        simulate(1);
+        removeAllCollidingParticles();
+    }
+}
+
 unsigned ParticleSystem::particleIDClosestToOrigin() const
 {
     if (m_particles.empty())
@@ -38,7 +50,50 @@ unsigned ParticleSystem::particleIDClosestToOrigin() const
                                                       return lhs.getPosition().cwiseAbs().sum() < rhs.getPosition().cwiseAbs().sum();
                                                   });
 
-    return minDistanceIter - m_particles.cbegin();
+    return minDistanceIter->getParticleID();
+}
+
+unsigned ParticleSystem::numParticles() const noexcept
+{
+    return m_particles.size();
+}
+
+struct Vector3DHash
+{
+    size_t operator()(const Particle::Vector3D& vec) const
+    {
+        std::size_t seed = 0;
+
+        boost::hash_combine(seed, vec.x());
+        boost::hash_combine(seed, vec.y());
+        boost::hash_combine(seed, vec.z());
+
+        return seed;
+    }
+};
+
+void ParticleSystem::removeAllCollidingParticles()
+{
+    std::unordered_multimap<Particle::Vector3D, Particle, Vector3DHash> positionToParticleMap;
+
+    // Move elements of m_particles into the position map
+    for (auto& particle : m_particles)
+    {
+        auto position = particle.getPosition();
+        positionToParticleMap.emplace(std::move(position), std::move(particle));
+    }
+
+    m_particles.clear();
+
+    // Non-colliding particles are the ones with a unique position
+    // Rebuild m_particles by moving these back from the position map
+    for (auto& element : positionToParticleMap)
+    {
+        if (positionToParticleMap.count(element.first) == 1)
+        {
+            m_particles.push_back(std::move(element.second));
+        }
+    }
 }
 
 }

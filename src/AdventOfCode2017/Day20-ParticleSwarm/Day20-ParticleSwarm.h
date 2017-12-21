@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned particleIDClosestToOriginLongTerm(const std::vector<std::string>& particleLines);
+unsigned numParticlesLeftAfterCollisions(const std::vector<std::string>& particleLines);
 
 }

@@ -16,10 +16,14 @@ class ParticleSystem
 public:
     ParticleSystem(std::vector<Particle> particles) noexcept;
     void simulate(unsigned numSteps);
+    void simulateWithCollisions(unsigned numSteps);
     unsigned particleIDClosestToOrigin() const;
+    unsigned numParticles() const noexcept;
 
 private:
     std::vector<Particle> m_particles;
+
+    void removeAllCollidingParticles();
 };
 
 }

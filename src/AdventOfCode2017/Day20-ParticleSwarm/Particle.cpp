@@ -9,8 +9,9 @@ END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-Particle::Particle(VectorType position, VectorType velocity, VectorType acceleration) noexcept
-    : m_position(std::move(position))
+Particle::Particle(unsigned particleID, Vector3D position, Vector3D velocity, Vector3D acceleration) noexcept
+    : m_particleID(particleID)
+    , m_position(std::move(position))
     , m_velocity(std::move(velocity))
     , m_acceleration(std::move(acceleration))
 {
@@ -23,9 +24,14 @@ void Particle::stepTime()
     m_position += m_velocity;
 }
 
-const Particle::VectorType& Particle::getPosition() const noexcept
+const Particle::Vector3D& Particle::getPosition() const noexcept
 {
     return m_position;
+}
+
+unsigned Particle::getParticleID() const noexcept
+{
+    return m_particleID;
 }
 
 }

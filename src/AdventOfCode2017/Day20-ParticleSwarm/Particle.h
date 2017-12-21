@@ -12,17 +12,20 @@ namespace AdventOfCode
 class Particle
 {
 public:
-    using VectorType = Eigen::Matrix<long long, 3, 1>;
+    using Vector3D = Eigen::Matrix<long long, 3, 1>;
 
-    Particle(VectorType position, VectorType velocity, VectorType acceleration) noexcept;
+    Particle(unsigned particleID, Vector3D position, Vector3D velocity, Vector3D acceleration) noexcept;
 
     void stepTime();
-    const VectorType& getPosition() const noexcept;
+    const Vector3D& getPosition() const noexcept;
+    unsigned getParticleID() const noexcept;
 
 private:
-    VectorType m_position;
-    VectorType m_velocity;
-    VectorType m_acceleration;
+    unsigned m_particleID;
+
+    Vector3D m_position;
+    Vector3D m_velocity;
+    Vector3D m_acceleration;
 };
 
 }
