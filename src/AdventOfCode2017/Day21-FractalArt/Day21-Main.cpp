@@ -20,5 +20,6 @@ int main()
         inputEnhancementRuleLines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::numPixelsOnAfterEnhancements(inputEnhancementRuleLines) << std::endl;
+    std::cout << "First part: " << AoC::numPixelsOnSmallIterations(inputEnhancementRuleLines) << std::endl;
+    std::cout << "Second part: " << AoC::numPixelsOnLargeIterations(inputEnhancementRuleLines) << std::endl;
 }

@@ -13,15 +13,22 @@ TEST_CLASS(Day21FractalArt)
 {
 public:
 
-    TEST_METHOD(numPixelsOnAfterEnhancements_SimpleTests)
+    TEST_METHOD(numPixelsOnSmallIterations_SimpleTests)
     {
-        const std::vector<std::string> enhancementRuleLines =
-        {
-            "../.# => ##./#../...",
-            ".#./..#/### => #..#/..../..../#..#"
-        };
-
-        Assert::AreEqual(12u, AoC::numPixelsOnAfterEnhancements(enhancementRuleLines, 2));
+        Assert::AreEqual(4u, AoC::numPixelsOnSmallIterations(m_enhancementRuleLines, 1));
     }
+
+
+    TEST_METHOD(numPixelsOnLargeIterations_SimpleTests)
+    {
+        Assert::AreEqual(12u, AoC::numPixelsOnLargeIterations(m_enhancementRuleLines, 2));
+    }
+
+private:
+    const std::vector<std::string> m_enhancementRuleLines =
+    {
+        "../.# => ##./#../...",
+        ".#./..#/### => #..#/..../..../#..#"
+    };
 
 };

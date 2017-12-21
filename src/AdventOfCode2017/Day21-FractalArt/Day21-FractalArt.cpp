@@ -61,4 +61,14 @@ unsigned numPixelsOnAfterEnhancements(const std::vector<std::string>& enhancemen
     return fractalImage.numPixelsOn();
 }
 
+unsigned numPixelsOnSmallIterations(const std::vector<std::string>& enhancementRuleLines, unsigned numIterations)
+{
+    return numPixelsOnAfterEnhancements(enhancementRuleLines, numIterations);
+}
+
+unsigned numPixelsOnLargeIterations(const std::vector<std::string>& enhancementRuleLines, unsigned numIterations)
+{
+    return numPixelsOnAfterEnhancements(enhancementRuleLines, numIterations);
+}
+
 }
