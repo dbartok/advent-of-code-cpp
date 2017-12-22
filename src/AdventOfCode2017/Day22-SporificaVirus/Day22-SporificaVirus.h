@@ -10,13 +10,16 @@ END_LIBRARIES_DISABLE_WARNINGS
 namespace
 {
 
-unsigned DEFAULT_NUM_ITERATIONS = 10'000;
+unsigned DEFAULT_NUM_ITERATIONS_BASIC = 10'000;
+unsigned DEFAULT_NUM_ITERATIONS_EVOLVED = 10'000'000;
 
 }
 
 namespace AdventOfCode
 {
 
-unsigned numBurstsThatAreInfecting(const std::vector<std::string>& initialVirusPosLines, unsigned numIterations = DEFAULT_NUM_ITERATIONS);
+unsigned basicVirusInfectingBursts(const std::vector<std::string>& initialVirusPosLines, unsigned numIterations = DEFAULT_NUM_ITERATIONS_BASIC);
+unsigned evolvedVirusInfectingBursts(const std::vector<std::string>& initialVirusPosLines, unsigned numIterations = DEFAULT_NUM_ITERATIONS_EVOLVED);
+
 
 }

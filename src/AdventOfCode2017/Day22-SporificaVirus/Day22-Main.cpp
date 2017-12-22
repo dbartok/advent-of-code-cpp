@@ -22,5 +22,6 @@ int main()
         initialVirusPosLines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::numBurstsThatAreInfecting(initialVirusPosLines) << std::endl;
+    std::cout << "First part: " << AoC::basicVirusInfectingBursts(initialVirusPosLines) << std::endl;
+    std::cout << "Second part: " << AoC::evolvedVirusInfectingBursts(initialVirusPosLines) << std::endl;
 }

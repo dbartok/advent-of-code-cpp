@@ -12,9 +12,9 @@ END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-InfiniteGrid<bool> createInfiniteGridFromVirusPosLines(const std::vector<std::string>& virusPosLine)
+InfiniteGrid<InfectionState> createInfiniteGridFromVirusPosLines(const std::vector<std::string>& virusPosLine)
 {
-    InfiniteGrid<bool> grid;
+    InfiniteGrid<InfectionState> grid;
 
     const int gridSize = virusPosLine.size();
     const int middleOffset = virusPosLine.size() / 2;
@@ -25,7 +25,7 @@ InfiniteGrid<bool> createInfiniteGridFromVirusPosLines(const std::vector<std::st
         {
             if (virusPosLine[j][i] == '#')
             {
-                grid.setValue(i - middleOffset, j - middleOffset, true);
+                grid.setValue(i - middleOffset, j - middleOffset, InfectionState::INFECTED);
             }
         }
     }
@@ -33,13 +33,22 @@ InfiniteGrid<bool> createInfiniteGridFromVirusPosLines(const std::vector<std::st
     return grid;
 }
 
-unsigned numBurstsThatAreInfecting(const std::vector<std::string>& initialVirusPosLines, unsigned numIterations)
+unsigned basicVirusInfectingBursts(const std::vector<std::string>& initialVirusPosLines, unsigned numIterations)
 {
-    InfiniteGrid<bool> initialGrid = createInfiniteGridFromVirusPosLines(initialVirusPosLines);
+    InfiniteGrid<InfectionState> initialGrid = createInfiniteGridFromVirusPosLines(initialVirusPosLines);
 
-    GridInfectingVirus gridInfectingVirus{initialGrid};
-    gridInfectingVirus.infectRepeatedly(numIterations);
-    return gridInfectingVirus.getTotalInfectionBursts();
+    BasicGridInfectingVirus basicVirus{initialGrid};
+    basicVirus.infectRepeatedly(numIterations);
+    return basicVirus.getTotalInfectionBursts();
+}
+
+unsigned evolvedVirusInfectingBursts(const std::vector<std::string>& initialVirusPosLines, unsigned numIterations)
+{
+    InfiniteGrid<InfectionState> initialGrid = createInfiniteGridFromVirusPosLines(initialVirusPosLines);
+
+    EvolvedGridInfectingVirus evolvedVirus{initialGrid};
+    evolvedVirus.infectRepeatedly(numIterations);
+    return evolvedVirus.getTotalInfectionBursts();
 }
 
 }
