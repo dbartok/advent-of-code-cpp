@@ -51,7 +51,7 @@ AssemblyInstruction::SharedPtr AssemblyProgramParser::createCustomInstruction(co
 
 bool AssemblyProgramParser::validateInstruction(const std::string & instructionName, const std::vector<std::string> & args) const
 {
-    if (instructionName == "set" || instructionName == "add" || instructionName == "mul" || instructionName == "mod" || instructionName == "jgz")
+    if (instructionName == "set" || instructionName == "add" || instructionName == "mul" || instructionName == "mod" || instructionName == "jgz" || instructionName == "sub" ||instructionName == "jnz")
     {
         if (args.size() != 2)
         {
@@ -90,6 +90,14 @@ AssemblyInstruction::SharedPtr AssemblyProgramParser::createDefaultInstruction(c
     else if (instructionName == "jgz")
     {
         return std::make_shared<JumpGreaterThanZeroInstruction>(args[0], args[1]);
+    }
+    else if (instructionName == "sub")
+    {
+        return std::make_shared<SubtractInstruction>(args[0], args[1]);
+    }
+    else if (instructionName == "jnz")
+    {
+        return std::make_shared<JumpNotZeroInstruction>(args[0], args[1]);
     }
     else
     {

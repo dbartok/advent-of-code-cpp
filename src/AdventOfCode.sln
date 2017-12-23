@@ -51,6 +51,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day21-FractalArt", "AdventO
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day22-SporificaVirus", "AdventOfCode2017\Day22-SporificaVirus\Day22-SporificaVirus.vcxproj", "{923D0963-8FCF-42F4-8A1B-A6D6E5EC4E95}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day23-CoprocessorConflagration", "AdventOfCode2017\Day23-CoprocessorConflagration\Day23-CoprocessorConflagration.vcxproj", "{E15D72CF-7E02-41F8-8114-2A4631E65876}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -337,6 +339,18 @@ Global
 		{923D0963-8FCF-42F4-8A1B-A6D6E5EC4E95}.Test|x64.Build.0 = Test|x64
 		{923D0963-8FCF-42F4-8A1B-A6D6E5EC4E95}.Test|x86.ActiveCfg = Test|Win32
 		{923D0963-8FCF-42F4-8A1B-A6D6E5EC4E95}.Test|x86.Build.0 = Test|Win32
+		{E15D72CF-7E02-41F8-8114-2A4631E65876}.Debug|x64.ActiveCfg = Debug|x64
+		{E15D72CF-7E02-41F8-8114-2A4631E65876}.Debug|x64.Build.0 = Debug|x64
+		{E15D72CF-7E02-41F8-8114-2A4631E65876}.Debug|x86.ActiveCfg = Debug|Win32
+		{E15D72CF-7E02-41F8-8114-2A4631E65876}.Debug|x86.Build.0 = Debug|Win32
+		{E15D72CF-7E02-41F8-8114-2A4631E65876}.Release|x64.ActiveCfg = Release|x64
+		{E15D72CF-7E02-41F8-8114-2A4631E65876}.Release|x64.Build.0 = Release|x64
+		{E15D72CF-7E02-41F8-8114-2A4631E65876}.Release|x86.ActiveCfg = Release|Win32
+		{E15D72CF-7E02-41F8-8114-2A4631E65876}.Release|x86.Build.0 = Release|Win32
+		{E15D72CF-7E02-41F8-8114-2A4631E65876}.Test|x64.ActiveCfg = Test|x64
+		{E15D72CF-7E02-41F8-8114-2A4631E65876}.Test|x64.Build.0 = Test|x64
+		{E15D72CF-7E02-41F8-8114-2A4631E65876}.Test|x86.ActiveCfg = Test|Win32
+		{E15D72CF-7E02-41F8-8114-2A4631E65876}.Test|x86.Build.0 = Test|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -364,6 +378,7 @@ Global
 		{2D165B2F-0881-4AFE-BF23-F2DA0594AFF8} = {55904875-D27A-4052-A99D-C4B43B186A6C}
 		{FFA2362A-C1B1-4A47-A1D5-24B672FBD9DE} = {55904875-D27A-4052-A99D-C4B43B186A6C}
 		{923D0963-8FCF-42F4-8A1B-A6D6E5EC4E95} = {55904875-D27A-4052-A99D-C4B43B186A6C}
+		{E15D72CF-7E02-41F8-8114-2A4631E65876} = {55904875-D27A-4052-A99D-C4B43B186A6C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C73BC1FB-06D6-478E-B2D0-DE1E761743D4}

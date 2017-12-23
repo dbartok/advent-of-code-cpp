@@ -15,6 +15,7 @@ AssemblyProgramState::AssemblyProgramState() noexcept
     , m_registerNameToValue{}
     , m_lastPlayedFrequency{}
     , m_numTimesSent{0}
+    , m_numTimesMultInvoked{0}
     , m_programID{}
     , m_messageQueueSharedPtr{nullptr}
 {
@@ -44,6 +45,16 @@ unsigned& AssemblyProgramState::numTimesSent() noexcept
 unsigned AssemblyProgramState::getNumTimesSent() const noexcept
 {
     return m_numTimesSent;
+}
+
+unsigned& AssemblyProgramState::numTimesMultInvoked() noexcept
+{
+    return m_numTimesMultInvoked;
+}
+
+unsigned AssemblyProgramState::getNumTimesMultInvoked() const noexcept
+{
+    return m_numTimesMultInvoked;
 }
 
 ExecutionState AssemblyProgramState::getExecutionState() const noexcept

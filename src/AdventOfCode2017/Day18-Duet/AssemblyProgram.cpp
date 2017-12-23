@@ -48,7 +48,7 @@ void AssemblyProgram::runUntilHalts()
 
         ++numExecuted;
 
-        if (m_state.instructionIndex() < 0 || m_state.instructionIndex() > m_instructions.size())
+        if (m_state.instructionIndex() < 0 || m_state.instructionIndex() >= m_instructions.size())
         {
             m_state.executionState() = ExecutionState::TERMINATED;
         }
@@ -94,6 +94,11 @@ RegisterValueType AssemblyProgram::lastRecoveredFrequency() const
 unsigned AssemblyProgram::getNumTimesSent() const noexcept
 {
     return m_state.getNumTimesSent();
+}
+
+unsigned AssemblyProgram::getNumTimesMultInvoked() const noexcept
+{
+    return m_state.getNumTimesMultInvoked();
 }
 
 }

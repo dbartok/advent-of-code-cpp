@@ -35,10 +35,12 @@ public:
     int& instructionIndex() noexcept;
     boost::optional<RegisterValueType>& lastPlayedFrequency() noexcept;
     unsigned& numTimesSent() noexcept;
+    unsigned& numTimesMultInvoked() noexcept;
 
     ExecutionState getExecutionState() const noexcept;
     const boost::optional<RegisterValueType>& getLastPlayedFrequency() const noexcept;
     unsigned getNumTimesSent() const noexcept;
+    unsigned getNumTimesMultInvoked() const noexcept;
 
     void initalizeProgramID(unsigned programID);
     unsigned& programID();
@@ -56,6 +58,7 @@ private:
     RegisterNameToValueMap m_registerNameToValue;
     boost::optional<RegisterValueType> m_lastPlayedFrequency;
     unsigned m_numTimesSent;
+    unsigned m_numTimesMultInvoked;
 
     boost::optional<unsigned> m_programID;
     DuetMessageQueue::SharedPtr m_messageQueueSharedPtr;

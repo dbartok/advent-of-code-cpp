@@ -197,4 +197,33 @@ public:
     virtual bool increasesInstructionIndex() const noexcept override;
 };
 
+class SubtractInstruction : public DoubleArgInstruction
+{
+public:
+    using DoubleArgInstruction::DoubleArgInstruction;
+
+    SubtractInstruction(const SubtractInstruction&) = default;
+    SubtractInstruction(SubtractInstruction&&) = default;
+    SubtractInstruction& operator=(const SubtractInstruction&) = default;
+    SubtractInstruction& operator=(SubtractInstruction&&) = default;
+    virtual ~SubtractInstruction() = default;
+
+    virtual void execute(AssemblyProgramState& state) const override;
+};
+
+class JumpNotZeroInstruction : public DoubleArgInstruction
+{
+public:
+    using DoubleArgInstruction::DoubleArgInstruction;
+
+    JumpNotZeroInstruction(const JumpNotZeroInstruction&) = default;
+    JumpNotZeroInstruction(JumpNotZeroInstruction&&) = default;
+    JumpNotZeroInstruction& operator=(const JumpNotZeroInstruction&) = default;
+    JumpNotZeroInstruction& operator=(JumpNotZeroInstruction&&) = default;
+    virtual ~JumpNotZeroInstruction() = default;
+
+    virtual void execute(AssemblyProgramState& state) const override;
+    virtual bool increasesInstructionIndex() const noexcept override;
+};
+
 }

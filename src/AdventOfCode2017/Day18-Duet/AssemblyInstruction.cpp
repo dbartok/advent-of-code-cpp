@@ -122,6 +122,7 @@ void AddInstruction::execute(AssemblyProgramState& state) const
 void MultiplyInstruction::execute(AssemblyProgramState& state) const
 {
     *m_arg1.asRegisterValueSharedPtr(state) *= m_arg2.asValue(state);
+    ++state.numTimesMultInvoked();
 }
 
 void ModuloInstruction::execute(AssemblyProgramState& state) const
@@ -143,6 +144,28 @@ void JumpGreaterThanZeroInstruction::execute(AssemblyProgramState& state) const
 }
 
 bool JumpGreaterThanZeroInstruction::increasesInstructionIndex() const noexcept
+{
+    return false;
+}
+
+void SubtractInstruction::execute(AssemblyProgramState& state) const
+{
+    *m_arg1.asRegisterValueSharedPtr(state) -= m_arg2.asValue(state);
+}
+
+void JumpNotZeroInstruction::execute(AssemblyProgramState& state) const
+{
+    if (m_arg1.asValue(state) != 0)
+    {
+        state.instructionIndex() += m_arg2.asValue(state);
+    }
+    else
+    {
+        ++state.instructionIndex();
+    }
+}
+
+bool JumpNotZeroInstruction::increasesInstructionIndex() const noexcept
 {
     return false;
 }

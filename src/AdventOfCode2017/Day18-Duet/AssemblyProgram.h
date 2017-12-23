@@ -25,6 +25,7 @@ public:
 
     RegisterValueType lastRecoveredFrequency() const;
     unsigned getNumTimesSent() const noexcept;
+    unsigned getNumTimesMultInvoked() const noexcept;
 
 private:
     std::vector<AssemblyInstruction::SharedPtr> m_instructions;
