@@ -23,4 +23,9 @@ unsigned numTimesMultInvoked(const std::vector<std::string>& instructionStrings)
     return program.getNumTimesMultInvoked();
 }
 
+unsigned overheatFinalValueOfH() noexcept
+{
+    return optimizedFinalValueOfH();
+}
+
 }

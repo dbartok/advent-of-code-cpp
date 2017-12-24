@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numTimesMultInvoked(inputInstructionStrings) << std::endl;
+    std::cout << "Second part: " << AoC::overheatFinalValueOfH() << std::endl;
 }

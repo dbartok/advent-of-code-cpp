@@ -28,4 +28,10 @@ public:
         Assert::AreEqual(2u, AoC::numTimesMultInvoked(instructionStrings));
     }
 
+    // Test is the same as the real puzzle input in this case, because the solution is meant to be optimized solely for that
+    TEST_METHOD(overheatFinalValueOfH_Returns911AsTheAnswer)
+    {
+        Assert::AreEqual(911u, AoC::overheatFinalValueOfH());
+    }
+
 };

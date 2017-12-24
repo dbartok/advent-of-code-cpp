@@ -256,6 +256,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day23-CoprocessorConflagration.cpp" />
+    <ClCompile Include="HandOptimizedAssembly.cpp" />
     <ClCompile Include="test_Day23-CoprocessorConflagration.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -272,6 +273,7 @@
     <ClInclude Include="..\Day18-Duet\AssemblyProgramState.h" />
     <ClInclude Include="..\Day18-Duet\DuetMessageQueue.h" />
     <ClInclude Include="Day23-CoprocessorConflagration.h" />
+    <ClInclude Include="HandOptimizedAssembly.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
