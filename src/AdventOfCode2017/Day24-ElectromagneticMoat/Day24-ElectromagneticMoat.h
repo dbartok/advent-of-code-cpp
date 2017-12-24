@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned strengthOfStrongestBridge(const std::vector<std::string>& componentLines);
+unsigned strengthOfStrongestLongestBridge(const std::vector<std::string>& componentLines);
 
 }

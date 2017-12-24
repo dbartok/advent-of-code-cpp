@@ -24,4 +24,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::strengthOfStrongestBridge(inputComponentLines) << std::endl;
+    std::cout << "Second part: " << AoC::strengthOfStrongestLongestBridge(inputComponentLines) << std::endl;
 }

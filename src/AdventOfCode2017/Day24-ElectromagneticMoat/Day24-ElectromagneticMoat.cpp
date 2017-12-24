@@ -53,4 +53,11 @@ unsigned strengthOfStrongestBridge(const std::vector<std::string>& componentLine
     return bridgeGraph.maxCostWalk();
 }
 
+unsigned strengthOfStrongestLongestBridge(const std::vector<std::string>& componentLines)
+{
+    BridgeGraph::NodeIDToNeighbors nodeIDToNeighbors = nodeIDToNeighborsFromComponentLines(componentLines);
+    BridgeGraph bridgeGraph{nodeIDToNeighbors};
+    return bridgeGraph.maxCostLongestWalk();
+}
+
 }

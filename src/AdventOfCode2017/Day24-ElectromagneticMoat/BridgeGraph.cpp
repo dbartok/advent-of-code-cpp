@@ -18,13 +18,24 @@ BridgeGraph::BridgeGraph(NodeIDToNeighbors nodeIDToNeighbors) noexcept
 unsigned BridgeGraph::maxCostWalk() const
 {
     unsigned maxCost = 0;
+    Walk maxCostLongestWalk{};
 
-    maxCostWalkRec(0, {}, 0, maxCost);
+    traverseForMaxCostWalk(0, {}, 0, maxCost, Walk{}, maxCostLongestWalk);
 
     return maxCost;
 }
 
-void BridgeGraph::maxCostWalkRec(NodeIDType currentNodeID, const VisitedEdgeSet& visitedEdgeSet, unsigned currentCost, unsigned& maxCost) const
+unsigned BridgeGraph::maxCostLongestWalk() const
+{
+    unsigned maxCost = 0;
+    Walk maxCostLongestWalk{};
+
+    traverseForMaxCostWalk(0, {}, 0, maxCost, Walk{}, maxCostLongestWalk);
+
+    return maxCostLongestWalk.cost;
+}
+
+void BridgeGraph::traverseForMaxCostWalk(NodeIDType currentNodeID, const VisitedEdgeSet& visitedEdgeSet, unsigned currentCost, unsigned& maxCost, const Walk& currentWalk, Walk& maxWalk) const
 {
     NodeIDVector neighborIDs = m_nodeIDToNeighbors[currentNodeID];
 
@@ -40,7 +51,10 @@ void BridgeGraph::maxCostWalkRec(NodeIDType currentNodeID, const VisitedEdgeSet&
             const unsigned newCurrentCost = currentCost + currentNodeID + neighborID;
             maxCost = std::max(maxCost, newCurrentCost);
 
-            maxCostWalkRec(neighborID, visitedEdgeSetExtended, newCurrentCost, maxCost);
+            const Walk newWalk{currentWalk.length + 1, newCurrentCost};
+            maxWalk = std::max(maxWalk, newWalk);
+
+            traverseForMaxCostWalk(neighborID, visitedEdgeSetExtended, newCurrentCost, maxCost, newWalk, maxWalk);
         }
     }
 }
