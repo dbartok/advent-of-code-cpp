@@ -32,7 +32,7 @@ unsigned valueAfterLastWritten(unsigned numStepsForward)
     return spinLockValues[(currentPos + 1) % spinLockValues.size()];
 }
 
-unsigned valueAfterZeroAfterManyInsertions(unsigned numStepsForward) noexcept
+constexpr unsigned valueAfterZeroAfterManyInsertions(unsigned numStepsForward) noexcept
 {
     size_t spinLockSize = 1;
     size_t currentPos = 0;

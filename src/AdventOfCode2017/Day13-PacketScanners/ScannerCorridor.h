@@ -22,7 +22,7 @@ public:
     unsigned smallestDelayNotToGetCaught() const;
 
     static ScannerCorridor fromScannerRangeLines(const std::vector<std::string> scannerRangeLines);
-    static bool isCaught(unsigned range, unsigned depth, unsigned delay = 0);
+    static constexpr bool isCaught(unsigned range, unsigned depth, unsigned delay = 0);
 
 private:
     RangeToDepthMap m_rangeToDepthMap;

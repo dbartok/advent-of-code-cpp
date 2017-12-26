@@ -96,7 +96,7 @@ ScannerCorridor ScannerCorridor::fromScannerRangeLines(const std::vector<std::st
     return ScannerCorridor{std::move(rangeToDepthMap)};
 }
 
-bool ScannerCorridor::isCaught(unsigned range, unsigned depth, unsigned delay)
+constexpr bool ScannerCorridor::isCaught(unsigned range, unsigned depth, unsigned delay)
 {
     unsigned totalStepsInPath = (2 * (range - 1));
 
@@ -106,7 +106,7 @@ bool ScannerCorridor::isCaught(unsigned range, unsigned depth, unsigned delay)
     // Number of steps the scanner has taken since last being at the top
     unsigned scannerNumStepsFromTop = (depth + minEquivalentDelay) % totalStepsInPath;
 
-    unsigned scannerPos;
+    unsigned scannerPos{};
 
     // Scanner in the first half of its path
     if (scannerNumStepsFromTop <= range - 1)

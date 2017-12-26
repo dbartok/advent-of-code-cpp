@@ -10,6 +10,6 @@ namespace AdventOfCode
 {
 
 unsigned valueAfterLastWritten(unsigned numStepsForward);
-unsigned valueAfterZeroAfterManyInsertions(unsigned numStepsForward) noexcept;
+constexpr unsigned valueAfterZeroAfterManyInsertions(unsigned numStepsForward) noexcept;
 
 }

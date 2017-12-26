@@ -20,7 +20,7 @@ unsigned previousOddNumber(unsigned number)
     return (number % 2 == 1) ? number : number - 1;
 }
 
-unsigned nextOddNumber(unsigned number)
+constexpr unsigned nextOddNumber(unsigned number)
 {
     return (number % 2 == 1) ? number : number + 1;
 }

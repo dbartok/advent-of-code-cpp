@@ -6,12 +6,14 @@
 
 BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
+
+#include <array>
 END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
 {
 
-std::vector<unsigned char> EXTRA_SALT_BYTES = {17, 31, 73, 47, 23};
+std::array<unsigned char, 5> EXTRA_SALT_BYTES = {17, 31, 73, 47, 23};
 
 }
 
