@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::sumOfAllNumbers(numbers) << std::endl;
+    std::cout << "Second part: " << AoC::firstDuplicateSumReached(numbers) << std::endl;
 }

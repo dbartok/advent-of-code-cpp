@@ -20,4 +20,12 @@ public:
         Assert::AreEqual(-6, AoC::sumOfAllNumbers({-1, -2, -3}));
     }
 
+    TEST_METHOD(firstDuplicateSumReached_SimpleTests)
+    {
+        Assert::AreEqual(0, AoC::firstDuplicateSumReached({+1, -1}));
+        Assert::AreEqual(10, AoC::firstDuplicateSumReached({+3, +3, +4, -2, -4}));
+        Assert::AreEqual(5, AoC::firstDuplicateSumReached({-6, +3, +8, +5, -6}));
+        Assert::AreEqual(14, AoC::firstDuplicateSumReached({+7, +7, -2, -7, -4}));
+    }
+
 };

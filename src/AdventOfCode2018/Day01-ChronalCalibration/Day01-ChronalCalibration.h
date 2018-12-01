@@ -10,5 +10,6 @@ namespace AdventOfCode
 {
 
 int sumOfAllNumbers(const std::vector<int>& numbers);
+int firstDuplicateSumReached(const std::vector<int>& numbers);
 
 }
