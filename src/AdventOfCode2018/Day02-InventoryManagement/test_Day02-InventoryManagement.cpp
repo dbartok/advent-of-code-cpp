@@ -29,6 +29,22 @@ public:
         Assert::AreEqual(4u * 3u, AoC::checksumTwoOrThreeOfAnyLetter(words));
     }
 
+    TEST_METHOD(commonLettersBetweenOneCharacterDiff_SimpleTests)
+    {
+        std::vector<std::string> words =
+        {
+            "abcde",
+            "fghij",
+            "klmno",
+            "pqrst",
+            "fguij",
+            "axcye",
+            "wvxyz"
+        };
+
+        Assert::AreEqual(std::string{"fgij"}, AoC::commonLettersBetweenOneCharacterDiff(words));
+    }
+
 
 
 };

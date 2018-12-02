@@ -10,6 +10,8 @@ END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
+using StringPair = std::pair<std::string, std::string>;
+
 unsigned countWordsWithNRepeatingChars(const std::vector<std::string>& words, unsigned n)
 {
     unsigned count = 0;
@@ -36,11 +38,70 @@ unsigned countWordsWithNRepeatingChars(const std::vector<std::string>& words, un
 
 unsigned checksumTwoOrThreeOfAnyLetter(const std::vector<std::string>& words)
 {
-
     const unsigned numWordsWithTwoRepeatingLetters = countWordsWithNRepeatingChars(words, 2);
     const unsigned numWordsWithThreeRepeatingLetters = countWordsWithNRepeatingChars(words, 3);
 
     return numWordsWithTwoRepeatingLetters * numWordsWithThreeRepeatingLetters;
+}
+
+StringPair findOneCharacterDiffStrings(const std::vector<std::string>& words)
+{
+    for (auto firstWordIter = words.cbegin(); firstWordIter != words.cend(); ++firstWordIter)
+    {
+        for (auto secondWordIter = firstWordIter + 1; secondWordIter != words.cend(); ++secondWordIter)
+        {
+            const std::string& firstWord = *firstWordIter;
+            const std::string& secondWord = *secondWordIter;
+
+            if (firstWord.length() != secondWord.length())
+            {
+                throw std::runtime_error("Words are of different length.");
+            }
+
+            unsigned diffCount = 0;
+            for (size_t i = 0; i < firstWord.length(); ++i)
+            {
+                if (firstWord[i] != secondWord[i])
+                {
+                    ++diffCount;
+                    if (diffCount > 1)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (diffCount == 1)
+            {
+                return std::make_pair(*firstWordIter, *secondWordIter);
+            }
+        }
+    }
+
+    throw std::runtime_error("No two words with exactly one character difference.");
+}
+
+std::string commonLettersBetweenOneCharacterDiff(const std::vector<std::string>& words)
+{
+    if (words.size() < 2)
+    {
+        throw std::runtime_error("Input has fewer than two words.");
+    }
+
+    std::string firstWord;
+    std::string secondWord;
+    std::tie(firstWord, secondWord) = findOneCharacterDiffStrings(words);
+
+    std::string commonLetters;
+    for (size_t i = 0; i < firstWord.length(); ++i)
+    {
+        if (firstWord[i] == secondWord[i])
+        {
+            commonLetters += firstWord[i];
+        }
+    }
+
+    return commonLetters;
 }
 
 }

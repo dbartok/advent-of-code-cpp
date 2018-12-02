@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::checksumTwoOrThreeOfAnyLetter(words) << std::endl;
+    std::cout << "Second part: " << AoC::commonLettersBetweenOneCharacterDiff(words) << std::endl;
 }

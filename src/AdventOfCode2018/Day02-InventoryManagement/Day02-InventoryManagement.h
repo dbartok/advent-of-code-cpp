@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned checksumTwoOrThreeOfAnyLetter(const std::vector<std::string>& words);
+std::string commonLettersBetweenOneCharacterDiff(const std::vector<std::string>& words);
 
 }
