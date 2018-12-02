@@ -42,7 +42,7 @@ public:
     SpinMove& operator=(SpinMove&&) = default;
     virtual ~SpinMove() = default;
 
-    virtual void execute(std::string& nameOrderString) const;
+    void execute(std::string& nameOrderString) const override;
 
 private:
     unsigned m_offset;
@@ -59,7 +59,7 @@ public:
     ExchangeMove& operator=(ExchangeMove&&) = default;
     virtual ~ExchangeMove() = default;
 
-    virtual void execute(std::string& nameOrderString) const;
+    void execute(std::string& nameOrderString) const override;
 
 private:
     unsigned m_pos1;
@@ -77,7 +77,7 @@ public:
     PartnerMove& operator=(PartnerMove&&) = default;
     virtual ~PartnerMove() = default;
 
-    virtual void execute(std::string& nameOrderString) const;
+    void execute(std::string& nameOrderString) const override;
 
 private:
     std::string m_name1;

@@ -71,7 +71,7 @@ public:
     virtual ~BasicGridInfectingVirus() = default;
 
 protected:
-    virtual void makeInfectionStep() override;
+    void makeInfectionStep() override;
 };
 
 class EvolvedGridInfectingVirus : public GridInfectingVirus
@@ -86,7 +86,7 @@ public:
     virtual ~EvolvedGridInfectingVirus() = default;
 
 protected:
-    virtual void makeInfectionStep() override;
+    void makeInfectionStep() override;
 };
 
 }

@@ -81,7 +81,7 @@ public:
     SoundInstruction& operator=(SoundInstruction&&) = default;
     virtual ~SoundInstruction() = default;
 
-    virtual void execute(AssemblyProgramState& state) const override;
+    void execute(AssemblyProgramState& state) const override;
 };
 
 class RecoverInstruction : public SingleArgInstruction
@@ -95,7 +95,7 @@ public:
     RecoverInstruction& operator=(RecoverInstruction&&) = default;
     virtual ~RecoverInstruction() = default;
 
-    virtual void execute(AssemblyProgramState& state) const override;
+    void execute(AssemblyProgramState& state) const override;
 };
 
 class SendInstruction : public SingleArgInstruction
@@ -109,7 +109,7 @@ public:
     SendInstruction& operator=(SendInstruction&&) = default;
     virtual ~SendInstruction() = default;
 
-    virtual void execute(AssemblyProgramState& state) const override;
+    void execute(AssemblyProgramState& state) const override;
 };
 
 class ReceiveInstruction : public SingleArgInstruction
@@ -123,7 +123,7 @@ public:
     ReceiveInstruction& operator=(ReceiveInstruction&&) = default;
     virtual ~ReceiveInstruction() = default;
 
-    virtual void execute(AssemblyProgramState& state) const override;
+    void execute(AssemblyProgramState& state) const override;
 };
 
 class SetInstruction : public DoubleArgInstruction
@@ -137,7 +137,7 @@ public:
     SetInstruction& operator=(SetInstruction&&) = default;
     virtual ~SetInstruction() = default;
 
-    virtual void execute(AssemblyProgramState& state) const override;
+    void execute(AssemblyProgramState& state) const override;
 };
 
 class AddInstruction : public DoubleArgInstruction
@@ -151,7 +151,7 @@ public:
     AddInstruction& operator=(AddInstruction&&) = default;
     virtual ~AddInstruction() = default;
 
-    virtual void execute(AssemblyProgramState& state) const override;
+    void execute(AssemblyProgramState& state) const override;
 };
 
 class MultiplyInstruction : public DoubleArgInstruction
@@ -165,7 +165,7 @@ public:
     MultiplyInstruction& operator=(MultiplyInstruction&&) = default;
     virtual ~MultiplyInstruction() = default;
 
-    virtual void execute(AssemblyProgramState& state) const override;
+    void execute(AssemblyProgramState& state) const override;
 };
 
 class ModuloInstruction : public DoubleArgInstruction
@@ -179,7 +179,7 @@ public:
     ModuloInstruction& operator=(ModuloInstruction&&) = default;
     virtual ~ModuloInstruction() = default;
 
-    virtual void execute(AssemblyProgramState& state) const override;
+    void execute(AssemblyProgramState& state) const override;
 };
 
 class JumpGreaterThanZeroInstruction : public DoubleArgInstruction
@@ -193,8 +193,8 @@ public:
     JumpGreaterThanZeroInstruction& operator=(JumpGreaterThanZeroInstruction&&) = default;
     virtual ~JumpGreaterThanZeroInstruction() = default;
 
-    virtual void execute(AssemblyProgramState& state) const override;
-    virtual bool increasesInstructionIndex() const noexcept override;
+    void execute(AssemblyProgramState& state) const override;
+    bool increasesInstructionIndex() const noexcept override;
 };
 
 class SubtractInstruction : public DoubleArgInstruction
@@ -208,7 +208,7 @@ public:
     SubtractInstruction& operator=(SubtractInstruction&&) = default;
     virtual ~SubtractInstruction() = default;
 
-    virtual void execute(AssemblyProgramState& state) const override;
+    void execute(AssemblyProgramState& state) const override;
 };
 
 class JumpNotZeroInstruction : public DoubleArgInstruction
@@ -222,8 +222,8 @@ public:
     JumpNotZeroInstruction& operator=(JumpNotZeroInstruction&&) = default;
     virtual ~JumpNotZeroInstruction() = default;
 
-    virtual void execute(AssemblyProgramState& state) const override;
-    virtual bool increasesInstructionIndex() const noexcept override;
+    void execute(AssemblyProgramState& state) const override;
+    bool increasesInstructionIndex() const noexcept override;
 };
 
 }

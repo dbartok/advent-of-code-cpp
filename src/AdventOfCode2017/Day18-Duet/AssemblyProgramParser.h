@@ -49,7 +49,7 @@ public:
     virtual ~SoundProgramParser() = default;
 
 protected:
-    virtual AssemblyInstruction::SharedPtr createCustomInstruction(const std::string& instructionName, const std::vector<std::string>& args) const noexcept override;
+    AssemblyInstruction::SharedPtr createCustomInstruction(const std::string& instructionName, const std::vector<std::string>& args) const noexcept override;
 };
 
 class MessageQueueProgramParser : public AssemblyProgramParser
@@ -65,7 +65,7 @@ public:
     virtual ~MessageQueueProgramParser() = default;
 
 protected:
-    virtual AssemblyInstruction::SharedPtr createCustomInstruction(const std::string& instructionName, const std::vector<std::string>& args) const noexcept override;
+    AssemblyInstruction::SharedPtr createCustomInstruction(const std::string& instructionName, const std::vector<std::string>& args) const noexcept override;
 };
 
 }
