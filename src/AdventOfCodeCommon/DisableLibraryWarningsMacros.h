@@ -1,7 +1,6 @@
 #pragma once
 
 #include <codeanalysis/warnings.h>
-#include <CppCoreCheck/Warnings.h>
 
 // Surround a block of code with these macros to suppress one or more warnings for that block
 // e.g.,
@@ -33,6 +32,7 @@ __pragma(warning(pop))
 // 4623 - 'derived class': default constructor was implicitly defined as deleted
 // 4625 - 'derived class': copy constructor was implicitly defined as deleted
 // 4626 - 'derived class': assignment operator was implicitly defined as deleted
+// 4643 - Forward declaring 'type' in namespace std is not permitted by the C++ Standard
 // 4668 - 'symbol' is not defined as a preprocessor macro, replacing with '0' for 'directives'
 // 4710 - 'function': function not inlined
 // 4774 - 'function' : format string expected in argument 'position' is not a string literal
@@ -42,7 +42,7 @@ __pragma(warning(pop))
 // 5027 - 'type': move assignment operator was implicitly defined as deleted
 // 5031 - #pragma warning(pop): likely mismatch, popping warning state pushed in different file
 // 5039 - pointer or reference to potentially throwing function passed to extern C function under -EHc.
-#define UNFIXABLE_WARNINGS_ENCOUNTERED_IN_LIBRARIES 4061 4365 4464 4514 4571 4619 4623 4625 4626 4668 4710 4774 4820 4996 5026 5027 5031 5039
+#define UNFIXABLE_WARNINGS_ENCOUNTERED_IN_LIBRARIES 4061 4365 4464 4514 4571 4619 4623 4625 4626 4643 4668 4710 4774 4820 4996 5026 5027 5031 5039
 
 
 #define __BEGIN_LIBRARIES_DISABLE_WARNINGS \
