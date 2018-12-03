@@ -2,12 +2,12 @@
 
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
-BEGIN_LIBRARIES_DISABLE_WARNINGS
+__BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include "CppUnitTest.h"
 
 #include <vector>
 #include <string>
-END_LIBRARIES_DISABLE_WARNINGS
+__END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace AoC = AdventOfCode;

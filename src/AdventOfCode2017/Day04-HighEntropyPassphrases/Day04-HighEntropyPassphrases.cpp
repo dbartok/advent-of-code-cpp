@@ -4,12 +4,12 @@
 
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
-BEGIN_LIBRARIES_DISABLE_WARNINGS
+__BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <unordered_set>
 #include <tuple>
 #include <functional>
 #include <algorithm>
-END_LIBRARIES_DISABLE_WARNINGS
+__END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {

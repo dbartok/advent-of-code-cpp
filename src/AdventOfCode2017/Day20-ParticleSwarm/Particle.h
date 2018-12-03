@@ -2,9 +2,9 @@
 
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
-BEGIN_LIBRARIES_DISABLE_WARNINGS
+__BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <Eigen/Dense>
-END_LIBRARIES_DISABLE_WARNINGS
+__END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {

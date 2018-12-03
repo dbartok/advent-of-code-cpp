@@ -2,10 +2,10 @@
 
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
-BEGIN_LIBRARIES_DISABLE_WARNINGS
+__BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <cmath>
 #include <cassert>
-END_LIBRARIES_DISABLE_WARNINGS
+__END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
@@ -47,6 +47,7 @@ namespace AdventOfCode
 // The below functions are refactorings of the assembly code above
 // Only the final version is meant to actually be run
 
+__BEGIN_DISABLE_WARNINGS(26438)
 Register finalValueOfH_Initial()
 {
     Register a = 1, b = 0, c = 0, d = 0, e = 0, f = 0, g = 0, h = 0;
@@ -91,6 +92,8 @@ label7:
     b += 17;
     goto label2;
 }
+__END_DISABLE_WARNINGS
+
 
 Register finalValueOfH_NoGotos()
 {

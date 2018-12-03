@@ -3,6 +3,19 @@
 #include <codeanalysis/warnings.h>
 #include <CppCoreCheck/Warnings.h>
 
+// Surround a block of code with these macros to suppress one or more warnings for that block
+// e.g.,
+// __BEGIN_DISABLE_WARNINGS(26440 26446)
+// int f(const std::vector<int>& v) { return v[0]; }
+// __END_DISABLE_WARNINGS
+
+#define __BEGIN_DISABLE_WARNINGS(WARNINGS) \
+__pragma(warning(push)) \
+__pragma(warning(disable: WARNINGS)) \
+
+#define __END_DISABLE_WARNINGS \
+__pragma(warning(pop))
+
 // Unfixable warnings encountered in libraries
 //
 // Each of these warnings occurs at least once in the external dependencies (e.g., the standard library) intrinsically (meaning they are unfixable externally).
@@ -32,11 +45,11 @@
 #define UNFIXABLE_WARNINGS_ENCOUNTERED_IN_LIBRARIES 4061 4365 4464 4514 4571 4619 4623 4625 4626 4668 4710 4774 4820 4996 5026 5027 5031 5039
 
 
-#define BEGIN_LIBRARIES_DISABLE_WARNINGS \
-__pragma(warning(push)) \
-__pragma(warning(disable: ALL_CPPCORECHECK_WARNINGS)) \
-__pragma(warning(disable: ALL_CODE_ANALYSIS_WARNINGS)) \
-__pragma(warning(disable: UNFIXABLE_WARNINGS_ENCOUNTERED_IN_LIBRARIES)) \
+#define __BEGIN_LIBRARIES_DISABLE_WARNINGS \
+__BEGIN_DISABLE_WARNINGS(\
+ALL_CPPCORECHECK_WARNINGS \
+ALL_CODE_ANALYSIS_WARNINGS \
+UNFIXABLE_WARNINGS_ENCOUNTERED_IN_LIBRARIES)
 
-#define END_LIBRARIES_DISABLE_WARNINGS \
-__pragma(warning(pop))
+#define __END_LIBRARIES_DISABLE_WARNINGS \
+__END_DISABLE_WARNINGS

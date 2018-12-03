@@ -2,12 +2,12 @@
 
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
-BEGIN_LIBRARIES_DISABLE_WARNINGS
+__BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/functional/hash/hash.hpp>
 
 #include <algorithm>
 #include <unordered_map>
-END_LIBRARIES_DISABLE_WARNINGS
+__END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
