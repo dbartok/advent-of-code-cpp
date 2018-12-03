@@ -109,7 +109,7 @@ std::vector<unsigned char> KnotHasher::createDenseHashBytes()
     for (size_t i = 0; i < m_hashResultNumbers.size(); i += m_blockSize)
     {
         auto blockBeginIter = m_hashResultNumbers.begin() + i;
-        unsigned char blockValue = std::accumulate(blockBeginIter + 1, blockBeginIter + m_blockSize, *blockBeginIter, [](unsigned char acc, unsigned char elem)
+        unsigned char blockValue = std::accumulate(blockBeginIter + 1, blockBeginIter + m_blockSize, *blockBeginIter, [](unsigned char acc, unsigned char elem) noexcept
                                                    {
                                                        return acc ^= elem;
                                                    });

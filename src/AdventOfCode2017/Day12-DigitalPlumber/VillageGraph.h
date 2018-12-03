@@ -21,7 +21,7 @@ public:
     // Neighbors are mapped to the nodes by their position in the vector
     using NeighborSetToNodeID = std::vector<NodeIDSet>;
 
-    VillageGraph(NeighborSetToNodeID neighborSets);
+    VillageGraph(NeighborSetToNodeID neighborSets) noexcept;
     unsigned numNodesInGroupContainingNode(NodeIDType nodeID) const;
     unsigned numTotalGroups() const;
 

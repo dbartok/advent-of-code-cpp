@@ -32,7 +32,7 @@ int Processor::largestRegister() const
         throw std::runtime_error("There are no registers.");
     }
 
-    auto maxValueIter = std::max_element(registerValueToNameMap.begin(), registerValueToNameMap.end(), [](const auto& lhs, const auto& rhs)
+    auto maxValueIter = std::max_element(registerValueToNameMap.begin(), registerValueToNameMap.end(), [](const auto& lhs, const auto& rhs) noexcept
                                          {
                                              return lhs.second < rhs.second;
                                          });
@@ -40,7 +40,7 @@ int Processor::largestRegister() const
     return maxValueIter->second;
 }
 
-int Processor::globalMaxValueOfRegisters() const
+int Processor::globalMaxValueOfRegisters() const noexcept
 {
     return m_state.getGlobalMaxValueOfRegisters();
 }

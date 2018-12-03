@@ -93,7 +93,7 @@ public:
 
         std::vector<double> equalDoublesWithThresholdVector{1.0, 0.999, 1.002, 1.05};
         Assert::IsTrue(AoC::Utils::allElementsEqual(equalDoublesWithThresholdVector.cbegin(), equalDoublesWithThresholdVector.cend(),
-                                                    [](double lhs, double rhs)
+                                                    [](double lhs, double rhs) noexcept
                                                     {
                                                         return std::fabs(lhs - rhs) < 0.1;
                                                     }));
@@ -109,7 +109,7 @@ public:
 
         std::vector<double> farDifferentDoubles{1.7, 0.999, 1.25, 1.05};
         Assert::IsFalse(AoC::Utils::allElementsEqual(farDifferentDoubles.cbegin(), farDifferentDoubles.cend(),
-                                                     [](double lhs, double rhs)
+                                                     [](double lhs, double rhs) noexcept
                                                      {
                                                          return std::fabs(lhs - rhs) < 0.1;
                                                      }));

@@ -52,7 +52,7 @@ std::string knotHashDenseString(const std::string& stringToHash)
     bytesToHash.reserve(stringToHashTrimmed.size());
 
     // Each character is converted to a byte
-    std::transform(stringToHashTrimmed.cbegin(), stringToHashTrimmed.cend(), std::back_inserter(bytesToHash), [](char c)
+    std::transform(stringToHashTrimmed.cbegin(), stringToHashTrimmed.cend(), std::back_inserter(bytesToHash), [](char c) noexcept
                    {
                        return static_cast<unsigned char>(c);
                    });

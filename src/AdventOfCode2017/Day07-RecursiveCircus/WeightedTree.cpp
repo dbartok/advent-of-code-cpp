@@ -13,7 +13,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-WeightedTree::TreeNode::TreeNode(std::string name, int weight)
+WeightedTree::TreeNode::TreeNode(std::string name, int weight) noexcept
     : name{std::move(name)}
     , weight{weight}
     , childrenSharedPtrs{}
@@ -110,7 +110,7 @@ void WeightedTree::recalculateSubtreeWeightsForNode(TreeNode& node)
     }
 
     node.totalSubtreeWeight = std::accumulate(node.childrenSharedPtrs.cbegin(), node.childrenSharedPtrs.cend(), node.weight,
-                                                        [](int sum, const TreeNodeSharedPtr& childSharedPtr)
+                                                        [](int sum, const TreeNodeSharedPtr& childSharedPtr) noexcept
                                                         {
                                                             return sum + childSharedPtr->totalSubtreeWeight;
                                                         });
@@ -128,7 +128,7 @@ int WeightedTree::traverseForCorrectWeightFromNode(const TreeNode& currentNode, 
     }
 
     bool areAllChildrenEqualSubtreeWeight = Utils::allElementsEqual(childrenSharedPtrs.cbegin(), childrenSharedPtrs.cend(),
-                                                                    [](const TreeNodeSharedPtr& lhs, const TreeNodeSharedPtr& rhs)
+                                                                    [](const TreeNodeSharedPtr& lhs, const TreeNodeSharedPtr& rhs) noexcept
                                                                     {
                                                                         return lhs->totalSubtreeWeight == rhs->totalSubtreeWeight;
                                                                     });

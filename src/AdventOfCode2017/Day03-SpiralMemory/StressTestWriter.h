@@ -17,7 +17,7 @@ class StressTestWriter
 public:
     StressTestWriter();
     void writeUntil(unsigned threshold);
-    unsigned getLastWritten() const;
+    unsigned getLastWritten() const noexcept;
 
 private:
     InfiniteGrid<unsigned> m_grid;
@@ -27,7 +27,7 @@ private:
     unsigned m_totalStepsUntilTurn;
     unsigned m_remainingStepsUntilTurn;
 
-    void executeNextTurn();
+    void executeNextTurn() noexcept;
 };
 
 }

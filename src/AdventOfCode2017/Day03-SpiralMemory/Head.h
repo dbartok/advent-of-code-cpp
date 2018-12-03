@@ -20,13 +20,13 @@ enum class Direction
 class Head
 {
 public:
-    Head(std::pair<int, int> m_position, Direction m_direction);
+    Head(std::pair<int, int> m_position, Direction m_direction) noexcept;
 
-    const std::pair<int, int>& getPosition() const;
-    Direction getDirection() const;
+    const std::pair<int, int>& getPosition() const noexcept;
+    Direction getDirection() const noexcept;
 
-    void step();
-    void turnLeft();
+    void step() noexcept;
+    void turnLeft() noexcept;
 
 private:
     std::pair<int, int> m_position;

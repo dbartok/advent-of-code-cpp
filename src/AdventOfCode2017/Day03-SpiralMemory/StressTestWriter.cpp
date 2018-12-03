@@ -45,12 +45,12 @@ void StressTestWriter::writeUntil(unsigned threshold)
     }
 }
 
-unsigned StressTestWriter::getLastWritten() const
+unsigned StressTestWriter::getLastWritten() const noexcept
 {
     return m_lastWritten;
 }
 
-void StressTestWriter::executeNextTurn()
+void StressTestWriter::executeNextTurn() noexcept
 {
     if (m_head.getDirection() == Direction::DOWN || m_head.getDirection() == Direction::UP)
     {

@@ -59,7 +59,7 @@ void applyStep(const std::string& step, std::pair<int, int>& coordinates)
     assert((coordinates.first + coordinates.second) % 2 == 0);
 }
 
-int distanceFromStart(std::pair<int, int> coordinates)
+int distanceFromStart(std::pair<int, int> coordinates) noexcept
 {
     // We can calculate the distance as if the coordinates were in the bottom right quadrant
     coordinates.first = std::abs(coordinates.first);

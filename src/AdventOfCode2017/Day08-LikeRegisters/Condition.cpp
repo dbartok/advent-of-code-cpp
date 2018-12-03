@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-Condition::Condition(std::string registerName, std::string symbol, int argument)
+Condition::Condition(std::string registerName, std::string symbol, int argument) noexcept
     : m_registerName{std::move(registerName)}
     , m_symbol{std::move(symbol)}
     , m_argument{argument}

@@ -32,7 +32,7 @@ public:
 
         int totalSubtreeWeight;
 
-        TreeNode(std::string name, int weight);
+        TreeNode(std::string name, int weight) noexcept;
 
         // Returns the sibling count for the node, including itself in the count
         int totalSiblingCount() const;

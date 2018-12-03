@@ -9,24 +9,24 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-Head::Head(std::pair<int, int> position, Direction direction)
+Head::Head(std::pair<int, int> position, Direction direction) noexcept
     : m_position{std::move(position)}
     , m_direction{direction}
 {
 
 }
 
-const std::pair<int, int>& Head::getPosition() const
+const std::pair<int, int>& Head::getPosition() const noexcept
 {
     return m_position;
 }
 
-Direction Head::getDirection() const
+Direction Head::getDirection() const noexcept
 {
     return m_direction;
 }
 
-void Head::step()
+void Head::step() noexcept
 {
     switch (m_direction)
     {
@@ -48,7 +48,7 @@ void Head::step()
     }
 }
 
-void Head::turnLeft()
+void Head::turnLeft() noexcept
 {
     switch (m_direction)
     {

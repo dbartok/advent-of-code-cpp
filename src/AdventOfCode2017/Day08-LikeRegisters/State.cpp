@@ -6,7 +6,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <algorithm>
 __END_LIBRARIES_DISABLE_WARNINGS
 
-const State::RegisterValueToNameMap& State::getRegisterValueToNameMap() const
+const State::RegisterValueToNameMap& State::getRegisterValueToNameMap() const noexcept
 {
     return m_registerValueToNameMap;
 }
@@ -38,7 +38,7 @@ int State::registerValue(const std::string& registerName) const
     return foundIter->second;
 }
 
-int State::getGlobalMaxValueOfRegisters() const
+int State::getGlobalMaxValueOfRegisters() const noexcept
 {
     return m_globalMaxValueOfRegisters;
 }

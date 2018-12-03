@@ -10,7 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-VillageGraph::VillageGraph(NeighborSetToNodeID neighborSets)
+VillageGraph::VillageGraph(NeighborSetToNodeID neighborSets) noexcept
     : m_neighborSets(std::move(neighborSets))
 {
 

@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-NodeDescriptor::NodeDescriptor(std::string name, int weight, std::vector<std::string> childrenNames)
+NodeDescriptor::NodeDescriptor(std::string name, int weight, std::vector<std::string> childrenNames) noexcept
     : name{std::move(name)}
     , weight{weight}
     , childrenNames{std::move(childrenNames)}

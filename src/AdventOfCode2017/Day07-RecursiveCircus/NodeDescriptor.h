@@ -16,7 +16,7 @@ struct NodeDescriptor
     int weight;
     std::vector<std::string> childrenNames;
 
-    NodeDescriptor(std::string name, int weight, std::vector<std::string> childrenNames);
+    NodeDescriptor(std::string name, int weight, std::vector<std::string> childrenNames) noexcept;
 
     static NodeDescriptor fromString(const std::string& nodeDescriptorString);
 };

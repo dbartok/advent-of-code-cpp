@@ -14,7 +14,7 @@ namespace AdventOfCode
 class Condition
 {
 public:
-    Condition(std::string registerName, std::string symbol, int argument);
+    Condition(std::string registerName, std::string symbol, int argument) noexcept;
     bool isTrue(const State& state) const;
 
 private:

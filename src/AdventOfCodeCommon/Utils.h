@@ -45,7 +45,7 @@ bool allElementsEqual(Iterator first, Iterator last, const Comparator& comparato
 template <typename Iterator>
 bool allElementsEqual(Iterator first, Iterator last)
 {
-    return allElementsEqual(first, last, [](const auto& lhs, const auto& rhs)
+    return allElementsEqual(first, last, [](const auto& lhs, const auto& rhs) noexcept
                             {
                                 return lhs == rhs;
                             });

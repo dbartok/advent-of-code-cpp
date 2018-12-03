@@ -26,7 +26,7 @@ private:
     // This is very simplistic, recommend to use boost::hash_combine or similar if performance is a concern at all
     struct SimpleIntPairHash
     {
-        size_t operator()(const IntPair& ip) const
+        size_t operator()(const IntPair& ip) const noexcept
         {
             return 31 * static_cast<size_t>(ip.first) + static_cast<size_t>(ip.second);
         }

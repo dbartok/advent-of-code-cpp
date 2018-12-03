@@ -14,7 +14,7 @@ namespace AdventOfCode
 class Operation
 {
 public:
-    Operation(std::string target, std::string name, int argument);
+    Operation(std::string target, std::string name, int argument) noexcept;
     void execute(State& state) const;
 
 private:

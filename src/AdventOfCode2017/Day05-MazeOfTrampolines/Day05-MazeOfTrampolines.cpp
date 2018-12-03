@@ -27,12 +27,12 @@ unsigned stepsWithInstructionModifierFunc(std::vector<int> instructions, std::fu
 
 unsigned stepsInstructionsIncreasing(const std::vector<int>& instructions)
 {
-    return stepsWithInstructionModifierFunc(instructions, [](int& i) { ++i; });
+    return stepsWithInstructionModifierFunc(instructions, [](int& i) noexcept { ++i; });
 }
 
 unsigned stepsInstructionsIncreasingDecreasing(const std::vector<int>& instructions)
 {
-    return stepsWithInstructionModifierFunc(instructions, [](int& i) { i >= 3 ? --i : ++i; });
+    return stepsWithInstructionModifierFunc(instructions, [](int& i) noexcept { i >= 3 ? --i : ++i; });
 }
 
 }

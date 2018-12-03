@@ -13,7 +13,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-unsigned previousOddNumber(unsigned number)
+unsigned previousOddNumber(unsigned number) noexcept
 {
     assert(number >= 1);
 
@@ -25,7 +25,7 @@ constexpr unsigned nextOddNumber(unsigned number)
     return (number % 2 == 1) ? number : number + 1;
 }
 
-unsigned safeUnsignedDistance(unsigned a, unsigned b)
+unsigned safeUnsignedDistance(unsigned a, unsigned b) noexcept
 {
     return std::max(a, b) - std::min(a, b);
 }

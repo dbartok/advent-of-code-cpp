@@ -11,14 +11,14 @@ class State
 public:
     using RegisterValueToNameMap = std::unordered_map<std::string, int>;
 
-    const RegisterValueToNameMap& getRegisterValueToNameMap() const;
+    const RegisterValueToNameMap& getRegisterValueToNameMap() const noexcept;
 
     // All of the register modifiers and accessors treat the register as 0 if it hasn't been encountered before
     void addToRegister(const std::string& registerName, int addend);
     void substractFromRegister(const std::string& registerName, int subtrahend);
     int registerValue(const std::string& registerName) const;
 
-    int getGlobalMaxValueOfRegisters() const;
+    int getGlobalMaxValueOfRegisters() const noexcept;
 
 private:
     RegisterValueToNameMap m_registerValueToNameMap;

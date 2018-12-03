@@ -48,7 +48,7 @@ namespace AdventOfCode
 // Only the final version is meant to actually be run
 
 __BEGIN_DISABLE_WARNINGS(26438)
-Register finalValueOfH_Initial()
+Register finalValueOfH_Initial() noexcept
 {
     Register a = 1, b = 0, c = 0, d = 0, e = 0, f = 0, g = 0, h = 0;
 
@@ -95,7 +95,7 @@ label7:
 __END_DISABLE_WARNINGS
 
 
-Register finalValueOfH_NoGotos()
+Register finalValueOfH_NoGotos() noexcept
 {
     Register a = 1, b = 0, c = 0, d = 0, e = 0, f = 0, g = 0, h = 0;
 
@@ -135,7 +135,7 @@ Register finalValueOfH_NoGotos()
     return h;
 }
 
-Register finalValueOfH_ForLoops()
+Register finalValueOfH_ForLoops() noexcept
 {
     Register a = 1, b = 0, c = 0, d = 0, e = 0, f = 0, g = 0, h = 0;
 
@@ -159,7 +159,7 @@ Register finalValueOfH_ForLoops()
     return h;
 }
 
-Register finalValueOfH_Renames()
+Register finalValueOfH_Renames() noexcept
 {
     Register testedNumber = 0, testUntil = 0, factor1 = 0, factor2 = 0, isPrime = 0, numComposites = 0;
 

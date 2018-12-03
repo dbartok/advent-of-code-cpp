@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-Operation::Operation(std::string target, std::string name, int argument)
+Operation::Operation(std::string target, std::string name, int argument) noexcept
     : m_target{std::move(target)}
     , m_name{std::move(name)}
     , m_argument{argument}
