@@ -50,4 +50,10 @@ unsigned numOverlappingSquares(const std::vector<std::string>& areaLines)
     return OverlapGrid.getOverlapSize();
 }
 
+unsigned findSingleNonOperlappingSquare(const std::vector<std::string>& areaLines)
+{
+    OverlapGrid OverlapGrid = parseOverlapGridFromAreaLines(areaLines);
+    return OverlapGrid.getSingleNonOverlappingIndex() + 1;
+}
+
 }

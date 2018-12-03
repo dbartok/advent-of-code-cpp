@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numOverlappingSquares(lines) << std::endl;
+    std::cout << "Second part: " << AoC::findSingleNonOperlappingSquare(lines) << std::endl;
 }

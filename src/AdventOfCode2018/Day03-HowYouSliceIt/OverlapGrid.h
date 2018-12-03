@@ -27,14 +27,16 @@ class OverlapGrid
 public:
     OverlapGrid(size_t size);
 
-    void addRectangle(const Rectangle& rectangle);
+    void addRectangle(Rectangle rectangle);
 
     unsigned getOverlapSize() const;
+    unsigned getSingleNonOverlappingIndex() const;
 
 private:
     using Grid = std::vector<std::vector<int>>;
 
     Grid m_grid;
+    std::vector<Rectangle> m_rectangles;
 };
 
 }

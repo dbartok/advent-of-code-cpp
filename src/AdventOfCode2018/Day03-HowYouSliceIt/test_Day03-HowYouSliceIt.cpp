@@ -15,14 +15,19 @@ public:
 
     TEST_METHOD(numOverlappingSquares_SimpleTests)
     {
-        std::vector<std::string> lines
-        {
-            "#1 @ 1,3: 4x4",
-            "#2 @ 3,1: 4x4",
-            "#3 @ 5,5: 2x2"
-        };
-
-        Assert::AreEqual(4u, AoC::numOverlappingSquares(lines));
+        Assert::AreEqual(4u, AoC::numOverlappingSquares(m_lines));
     }
 
+    TEST_METHOD(findSingleNonOperlappingSquare_SimpleTests)
+    {
+        Assert::AreEqual(3u, AoC::findSingleNonOperlappingSquare(m_lines));
+    }
+
+private:
+    std::vector<std::string> m_lines
+    {
+        "#1 @ 1,3: 4x4",
+        "#2 @ 3,1: 4x4",
+        "#3 @ 5,5: 2x2"
+    };
 };

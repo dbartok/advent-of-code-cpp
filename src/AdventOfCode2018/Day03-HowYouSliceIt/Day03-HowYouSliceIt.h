@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned numOverlappingSquares(const std::vector<std::string>& areaLines);
+unsigned findSingleNonOperlappingSquare(const std::vector<std::string>& areaLines);
 
 }
