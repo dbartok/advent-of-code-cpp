@@ -68,7 +68,7 @@ public:
     BasicGridInfectingVirus(BasicGridInfectingVirus&&) = default;
     BasicGridInfectingVirus& operator=(const BasicGridInfectingVirus&) = default;
     BasicGridInfectingVirus& operator=(BasicGridInfectingVirus&&) = default;
-    virtual ~BasicGridInfectingVirus() = default;
+    ~BasicGridInfectingVirus() = default;
 
 protected:
     void makeInfectionStep() override;
@@ -83,7 +83,7 @@ public:
     EvolvedGridInfectingVirus(EvolvedGridInfectingVirus&&) = default;
     EvolvedGridInfectingVirus& operator=(const EvolvedGridInfectingVirus&) = default;
     EvolvedGridInfectingVirus& operator=(EvolvedGridInfectingVirus&&) = default;
-    virtual ~EvolvedGridInfectingVirus() = default;
+    ~EvolvedGridInfectingVirus() = default;
 
 protected:
     void makeInfectionStep() override;

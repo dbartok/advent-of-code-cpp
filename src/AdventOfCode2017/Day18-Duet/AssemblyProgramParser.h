@@ -46,7 +46,7 @@ public:
     SoundProgramParser(SoundProgramParser&&) = default;
     SoundProgramParser& operator=(const SoundProgramParser&) = default;
     SoundProgramParser& operator=(SoundProgramParser&&) = default;
-    virtual ~SoundProgramParser() = default;
+    ~SoundProgramParser() = default;
 
 protected:
     AssemblyInstruction::SharedPtr createCustomInstruction(const std::string& instructionName, const std::vector<std::string>& args) const noexcept override;
@@ -62,7 +62,7 @@ public:
     MessageQueueProgramParser(MessageQueueProgramParser&&) = default;
     MessageQueueProgramParser& operator=(const MessageQueueProgramParser&) = default;
     MessageQueueProgramParser& operator=(MessageQueueProgramParser&&) = default;
-    virtual ~MessageQueueProgramParser() = default;
+    ~MessageQueueProgramParser() = default;
 
 protected:
     AssemblyInstruction::SharedPtr createCustomInstruction(const std::string& instructionName, const std::vector<std::string>& args) const noexcept override;
