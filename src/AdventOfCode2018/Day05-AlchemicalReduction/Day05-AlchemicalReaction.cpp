@@ -4,39 +4,49 @@
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <cmath>
+#include <list>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
 {
-const unsigned REDUCIBLE_DISTANCE = std::abs('A' - 'a');
+const int REDUCIBLE_DISTANCE = std::abs('A' - 'a');
 }
 
 namespace AdventOfCode
 {
 
-bool reducible(char a, char b)
+bool isReducible(char a, char b)
 {
     return std::abs(a - b) == REDUCIBLE_DISTANCE;
 }
 
 std::string getReducedPolymerString(const std::string& polymerString)
 {
-    if (polymerString.length() <= 1)
+    std::list<char> charList{polymerString.cbegin(), polymerString.cend()};
+
+    auto currentIter = charList.begin();
+    while (currentIter != charList.end())
     {
-        return polymerString;
+        auto previousIter = currentIter;
+        ++currentIter;
+
+        if (currentIter == charList.end())
+        {
+            break;
+        }
+
+        if (isReducible(*previousIter, *currentIter))
+        {
+            currentIter = charList.erase(previousIter);
+            currentIter = charList.erase(currentIter);
+            if (currentIter != charList.begin())
+            {
+                --currentIter;
+            }
+        }
     }
 
-    std::string tail = polymerString.substr(1);
-    std::string reducedTail = getReducedPolymerString(tail);
-
-    if (reducible(polymerString.front(), reducedTail.front()))
-    {
-        return reducedTail.substr(1);
-    }
-    else
-    {
-        return polymerString.front() + reducedTail;
-    }
+    return std::string{charList.cbegin(), charList.cend()};
 }
 
 unsigned getReducedPolymerStringLength(const std::string& polymerString)
