@@ -17,5 +17,6 @@ int main()
 
     fileIn >> line;
 
-    std::cout << "First part: " << AoC::getReducedPolymerStringLength(line) << std::endl;
+    std::cout << "First part: " << AoC::getReducedPolymerLength(line) << std::endl;
+    std::cout << "Second part: " << AoC::getOneUnitRemovedShortestReducedLength(line) << std::endl;
 }

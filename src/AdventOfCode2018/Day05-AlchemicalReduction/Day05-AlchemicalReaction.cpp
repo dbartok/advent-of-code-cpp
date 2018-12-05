@@ -5,6 +5,9 @@
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <cmath>
 #include <list>
+#include <unordered_set>
+#include <cctype>
+#include <algorithm>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
@@ -49,11 +52,62 @@ std::string getReducedPolymerString(const std::string& polymerString)
     return std::string{charList.cbegin(), charList.cend()};
 }
 
-unsigned getReducedPolymerStringLength(const std::string& polymerString)
+std::unordered_set<char> getAllLowercaseChars(const std::string& s)
+{
+    std::unordered_set<char> allLowercaseChars;
+
+    for (auto c : s)
+    {
+        allLowercaseChars.insert(std::tolower(c));
+    }
+
+    return allLowercaseChars;
+}
+
+std::vector<std::string> getPolymerStringsWithOneUnitRemoved(const std::string& polymerString)
+{
+    std::unordered_set<char> allLowercaseChars = getAllLowercaseChars(polymerString);
+
+    std::vector<std::string> polymerStringsWithOneUnitRemoved;
+    for (auto lowercaseUnit : allLowercaseChars)
+    {
+        std::string newPolymerString;
+        std::copy_if(polymerString.cbegin(), polymerString.cend(), std::back_inserter(newPolymerString), [lowercaseUnit](char c)
+                     {
+                         return std::tolower(c) != lowercaseUnit;
+                     });
+
+        polymerStringsWithOneUnitRemoved.push_back(std::move(newPolymerString));
+    }
+
+    return polymerStringsWithOneUnitRemoved;
+}
+
+std::string getOneUnitRemovedShortestReducedString(const std::string& polymerString)
+{
+    std::vector<std::string> polymerStringsWithOneUnitRemoved = getPolymerStringsWithOneUnitRemoved(polymerString);
+
+    auto minIter = std::min_element(polymerStringsWithOneUnitRemoved.cbegin(), polymerStringsWithOneUnitRemoved.cend(),
+                                    [](const std::string& s1, const std::string& s2)
+                                    {
+                                        return getReducedPolymerLength(s1) < getReducedPolymerLength(s2);
+                                    });
+
+    return getReducedPolymerString(*minIter);
+}
+
+unsigned getReducedPolymerLength(const std::string& polymerString)
 {
     std::string reducedPolymerString = getReducedPolymerString(polymerString);
 
     return reducedPolymerString.length();
+}
+
+unsigned getOneUnitRemovedShortestReducedLength(const std::string& polymerString)
+{
+    std::string oneUnitRemovedReducedPolymerString = getOneUnitRemovedShortestReducedString(polymerString);
+
+    return oneUnitRemovedReducedPolymerString.length();
 }
 
 }

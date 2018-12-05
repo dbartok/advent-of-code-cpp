@@ -9,6 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-unsigned getReducedPolymerStringLength(const std::string& polymerString);
+unsigned getReducedPolymerLength(const std::string& polymerString);
+unsigned getOneUnitRemovedShortestReducedLength(const std::string& polymerString);
 
 }
