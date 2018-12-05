@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::guardMostMinutesAsleepTimesMinute(lines) << std::endl;
+    std::cout << "Second part: " << AoC::guardMostFrequentlyMinuteAsleepTimesMinute(lines) << std::endl;
 }

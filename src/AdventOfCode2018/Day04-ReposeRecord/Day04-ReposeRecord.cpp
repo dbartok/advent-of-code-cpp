@@ -18,6 +18,7 @@ namespace AdventOfCode
 {
 
 using GuardIDType = unsigned;
+using MinuteAndAmountPair = std::pair<unsigned, unsigned>;
 
 struct Day
 {
@@ -40,7 +41,7 @@ struct Guard
                                });
     }
 
-    unsigned getMostSleptMinute() const
+    MinuteAndAmountPair getMostSleptMinute() const
     {
         std::array<int, 60> allZeroes;
         std::fill(allZeroes.begin(), allZeroes.end(), 0);
@@ -58,7 +59,7 @@ struct Guard
                                            });
 
         auto maxIter = std::max_element(sleepValues.cbegin(), sleepValues.cend());
-        return maxIter - sleepValues.cbegin();
+        return std::make_pair(maxIter - sleepValues.cbegin(), *maxIter);
     }
 
     std::vector<Day> days;
@@ -71,6 +72,23 @@ struct GuardDutyKeeper
         auto maxElemIter = std::max_element(guards.cbegin(), guards.cend(), [](const auto& lhs, const auto& rhs)
                                             {
                                                 return lhs.second.getHoursSlept() < rhs.second.getHoursSlept();
+                                            });
+
+        return maxElemIter->first;
+    }
+
+    GuardIDType getMostFrequentlyMinuteAsleepGuardID()
+    {
+        std::unordered_map<GuardIDType, unsigned> guardsToMostSleptMinute;
+
+        for (const auto& elem : guards)
+        {
+            guardsToMostSleptMinute.insert(std::make_pair(elem.first, elem.second.getMostSleptMinute().second));
+        }
+
+        auto maxElemIter = std::max_element(guardsToMostSleptMinute.cbegin(), guardsToMostSleptMinute.cend(), [](const auto& lhs, const auto& rhs)
+                                            {
+                                                return lhs.second < rhs.second;
                                             });
 
         return maxElemIter->first;
@@ -158,7 +176,7 @@ GuardDutyKeeper parseGuardDutyKeeper(const std::vector<std::vector<Event>>& even
     return guardDutyKeeper;
 }
 
-unsigned guardMostMinutesAsleepTimesMinute(const std::vector<std::string>& eventLines)
+GuardDutyKeeper parseGuardDutyKeeperFromEventLines(const std::vector<std::string>& eventLines)
 {
     std::vector<Event> events = parseEvents(eventLines);
 
@@ -172,12 +190,27 @@ unsigned guardMostMinutesAsleepTimesMinute(const std::vector<std::string>& event
 
     std::vector<std::vector<Event>> eventsForEachDay = getEventsForEachDay(events);
 
-    GuardDutyKeeper guardDutyKeeper = parseGuardDutyKeeper(eventsForEachDay);
+    return parseGuardDutyKeeper(eventsForEachDay);
+}
+
+unsigned guardMostMinutesAsleepTimesMinute(const std::vector<std::string>& eventLines)
+{
+    GuardDutyKeeper guardDutyKeeper = parseGuardDutyKeeperFromEventLines(eventLines);
 
     GuardIDType mostAsleepGuardID = guardDutyKeeper.getMostAsleepGuardID();
-    unsigned mostSleptMinute = guardDutyKeeper.guards[mostAsleepGuardID].getMostSleptMinute();
+    unsigned mostSleptMinute = guardDutyKeeper.guards[mostAsleepGuardID].getMostSleptMinute().first;
 
     return mostAsleepGuardID * mostSleptMinute;
+}
+
+unsigned guardMostFrequentlyMinuteAsleepTimesMinute(const std::vector<std::string>& eventLines)
+{
+    GuardDutyKeeper guardDutyKeeper = parseGuardDutyKeeperFromEventLines(eventLines);
+
+    GuardIDType mostFrequentlyMinuteAsleepGuardID = guardDutyKeeper.getMostFrequentlyMinuteAsleepGuardID();
+    unsigned mostSleptMinute = guardDutyKeeper.guards[mostFrequentlyMinuteAsleepGuardID].getMostSleptMinute().first;
+
+    return mostFrequentlyMinuteAsleepGuardID * mostSleptMinute;
 }
 
 }

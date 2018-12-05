@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned guardMostMinutesAsleepTimesMinute(const std::vector<std::string>& eventLines);
+unsigned guardMostFrequentlyMinuteAsleepTimesMinute(const std::vector<std::string>& eventLines);
 
 }
