@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::sizeOfLargestNonInfiniteArea(lines) << std::endl;
+    std::cout << "Second part: " << AoC::sizeOfAreaWithinGivenDistance(lines) << std::endl;
 }

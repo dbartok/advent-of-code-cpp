@@ -15,17 +15,23 @@ public:
 
     TEST_METHOD(sizeOfLargestNonInfiniteArea_SimpleTests)
     {
-        std::vector<std::string> lines =
-        {
-            "1, 1",
-            "1, 6",
-            "8, 3",
-            "3, 4",
-            "5, 5",
-            "8, 9"
-        };
-
-        Assert::AreEqual(17u, AoC::sizeOfLargestNonInfiniteArea(lines));
+        Assert::AreEqual(17u, AoC::sizeOfLargestNonInfiniteArea(m_lines));
     }
 
+
+    TEST_METHOD(sizeOfAreaWithinGivenDistance_SimpleTests)
+    {
+        Assert::AreEqual(16u, AoC::sizeOfAreaWithinGivenDistance(m_lines, 32));
+    }
+
+private:
+    std::vector<std::string> m_lines =
+    {
+        "1, 1",
+        "1, 6",
+        "8, 3",
+        "3, 4",
+        "5, 5",
+        "8, 9"
+    };
 };

@@ -9,6 +9,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <unordered_map>
 #include <unordered_set>
 #include <algorithm>
+#include <numeric>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -69,11 +70,62 @@ public:
         return maxIter->second;
     }
 
+    unsigned getAreaWithinGivenDistance(unsigned distanceThreshold)
+    {
+        unsigned areaSize = 0;
+        for (unsigned i = 0; i <= m_highestCoordinates.first; ++i)
+        {
+            for (unsigned j = 0; j <= m_highestCoordinates.second; ++j)
+            {
+                if (areCoordinatesWithDistanceThreshold(i, j, distanceThreshold))
+                {
+                    ++areaSize;
+                }
+            }
+        }
+
+        return areaSize;
+    }
+
 private:
     std::unordered_map<CoordinateIDType, Coordinates> m_coordinateIDToCoordinates;
     Coordinates m_highestCoordinates;
 
     CoordinateIDType getClosestCoordinateID(unsigned i, unsigned j)
+    {
+        std::vector<std::pair<char, unsigned>> coordinateIDAndDistances = getCoordinateIDAndDistances(i, j);
+
+        std::nth_element(coordinateIDAndDistances.begin(), coordinateIDAndDistances.begin() + 1, coordinateIDAndDistances.end(),
+                         [](const auto& lhs, const auto& rhs)
+                         {
+                             return lhs.second < rhs.second;
+                         });
+
+        const auto& maxElem = coordinateIDAndDistances[0];
+        const auto& secondMaxElem = coordinateIDAndDistances[1];
+
+        if (maxElem.second == secondMaxElem.second)
+        {
+            return NO_CLAIM_COORDINATE_ID;
+        }
+
+        return maxElem.first;
+    }
+
+    bool areCoordinatesWithDistanceThreshold(unsigned i, unsigned j, unsigned distanceThreshold)
+    {
+        std::vector<std::pair<char, unsigned>> coordinateIDAndDistances = getCoordinateIDAndDistances(i, j);
+
+        unsigned totalDistance = std::accumulate(coordinateIDAndDistances.cbegin(), coordinateIDAndDistances.cend(), 0u,
+                                                 [](unsigned acc, const auto& elem)
+                                                 {
+                                                     return acc + elem.second;
+                                                 });
+
+        return totalDistance < distanceThreshold;
+    }
+
+    std::vector<std::pair<char, unsigned>> getCoordinateIDAndDistances(unsigned i, unsigned j)
     {
         std::vector<std::pair<char, unsigned>> coordinateIDAndDistances;
 
@@ -92,21 +144,7 @@ private:
             coordinateIDAndDistances.emplace_back(coordinateID, manhattanDistance);
         }
 
-        std::nth_element(coordinateIDAndDistances.begin(), coordinateIDAndDistances.begin() + 1, coordinateIDAndDistances.end(),
-                         [](const auto& lhs, const auto& rhs)
-                         {
-                             return lhs.second < rhs.second;
-                         });
-
-        const auto& maxElem = coordinateIDAndDistances[0];
-        const auto& secondMaxElem = coordinateIDAndDistances[1];
-
-        if (maxElem.second == secondMaxElem.second)
-        {
-            return NO_CLAIM_COORDINATE_ID;
-        }
-
-        return maxElem.first;
+        return coordinateIDAndDistances;
     }
 };
 
@@ -135,6 +173,15 @@ unsigned sizeOfLargestNonInfiniteArea(const std::vector<std::string>& coordinate
     GridAnalyzer gridAnalyzer{std::move(allCoordinates)};
 
     return gridAnalyzer.getLargestNonInfiniteArea();
+}
+
+unsigned sizeOfAreaWithinGivenDistance(const std::vector<std::string>& coordinatesLines, unsigned distanceThreshold)
+{
+    std::vector<Coordinates> allCoordinates = parseCoordinates(coordinatesLines);
+
+    GridAnalyzer gridAnalyzer{std::move(allCoordinates)};
+
+    return gridAnalyzer.getAreaWithinGivenDistance(distanceThreshold);
 }
 
 }
