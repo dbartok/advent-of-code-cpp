@@ -69,6 +69,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day04-ReposeRecord", "Adven
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day05-AlchemicalReduction", "AdventOfCode2018\Day05-AlchemicalReduction\Day05-AlchemicalReduction.vcxproj", "{6A94E39E-4409-4FAD-9D14-DDEF37E317D9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day06-ChronalCoordinates", "AdventOfCode2018\Day06-ChronalCoordinates\Day06-ChronalCoordinates.vcxproj", "{C456A912-5B38-45C0-BCE3-A55FA589A503}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -451,6 +453,18 @@ Global
 		{6A94E39E-4409-4FAD-9D14-DDEF37E317D9}.Test|x64.Build.0 = Test|x64
 		{6A94E39E-4409-4FAD-9D14-DDEF37E317D9}.Test|x86.ActiveCfg = Test|Win32
 		{6A94E39E-4409-4FAD-9D14-DDEF37E317D9}.Test|x86.Build.0 = Test|Win32
+		{C456A912-5B38-45C0-BCE3-A55FA589A503}.Debug|x64.ActiveCfg = Debug|x64
+		{C456A912-5B38-45C0-BCE3-A55FA589A503}.Debug|x64.Build.0 = Debug|x64
+		{C456A912-5B38-45C0-BCE3-A55FA589A503}.Debug|x86.ActiveCfg = Debug|Win32
+		{C456A912-5B38-45C0-BCE3-A55FA589A503}.Debug|x86.Build.0 = Debug|Win32
+		{C456A912-5B38-45C0-BCE3-A55FA589A503}.Release|x64.ActiveCfg = Release|x64
+		{C456A912-5B38-45C0-BCE3-A55FA589A503}.Release|x64.Build.0 = Release|x64
+		{C456A912-5B38-45C0-BCE3-A55FA589A503}.Release|x86.ActiveCfg = Release|Win32
+		{C456A912-5B38-45C0-BCE3-A55FA589A503}.Release|x86.Build.0 = Release|Win32
+		{C456A912-5B38-45C0-BCE3-A55FA589A503}.Test|x64.ActiveCfg = Test|x64
+		{C456A912-5B38-45C0-BCE3-A55FA589A503}.Test|x64.Build.0 = Test|x64
+		{C456A912-5B38-45C0-BCE3-A55FA589A503}.Test|x86.ActiveCfg = Test|Win32
+		{C456A912-5B38-45C0-BCE3-A55FA589A503}.Test|x86.Build.0 = Test|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -486,6 +500,7 @@ Global
 		{394031D7-6391-47AC-8A7B-BA48AACD4CA3} = {D5F46C08-94B9-4D43-8F1B-1F2D558CF7EA}
 		{205553EB-BB83-4B55-807A-B03CF6C61CBD} = {D5F46C08-94B9-4D43-8F1B-1F2D558CF7EA}
 		{6A94E39E-4409-4FAD-9D14-DDEF37E317D9} = {D5F46C08-94B9-4D43-8F1B-1F2D558CF7EA}
+		{C456A912-5B38-45C0-BCE3-A55FA589A503} = {D5F46C08-94B9-4D43-8F1B-1F2D558CF7EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C73BC1FB-06D6-478E-B2D0-DE1E761743D4}
