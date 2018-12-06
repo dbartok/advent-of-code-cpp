@@ -13,14 +13,14 @@ TEST_CLASS(Day04ReposeRecord)
 {
 public:
 
-    TEST_METHOD(guardMostMinutesAsleepTimesMinute_SimpleTests)
+    TEST_METHOD(guardMostMinutesSleptTimesMinute_SimpleTests)
     {
-        Assert::AreEqual(240u, AoC::guardMostMinutesAsleepTimesMinute(m_lines));
+        Assert::AreEqual(240u, AoC::guardMostMinutesSleptTimesMinute(m_lines));
     }
 
-    TEST_METHOD(guardMostFrequentlyMinuteAsleepTimesMinute_SimpleTests)
+    TEST_METHOD(guardMostFrequentlyMinuteSleptTimesMinute_SimpleTests)
     {
-        Assert::AreEqual(4455u, AoC::guardMostFrequentlyMinuteAsleepTimesMinute(m_lines));
+        Assert::AreEqual(4455u, AoC::guardMostFrequentlyMinuteSleptTimesMinute(m_lines));
     }
 
 private:

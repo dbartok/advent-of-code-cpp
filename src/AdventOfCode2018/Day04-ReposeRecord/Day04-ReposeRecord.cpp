@@ -1,128 +1,68 @@
 #include "Day04-ReposeRecord.h"
 
+#include "GuardDutyKeeper.h"
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include <array>
-#include <unordered_map>
 #include <chrono>
 #include <sstream>
 #include <iomanip>
-#include <numeric>
+#include <regex>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
 
-using GuardIDType = unsigned;
-using MinuteAndAmountPair = std::pair<unsigned, unsigned>;
-
-struct Day
-{
-    Day()
-        : sleep{}
-    {
-
-    }
-
-    std::array<bool, 60> sleep;
-};
-
-struct Guard
-{
-    unsigned getHoursSlept() const
-    {
-        return std::accumulate(days.cbegin(), days.cend(), 0u, [](unsigned acc, const Day& day)
-                               {
-                                   return acc + std::count(day.sleep.cbegin(), day.sleep.cend(), true);
-                               });
-    }
-
-    MinuteAndAmountPair getMostSleptMinute() const
-    {
-        std::array<int, 60> allZeroes;
-        std::fill(allZeroes.begin(), allZeroes.end(), 0);
-        auto sleepValues = std::accumulate(days.cbegin(), days.cend(), allZeroes, [](std::array<int, 60> acc, const Day& day)
-                                           {
-                                               for (size_t i = 0; i < day.sleep.size(); ++i)
-                                               {
-                                                   if (day.sleep[i])
-                                                   {
-                                                       ++acc[i];
-                                                   }
-                                               }
-
-                                               return acc;
-                                           });
-
-        auto maxIter = std::max_element(sleepValues.cbegin(), sleepValues.cend());
-        return std::make_pair(maxIter - sleepValues.cbegin(), *maxIter);
-    }
-
-    std::vector<Day> days;
-};
-
-struct GuardDutyKeeper
-{
-    GuardIDType getMostAsleepGuardID()
-    {
-        auto maxElemIter = std::max_element(guards.cbegin(), guards.cend(), [](const auto& lhs, const auto& rhs)
-                                            {
-                                                return lhs.second.getHoursSlept() < rhs.second.getHoursSlept();
-                                            });
-
-        return maxElemIter->first;
-    }
-
-    GuardIDType getMostFrequentlyMinuteAsleepGuardID()
-    {
-        std::unordered_map<GuardIDType, unsigned> guardsToMostSleptMinute;
-
-        for (const auto& elem : guards)
-        {
-            guardsToMostSleptMinute.insert(std::make_pair(elem.first, elem.second.getMostSleptMinute().second));
-        }
-
-        auto maxElemIter = std::max_element(guardsToMostSleptMinute.cbegin(), guardsToMostSleptMinute.cend(), [](const auto& lhs, const auto& rhs)
-                                            {
-                                                return lhs.second < rhs.second;
-                                            });
-
-        return maxElemIter->first;
-    }
-
-    std::unordered_map<GuardIDType, Guard> guards;
-};
+const int SOME_VALID_YEAR_FOR_TIMESTAMP = 1970 - 1900;
 
 struct Event
 {
+    Event(std::tm timestamp, std::string description) noexcept
+        : timestamp{std::move(timestamp)}
+        , description{std::move(description)}
+    {
+
+    }
+
     std::tm timestamp;
-    std::vector<std::string> args;
+    std::string description;
 };
 
-std::vector<Event> parseEvents(const std::vector<std::string>& eventLines)
+// The year in the puzzle is 1518, which is before the POSIX Epoch
+// So we're ignoring the year when parsing, and set it to some valid year instead
+std::tm parseTimestampWithoutYear(const std::string& timestampString)
+{
+    const size_t yearEndPos = timestampString.find('-');
+    std::string timeStampWithoutYearString = timestampString.substr(yearEndPos + 1);
+
+    std::stringstream ss{timeStampWithoutYearString};
+    std::tm tm = {};
+    ss >> std::get_time(&tm, "%m-%d %H:%M");
+    tm.tm_year = SOME_VALID_YEAR_FOR_TIMESTAMP;
+    std::mktime(&tm);
+
+    return tm;
+}
+
+std::vector<Event> parseEventsFromEventLines(const std::vector<std::string>& eventLines)
 {
     std::vector<Event> events;
 
     for (const auto& line : eventLines)
     {
         std::vector<std::string> tokens;
-        boost::algorithm::split(tokens, line, boost::is_any_of("[]"), boost::token_compress_on);
+        boost::algorithm::split(tokens, line, boost::is_any_of("]"), boost::token_compress_on);
 
-        std::string timestampString = tokens[1].substr(5);
-        std::stringstream ss{timestampString};
-        std::tm tm = {};
-        ss >> std::get_time(&tm, "%m-%d %H:%M");
-        tm.tm_year = 70;
-        std::mktime(&tm);
-        auto timestamp = tm;
+        std::string timestampString = tokens[0];
+        boost::trim_if(timestampString, boost::is_any_of("["));
 
-        std::vector<std::string> args;
-        boost::algorithm::split(args, tokens[2], boost::is_any_of(" #"), boost::token_compress_on);
-        Event event{tm, args};
+        const std::tm tm = parseTimestampWithoutYear(timestampString);
+
+        Event event{std::move(tm), std::move(tokens[1])};
 
         events.push_back(std::move(event));
     }
@@ -140,7 +80,9 @@ std::vector<std::vector<AdventOfCode::Event>> getEventsForEachDay(std::vector<Ad
         eventsForADay.push_back(std::move(*iter));
 
         const auto nextIter = (iter + 1);
-        if (nextIter == events.end() || nextIter->args.size() == 5)
+
+        // Next element signals that the current day is over
+        if (nextIter == events.end() || nextIter->description.find("begins shift") != std::string::npos)
         {
             eventsForEachDay.push_back(std::move(eventsForADay));
             eventsForADay.clear();
@@ -150,27 +92,51 @@ std::vector<std::vector<AdventOfCode::Event>> getEventsForEachDay(std::vector<Ad
     return eventsForEachDay;
 }
 
-GuardDutyKeeper parseGuardDutyKeeper(const std::vector<std::vector<Event>>& eventsForEachDay)
+GuardIDType parseGuardIDFromDescription(const std::string& description)
+{
+    std::regex guardIDRegex("#([0-9]+)");
+    std::smatch matchResults;
+    std::regex_search(description, matchResults, guardIDRegex);
+
+    return boost::lexical_cast<unsigned>(matchResults[1]);
+}
+
+MinutesToBoolMap parseHourMapFromEvents(const std::vector<Event>& eventsForADay)
+{
+    MinutesToBoolMap hourMap{};
+
+    int previousMinutePoint = 0;
+    bool currentSleepingState = false;
+    for (auto eventIter = eventsForADay.cbegin(); eventIter != eventsForADay.cend(); ++eventIter)
+    {
+        const int currentMinutePoint = eventIter->timestamp.tm_min;
+        std::fill(hourMap.begin() + previousMinutePoint, hourMap.begin() + currentMinutePoint, currentSleepingState);
+
+        // Sleeps and wakeups are in alternating order
+        currentSleepingState = !currentSleepingState;
+        previousMinutePoint = currentMinutePoint;
+    }
+
+    // No more events, fill up the rest of the hour with the current sleeping state
+    std::fill(hourMap.begin() + previousMinutePoint, hourMap.end(), currentSleepingState);
+
+    return hourMap;
+}
+
+GuardDutyKeeper parseGuardDutyKeeperFromEventsForEachDay(const std::vector<std::vector<Event>>& eventsForEachDay)
 {
     GuardDutyKeeper guardDutyKeeper;
 
     for (const auto& eventsForADay : eventsForEachDay)
     {
-        GuardIDType guardID = boost::lexical_cast<unsigned>(eventsForADay.front().args[2]);
+        // Guard beginning shift is the first event of the day
+        const GuardIDType guardID = parseGuardIDFromDescription(eventsForADay.front().description);
 
-        Day day;
-        unsigned minute = 0;
-        bool value = false;
-        for (auto iter = eventsForADay.begin() + 1; iter != eventsForADay.end(); ++iter)
-        {
-            unsigned newMinute = iter->timestamp.tm_min;
-            std::fill(day.sleep.begin() + minute, day.sleep.begin() + newMinute, value);
-            value = !value;
-            minute = newMinute;
-        }
-        std::fill(day.sleep.begin() + minute, day.sleep.end(), value);
+        // Discard first event, the rest is sleeps and wakeups
+        std::vector<Event> sleepWakeupEvents{std::make_move_iterator(eventsForADay.begin() + 1), std::make_move_iterator(eventsForADay.end())};
+        MinutesToBoolMap hourMap = parseHourMapFromEvents(sleepWakeupEvents);
 
-        guardDutyKeeper.guards[guardID].days.push_back(std::move(day));
+        guardDutyKeeper.addDayForGuard(guardID, std::move(hourMap));
     }
 
     return guardDutyKeeper;
@@ -178,9 +144,9 @@ GuardDutyKeeper parseGuardDutyKeeper(const std::vector<std::vector<Event>>& even
 
 GuardDutyKeeper parseGuardDutyKeeperFromEventLines(const std::vector<std::string>& eventLines)
 {
-    std::vector<Event> events = parseEvents(eventLines);
+    std::vector<Event> events = parseEventsFromEventLines(eventLines);
 
-    std::sort(events.begin(), events.end(), [](const Event& lhs, const Event& rhs)
+    std::sort(events.begin(), events.end(), [](const Event& lhs, const Event& rhs) noexcept
               {
                   auto lts = lhs.timestamp;
                   auto rts = rhs.timestamp;
@@ -190,27 +156,27 @@ GuardDutyKeeper parseGuardDutyKeeperFromEventLines(const std::vector<std::string
 
     std::vector<std::vector<Event>> eventsForEachDay = getEventsForEachDay(events);
 
-    return parseGuardDutyKeeper(eventsForEachDay);
+    return parseGuardDutyKeeperFromEventsForEachDay(eventsForEachDay);
 }
 
-unsigned guardMostMinutesAsleepTimesMinute(const std::vector<std::string>& eventLines)
+unsigned guardMostMinutesSleptTimesMinute(const std::vector<std::string>& eventLines)
 {
     GuardDutyKeeper guardDutyKeeper = parseGuardDutyKeeperFromEventLines(eventLines);
 
-    GuardIDType mostAsleepGuardID = guardDutyKeeper.getMostAsleepGuardID();
-    unsigned mostSleptMinute = guardDutyKeeper.guards[mostAsleepGuardID].getMostSleptMinute().first;
+    const GuardIDType mostSleptGuardID = guardDutyKeeper.getMostSleptGuardID();
+    const unsigned mostSleptMinute = guardDutyKeeper.getMostFrequentlySleptMinute(mostSleptGuardID).first;
 
-    return mostAsleepGuardID * mostSleptMinute;
+    return mostSleptGuardID * mostSleptMinute;
 }
 
-unsigned guardMostFrequentlyMinuteAsleepTimesMinute(const std::vector<std::string>& eventLines)
+unsigned guardMostFrequentlyMinuteSleptTimesMinute(const std::vector<std::string>& eventLines)
 {
     GuardDutyKeeper guardDutyKeeper = parseGuardDutyKeeperFromEventLines(eventLines);
 
-    GuardIDType mostFrequentlyMinuteAsleepGuardID = guardDutyKeeper.getMostFrequentlyMinuteAsleepGuardID();
-    unsigned mostSleptMinute = guardDutyKeeper.guards[mostFrequentlyMinuteAsleepGuardID].getMostSleptMinute().first;
+    const GuardIDType mostFrequentlyMinuteSleptGuardID = guardDutyKeeper.getMostFrequentlySleptMinuteGlobalGuardID();
+    const unsigned mostSleptMinute = guardDutyKeeper.getMostFrequentlySleptMinute(mostFrequentlyMinuteSleptGuardID).first;
 
-    return mostFrequentlyMinuteAsleepGuardID * mostSleptMinute;
+    return mostFrequentlyMinuteSleptGuardID * mostSleptMinute;
 }
 
 }

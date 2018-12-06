@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day04-ReposeRecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GuardDutyKeeper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day04-ReposeRecord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GuardDutyKeeper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

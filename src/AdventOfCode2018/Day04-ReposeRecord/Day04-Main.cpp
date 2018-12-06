@@ -22,6 +22,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::guardMostMinutesAsleepTimesMinute(lines) << std::endl;
-    std::cout << "Second part: " << AoC::guardMostFrequentlyMinuteAsleepTimesMinute(lines) << std::endl;
+    std::cout << "First part: " << AoC::guardMostMinutesSleptTimesMinute(lines) << std::endl;
+    std::cout << "Second part: " << AoC::guardMostFrequentlyMinuteSleptTimesMinute(lines) << std::endl;
 }
