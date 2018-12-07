@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::topologicalOrderOfInstructions(lines) << std::endl;
+    std::cout << "Second part: " << AoC::timeUntilAllStepsAreDone(lines) << std::endl;
 }
