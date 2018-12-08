@@ -14,7 +14,7 @@ int main()
 {
     namespace AoC = AdventOfCode;
 
-    std::fstream fileIn("input.txt");
+    std::fstream fileIn("t_input.txt");
 
     std::string line;
     std::getline(fileIn, line);
@@ -23,4 +23,5 @@ int main()
     AoC::Utils::splitStringIntoTypedVector(line, nodeNumbers, ' ');
 
     std::cout << "First part: " << AoC::sumOfAllMetadataEntries(nodeNumbers) << std::endl;
+    std::cout << "Second part: " << AoC::valueOfRootNode(nodeNumbers) << std::endl;
 }

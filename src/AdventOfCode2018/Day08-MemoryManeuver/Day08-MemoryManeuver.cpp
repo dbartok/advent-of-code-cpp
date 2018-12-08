@@ -66,6 +66,11 @@ public:
         return getSumOfAllMetadataRecursive(m_rootSharedPtr);
     }
 
+    Metadatum getValueOfRootNode() const
+    {
+        return getValueOfRootNodeRecursive(m_rootSharedPtr);
+    }
+
 private:
     LicenseNodeSharedPtr m_rootSharedPtr;
 
@@ -86,6 +91,34 @@ private:
                                                    });
 
         return sumForThisNode + sumForChildren;
+    }
+
+
+    static Metadatum getValueOfRootNodeRecursive(const LicenseNodeSharedPtr& rootSharedPtr)
+    {
+        const std::vector<Metadatum>& metadataForThisNode = rootSharedPtr->metadata;
+
+        if (rootSharedPtr->childrenSharedPtrs.empty())
+        {
+            Metadatum sumForThisNode = std::accumulate(metadataForThisNode.cbegin(), metadataForThisNode.cend(), Metadatum{},
+                                                       [](Metadatum acc, const Metadatum& metadatum)
+                                                       {
+                                                           return acc + metadatum;
+                                                       });
+            return sumForThisNode;
+        }
+
+        const std::vector<LicenseNodeSharedPtr>& childrenSharedPtrs = rootSharedPtr->childrenSharedPtrs;
+        Metadatum sumForGivenChildren{};
+        for (const auto& metadatum : metadataForThisNode)
+        {
+            if (metadatum != 0 && metadatum <= childrenSharedPtrs.size())
+            {
+                sumForGivenChildren += getValueOfRootNodeRecursive(childrenSharedPtrs[metadatum - 1]);
+            }
+        }
+
+        return sumForGivenChildren;
     }
 };
 
@@ -131,6 +164,14 @@ unsigned sumOfAllMetadataEntries(const std::vector<unsigned>& nodeNumbers)
     LicenseTree licenseTree{std::move(rootSharedPtr)};
 
     return licenseTree.getSumOfAllMetadata();
+}
+
+unsigned valueOfRootNode(const std::vector<unsigned>& nodeNumbers)
+{
+    LicenseNodeSharedPtr rootSharedPtr = parseLicenseTreeRoot(nodeNumbers);
+    LicenseTree licenseTree{std::move(rootSharedPtr)};
+
+    return licenseTree.getValueOfRootNode();
 }
 
 }

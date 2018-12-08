@@ -10,5 +10,6 @@ namespace AdventOfCode
 {
 
 unsigned sumOfAllMetadataEntries(const std::vector<unsigned>& nodeNumbers);
+unsigned valueOfRootNode(const std::vector<unsigned>& nodeNumbers);
 
 }
