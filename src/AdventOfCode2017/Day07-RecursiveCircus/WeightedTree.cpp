@@ -165,7 +165,7 @@ int WeightedTree::traverseForCorrectWeightFromNode(const TreeNode& currentNode, 
     {
         // Determine child with the unique subtree weight, because that's the direction where the imbalance is
         // We also need the value of the non-unique subtree weight so that we know the weight difference
-        std::unordered_map<int, TreeNodeSharedPtr> nodeSharedPtrToSubtreeWeightMap; // OrderedNodes with potentially unique subtree weight
+        std::unordered_map<int, TreeNodeSharedPtr> nodeSharedPtrToSubtreeWeightMap; // OrderedNodeIDs with potentially unique subtree weight
         std::unordered_set<int> uniqueWeightSet;
         int nonUniqueSubtreeWeight = -1;
 
