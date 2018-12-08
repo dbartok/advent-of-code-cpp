@@ -251,6 +251,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day08-MemoryManeuver.cpp" />
+    <ClCompile Include="LicenseNode.cpp" />
+    <ClCompile Include="LicenseTree.cpp" />
     <ClCompile Include="test_Day08-MemoryManeuver.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -262,6 +264,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day08-MemoryManeuver.h" />
+    <ClInclude Include="LicenseNode.h" />
+    <ClInclude Include="LicenseTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

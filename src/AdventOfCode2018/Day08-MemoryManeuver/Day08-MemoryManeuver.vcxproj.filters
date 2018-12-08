@@ -20,9 +20,21 @@
     <ClCompile Include="test_Day08-MemoryManeuver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LicenseNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LicenseTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day08-MemoryManeuver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LicenseNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LicenseTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
