@@ -18,4 +18,5 @@ int main()
     std::getline(fileIn, line);
 
     std::cout << "First part: " << AoC::winningElfsScore(line) << std::endl;
+    std::cout << "Second part: " << AoC::winningElfsScoreLongerGame(line) << std::endl;
 }

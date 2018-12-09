@@ -10,5 +10,6 @@ namespace AdventOfCode
 {
 
 unsigned winningElfsScore(const std::string& gameDescriptionLine);
+unsigned winningElfsScoreLongerGame(const std::string& gameDescriptionLine);
 
 }

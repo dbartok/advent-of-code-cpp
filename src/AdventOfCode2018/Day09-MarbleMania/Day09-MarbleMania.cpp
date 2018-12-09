@@ -8,7 +8,14 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <regex>
 #include <vector>
 #include <algorithm>
+#include <list>
+#include <cmath>
 __END_LIBRARIES_DISABLE_WARNINGS
+
+namespace
+{
+const unsigned LONGER_GAME_MULTIPLYING_FACTOR = 100;
+}
 
 namespace AdventOfCode
 {
@@ -20,13 +27,13 @@ public:
         : m_playerToScore(numPlayers, 0)
         , m_lastMarbleScore{lastMarbleScore}
         , m_marbles{0}
+        , m_currentMarbleIter{m_marbles.begin()}
     {
 
     }
 
     void play()
     {
-        unsigned currentMarbleIdx = 0;
         unsigned currentPlayerIdx = 0;
 
         for (unsigned currentMarbleScore = 1; currentMarbleScore <= m_lastMarbleScore; ++currentMarbleScore)
@@ -35,14 +42,16 @@ public:
             {
                 m_playerToScore[currentPlayerIdx] += currentMarbleScore;
 
-                currentMarbleIdx = (currentMarbleIdx - 7 + m_marbles.size()) % m_marbles.size();
-                m_playerToScore[currentPlayerIdx] += m_marbles[currentMarbleIdx];
-                m_marbles.erase(m_marbles.begin() + currentMarbleIdx);
+                stepCurrentMarbleIter(-7);
+                m_playerToScore[currentPlayerIdx] += *m_currentMarbleIter;
+                m_currentMarbleIter = m_marbles.erase(m_currentMarbleIter);
             }
             else
             {
-                currentMarbleIdx = ((currentMarbleIdx + 1) % m_marbles.size()) + 1;
-                m_marbles.insert(m_marbles.begin() + currentMarbleIdx, currentMarbleScore);
+                stepCurrentMarbleIter(1);
+                auto insertionIter = m_currentMarbleIter;
+                ++insertionIter;
+                m_currentMarbleIter = m_marbles.insert(insertionIter, currentMarbleScore);
             }
 
             currentPlayerIdx = (currentPlayerIdx + 1) % m_playerToScore.size();
@@ -59,10 +68,38 @@ private:
     std::vector<unsigned> m_playerToScore;
     unsigned m_lastMarbleScore;
 
-    std::vector<unsigned> m_marbles;
+    std::list<unsigned> m_marbles;
+    std::list<unsigned>::iterator m_currentMarbleIter;
+
+    void stepCurrentMarbleIter(int steps)
+    {
+        std::function<void(std::list<unsigned>::iterator)> iterFunc;
+        if (steps > 0)
+        {
+            for (int i = 0; i < steps; ++i)
+            {
+                ++m_currentMarbleIter;
+                if (m_currentMarbleIter == m_marbles.end())
+                {
+                    m_currentMarbleIter = m_marbles.begin();
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < -steps; ++i)
+            {
+                if (m_currentMarbleIter == m_marbles.begin())
+                {
+                    m_currentMarbleIter = m_marbles.end();
+                }
+                --m_currentMarbleIter;
+            }
+        }
+    }
 };
 
-MarbleGame parseMarbleGame(const std::string& gameDescriptionLine)
+MarbleGame parseMarbleGame(const std::string& gameDescriptionLine, bool longerGame = false)
 {
     std::regex numbersRegex("([0-9]+)");
     std::smatch matchResults;
@@ -74,6 +111,11 @@ MarbleGame parseMarbleGame(const std::string& gameDescriptionLine)
     std::regex_search(suffix, matchResults, numbersRegex);
     unsigned lastMarbleScore = boost::lexical_cast<unsigned>(matchResults[1]);
 
+    if (longerGame)
+    {
+        lastMarbleScore *= LONGER_GAME_MULTIPLYING_FACTOR;
+    }
+
     MarbleGame marbleGame{numPlayers, lastMarbleScore};
 
     return marbleGame;
@@ -82,6 +124,15 @@ MarbleGame parseMarbleGame(const std::string& gameDescriptionLine)
 unsigned winningElfsScore(const std::string& gameDescriptionLine)
 {
     MarbleGame marbleGame = parseMarbleGame(gameDescriptionLine);
+
+    marbleGame.play();
+
+    return marbleGame.getWinningsElfsScore();
+}
+
+unsigned winningElfsScoreLongerGame(const std::string& gameDescriptionLine)
+{
+    MarbleGame marbleGame = parseMarbleGame(gameDescriptionLine, true);
 
     marbleGame.play();
 

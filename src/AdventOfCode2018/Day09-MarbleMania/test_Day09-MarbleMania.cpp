@@ -23,4 +23,9 @@ public:
         Assert::AreEqual(37305u, AoC::winningElfsScore("30 players; last marble is worth 5807 points"));
     }
 
+    TEST_METHOD(winningElfsScoreLongerGame_SimpleTests)
+    {
+        Assert::AreEqual(22563u, AoC::winningElfsScoreLongerGame("9 players; last marble is worth 25 points"));
+    }
+
 };
