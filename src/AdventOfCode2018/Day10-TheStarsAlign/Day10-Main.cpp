@@ -20,6 +20,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part:\n" << AoC::serializedMessageWhenAligned(lines) << std::endl;
-    std::cout << "\nSecond part: " << AoC::timeTakenUntilAligned(lines) << std::endl;
+    std::cout << "First part: " << std::endl << AoC::serializedMessageWhenAligned(lines) << std::endl << std::endl;
+    std::cout << "Second part: " << AoC::timeTakenUntilAligned(lines) << std::endl;
 }

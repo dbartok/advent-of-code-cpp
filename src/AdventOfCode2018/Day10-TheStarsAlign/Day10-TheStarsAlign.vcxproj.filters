@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day10-TheStarsAlign.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StarAligner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day10-TheStarsAlign.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StarAligner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
