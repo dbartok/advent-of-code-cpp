@@ -18,6 +18,11 @@ public:
         Assert::AreEqual(m_expectedSerializedMessageWhenAligned, AoC::serializedMessageWhenAligned(m_starlightLines));
     }
 
+    TEST_METHOD(timeTakenUntilAligned_SimpleTests)
+    {
+        Assert::AreEqual(3u, AoC::timeTakenUntilAligned(m_starlightLines));
+    }
+
 private:
     std::vector<std::string> m_starlightLines =
     {

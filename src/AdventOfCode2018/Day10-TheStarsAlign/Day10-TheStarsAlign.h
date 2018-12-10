@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 std::string serializedMessageWhenAligned(const std::vector<std::string>& starlightLines);
+unsigned timeTakenUntilAligned(const std::vector<std::string>& starlightLines);
 
 }

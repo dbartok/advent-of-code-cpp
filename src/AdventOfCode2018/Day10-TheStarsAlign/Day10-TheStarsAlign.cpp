@@ -48,6 +48,7 @@ class StarAligner
 public:
     StarAligner(std::vector<Starlight> starlights)
         : m_starlights{std::move(starlights)}
+        , m_timeElapsed{0}
     {
 
     }
@@ -69,6 +70,7 @@ public:
             }
 
             previousBoundingBoxArea = currentBoundingBoxArea;
+            ++m_timeElapsed;
         }
 
         rewindOneTimeUnit();
@@ -108,8 +110,14 @@ public:
         return boost::algorithm::join(serializedLines, "\n");
     }
 
+    unsigned getTimeUnitsElapsed() const
+    {
+        return m_timeElapsed;
+    }
+
 private:
     std::vector<Starlight> m_starlights;
+    unsigned m_timeElapsed;
 
     StarBoundingBox getBoundingBox() const
     {
@@ -166,6 +174,17 @@ std::string serializedMessageWhenAligned(const std::vector<std::string>& starlig
     starAligner.align();
 
     return starAligner.getSerializedMessage();
+}
+
+unsigned timeTakenUntilAligned(const std::vector<std::string>& starlightLines)
+{
+    std::vector<Starlight> starlights = parseStarlights(starlightLines);
+
+    StarAligner starAligner{std::move(starlights)};
+
+    starAligner.align();
+
+    return starAligner.getTimeUnitsElapsed();
 }
 
 }

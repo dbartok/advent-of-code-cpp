@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part:\n" << AoC::serializedMessageWhenAligned(lines) << std::endl;
+    std::cout << "\nSecond part: " << AoC::timeTakenUntilAligned(lines) << std::endl;
 }
