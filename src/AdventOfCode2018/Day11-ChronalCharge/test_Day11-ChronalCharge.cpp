@@ -19,4 +19,10 @@ public:
         Assert::AreEqual(std::string{"21,61"}, AoC::highestPowerSmallSquareCoordinates(42));
     }
 
+    TEST_METHOD(highestPowerSquareCoordinatesAndSize_SimpleTests)
+    {
+        Assert::AreEqual(std::string{"90,269,16"}, AoC::highestPowerSquareCoordinatesAndSize(18, 17u));
+        Assert::AreEqual(std::string{"232,251,12"}, AoC::highestPowerSquareCoordinatesAndSize(42, 13u));
+    }
+
 };

@@ -17,4 +17,5 @@ int main()
     fileIn >> gridSerialNumber;
 
     std::cout << "First part: " << AoC::highestPowerSmallSquareCoordinates(gridSerialNumber) << std::endl;
+    std::cout << "Second part: " << AoC::highestPowerSquareCoordinatesAndSize(gridSerialNumber) << std::endl;
 }
