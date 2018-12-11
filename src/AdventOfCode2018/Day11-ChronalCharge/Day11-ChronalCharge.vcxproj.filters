@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day11-ChronalCharge.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FuelCellGrid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day11-ChronalCharge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FuelCellGrid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

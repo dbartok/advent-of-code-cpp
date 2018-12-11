@@ -1,5 +1,7 @@
 #pragma once
 
+#include "FuelCellGrid.h"
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
@@ -8,7 +10,6 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
 {
-const size_t GRID_SIZE = 300;
 }
 
 namespace AdventOfCode
