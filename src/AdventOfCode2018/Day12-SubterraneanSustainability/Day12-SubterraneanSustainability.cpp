@@ -1,5 +1,7 @@
 #include "Day12-SubterraneanSustainability.h"
 
+#include <AdventOfCodeCommon/Utils.h>
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
@@ -9,12 +11,14 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <array>
 #include <algorithm>
 #include <numeric>
+#include <deque>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
 {
 const char PLANT_IDENTIFIER = '#';
-const unsigned NUM_GROWTH_CYCLES = 20;
+const unsigned NUM_GROWTH_CYCLES_SHORT = 20;
+const unsigned long long NUM_GROWTH_CYCLES_LONG = 50'000'000'000;
 }
 
 namespace AdventOfCode
@@ -29,26 +33,43 @@ public:
     PlantNeighborSimulator(Pots initialPotsWithPlants, std::vector<NeighborPattern> neighborPatternsResultingInPlant)
         : m_potsWithPlants{std::move(initialPotsWithPlants)}
         , m_neighborPatternsResultingInPlant{std::move(neighborPatternsResultingInPlant)}
+        , m_currentSumOfPotNumbersWithPlant{}
+        , m_latestGrowthValues{}
     {
-
+        recalculateGrowthValues();
     }
 
-    void simulateGrowth()
+    void simulateGrowth(unsigned long long numCycles)
     {
-        for (unsigned i = 0; i < NUM_GROWTH_CYCLES; ++i)
+        for (unsigned i = 1; i <= numCycles; ++i)
         {
             executeGrowthCycle();
+
+            // Possible short circuit to last value
+            if (isGrowthInStableState())
+            {
+                long long growthValue = m_latestGrowthValues.back();
+                unsigned long long numRemainingCycles = numCycles - i;
+                m_currentSumOfPotNumbersWithPlant += numRemainingCycles * growthValue;
+                break;
+            }
         }
     }
 
-    int getSumOfPotNumbersWithPlant() const
+    long long getSumOfPotNumbersWithPlant() const
     {
-        return std::accumulate(m_potsWithPlants.cbegin(), m_potsWithPlants.cend(), 0);
+        return m_currentSumOfPotNumbersWithPlant;
     }
 
 private:
+    const unsigned NUM_MAX_LAST_GROWTH_DIFFS = 100;
+
     Pots m_potsWithPlants;
+
     std::vector<NeighborPattern> m_neighborPatternsResultingInPlant;
+
+    long long m_currentSumOfPotNumbersWithPlant;
+    std::deque<long long> m_latestGrowthValues;
 
     void executeGrowthCycle()
     {
@@ -58,6 +79,8 @@ private:
         int simulationEnd = *minMaxPotsWithPlants.second + 3;
 
         executeGrowthCycleInPotRange(simulationBegin, simulationEnd);
+
+        recalculateGrowthValues();
     }
 
     void executeGrowthCycleInPotRange(int begin, int end)
@@ -97,6 +120,24 @@ private:
         }
 
         return neighborPattern;
+    }
+
+    void recalculateGrowthValues()
+    {
+        long long previousSumOfPotNumbersWithPlant = m_currentSumOfPotNumbersWithPlant;
+        m_currentSumOfPotNumbersWithPlant = std::accumulate(m_potsWithPlants.cbegin(), m_potsWithPlants.cend(), 0ll);
+
+        if (m_latestGrowthValues.size() == NUM_MAX_LAST_GROWTH_DIFFS)
+        {
+            m_latestGrowthValues.erase(m_latestGrowthValues.begin());
+        }
+
+        m_latestGrowthValues.push_back(m_currentSumOfPotNumbersWithPlant - previousSumOfPotNumbersWithPlant);
+    }
+
+    bool isGrowthInStableState() const
+    {
+        return (m_latestGrowthValues.size() == NUM_MAX_LAST_GROWTH_DIFFS) && Utils::allElementsEqual(m_latestGrowthValues.cbegin(), m_latestGrowthValues.cend());
     }
 };
 
@@ -153,16 +194,26 @@ std::vector<NeighborPattern> parseNeighborPatternsResultingInPlant(const std::ve
     return neighborPatternsResultingInPlant;
 }
 
-int sumOfPotNumbersWithPlantAfterGrowth(const std::string& initialStateLine, const std::vector<std::string>& neighborPatternLines)
+long long sumOfPotNumbersWithPlantAfterGrowthGivenTime(const std::string& initialStateLine, const std::vector<std::string>& neighborPatternLines, unsigned long long numCycles)
 {
     Pots initialPotsWithPlants = parseInitialPlants(initialStateLine);
     std::vector<NeighborPattern> neighborPatterns = parseNeighborPatternsResultingInPlant(neighborPatternLines);
 
     PlantNeighborSimulator simulator{std::move(initialPotsWithPlants), std::move(neighborPatterns)};
 
-    simulator.simulateGrowth();
+    simulator.simulateGrowth(numCycles);
 
     return simulator.getSumOfPotNumbersWithPlant();
+}
+
+long long sumOfPotNumbersWithPlantAfterGrowthShortTime(const std::string& initialStateLine, const std::vector<std::string>& neighborPatternLines)
+{
+    return sumOfPotNumbersWithPlantAfterGrowthGivenTime(initialStateLine, neighborPatternLines, NUM_GROWTH_CYCLES_SHORT);
+}
+
+long long sumOfPotNumbersWithPlantAfterGrowthLongTime(const std::string& initialStateLine, const std::vector<std::string>& neighborPatternLines)
+{
+    return sumOfPotNumbersWithPlantAfterGrowthGivenTime(initialStateLine, neighborPatternLines, NUM_GROWTH_CYCLES_LONG);
 }
 
 }

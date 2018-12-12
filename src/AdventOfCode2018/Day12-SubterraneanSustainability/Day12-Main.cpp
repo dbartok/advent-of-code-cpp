@@ -28,5 +28,6 @@ int main()
         }
     }
 
-    std::cout << "First part: " << AoC::sumOfPotNumbersWithPlantAfterGrowth(initialStateLine, neighborPatterLines) << std::endl;
+    std::cout << "First part: " << AoC::sumOfPotNumbersWithPlantAfterGrowthShortTime(initialStateLine, neighborPatterLines) << std::endl;
+    std::cout << "Second part: " << AoC::sumOfPotNumbersWithPlantAfterGrowthLongTime(initialStateLine, neighborPatterLines) << std::endl;
 }

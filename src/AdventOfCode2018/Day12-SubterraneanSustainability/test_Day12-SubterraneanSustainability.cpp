@@ -9,32 +9,54 @@ __END_LIBRARIES_DISABLE_WARNINGS
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace AoC = AdventOfCode;
 
+namespace Microsoft
+{
+namespace VisualStudio
+{
+namespace CppUnitTestFramework
+{
+
+std::wstring ToString(const long long& l)
+{
+    RETURN_WIDE_STRING(l);
+}
+
+}
+}
+}
+
 TEST_CLASS(Day12SubterraneanSustainability)
 {
 public:
 
-    TEST_METHOD(sumOfPotNumbersWithPlantAfterGrowth_SimpleTests)
+    TEST_METHOD(sumOfPotNumbersWithPlantAfterGrowthShortTime_SimpleTests)
     {
-        std::string initialStateLine = "initial state: #..#.#..##......###...###";
-        std::vector<std::string> neighborPatternLines =
-        {
-            "...## => #",
-            "..#.. => #",
-            ".#... => #",
-            ".#.#. => #",
-            ".#.## => #",
-            ".##.. => #",
-            ".#### => #",
-            "#.#.# => #",
-            "#.### => #",
-            "##.#. => #",
-            "##.## => #",
-            "###.. => #",
-            "###.# => #",
-            "####. => #"
-        };
-
-        Assert::AreEqual(325, AoC::sumOfPotNumbersWithPlantAfterGrowth(initialStateLine, neighborPatternLines));
+        Assert::AreEqual(325ll, AoC::sumOfPotNumbersWithPlantAfterGrowthShortTime(m_initialStateLine, m_neighborPatternLines));
     }
 
+    TEST_METHOD(sumOfPotNumbersWithPlantAfterGrowthLongTime_SimpleTests)
+    {
+        Assert::AreEqual(999999999374ll, AoC::sumOfPotNumbersWithPlantAfterGrowthLongTime(m_initialStateLine, m_neighborPatternLines));
+    }
+
+private:
+    std::string m_initialStateLine = "initial state: #..#.#..##......###...###";
+
+    std::vector<std::string> m_neighborPatternLines =
+    {
+        "...## => #",
+        "..#.. => #",
+        ".#... => #",
+        ".#.#. => #",
+        ".#.## => #",
+        ".##.. => #",
+        ".#### => #",
+        "#.#.# => #",
+        "#.### => #",
+        "##.#. => #",
+        "##.## => #",
+        "###.. => #",
+        "###.# => #",
+        "####. => #"
+    };
 };
