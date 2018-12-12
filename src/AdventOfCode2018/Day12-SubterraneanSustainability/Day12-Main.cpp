@@ -1,0 +1,32 @@
+#include "Day12-SubterraneanSustainability.h"
+
+#include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
+
+__BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include <fstream>
+#include <iostream>
+#include <vector>
+#include <string>
+__END_LIBRARIES_DISABLE_WARNINGS
+
+int main()
+{
+    namespace AoC = AdventOfCode;
+
+    std::fstream fileIn("input.txt");
+
+    std::string initialStateLine;
+    std::getline(fileIn, initialStateLine);
+
+    std::string lineBuffer;
+    std::vector<std::string> neighborPatterLines;
+    while (std::getline(fileIn, lineBuffer))
+    {
+        if (!lineBuffer.empty())
+        {
+            neighborPatterLines.push_back(std::move(lineBuffer));
+        }
+    }
+
+    std::cout << "First part: " << AoC::sumOfPotNumbersWithPlantAfterGrowth(initialStateLine, neighborPatterLines) << std::endl;
+}
