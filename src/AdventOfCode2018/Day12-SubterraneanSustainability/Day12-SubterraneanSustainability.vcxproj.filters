@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day12-SubterraneanSustainability.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PlantNeighborSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day12-SubterraneanSustainability.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlantNeighborSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
