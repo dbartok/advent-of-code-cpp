@@ -20,9 +20,27 @@
     <ClCompile Include="test_Day13-MineCartMadness.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MineCart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MineManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RailPiece.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day13-MineCartMadness.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MineCart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MineManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RailPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

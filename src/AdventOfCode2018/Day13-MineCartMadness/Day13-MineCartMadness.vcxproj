@@ -251,6 +251,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day13-MineCartMadness.cpp" />
+    <ClCompile Include="MineCart.cpp" />
+    <ClCompile Include="MineManager.cpp" />
+    <ClCompile Include="RailPiece.cpp" />
     <ClCompile Include="test_Day13-MineCartMadness.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -262,6 +265,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day13-MineCartMadness.h" />
+    <ClInclude Include="MineCart.h" />
+    <ClInclude Include="MineManager.h" />
+    <ClInclude Include="RailPiece.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
