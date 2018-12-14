@@ -4,7 +4,6 @@
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/optional.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include <unordered_set>
 #include <unordered_map>
@@ -13,6 +12,8 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+
+using Coordinates = std::pair<unsigned, unsigned>;
 
 enum class Orientation
 {
@@ -32,9 +33,10 @@ enum class Turn
 class MineCart
 {
 public:
-    MineCart(Orientation orientation)
+    MineCart(Orientation orientation, Coordinates position)
         : m_orientation{orientation}
-        , m_turn{Turn::LEFT}
+        , m_position{position}
+        , m_nextTurn{Turn::LEFT}
     {
 
     }
@@ -44,6 +46,11 @@ public:
         return m_orientation;
     }
 
+    Coordinates getCurrentPosition() const
+    {
+        return m_position;
+    }
+
     void setCurrentOrientation(Orientation orientation)
     {
         m_orientation = orientation;
@@ -51,25 +58,48 @@ public:
 
     void turnToNextOrientation()
     {
-        m_orientation = static_cast<Orientation>((static_cast<unsigned>(m_orientation) + static_cast<unsigned>(m_turn)) % 4);
+        m_orientation = static_cast<Orientation>((static_cast<unsigned>(m_orientation) + static_cast<unsigned>(m_nextTurn)) % 4);
 
-        if (m_turn == Turn::LEFT)
+        if (m_nextTurn == Turn::LEFT)
         {
-            m_turn = Turn::STRAIGHT;
+            m_nextTurn = Turn::STRAIGHT;
         }
-        else if (m_turn == Turn::STRAIGHT)
+        else if (m_nextTurn == Turn::STRAIGHT)
         {
-            m_turn = Turn::RIGHT;
+            m_nextTurn = Turn::RIGHT;
         }
-        else if (m_turn == Turn::RIGHT)
+        else if (m_nextTurn == Turn::RIGHT)
         {
-            m_turn = Turn::LEFT;
+            m_nextTurn = Turn::LEFT;
+        }
+    }
+
+    void move()
+    {
+        switch (m_orientation)
+        {
+            case Orientation::LEFT:
+                m_position.first -= 1;
+                break;
+
+            case Orientation::RIGHT:
+                m_position.first += 1;
+                break;
+
+            case Orientation::UP:
+                m_position.second -= 1;
+                break;
+
+            case Orientation::DOWN:
+                m_position.second += 1;
+                break;
         }
     }
 
 private:
     Orientation m_orientation;
-    Turn m_turn;
+    Coordinates m_position;
+    Turn m_nextTurn;
 };
 
 class RailPiece;
@@ -79,13 +109,13 @@ using RailPieceSharedPtr = std::shared_ptr<RailPiece>;
 class RailPiece
 {
 public:
-    virtual void setOrientation(MineCart& mineCart) = 0;
+    virtual void applyOrientation(MineCart& mineCart) = 0;
 };
 
 class DeterministicOrientingRailPiece : public RailPiece
 {
 public:
-    virtual void setOrientation(MineCart& mineCart)
+    virtual void applyOrientation(MineCart& mineCart)
     {
         Orientation currentOrientation = mineCart.getCurrentOrientation();
 
@@ -130,7 +160,7 @@ public:
 
 class PassiveRailPiece : public RailPiece
 {
-    virtual void setOrientation(MineCart&)
+    virtual void applyOrientation(MineCart&)
     {
 
     }
@@ -138,7 +168,7 @@ class PassiveRailPiece : public RailPiece
 
 class EmptyRailPiece : public RailPiece
 {
-    virtual void setOrientation(MineCart&)
+    virtual void applyOrientation(MineCart&)
     {
         throw std::runtime_error("Empty rail piece attempted to be used.");
     }
@@ -146,42 +176,21 @@ class EmptyRailPiece : public RailPiece
 
 class IntersectionRailPiece : public RailPiece
 {
-    virtual void setOrientation(MineCart& mineCart)
+    virtual void applyOrientation(MineCart& mineCart)
     {
         mineCart.turnToNextOrientation();
     }
 };
 
-struct MineMapField
-{
-    RailPieceSharedPtr railPieceSharedPtr;
-    boost::optional<MineCart> mineCart;
-
-    MineMapField(RailPieceSharedPtr railPieceSharedPtr)
-        : railPieceSharedPtr{std::move(railPieceSharedPtr)}
-        , mineCart{}
-    {
-
-    }
-
-    MineMapField(RailPieceSharedPtr railPieceSharedPtr, MineCart mineCart)
-        : railPieceSharedPtr{std::move(railPieceSharedPtr)}
-        , mineCart{std::move(mineCart)}
-    {
-
-    }
-};
-
-using MineMapLine = std::vector<MineMapField>;
+using MineMapLine = std::vector<RailPieceSharedPtr>;
 using MineMap = std::vector<MineMapLine>;
-
-using Coordinates = std::pair<unsigned, unsigned>;
 
 class MineManager
 {
 public:
-    MineManager(MineMap mineMap)
+    MineManager(MineMap mineMap, std::list<MineCart> mineCarts)
         : m_mineMap{std::move(mineMap)}
+        , m_mineCarts{std::move(mineCarts)}
     {
 
     }
@@ -190,83 +199,129 @@ public:
     {
         while (true)
         {
-            std::vector<Coordinates> mineCartCoordinates;
-
-            for (size_t j = 0; j < m_mineMap.size(); ++j)
+            sortMineCarts();
+            for (auto& mineCart : m_mineCarts)
             {
-                for (size_t i = 0; i < m_mineMap[j].size(); ++i)
+                mineCart.move();
+
+                if (isThereCollision(mineCart.getCurrentPosition()))
                 {
-                    auto& currentMineMapField = m_mineMap[j][i];
-                    auto& currentMineCartOpt = currentMineMapField.mineCart;
-                    if (currentMineCartOpt.is_initialized())
-                    {
-                        mineCartCoordinates.push_back(Coordinates{i, j});
-                    }
+                    return mineCart.getCurrentPosition();
                 }
+
+                reorientMineCart(mineCart);
             }
+        }
+    }
 
-            for (const auto& currentCoordinates : mineCartCoordinates)
+    Coordinates coordinatesOfLastRemainingCart()
+    {
+        while (m_mineCarts.size() > 1)
+        {
+            sortMineCarts();
+            for (auto mineCartIter = m_mineCarts.begin(); mineCartIter != m_mineCarts.end();)
             {
-                auto& currentMineMapField = m_mineMap[currentCoordinates.second][currentCoordinates.first];
-                auto& currentMineCartOpt = currentMineMapField.mineCart;
-                if (currentMineCartOpt.is_initialized())
+                mineCartIter->move();
+
+                if (isThereCollision(mineCartIter->getCurrentPosition()))
                 {
-                    Coordinates newCoordinates = nextCoordinateForOrientation(currentCoordinates, currentMineCartOpt.get().getCurrentOrientation());
-
-                    auto& nextMineMapField = m_mineMap[newCoordinates.second][newCoordinates.first];
-                    auto& newMineCartOpt = nextMineMapField.mineCart;
-
-                    if (newMineCartOpt.is_initialized())
-                    {
-                        return newCoordinates;
-                    }
-
-                    newMineCartOpt = currentMineCartOpt.get();
-                    currentMineCartOpt.reset();
-
-                    nextMineMapField.railPieceSharedPtr->setOrientation(newMineCartOpt.get());
+                    mineCartIter = eraseBothMineCartsWithSamePosition(mineCartIter);
+                }
+                else
+                {
+                    reorientMineCart(*mineCartIter);
+                    ++mineCartIter;
                 }
             }
         }
+
+        return m_mineCarts.front().getCurrentPosition();
     }
 
 private:
     MineMap m_mineMap;
+    std::list<MineCart> m_mineCarts;
 
-    Coordinates nextCoordinateForOrientation(const Coordinates& c, Orientation orientation)
+    bool isThereCollision(const Coordinates& position) const
     {
-        switch (orientation)
+        auto numMineCartsAtPosition = std::count_if(m_mineCarts.cbegin(), m_mineCarts.cend(), [&position](const MineCart& mc) {return mc.getCurrentPosition() == position; });
+        return numMineCartsAtPosition >= 2;
+    }
+
+    void sortMineCarts()
+    {
+        std::vector<MineCart> mineCartsVector{std::make_move_iterator(m_mineCarts.begin()), std::make_move_iterator(m_mineCarts.end())};
+
+        std::sort(mineCartsVector.begin(), mineCartsVector.end(),
+                  [](const MineCart& lhs, const MineCart& rhs)
+                  {
+                      return lhs.getCurrentPosition() < rhs.getCurrentPosition();
+                  });
+
+        m_mineCarts.assign(std::make_move_iterator(mineCartsVector.begin()), std::make_move_iterator(mineCartsVector.end()));
+    }
+
+    std::list<MineCart>::iterator eraseBothMineCartsWithSamePosition(std::list<MineCart>::iterator mineCartIter)
+    {
+        std::list<MineCart>::iterator otherMineCartIter = m_mineCarts.begin();
+        while (true)
         {
-            case Orientation::LEFT:
-                return Coordinates{c.first - 1, c.second};
-            case Orientation::RIGHT:
-                return Coordinates{c.first + 1, c.second};
-            case Orientation::UP:
-                return Coordinates{c.first, c.second - 1};
-            case Orientation::DOWN:
-                return Coordinates{c.first, c.second + 1};
+            if (mineCartIter != otherMineCartIter && otherMineCartIter->getCurrentPosition() == mineCartIter->getCurrentPosition())
+            {
+                break;
+            }
+            ++otherMineCartIter;
         }
+
+        m_mineCarts.erase(otherMineCartIter);
+        return m_mineCarts.erase(mineCartIter);
+    }
+
+    void reorientMineCart(MineCart& mineCart)
+    {
+        const auto& position = mineCart.getCurrentPosition();
+        auto railPiece = m_mineMap[position.second][position.first];
+        railPiece->applyOrientation(mineCart);
     }
 };
 
-bool isMineCart(char c)
+std::string coordinatesToString(const Coordinates& coordinates)
+{
+    return std::to_string(coordinates.first) + "," + std::to_string(coordinates.second);
+}
+
+bool isCharMineCart(char c)
 {
     static const std::unordered_set<char> mineCartChars{'<', '>', '^', 'v'};
 
     return mineCartChars.find(c) != mineCartChars.end();
 }
 
-RailPieceSharedPtr parseRailPieceSharedPtrFromRailPieceChar(char c)
+Orientation parseOrientation(char c)
+{
+    static const std::unordered_map<char, Orientation> charToOrientation =
+    {
+        {'<', Orientation::LEFT},
+        {'>', Orientation::RIGHT},
+        {'^', Orientation::UP},
+        {'v', Orientation::DOWN}
+    };
+
+    return charToOrientation.at(c);
+}
+
+RailPieceSharedPtr parseRailPieceSharedPtr(char c)
 {
     RailPieceSharedPtr result;
 
     switch (c)
     {
-        case '-':
-            result = std::make_shared<PassiveRailPiece>();
-            break;
-
         case '|':
+        case '-':
+        case '^':
+        case 'v':
+        case '<':
+        case '>':
             result = std::make_shared<PassiveRailPiece>();
             break;
 
@@ -289,41 +344,27 @@ RailPieceSharedPtr parseRailPieceSharedPtrFromRailPieceChar(char c)
     return result;
 }
 
-MineCart parseMineCartFromMineCartChar(char c)
+
+std::list<MineCart> parseMineCarts(const std::vector<std::string>& mapLines)
 {
-    static const std::unordered_map<char, MineCart> charToMineCartMap =
+    std::list<MineCart> mineCarts;
+
+    for (size_t j = 0; j < mapLines.size(); ++j)
     {
-        {'<', MineCart{Orientation::LEFT}},
-        {'>', MineCart{Orientation::RIGHT}},
-        {'^', MineCart{Orientation::UP}},
-        {'v', MineCart{Orientation::DOWN}}
-    };
+        for (size_t i = 0; i < mapLines[j].size(); ++i)
+        {
+            char c = mapLines[j][i];
+            if (isCharMineCart(c))
+            {
+                Orientation orientation = parseOrientation(c);
 
-    return charToMineCartMap.at(c);
-}
-
-MineMapField parseMineMapFieldFromMineCartChar(char c)
-{
-    RailPieceSharedPtr railPieceSharedPtr = std::static_pointer_cast<RailPiece>(std::make_shared<PassiveRailPiece>());
-
-    return MineMapField{railPieceSharedPtr, parseMineCartFromMineCartChar(c)};
-}
-
-MineMapField parseMineMapFieldFromRailPieceChar(char c)
-{
-    return MineMapField{parseRailPieceSharedPtrFromRailPieceChar(c)};
-}
-
-MineMapField parseMineMapField(char c)
-{
-    if (isMineCart(c))
-    {
-        return parseMineMapFieldFromMineCartChar(c);
+                MineCart mineCart{orientation, Coordinates{i, j}};
+                mineCarts.push_back(std::move(mineCart));
+            }
+        }
     }
-    else
-    {
-        return parseMineMapFieldFromRailPieceChar(c);
-    }
+
+    return mineCarts;
 }
 
 MineMap parseMineMap(const std::vector<std::string>& mapLines)
@@ -335,7 +376,7 @@ MineMap parseMineMap(const std::vector<std::string>& mapLines)
         MineMapLine currentMineMapLine;
         for (const char c : lines)
         {
-            currentMineMapLine.push_back(parseMineMapField(c));
+            currentMineMapLine.push_back(parseRailPieceSharedPtr(c));
         }
         mineMap.push_back(std::move(currentMineMapLine));
     }
@@ -343,14 +384,29 @@ MineMap parseMineMap(const std::vector<std::string>& mapLines)
     return mineMap;
 }
 
-std::string locationOfFirstCollision(const std::vector<std::string>& mapLines)
+MineManager parseMineManager(const std::vector<std::string>& mapLines)
 {
     MineMap mineMap = parseMineMap(mapLines);
-    MineManager mineManager{std::move(mineMap)};
+    std::list<MineCart> mineCarts = parseMineCarts(mapLines);
+    return MineManager{std::move(mineMap), std::move(mineCarts)};
+}
+
+std::string positionOfFirstCollision(const std::vector<std::string>& mapLines)
+{
+    MineManager mineManager = parseMineManager(mapLines);
 
     auto coordinatesOfFirstCollision = mineManager.coordinatesOfFirstCollision();
 
-    return boost::lexical_cast<std::string>(coordinatesOfFirstCollision.first) + "," + boost::lexical_cast<std::string>(coordinatesOfFirstCollision.second);
+    return coordinatesToString(coordinatesOfFirstCollision);
+}
+
+std::string positionOfLastRemainingCart(const std::vector<std::string>& mapLines)
+{
+    MineManager mineManager = parseMineManager(mapLines);
+
+    auto coordinatesOfLastRemainingCart = mineManager.coordinatesOfLastRemainingCart();
+
+    return coordinatesToString(coordinatesOfLastRemainingCart);
 }
 
 }

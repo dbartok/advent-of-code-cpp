@@ -13,7 +13,7 @@ TEST_CLASS(Day13MineCartMadness)
 {
 public:
 
-    TEST_METHOD(locationOfFirstCollision_SimpleTests)
+    TEST_METHOD(positionOfFirstCollision_SimpleTests)
     {
         std::vector<std::string> lines =
         {
@@ -25,7 +25,23 @@ public:
             R"(  \------/   )"
         };
 
-        Assert::AreEqual(std::string{"7,3"}, AoC::locationOfFirstCollision(lines));
+        Assert::AreEqual(std::string{"7,3"}, AoC::positionOfFirstCollision(lines));
+    }
+
+    TEST_METHOD(positionOfLastRemainingCart_SimpleTests)
+    {
+        std::vector<std::string> lines =
+        {
+            R"(/>-<\  )",
+            R"(|   |  )",
+            R"(| /<+-\)",
+            R"(| | | v)",
+            R"(\>+</ |)",
+            R"(  |   ^)",
+            R"(  \<->/)"
+        };
+
+        Assert::AreEqual(std::string{"6,4"}, AoC::positionOfLastRemainingCart(lines));
     }
 
 };

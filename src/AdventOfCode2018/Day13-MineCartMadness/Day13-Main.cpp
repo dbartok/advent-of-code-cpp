@@ -25,5 +25,6 @@ int main()
         }
     }
 
-    std::cout << "First part: " << AoC::locationOfFirstCollision(lines) << std::endl;
+    std::cout << "First part: " << AoC::positionOfFirstCollision(lines) << std::endl;
+    std::cout << "Second part: " << AoC::positionOfLastRemainingCart(lines) << std::endl;
 }
