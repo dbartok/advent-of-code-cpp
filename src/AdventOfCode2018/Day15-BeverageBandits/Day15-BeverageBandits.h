@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned outcomeOfCombat(const std::vector<std::string>& mapLines);
+unsigned outcomeOfCombatIfElvesBarelyWin(const std::vector<std::string>& mapLines);
 
 }

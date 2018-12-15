@@ -32,9 +32,10 @@ using Coordinates = std::pair<unsigned, unsigned>;
 class Unit
 {
 public:
-    Unit(bool faction, Coordinates coordinates)
+    Unit(bool faction, Coordinates coordinates, int attackPower)
         : m_faction{faction}
         , m_coordinates{std::move(coordinates)}
+        , m_attackPower(attackPower)
         , m_hitPoints{DEFAULT_HIT_POINTS}
     {
 
@@ -67,7 +68,7 @@ public:
 
     void attack(const UnitSharedPtr& other)
     {
-        other->m_hitPoints -= DEFAULT_ATTACK_POWER;
+        other->m_hitPoints -= m_attackPower;
     }
 
     void setCoordinates(Coordinates coordinates)
@@ -78,6 +79,7 @@ public:
 private:
     bool m_faction;
     Coordinates m_coordinates;
+    int m_attackPower;
     int m_hitPoints;
 };
 
@@ -156,6 +158,14 @@ public:
                                });
     }
 
+    unsigned getNumElvesAlive() const
+    {
+        return std::count_if(m_coordinatesToUnit.cbegin(), m_coordinatesToUnit.cend(), [](const auto& elem)
+                            {
+                                return elem.second->getFaction();
+                            });
+    }
+
 private:
     WallGrid m_wallGrid;
     CoordinatesToUnit m_coordinatesToUnit;
@@ -193,37 +203,56 @@ private:
         std::vector<Coordinates> allInitialFreeNeighborCoordinates = getAllFreeNeighborCoordinates(unit->getCoordinates());
 
         std::queue<OriginAndCurrentCoordinates> bfsQueue;
+        std::queue<OriginAndCurrentCoordinates> nextBfsQueue;
         std::unordered_set<Coordinates, boost::hash<Coordinates>> visitedSet;
         for (const auto& initialFreeNeighborCoordinates : allInitialFreeNeighborCoordinates)
         {
-            bfsQueue.push({initialFreeNeighborCoordinates, initialFreeNeighborCoordinates});
+            nextBfsQueue.push({initialFreeNeighborCoordinates, initialFreeNeighborCoordinates});
             visitedSet.insert(initialFreeNeighborCoordinates);
         }
 
-        while (!bfsQueue.empty())
+        std::vector<OriginAndCurrentCoordinates> solutions;
+
+        while (solutions.empty() && !nextBfsQueue.empty())
         {
-            auto currentSearchItem = bfsQueue.front();
-            bfsQueue.pop();
+            std::swap(bfsQueue, nextBfsQueue);
 
-            auto target = getAttackTarget(unit, currentSearchItem.searchCoordinates);
-            if (target)
+            while (!bfsQueue.empty())
             {
-                m_coordinatesToUnit.erase(unit->getCoordinates());
-                unit->setCoordinates(currentSearchItem.origin);
-                m_coordinatesToUnit.emplace(unit->getCoordinates(), unit);
-                return;
-            }
+                auto currentSearchItem = bfsQueue.front();
+                bfsQueue.pop();
 
-            auto allFreeNeighborCoordinates = getAllFreeNeighborCoordinates(currentSearchItem.searchCoordinates);
-
-            for (const auto& freeNeighborCoordinates : allFreeNeighborCoordinates)
-            {
-                bool notVisited = visitedSet.insert(freeNeighborCoordinates).second;
-                if (notVisited)
+                auto target = getAttackTarget(unit, currentSearchItem.searchCoordinates);
+                if (target)
                 {
-                    bfsQueue.push({currentSearchItem.origin, freeNeighborCoordinates});
+                    solutions.push_back(currentSearchItem);
+                }
+
+                auto allFreeNeighborCoordinates = getAllFreeNeighborCoordinates(currentSearchItem.searchCoordinates);
+
+                for (const auto& freeNeighborCoordinates : allFreeNeighborCoordinates)
+                {
+                    bool notVisited = visitedSet.insert(freeNeighborCoordinates).second;
+                    if (notVisited)
+                    {
+                        nextBfsQueue.push({currentSearchItem.origin, freeNeighborCoordinates});
+                    }
                 }
             }
+        }
+
+        if (!solutions.empty())
+        {
+            auto best = std::min_element(solutions.begin(), solutions.end(), [](const auto& lhs, const auto& rhs)
+                                         {
+                                             return lhs.searchCoordinates < rhs.searchCoordinates;
+                                         });
+
+            auto moveTarget = best->origin;
+
+            m_coordinatesToUnit.erase(unit->getCoordinates());
+            unit->setCoordinates(moveTarget);
+            m_coordinatesToUnit.emplace(unit->getCoordinates(), unit);
         }
     }
 
@@ -313,7 +342,7 @@ private:
     }
 };
 
-GameManager parseGameManager(const std::vector<std::string>& mapLines)
+GameManager parseGameManager(const std::vector<std::string>& mapLines, int elfAttackPower = DEFAULT_ATTACK_POWER)
 {
     WallGrid wallGrid;
     CoordinatesToUnit coordinatesToUnit;
@@ -329,7 +358,12 @@ GameManager parseGameManager(const std::vector<std::string>& mapLines)
             if (field == 'E' || field == 'G')
             {
                 Coordinates coordinates{j, i};
-                coordinatesToUnit.emplace(coordinates, std::make_shared<Unit>(field == 'E', coordinates));
+                bool isElf = (field == 'E');
+                int attackPower = isElf ? elfAttackPower : DEFAULT_ATTACK_POWER;
+
+                UnitSharedPtr unitSharedPtr = std::make_shared<Unit>(isElf, coordinates, attackPower);
+
+                coordinatesToUnit.emplace(std::move(coordinates), std::move(unitSharedPtr));
             }
         }
         wallGrid.push_back(std::move(wallGridLine));
@@ -346,6 +380,26 @@ unsigned outcomeOfCombat(const std::vector<std::string>& mapLines)
     gameManager.play();
 
     return gameManager.getNumTurnsElapsed() * gameManager.getTotalHitPointsRemaining();
+}
+
+unsigned outcomeOfCombatIfElvesBarelyWin(const std::vector<std::string>& mapLines)
+{
+    unsigned elfAttackPower = DEFAULT_ATTACK_POWER;
+
+    while (true)
+    {
+        ++elfAttackPower;
+        GameManager gameManager = parseGameManager(mapLines, elfAttackPower);
+
+        unsigned numTotalElves = gameManager.getNumElvesAlive();
+
+        gameManager.play();
+
+        if (gameManager.getNumElvesAlive() == numTotalElves)
+        {
+            return gameManager.getNumTurnsElapsed() * gameManager.getTotalHitPointsRemaining();
+        }
+    }
 }
 
 }

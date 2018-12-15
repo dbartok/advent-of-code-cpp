@@ -26,4 +26,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::outcomeOfCombat(lines) << std::endl;
+    std::cout << "Second part: " << AoC::outcomeOfCombatIfElvesBarelyWin(lines) << std::endl;
 }
