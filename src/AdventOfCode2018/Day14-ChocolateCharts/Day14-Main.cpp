@@ -12,9 +12,12 @@ int main()
     namespace AoC = AdventOfCode;
 
     std::fstream fileIn("input.txt");
-    int numRecipes;
+    int recipeNumber;
 
-    fileIn >> numRecipes;
+    fileIn >> recipeNumber;
 
-    std::cout << "First part: " << AoC::scoresOfTenRecipesAfterSeveralRecipes(numRecipes) << std::endl;
+    std::string recipeSequence = std::to_string(recipeNumber);
+
+    std::cout << "First part: " << AoC::scoresOfTenRecipesAfterSeveralRecipes(recipeNumber) << std::endl;
+    std::cout << "Second part: " << AoC::numRecipesBeforeSequenceAppears(recipeSequence) << std::endl;
 }

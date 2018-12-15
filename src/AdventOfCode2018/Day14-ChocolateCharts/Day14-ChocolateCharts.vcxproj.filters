@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day14-ChocolateCharts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RecipeGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day14-ChocolateCharts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RecipeGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

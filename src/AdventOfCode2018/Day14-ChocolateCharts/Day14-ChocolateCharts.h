@@ -10,5 +10,6 @@ namespace AdventOfCode
 {
 
 std::string scoresOfTenRecipesAfterSeveralRecipes(unsigned numRecipes);
+unsigned numRecipesBeforeSequenceAppears(const std::string& sequence);
 
 }

@@ -21,4 +21,12 @@ public:
         Assert::AreEqual(std::string{"5941429882"}, AoC::scoresOfTenRecipesAfterSeveralRecipes(2018));
     }
 
+    TEST_METHOD(numRecipesBeforeSequenceAppears_SimpleTests)
+    {
+        Assert::AreEqual(9u, AoC::numRecipesBeforeSequenceAppears("51589"));
+        Assert::AreEqual(5u, AoC::numRecipesBeforeSequenceAppears("01245"));
+        Assert::AreEqual(18u, AoC::numRecipesBeforeSequenceAppears("92510"));
+        Assert::AreEqual(2018u, AoC::numRecipesBeforeSequenceAppears("59414"));
+    }
+
 };
