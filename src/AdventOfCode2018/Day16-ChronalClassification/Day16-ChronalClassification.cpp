@@ -8,6 +8,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <memory>
 #include <unordered_map>
 #include <functional>
+#include <set>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -48,10 +49,13 @@ struct CapturedSample
     }
 };
 
-using AssemblyFunc = std::function<void()>;
+using OpcodeStringSet = std::set<std::string>;
 
 class InstructionEvaluator
 {
+private:
+    using AssemblyFunc = std::function<void()>;
+
 public:
     InstructionEvaluator(Instruction instruction, Registers registers)
         : m_instruction{std::move(instruction)}
@@ -89,17 +93,17 @@ public:
         return registersSnapshot;
     }
 
-    std::vector<std::string> getAllPossibleOpcodeStrings() const
+    OpcodeStringSet getAllOpcodeStrings() const
     {
-        std::vector<std::string> allPossibleOpcodeStrings;
+        OpcodeStringSet allOpcodeStrings;
 
-        std::transform(m_opcodeStringToAssemblyFunc.cbegin(), m_opcodeStringToAssemblyFunc.cend(), std::back_inserter(allPossibleOpcodeStrings),
+        std::transform(m_opcodeStringToAssemblyFunc.cbegin(), m_opcodeStringToAssemblyFunc.cend(), std::inserter(allOpcodeStrings, allOpcodeStrings.begin()),
                        [](const auto& elem)
                        {
                            return elem.first;
                        });
 
-        return allPossibleOpcodeStrings;
+        return allOpcodeStrings;
     }
 
 private:
@@ -189,11 +193,15 @@ private:
 
 };
 
+using OpcodeToOpcodeString = std::unordered_map<int, std::string>;
+using OpcodeToOpcodeStrings = std::unordered_map<int, OpcodeStringSet>;
+
 class OpcodeDiscovery
 {
 public:
     OpcodeDiscovery(std::vector<CapturedSample> capturedSamples)
         : m_capturedSamples{std::move(capturedSamples)}
+        , m_opcodeToPossibleOpcodeStrings{}
     {
 
     }
@@ -202,37 +210,153 @@ public:
     {
         for (const auto& capturedSample : m_capturedSamples)
         {
-            InstructionEvaluator instructionEvaluator{capturedSample.instruction, capturedSample.before};
-            std::vector<std::string> allPossibleOpcodeStrings = instructionEvaluator.getAllPossibleOpcodeStrings();
+            auto possibleOpcodeStrings = getPossibleOpcodeStringsForSample(capturedSample);
 
-            unsigned numValidOpcodesForSample = 0;
-
-            for (const auto& opcodeString : allPossibleOpcodeStrings)
-            {
-                Registers actualAfter = instructionEvaluator.evaluateAs(opcodeString);
-
-                if (capturedSample.after == actualAfter)
-                {
-                    ++numValidOpcodesForSample;
-                }
-            }
-
-            if (numValidOpcodesForSample >= 3)
-            {
-                ++m_numSamplesBehaveMoreThanThreeOpcodes;
-            }
+            processOpcodeDiscovery(capturedSample.instruction.opcode, possibleOpcodeStrings);
         }
+
+        disambiguatePossibleOpcodes();
     }
 
-    unsigned numSamplesBehaveMoreThanThreeOpcodes() const
+    unsigned getNumSamplesBehaveMoreThanThreeOpcodes() const
     {
         return m_numSamplesBehaveMoreThanThreeOpcodes;
+    }
+
+    OpcodeToOpcodeString getOpcodeToOpcodeString() const
+    {
+        return m_opcodeToOpcodeStringUnambiguous;
     }
 
 private:
     std::vector<CapturedSample> m_capturedSamples;
 
+    OpcodeToOpcodeStrings m_opcodeToPossibleOpcodeStrings;
+    OpcodeToOpcodeString m_opcodeToOpcodeStringUnambiguous;
     unsigned m_numSamplesBehaveMoreThanThreeOpcodes = 0;
+
+    OpcodeStringSet getPossibleOpcodeStringsForSample(const CapturedSample& sample)
+    {
+        InstructionEvaluator instructionEvaluator{sample.instruction, sample.before};
+        OpcodeStringSet allOpcodeStrings = instructionEvaluator.getAllOpcodeStrings();
+
+        OpcodeStringSet possibleOpcodeStrings;
+
+        for (const auto& opcodeString : allOpcodeStrings)
+        {
+            Registers actualAfter = instructionEvaluator.evaluateAs(opcodeString);
+
+            if (sample.after == actualAfter)
+            {
+                possibleOpcodeStrings.insert(opcodeString);
+            }
+        }
+
+        return possibleOpcodeStrings;
+    }
+
+    void processOpcodeDiscovery(int opcode, const OpcodeStringSet& constrainedOpcodeStrings)
+    {
+        if (constrainedOpcodeStrings.size() >= 3)
+        {
+            ++m_numSamplesBehaveMoreThanThreeOpcodes;
+        }
+
+        auto findResult = m_opcodeToPossibleOpcodeStrings.find(opcode);
+        if (findResult == m_opcodeToPossibleOpcodeStrings.end())
+        {
+            m_opcodeToPossibleOpcodeStrings.emplace(opcode, constrainedOpcodeStrings);
+        }
+        else
+        {
+            auto& currentPossibleOpcodeStrings = findResult->second;
+
+            OpcodeStringSet intersection;
+            set_intersection(currentPossibleOpcodeStrings.cbegin(), currentPossibleOpcodeStrings.cend(),
+                             constrainedOpcodeStrings.cbegin(), constrainedOpcodeStrings.cend(),
+                             std::inserter(intersection, intersection.begin()));
+
+            currentPossibleOpcodeStrings = intersection;
+        }
+    }
+
+    void disambiguatePossibleOpcodes()
+    {
+        auto opcodeToPossibleOpcodeStringsAmbiguous{m_opcodeToPossibleOpcodeStrings};
+
+        std::vector<int> newlyDisambiguatedOpcodes;
+
+        while (!opcodeToPossibleOpcodeStringsAmbiguous.empty())
+        {
+            newlyDisambiguatedOpcodes.clear();
+
+            for (const auto& elem : opcodeToPossibleOpcodeStringsAmbiguous)
+            {
+                int opcode = elem.first;
+                const OpcodeStringSet& possibleOpcodeStrings = elem.second;
+
+                if (possibleOpcodeStrings.size() == 1)
+                {
+                    newlyDisambiguatedOpcodes.emplace_back(opcode);
+                    m_opcodeToOpcodeStringUnambiguous.emplace(opcode, *possibleOpcodeStrings.cbegin());
+                }
+            }
+
+            for (const auto& opcode : newlyDisambiguatedOpcodes)
+            {
+                opcodeToPossibleOpcodeStringsAmbiguous.erase(opcode);
+            }
+
+            for (const auto& opcode : newlyDisambiguatedOpcodes)
+            {
+                std::string opcodeSring = m_opcodeToOpcodeStringUnambiguous.at(opcode);
+                for (auto& elem : opcodeToPossibleOpcodeStringsAmbiguous)
+                {
+                    OpcodeStringSet& possibleOpcodeStrings = elem.second;
+                    possibleOpcodeStrings.erase(opcodeSring);
+                }
+            }
+
+            if (newlyDisambiguatedOpcodes.empty())
+            {
+                throw std::runtime_error("Failed to disambiguate possible opcodes.");
+            }
+        }
+    }
+};
+
+class ProgramExecutor
+{
+public:
+    ProgramExecutor(std::vector<Instruction> instructions, OpcodeToOpcodeString opcodeToOpcodeString)
+        : m_instructions{std::move(instructions)}
+        , m_opcodeToOpcodeString{std::move(opcodeToOpcodeString)}
+        , m_registers{0, 0, 0, 0}
+    {
+
+    }
+
+    void execute()
+    {
+        for (const auto& instruction : m_instructions)
+        {
+            InstructionEvaluator instructionEvalutator{instruction, std::move(m_registers)};
+
+            std::string opcodeString = m_opcodeToOpcodeString.at(instruction.opcode);
+            m_registers = instructionEvalutator.evaluateAs(opcodeString);
+        }
+    }
+
+    int getValueInFirstRegister() const
+    {
+        return m_registers.front();
+    }
+
+private:
+    std::vector<Instruction> m_instructions;
+    OpcodeToOpcodeString m_opcodeToOpcodeString;
+
+    Registers m_registers;
 };
 
 std::vector<int> parseAllNumbers(std::string line)
@@ -303,16 +427,53 @@ std::vector<CapturedSample> parseCapturedSamples(const std::vector<std::string>&
 
 }
 
+std::vector<Instruction> parseProgramInstructions(const std::vector<std::string>& opcodeManualLines)
+{
+    std::vector<Instruction> programInstructions;
+
+    size_t lineIndex = 2;
+    for (; lineIndex < opcodeManualLines.size(); ++lineIndex)
+    {
+        if (opcodeManualLines[lineIndex].empty() && opcodeManualLines[lineIndex - 1].empty() && opcodeManualLines[lineIndex - 2].empty())
+        {
+            ++lineIndex;
+            break;
+        }
+    }
+
+    for (; lineIndex < opcodeManualLines.size(); ++lineIndex)
+    {
+        Instruction instruction = parseInstruction(opcodeManualLines[lineIndex]);
+        programInstructions.push_back(std::move(instruction));
+    }
+
+    return programInstructions;
+}
 
 unsigned numSamplesBehaveMoreThanThreeOpcodes(const std::vector<std::string>& opcodeManualLines)
 {
     std::vector<CapturedSample> capturedSamples = parseCapturedSamples(opcodeManualLines);
 
     OpcodeDiscovery opcodeDiscovery{capturedSamples};
-
     opcodeDiscovery.discover();
 
-    return opcodeDiscovery.numSamplesBehaveMoreThanThreeOpcodes();
+    return opcodeDiscovery.getNumSamplesBehaveMoreThanThreeOpcodes();
+}
+
+unsigned valueInFirstRegisterAfterProgramFinishes(const std::vector<std::string>& opcodeManualLines)
+{
+    std::vector<CapturedSample> capturedSamples = parseCapturedSamples(opcodeManualLines);
+
+    OpcodeDiscovery opcodeDiscovery{capturedSamples};
+    opcodeDiscovery.discover();
+
+    std::vector<Instruction> programInstructions = parseProgramInstructions(opcodeManualLines);
+
+    ProgramExecutor programExecutor{std::move(programInstructions), opcodeDiscovery.getOpcodeToOpcodeString()};
+    programExecutor.execute();
+
+    return programExecutor.getValueInFirstRegister();
+
 }
 
 }

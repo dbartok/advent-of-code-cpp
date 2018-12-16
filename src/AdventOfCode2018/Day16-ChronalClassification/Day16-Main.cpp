@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numSamplesBehaveMoreThanThreeOpcodes(lines) << std::endl;
+    std::cout << "Second part: " << AoC::valueInFirstRegisterAfterProgramFinishes(lines) << std::endl;
 }

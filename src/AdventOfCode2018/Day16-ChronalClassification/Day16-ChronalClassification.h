@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned numSamplesBehaveMoreThanThreeOpcodes(const std::vector<std::string>& opcodeManualLines);
+unsigned valueInFirstRegisterAfterProgramFinishes(const std::vector<std::string>& opcodeManualLines);
 
 }
