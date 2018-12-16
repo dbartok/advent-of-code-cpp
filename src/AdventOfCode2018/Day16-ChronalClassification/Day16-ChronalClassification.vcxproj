@@ -251,6 +251,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day16-ChronalClassification.cpp" />
+    <ClCompile Include="InstructionEvaluator.cpp" />
+    <ClCompile Include="OpcodeDiscovery.cpp" />
+    <ClCompile Include="ProgramExecutor.cpp" />
     <ClCompile Include="test_Day16-ChronalClassification.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -262,6 +265,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day16-ChronalClassification.h" />
+    <ClInclude Include="InstructionEvaluator.h" />
+    <ClInclude Include="OpcodeDiscovery.h" />
+    <ClInclude Include="ProgramExecutor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
