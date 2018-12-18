@@ -15,19 +15,24 @@ public:
 
     TEST_METHOD(numTilesWaterCanReach_SimpleTests)
     {
-        std::vector<std::string> lines =
-        {
-            "x=495, y=2..7",
-            "y=7, x=495..501",
-            "x=501, y=3..7",
-            "x=498, y=2..4",
-            "x=506, y=1..2",
-            "x=498, y=10..13",
-            "x=504, y=10..13",
-            "y=13, x=498..504"
-        };
-
-        Assert::AreEqual(57u, AoC::numTilesWaterCanReach(lines));
+        Assert::AreEqual(57u, AoC::numTilesWaterCanReach(m_lines));
     }
 
+    TEST_METHOD(numTilesWaterRetained_SimpleTests)
+    {
+        Assert::AreEqual(29u, AoC::numTilesWaterRetained(m_lines));
+    }
+
+private:
+    std::vector<std::string> m_lines =
+    {
+        "x=495, y=2..7",
+        "y=7, x=495..501",
+        "x=501, y=3..7",
+        "x=498, y=2..4",
+        "x=506, y=1..2",
+        "x=498, y=10..13",
+        "x=504, y=10..13",
+        "y=13, x=498..504"
+    };
 };

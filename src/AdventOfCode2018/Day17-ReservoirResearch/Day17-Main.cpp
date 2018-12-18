@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numTilesWaterCanReach(lines) << std::endl;
+    std::cout << "Second part: " << AoC::numTilesWaterRetained(lines) << std::endl;
 }

@@ -13,5 +13,6 @@ namespace AdventOfCode
 {
 
 unsigned numTilesWaterCanReach(const std::vector<std::string>& clayCoordinatesLines);
+unsigned numTilesWaterRetained(const std::vector<std::string>& clayCoordinatesLines);
 
 }

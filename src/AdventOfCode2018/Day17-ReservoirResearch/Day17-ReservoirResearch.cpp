@@ -83,10 +83,20 @@ public:
         return std::count_if(m_coordinatesToTile.cbegin(), m_coordinatesToTile.cend(), [this](const auto& elem)
                              {
                                  const Coordinates& coordinates = elem.first;
-                                 bool isWater = this->tileIsWaterAt(coordinates);
+                                 Tile tile = getTileAt(coordinates);
+
+                                 bool isWater = (tile == Tile::SETTLED_WATER || tile == Tile::FLOWING_WATER);
                                  bool isInBounds = (coordinates.y >= m_yMin) && (coordinates.y <= m_yMax);
 
                                  return isWater && isInBounds;
+                             });
+    }
+
+    unsigned getNumTilesWithSettledWater() const
+    {
+        return std::count_if(m_coordinatesToTile.cbegin(), m_coordinatesToTile.cend(), [this](const auto& elem)
+                             {
+                                 return this->getTileAt(elem.first) == Tile::SETTLED_WATER;
                              });
     }
 
@@ -114,7 +124,7 @@ private:
                     break;
                 }
             }
-            else if (tileIsWaterAt({y + 1, coordinates.x}))
+            else if (getTileAt({y + 1, coordinates.x}) == Tile::FLOWING_WATER)
             {
                 break;
             }
@@ -201,12 +211,6 @@ private:
         return (tile == Tile::SAND || tile == Tile::FLOWING_WATER);
     }
 
-    bool tileIsWaterAt(const Coordinates& coordinates) const
-    {
-        Tile tile = getTileAt({coordinates.y, coordinates.x});
-        return (tile == Tile::SETTLED_WATER || tile == Tile::FLOWING_WATER);
-    }
-
     void setTileAt(const Coordinates& coordinates, Tile newValue)
     {
         m_coordinatesToTile[coordinates] = newValue;
@@ -289,10 +293,19 @@ unsigned numTilesWaterCanReach(const std::vector<std::string>& clayCoordinatesLi
     CoordinatesToTile clayCoordinates = parseClayCoordinates(clayCoordinatesLines);
 
     WaterFlowSimulator waterFlowSimulator{std::move(clayCoordinates)};
-
     waterFlowSimulator.run();
 
     return waterFlowSimulator.getNumTilesWithWater();
+}
+
+unsigned numTilesWaterRetained(const std::vector<std::string>& clayCoordinatesLines)
+{
+    CoordinatesToTile clayCoordinates = parseClayCoordinates(clayCoordinatesLines);
+
+    WaterFlowSimulator waterFlowSimulator{std::move(clayCoordinates)};
+    waterFlowSimulator.run();
+
+    return waterFlowSimulator.getNumTilesWithSettledWater();
 }
 
 }
