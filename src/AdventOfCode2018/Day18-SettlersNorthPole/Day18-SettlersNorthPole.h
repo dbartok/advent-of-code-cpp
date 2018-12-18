@@ -10,6 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-unsigned totalResourceValueAfterTenMinutes(const std::vector<std::string>& lumberAreaLines);
+unsigned totalResourceValueAfterShortTime(const std::vector<std::string>& lumberAreaLines);
+unsigned totalResourceValueAfterLongTime(const std::vector<std::string>& lumberAreaLines);
 
 }

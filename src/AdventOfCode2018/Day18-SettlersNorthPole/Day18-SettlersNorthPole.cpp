@@ -6,7 +6,14 @@
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <numeric>
+#include <unordered_set>
 __END_LIBRARIES_DISABLE_WARNINGS
+
+namespace
+{
+const unsigned NUM_CYCLES_SHORT = 10;
+const unsigned NUM_CYCLES_LONG = 1'000'000'000;
+}
 
 namespace AdventOfCode
 {
@@ -45,11 +52,25 @@ public:
         }
     }
 
-    void run()
+    void run(unsigned numIterations)
     {
-        for (unsigned i = 0; i < NUM_ITERATIONS; ++i)
+        for (unsigned i = 0; i < numIterations; ++i)
         {
+            m_previousResults.push_back(m_lumberArea);
+
             executeCycle();
+
+            auto findResult = std::find(m_previousResults.cbegin(), m_previousResults.cend(), m_lumberArea);
+            if (findResult != m_previousResults.cend())
+            {
+                unsigned cycleLength = std::distance(findResult, m_previousResults.cend());
+                unsigned remainingIterations = numIterations - i - 1;
+                unsigned resultPosInCycle = remainingIterations % cycleLength;
+                auto finalPositionIter = findResult + resultPosInCycle;
+
+                m_lumberArea = *finalPositionIter;
+                break;
+            }
         }
     }
 
@@ -63,7 +84,7 @@ private:
     unsigned m_width;
     unsigned m_height;
 
-    const unsigned NUM_ITERATIONS = 10;
+    std::vector<LumberArea> m_previousResults;
 
     void executeCycle()
     {
@@ -181,12 +202,22 @@ LumberArea parseLumberArea(const std::vector<std::string>& lumberAreaLines)
     return lumberArea;
 }
 
-unsigned totalResourceValueAfterTenMinutes(const std::vector<std::string>& lumberAreaLines)
+unsigned totalResourceValueAfterShortTime(const std::vector<std::string>& lumberAreaLines)
 {
     LumberArea initialArea = parseLumberArea(lumberAreaLines);
 
     LumberLandscapeSimulator lumberLandscapeSimulator{std::move(initialArea)};
-    lumberLandscapeSimulator.run();
+    lumberLandscapeSimulator.run(NUM_CYCLES_SHORT);
+
+    return lumberLandscapeSimulator.getResourceValue();
+}
+
+unsigned totalResourceValueAfterLongTime(const std::vector<std::string>& lumberAreaLines)
+{
+    LumberArea initialArea = parseLumberArea(lumberAreaLines);
+
+    LumberLandscapeSimulator lumberLandscapeSimulator{std::move(initialArea)};
+    lumberLandscapeSimulator.run(NUM_CYCLES_LONG);
 
     return lumberLandscapeSimulator.getResourceValue();
 }

@@ -20,5 +20,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::totalResourceValueAfterTenMinutes(lines) << std::endl;
+    std::cout << "First part: " << AoC::totalResourceValueAfterShortTime(lines) << std::endl;
+    std::cout << "Second part: " << AoC::totalResourceValueAfterLongTime(lines) << std::endl;
 }

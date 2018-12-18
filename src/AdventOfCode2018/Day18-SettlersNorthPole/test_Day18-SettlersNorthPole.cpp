@@ -13,7 +13,7 @@ TEST_CLASS(Day18SettlersNorthPole)
 {
 public:
 
-    TEST_METHOD(totalResourceValueAfterTenMinutes_SimpleTests)
+    TEST_METHOD(totalResourceValueAfterShortTime_SimpleTests)
     {
         std::vector<std::string> lines =
         {
@@ -29,7 +29,19 @@ public:
             "...#.|..|."
         };
 
-        Assert::AreEqual(1147u, AoC::totalResourceValueAfterTenMinutes(lines));
+        Assert::AreEqual(1147u, AoC::totalResourceValueAfterShortTime(lines));
+    }
+
+    TEST_METHOD(totalResourceValueAfterLongTime_SimpleTests)
+    {
+        std::vector<std::string> lines =
+        {
+            "#|.",
+            "|#|",
+            ".|#"
+        };
+
+        Assert::AreEqual(12u, AoC::totalResourceValueAfterLongTime(lines));
     }
 
 };
