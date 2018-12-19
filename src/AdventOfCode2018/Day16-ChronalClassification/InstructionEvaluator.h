@@ -12,7 +12,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-using Registers = std::array<unsigned, 4>;
+using Registers = std::array<unsigned, 6>;
 
 struct Instruction
 {

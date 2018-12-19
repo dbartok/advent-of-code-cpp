@@ -11,7 +11,7 @@ namespace AdventOfCode
 ProgramExecutor::ProgramExecutor(std::vector<Instruction> instructions, OpcodeToOpcodeString opcodeToOpcodeString)
     : m_instructions{std::move(instructions)}
     , m_opcodeToOpcodeString{std::move(opcodeToOpcodeString)}
-    , m_registers{0, 0, 0, 0}
+    , m_registers{}
 {
 
 }
@@ -20,10 +20,10 @@ void ProgramExecutor::execute()
 {
     for (const auto& instruction : m_instructions)
     {
-        InstructionEvaluator instructionEvalutator{instruction, std::move(m_registers)};
+        InstructionEvaluator instructionEvaluator{instruction, std::move(m_registers)};
 
         std::string opcodeString = m_opcodeToOpcodeString.at(instruction.opcode);
-        m_registers = instructionEvalutator.evaluateAs(opcodeString);
+        m_registers = instructionEvaluator.evaluateAs(opcodeString);
     }
 }
 
