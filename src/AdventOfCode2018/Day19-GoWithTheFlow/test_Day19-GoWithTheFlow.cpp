@@ -30,4 +30,10 @@ public:
         Assert::AreEqual(7u, AoC::valueInFirstRegisterAfterProcessHalts(lines));
     }
 
+    // Same as the real puzzle, because the solution had to be hand optimized for a specific input
+    TEST_METHOD(valueInFirstRegisterAfterNewProcessHalts_SimpleTests)
+    {
+        Assert::AreEqual(10915260u, AoC::valueInFirstRegisterAfterNewProcessHalts());
+    }
+
 };

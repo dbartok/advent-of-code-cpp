@@ -1,6 +1,7 @@
 #include "Day19-GoWithTheFlow.h"
 
 #include "AdventOfCode2018/Day16-ChronalClassification/InstructionEvaluator.h"
+#include "HandOptimizedProgram.h"
 
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
@@ -103,6 +104,11 @@ unsigned valueInFirstRegisterAfterProcessHalts(const std::vector<std::string>& p
     controlFlowExecutor.run();
 
     return controlFlowExecutor.getValueInFirstRegister();
+}
+
+unsigned valueInFirstRegisterAfterNewProcessHalts()
+{
+    return finalValueOfRegister0_v5();
 }
 
 }

@@ -264,6 +264,7 @@
   <ItemGroup>
     <ClInclude Include="..\Day16-ChronalClassification\InstructionEvaluator.h" />
     <ClInclude Include="Day19-GoWithTheFlow.h" />
+    <ClInclude Include="HandOptimizedProgram.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

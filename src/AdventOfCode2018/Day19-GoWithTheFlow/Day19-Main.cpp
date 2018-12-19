@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::valueInFirstRegisterAfterProcessHalts(lines) << std::endl;
+    std::cout << "Second part: " << AoC::valueInFirstRegisterAfterNewProcessHalts() << std::endl;
 }

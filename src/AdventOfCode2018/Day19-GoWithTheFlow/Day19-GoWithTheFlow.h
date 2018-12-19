@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned valueInFirstRegisterAfterProcessHalts(const std::vector<std::string>& programLines);
+unsigned valueInFirstRegisterAfterNewProcessHalts();
 
 }

@@ -31,5 +31,8 @@
     <ClInclude Include="..\Day16-ChronalClassification\InstructionEvaluator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HandOptimizedProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
