@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day18-SettlersNorthPole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LumberLandscapeSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day18-SettlersNorthPole.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LumberLandscapeSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
