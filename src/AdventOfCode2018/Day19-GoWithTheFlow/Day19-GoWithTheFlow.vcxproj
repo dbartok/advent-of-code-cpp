@@ -247,11 +247,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Day16-ChronalClassification\InstructionEvaluator.cpp" />
+    <ClCompile Include="ControlFlowExecutor.cpp" />
     <ClCompile Include="Day19-Main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day19-GoWithTheFlow.cpp" />
+    <ClCompile Include="HandOptimizedProgram.cpp" />
     <ClCompile Include="test_Day19-GoWithTheFlow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -263,6 +265,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Day16-ChronalClassification\InstructionEvaluator.h" />
+    <ClInclude Include="ControlFlowExecutor.h" />
     <ClInclude Include="Day19-GoWithTheFlow.h" />
     <ClInclude Include="HandOptimizedProgram.h" />
   </ItemGroup>

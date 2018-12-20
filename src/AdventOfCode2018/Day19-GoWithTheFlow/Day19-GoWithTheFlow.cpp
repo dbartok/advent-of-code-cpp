@@ -1,6 +1,6 @@
 #include "Day19-GoWithTheFlow.h"
 
-#include "AdventOfCode2018/Day16-ChronalClassification/InstructionEvaluator.h"
+#include "ControlFlowExecutor.h"
 #include "HandOptimizedProgram.h"
 
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
@@ -12,61 +12,6 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
-
-struct DecodedInstruction
-{
-    std::string opcodeString;
-    Instruction instruction;
-
-    DecodedInstruction(std::string opcodeString, Instruction instruction)
-        : opcodeString{std::move(opcodeString)}
-        , instruction{std::move(instruction)}
-    {
-
-    }
-};
-
-class ControlFlowExecutor
-{
-public:
-    ControlFlowExecutor(unsigned instructionPtrRegister, std::vector<DecodedInstruction> decodedInstructions)
-        : m_instructionPtrRegister{instructionPtrRegister}
-        , m_decodedInstructions(decodedInstructions)
-        , m_registers{}
-    {
-
-    }
-
-    void run()
-    {
-        while (true)
-        {
-            unsigned instructionPointer = m_registers.at(m_instructionPtrRegister);
-
-            if (instructionPointer >= m_decodedInstructions.size())
-            {
-                break;
-            }
-
-            const auto& decodedInstruction = m_decodedInstructions.at(instructionPointer);
-
-            InstructionEvaluator instructionEvaluator{decodedInstruction.instruction, std::move(m_registers)};
-            m_registers = instructionEvaluator.evaluateAs(decodedInstruction.opcodeString);
-            ++m_registers.at(m_instructionPtrRegister);
-        }
-    }
-
-    unsigned getValueInFirstRegister() const
-    {
-        return m_registers.front();
-    }
-
-private:
-    unsigned m_instructionPtrRegister;
-    std::vector<DecodedInstruction> m_decodedInstructions;
-
-    Registers m_registers;
-};
 
 DecodedInstruction parseDecodedInstruction(const std::string& decodedInstructionLine)
 {

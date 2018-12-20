@@ -23,6 +23,12 @@
     <ClCompile Include="..\Day16-ChronalClassification\InstructionEvaluator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ControlFlowExecutor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HandOptimizedProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day19-GoWithTheFlow.h">
@@ -32,6 +38,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HandOptimizedProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlFlowExecutor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
