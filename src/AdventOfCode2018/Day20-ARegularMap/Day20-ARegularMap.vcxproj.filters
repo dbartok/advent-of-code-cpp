@@ -20,9 +20,24 @@
     <ClCompile Include="test_Day20-ARegularMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CoordinatesTraverser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomLayoutRegexParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day20-ARegularMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CoordinatesToNeighborCoordinates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CoordinatesTraverser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomLayoutRegexParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

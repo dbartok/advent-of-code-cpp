@@ -246,11 +246,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CoordinatesTraverser.cpp" />
     <ClCompile Include="Day20-Main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day20-ARegularMap.cpp" />
+    <ClCompile Include="RoomLayoutRegexParser.cpp" />
     <ClCompile Include="test_Day20-ARegularMap.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -261,7 +263,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CoordinatesToNeighborCoordinates.h" />
+    <ClInclude Include="CoordinatesTraverser.h" />
     <ClInclude Include="Day20-ARegularMap.h" />
+    <ClInclude Include="RoomLayoutRegexParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
