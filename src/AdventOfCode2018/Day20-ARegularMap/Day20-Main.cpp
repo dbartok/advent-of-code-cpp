@@ -18,4 +18,5 @@ int main()
     fileIn >> roomLayoutRegex;
 
     std::cout << "First part: " << AoC::distanceToFarthestRoom(roomLayoutRegex) << std::endl;
+    std::cout << "Second part: " << AoC::numRoomsWithLargeDistance(roomLayoutRegex) << std::endl;
 }

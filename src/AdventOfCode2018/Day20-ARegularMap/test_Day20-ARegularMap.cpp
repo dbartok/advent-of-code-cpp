@@ -22,4 +22,10 @@ public:
         Assert::AreEqual(31u, AoC::distanceToFarthestRoom("^WSSEESWWWNW(S|NENNEEEENN(ESSSSW(NWSW|SSEN)|WSWWN(E|WWS(E|SS))))$"));
     }
 
+    TEST_METHOD(numRoomsWithLargeDistance_SimpleTests)
+    {
+        Assert::AreEqual(2u, AoC::numRoomsWithLargeDistance("^WNE$", 2));
+        Assert::AreEqual(1u, AoC::numRoomsWithLargeDistance("^WNE$", 3));
+    }
+
 };

@@ -100,8 +100,9 @@ private:
 class CoordinatesTraverser
 {
 public:
-    CoordinatesTraverser(CoordinatesToNeighborCoordinates layoutMap)
+    CoordinatesTraverser(CoordinatesToNeighborCoordinates layoutMap, unsigned distanceThreshold)
         : m_layoutMap{std::move(layoutMap)}
+        , m_distanceThreshold(distanceThreshold)
     {
 
     }
@@ -111,11 +112,11 @@ public:
         std::queue<Coordinates> reachableNodesQueue;
         std::queue<Coordinates> nextReachableNodesQueue;
         reachableNodesQueue.push(Coordinates{0, 0});
-        unsigned numNodesInLongestPath = 0;
+        unsigned numNodesInPath = 0;
 
         while (!reachableNodesQueue.empty())
         {
-            ++numNodesInLongestPath;
+            ++numNodesInPath;
             while (!reachableNodesQueue.empty())
             {
                 Coordinates currentCoordinates = reachableNodesQueue.front();
@@ -133,6 +134,11 @@ public:
                     bool notVisited = m_visited.insert(neighbor).second;
                     if (notVisited)
                     {
+                        if (numNodesInPath >= m_distanceThreshold)
+                        {
+                            ++m_numRoomsAboveDistanceThreshold;
+                        }
+
                         nextReachableNodesQueue.push(neighbor);
                     }
                 }
@@ -141,7 +147,7 @@ public:
             std::swap(reachableNodesQueue, nextReachableNodesQueue);
         }
 
-        m_maxDistance = numNodesInLongestPath - 1;
+        m_maxDistance = numNodesInPath - 1;
     }
 
     unsigned getDistanceToFarthestCoordinate() const
@@ -149,23 +155,45 @@ public:
         return m_maxDistance;
     }
 
+    unsigned getNumRoomsAboveDistanceThreshold() const
+    {
+        return m_numRoomsAboveDistanceThreshold;
+    }
+
 private:
     CoordinatesToNeighborCoordinates m_layoutMap;
     CoordinatesSet m_visited;
 
+    unsigned m_distanceThreshold;
+
     unsigned m_maxDistance = 0;
+    unsigned m_numRoomsAboveDistanceThreshold = 0;
 };
 
-unsigned distanceToFarthestRoom(const std::string& roomLayoutRegex)
+CoordinatesTraverser parseCoordinatesTraverser(const std::string& roomLayoutRegex, unsigned distanceThreshold = 0)
 {
     RoomLayoutRegexParser roomLayoutRegexParser{roomLayoutRegex};
     roomLayoutRegexParser.parse();
 
     auto layoutMap = roomLayoutRegexParser.getLayoutMap();
 
-    CoordinatesTraverser coordinatesTraverser{std::move(layoutMap)};
+    return CoordinatesTraverser{std::move(layoutMap), distanceThreshold};
+}
+
+unsigned distanceToFarthestRoom(const std::string& roomLayoutRegex)
+{
+    CoordinatesTraverser coordinatesTraverser = parseCoordinatesTraverser(roomLayoutRegex);
     coordinatesTraverser.traverse();
+
     return coordinatesTraverser.getDistanceToFarthestCoordinate();
+}
+
+unsigned numRoomsWithLargeDistance(const std::string& roomLayoutRegex, unsigned distanceThreshold)
+{
+    CoordinatesTraverser coordinatesTraverser = parseCoordinatesTraverser(roomLayoutRegex, distanceThreshold);
+    coordinatesTraverser.traverse();
+
+    return coordinatesTraverser.getNumRoomsAboveDistanceThreshold();
 }
 
 }
