@@ -20,6 +20,9 @@
     <ClCompile Include="test_Day21-ChronalConversion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HandOptimizedHalting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day21-ChronalConversion.h">

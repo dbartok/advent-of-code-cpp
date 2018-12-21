@@ -12,4 +12,5 @@ int main()
     namespace AoC = AdventOfCode;
 
     std::cout << "First part: " << AoC::lowestValueForFirstRegisterFewestInstructions() << std::endl;
+    std::cout << "Second part: " << AoC::lowestValueForFirstRegisterMostInstructions() << std::endl;
 }

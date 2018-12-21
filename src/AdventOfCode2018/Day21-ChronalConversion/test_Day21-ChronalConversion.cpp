@@ -19,4 +19,10 @@ public:
         Assert::AreEqual(10846352u, AoC::lowestValueForFirstRegisterFewestInstructions());
     }
 
+    // Same as the real puzzle, because the solution had to be hand optimized for a specific input
+    TEST_METHOD(lowestValueForFirstRegisterMostInstructions_SimpleTests)
+    {
+        Assert::AreEqual(5244670u, AoC::lowestValueForFirstRegisterMostInstructions());
+    }
+
 };

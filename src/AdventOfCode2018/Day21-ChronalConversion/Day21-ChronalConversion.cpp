@@ -12,7 +12,12 @@ namespace AdventOfCode
 
 unsigned lowestValueForFirstRegisterFewestInstructions()
 {
-    return transpiledProgram_v3();
+    return getTerminatingValuesOfFirstRegister().front();
+}
+
+unsigned lowestValueForFirstRegisterMostInstructions()
+{
+    return getTerminatingValuesOfFirstRegister().back();
 }
 
 }
