@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::riskLevelOfSmallestArea(lines) << std::endl;
+    std::cout << "Second part: " << AoC::fewestMinutesToTarget(lines) << std::endl;
 }

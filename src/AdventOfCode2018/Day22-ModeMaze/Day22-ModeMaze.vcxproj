@@ -246,6 +246,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CaveMap.cpp" />
+    <ClCompile Include="CaveTraverser.cpp" />
     <ClCompile Include="Day22-Main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
@@ -261,6 +263,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CaveMap.h" />
+    <ClInclude Include="CaveTraverser.h" />
     <ClInclude Include="Day22-ModeMaze.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

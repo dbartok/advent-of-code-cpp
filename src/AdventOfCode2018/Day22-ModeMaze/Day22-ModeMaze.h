@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned riskLevelOfSmallestArea(const std::vector<std::string>& depthAndTargetLines);
+unsigned fewestMinutesToTarget(const std::vector<std::string>& depthAndTargetLines);
 
 }

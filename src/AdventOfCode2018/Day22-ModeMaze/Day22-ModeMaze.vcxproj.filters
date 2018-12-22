@@ -20,9 +20,21 @@
     <ClCompile Include="test_Day22-ModeMaze.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CaveMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CaveTraverser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day22-ModeMaze.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CaveMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CaveTraverser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

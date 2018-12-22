@@ -13,15 +13,20 @@ TEST_CLASS(Day22ModeMaze)
 {
 public:
 
-    TEST_METHOD(solution1_SimpleTests)
+    TEST_METHOD(riskLevelOfSmallestArea_SimpleTests)
     {
-        std::vector<std::string> lines =
-        {
-            "depth: 510",
-            "target: 10,10"
-        };
-
-        Assert::AreEqual(114u, AoC::riskLevelOfSmallestArea(lines));
+        Assert::AreEqual(114u, AoC::riskLevelOfSmallestArea(m_lines));
     }
 
+    TEST_METHOD(fewestMinutesToTarget_SimpleTests)
+    {
+        Assert::AreEqual(45u, AoC::fewestMinutesToTarget(m_lines));
+    }
+
+private:
+    std::vector<std::string> m_lines =
+    {
+        "depth: 510",
+        "target: 10,10"
+    };
 };
