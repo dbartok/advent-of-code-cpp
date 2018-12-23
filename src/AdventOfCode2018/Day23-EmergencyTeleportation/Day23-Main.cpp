@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numNanobotsInStrongestRange(lines) << std::endl;
+    std::cout << "Second part: " << AoC::lowestDistanceFromOriginWithMostNanobots(lines) << std::endl;
 }

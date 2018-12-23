@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned numNanobotsInStrongestRange(const std::vector<std::string>& nanobotLines);
+int lowestDistanceFromOriginWithMostNanobots(const std::vector<std::string>& nanobotLines);
 
 }

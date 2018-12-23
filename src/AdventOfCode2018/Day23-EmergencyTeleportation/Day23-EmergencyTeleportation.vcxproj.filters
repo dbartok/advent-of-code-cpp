@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day23-EmergencyTeleportation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NanobotsAnalyzer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day23-EmergencyTeleportation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NanobotsAnalyzer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
