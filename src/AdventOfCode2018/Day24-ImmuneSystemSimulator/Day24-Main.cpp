@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numUnitsOfWinningArmy(lines) << std::endl;
+    std::cout << "Second part: " << AoC::numUnitsImmuneSystemSmallestBoost(lines) << std::endl;
 }

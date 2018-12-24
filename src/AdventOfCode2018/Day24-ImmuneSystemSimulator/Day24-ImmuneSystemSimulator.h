@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned numUnitsOfWinningArmy(const std::vector<std::string>& armiesLines);
+unsigned numUnitsImmuneSystemSmallestBoost(const std::vector<std::string>& armiesLines);
 
 }

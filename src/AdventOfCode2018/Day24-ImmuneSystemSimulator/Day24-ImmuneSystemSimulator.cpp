@@ -52,6 +52,19 @@ public:
 
     }
 
+    bool operator==(const UnitGroup& other) const
+    {
+        return
+            m_faction == other.m_faction &&
+            m_numUnits == other.m_numUnits &&
+            m_hitPoints == other.m_hitPoints &&
+            m_weaknesses == other.m_weaknesses &&
+            m_immunities == other.m_immunities &&
+            m_attackDamage == other.m_attackDamage &&
+            m_attackType == other.m_attackType &&
+            m_initiative == other.m_initiative;
+    }
+
     int getInitiative() const
     {
         return m_initiative;
@@ -131,8 +144,15 @@ private:
 class UnitGroupsParser
 {
 public:
-    UnitGroupsParser(std::vector<std::string> armiesLines)
+    UnitGroupsParser(std::vector<std::string> armiesLines, int immuneSystemBoost)
         : m_armiesLines{std::move(armiesLines)}
+        , m_immuneSystemBoost{immuneSystemBoost}
+    {
+
+    }
+
+    UnitGroupsParser(std::vector<std::string> armiesLines)
+        : UnitGroupsParser(std::move(armiesLines), 0)
     {
 
     }
@@ -162,6 +182,8 @@ public:
 
 private:
     std::vector<std::string> m_armiesLines;
+    int m_immuneSystemBoost;
+
     size_t m_nextLineIndex = 1;
     Faction m_currentFaction = Faction::IMMUNE_SYSTEM;
 
@@ -178,6 +200,11 @@ private:
         int attackDamage = std::stoi(*(tokens.crbegin() + 5));
         DamageType attackType = *(tokens.crbegin() + 4);
         int initiative = std::stoi(*tokens.crbegin());
+
+        if (m_currentFaction == Faction::IMMUNE_SYSTEM)
+        {
+            attackDamage += m_immuneSystemBoost;
+        }
 
         m_unitGroups.emplace_back(m_currentFaction, numUnits, hitPoints, weaknesses, immunities, attackDamage, attackType, initiative);
     }
@@ -233,13 +260,18 @@ public:
 
     void run()
     {
-        while (!isOnlyOneFactionRemaining())
+        while (true)
         {
+            auto previousState{m_unitGroupMap};
+
             std::vector<Targeting> targetings = selectTargets();
-
             executeAttacks(targetings);
-
             removeEmptyUnitGroups();
+
+            if (previousState == m_unitGroupMap)
+            {
+                break;
+            }
         }
     }
 
@@ -251,16 +283,18 @@ public:
                                });
     }
 
+    bool isThereRemaining(Faction faction) const
+    {
+        auto findResult = std::find_if(m_unitGroupMap.cbegin(), m_unitGroupMap.cend(), [faction](const auto& elem)
+                                       {
+                                           return elem.second.getFaction() == faction;
+                                       });
+
+        return findResult != m_unitGroupMap.cend();
+    }
+
 private:
     UnitGroupIDToUnitGroupMap m_unitGroupMap;
-
-    bool isOnlyOneFactionRemaining() const
-    {
-        return Utils::allElementsEqual(m_unitGroupMap.cbegin(), m_unitGroupMap.cend(), [](const auto& lhs, const auto& rhs)
-                                       {
-                                           return lhs.second.getFaction() == rhs.second.getFaction();
-                                       });
-    }
 
     std::vector<Targeting> selectTargets()
     {
@@ -416,6 +450,26 @@ unsigned numUnitsOfWinningArmy(const std::vector<std::string>& armiesLines)
     immuneFightSimulator.run();
 
     return immuneFightSimulator.getTotalRemainingNumUnits();
+}
+
+unsigned numUnitsImmuneSystemSmallestBoost(const std::vector<std::string>& armiesLines)
+{
+    int immuneSystemBoost = 0;
+    while (true)
+    {
+        UnitGroupsParser unitGroupsParser(armiesLines, immuneSystemBoost++);
+        unitGroupsParser.parse();
+
+        ImmuneFightSimulator immuneFightSimulator{unitGroupsParser.getUnitGroups()};
+        immuneFightSimulator.run();
+
+        if (immuneFightSimulator.isThereRemaining(Faction::INFECTION))
+        {
+            continue;
+        }
+
+        return immuneFightSimulator.getTotalRemainingNumUnits();
+    }
 }
 
 }
