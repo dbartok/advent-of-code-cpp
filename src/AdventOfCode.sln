@@ -107,6 +107,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day23-EmergencyTeleportatio
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day24-ImmuneSystemSimulator", "AdventOfCode2018\Day24-ImmuneSystemSimulator\Day24-ImmuneSystemSimulator.vcxproj", "{AFEAD110-3939-4C65-A06E-AEFDA2DEEF6E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day25-FourDimensionalAdventure", "AdventOfCode2018\Day25-FourDimensionalAdventure\Day25-FourDimensionalAdventure.vcxproj", "{00355304-E093-434E-AFF3-CDBF530EB50F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -717,6 +719,18 @@ Global
 		{AFEAD110-3939-4C65-A06E-AEFDA2DEEF6E}.Test|x64.Build.0 = Test|x64
 		{AFEAD110-3939-4C65-A06E-AEFDA2DEEF6E}.Test|x86.ActiveCfg = Test|Win32
 		{AFEAD110-3939-4C65-A06E-AEFDA2DEEF6E}.Test|x86.Build.0 = Test|Win32
+		{00355304-E093-434E-AFF3-CDBF530EB50F}.Debug|x64.ActiveCfg = Debug|x64
+		{00355304-E093-434E-AFF3-CDBF530EB50F}.Debug|x64.Build.0 = Debug|x64
+		{00355304-E093-434E-AFF3-CDBF530EB50F}.Debug|x86.ActiveCfg = Debug|Win32
+		{00355304-E093-434E-AFF3-CDBF530EB50F}.Debug|x86.Build.0 = Debug|Win32
+		{00355304-E093-434E-AFF3-CDBF530EB50F}.Release|x64.ActiveCfg = Release|x64
+		{00355304-E093-434E-AFF3-CDBF530EB50F}.Release|x64.Build.0 = Release|x64
+		{00355304-E093-434E-AFF3-CDBF530EB50F}.Release|x86.ActiveCfg = Release|Win32
+		{00355304-E093-434E-AFF3-CDBF530EB50F}.Release|x86.Build.0 = Release|Win32
+		{00355304-E093-434E-AFF3-CDBF530EB50F}.Test|x64.ActiveCfg = Test|x64
+		{00355304-E093-434E-AFF3-CDBF530EB50F}.Test|x64.Build.0 = Test|x64
+		{00355304-E093-434E-AFF3-CDBF530EB50F}.Test|x86.ActiveCfg = Test|Win32
+		{00355304-E093-434E-AFF3-CDBF530EB50F}.Test|x86.Build.0 = Test|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -771,6 +785,7 @@ Global
 		{B93D909E-7CB9-4E26-A4A0-4C2097739ECD} = {D5F46C08-94B9-4D43-8F1B-1F2D558CF7EA}
 		{73E33835-ECB0-4745-85F3-74CCEC259FEF} = {D5F46C08-94B9-4D43-8F1B-1F2D558CF7EA}
 		{AFEAD110-3939-4C65-A06E-AEFDA2DEEF6E} = {D5F46C08-94B9-4D43-8F1B-1F2D558CF7EA}
+		{00355304-E093-434E-AFF3-CDBF530EB50F} = {D5F46C08-94B9-4D43-8F1B-1F2D558CF7EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C73BC1FB-06D6-478E-B2D0-DE1E761743D4}
