@@ -251,6 +251,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day24-ImmuneSystemSimulator.cpp" />
+    <ClCompile Include="ImmuneFightSimulator.cpp" />
     <ClCompile Include="test_Day24-ImmuneSystemSimulator.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -259,9 +260,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="UnitGroupsParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day24-ImmuneSystemSimulator.h" />
+    <ClInclude Include="ImmuneFightSimulator.h" />
+    <ClInclude Include="UnitGroup.h" />
+    <ClInclude Include="UnitGroupsParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
