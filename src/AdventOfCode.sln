@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdventOfCodeCommon", "AdventOfCodeCommon\AdventOfCodeCommon.vcxproj", "{CACB5746-DED5-4746-82AA-8AA8F76CEC06}"
 EndProject
@@ -108,6 +108,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day24-ImmuneSystemSimulator", "AdventOfCode2018\Day24-ImmuneSystemSimulator\Day24-ImmuneSystemSimulator.vcxproj", "{AFEAD110-3939-4C65-A06E-AEFDA2DEEF6E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day25-FourDimensionalAdventure", "AdventOfCode2018\Day25-FourDimensionalAdventure\Day25-FourDimensionalAdventure.vcxproj", "{00355304-E093-434E-AFF3-CDBF530EB50F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AdventOfCode2019", "AdventOfCode2019", "{C4C5EFAB-33AB-4A69-9267-497B81F2C031}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day01-TyrannyOfTheRocket", "AdventOfCode2019\Day01-TyrannyOfTheRocket\Day01-TyrannyOfTheRocket.vcxproj", "{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -731,6 +735,18 @@ Global
 		{00355304-E093-434E-AFF3-CDBF530EB50F}.Test|x64.Build.0 = Test|x64
 		{00355304-E093-434E-AFF3-CDBF530EB50F}.Test|x86.ActiveCfg = Test|Win32
 		{00355304-E093-434E-AFF3-CDBF530EB50F}.Test|x86.Build.0 = Test|Win32
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}.Debug|x64.ActiveCfg = Debug|x64
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}.Debug|x64.Build.0 = Debug|x64
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}.Debug|x86.ActiveCfg = Debug|Win32
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}.Debug|x86.Build.0 = Debug|Win32
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}.Release|x64.ActiveCfg = Release|x64
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}.Release|x64.Build.0 = Release|x64
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}.Release|x86.ActiveCfg = Release|Win32
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}.Release|x86.Build.0 = Release|Win32
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}.Test|x64.ActiveCfg = Test|x64
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}.Test|x64.Build.0 = Test|x64
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}.Test|x86.ActiveCfg = Test|Win32
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5}.Test|x86.Build.0 = Test|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -786,6 +802,7 @@ Global
 		{73E33835-ECB0-4745-85F3-74CCEC259FEF} = {D5F46C08-94B9-4D43-8F1B-1F2D558CF7EA}
 		{AFEAD110-3939-4C65-A06E-AEFDA2DEEF6E} = {D5F46C08-94B9-4D43-8F1B-1F2D558CF7EA}
 		{00355304-E093-434E-AFF3-CDBF530EB50F} = {D5F46C08-94B9-4D43-8F1B-1F2D558CF7EA}
+		{28B6C9E2-91FC-48BF-80B8-4CDF932E0AD5} = {C4C5EFAB-33AB-4A69-9267-497B81F2C031}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C73BC1FB-06D6-478E-B2D0-DE1E761743D4}

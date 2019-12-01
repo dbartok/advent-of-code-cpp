@@ -28,12 +28,12 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{$guid1$}</ProjectGuid>
+    <ProjectGuid>{28b6c9e2-91fc-48bf-80b8-4cdf932e0ad5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>$safeprojectname$</RootNamespace>
+    <RootNamespace>Day01_TyrannyOfTheRocket</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectSubType>NativeUnitTestProject</ProjectSubType>
-    <ProjectName>DayX-PuzzleName</ProjectName>
+    <ProjectName>Day01-TyrannyOfTheRocket</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -246,12 +246,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DayX-Main.cpp">
+    <ClCompile Include="Day01-Main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="DayX-PuzzleName.cpp" />
-    <ClCompile Include="test_DayX-PuzzleName.cpp">
+    <ClCompile Include="Day01-TyrannyOfTheRocket.cpp" />
+    <ClCompile Include="test_Day01-TyrannyOfTheRocket.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">
@@ -261,7 +261,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DayX-PuzzleName.h" />
+    <ClInclude Include="Day01-TyrannyOfTheRocket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
