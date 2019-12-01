@@ -18,4 +18,9 @@ public:
         Assert::AreEqual(34241, AoC::getSumOfFuelRequirements({12, 14, 1969, 100756}));
     }
 
+    TEST_METHOD(getSumOfFuelRequirementsIncludingFuelItself_SimpleTests)
+    {
+        Assert::AreEqual(51314, AoC::getSumOfFuelRequirementsIncludingFuelItself({14, 1969, 100756}));
+    }
+
 };

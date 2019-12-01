@@ -10,5 +10,6 @@ namespace AdventOfCode
 {
 
 int getSumOfFuelRequirements(const std::vector<int>& moduleMasses);
+int getSumOfFuelRequirementsIncludingFuelItself(const std::vector<int>& moduleMasses);
 
 }

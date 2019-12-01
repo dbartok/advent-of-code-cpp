@@ -24,4 +24,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::getSumOfFuelRequirements(moduleMasses) << std::endl;
+    std::cout << "Second part: " << AoC::getSumOfFuelRequirementsIncludingFuelItself(moduleMasses) << std::endl;
 }
