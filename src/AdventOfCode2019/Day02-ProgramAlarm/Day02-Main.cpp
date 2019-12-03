@@ -27,8 +27,6 @@ int main()
     std::vector<int> intcodeProgram;
     AoC::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, intcodeProgram, ',');
 
-    intcodeProgram.at(1) = 12;
-    intcodeProgram.at(2) = 2;
-
-    std::cout << "First part: " << AoC::getValueInPositionZeroAfterProgramHalts(intcodeProgram) << std::endl;
+    std::cout << "First part: " << AoC::getValueInPositionZeroAfterProgramHalts(intcodeProgram, 12, 2) << std::endl;
+    std::cout << "Second part: " << AoC::getScoreOfNounAndVerbForSpecificOutput(intcodeProgram) << std::endl;
 }

@@ -4,13 +4,17 @@
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <vector>
+#include <stdexcept>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
 
-int getValueInPositionZeroAfterProgramHalts(std::vector<int> intcodeProgram)
+int getValueInPositionZeroAfterProgramHalts(std::vector<int> intcodeProgram, int noun, int verb)
 {
+    intcodeProgram.at(1) = noun;
+    intcodeProgram.at(2) = verb;
+
     size_t index = 0;
     while (true)
     {
@@ -41,6 +45,31 @@ int getValueInPositionZeroAfterProgramHalts(std::vector<int> intcodeProgram)
         index += 4;
     }
     return intcodeProgram.front();
+}
+
+int getScoreOfNounAndVerbForSpecificOutput(std::vector<int> intcodeProgram, int desiredOutput)
+{
+    for (int noun = 0; noun <= 99; ++noun)
+    {
+        for (int verb = 0; verb <= 99; ++verb)
+        {
+            try
+            {
+                const int output = getValueInPositionZeroAfterProgramHalts(intcodeProgram, noun, verb);
+
+                if (output == desiredOutput)
+                {
+                    return 100 * noun + verb;
+                }
+            }
+            catch (std::out_of_range)
+            {
+                continue;
+            }
+        }
+    }
+
+    throw std::runtime_error("No solution found");
 }
 
 }
