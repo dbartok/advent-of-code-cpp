@@ -42,7 +42,9 @@ __pragma(warning(pop))
 // 5027 - 'type': move assignment operator was implicitly defined as deleted
 // 5031 - #pragma warning(pop): likely mismatch, popping warning state pushed in different file
 // 5039 - pointer or reference to potentially throwing function passed to extern C function under -EHc.
-#define UNFIXABLE_WARNINGS_ENCOUNTERED_IN_LIBRARIES 4061 4365 4464 4514 4571 4619 4623 4625 4626 4643 4668 4710 4774 4820 4996 5026 5027 5031 5039
+// 26812 - Prefer 'enum class' over 'enum'
+// 26814 - Use constexpr for constants whose value is known at compile time.
+#define UNFIXABLE_WARNINGS_ENCOUNTERED_IN_LIBRARIES 4061 4365 4464 4514 4571 4619 4623 4625 4626 4643 4668 4710 4774 4820 4996 5026 5027 5031 5039 26812 26814
 
 
 #define __BEGIN_LIBRARIES_DISABLE_WARNINGS \
