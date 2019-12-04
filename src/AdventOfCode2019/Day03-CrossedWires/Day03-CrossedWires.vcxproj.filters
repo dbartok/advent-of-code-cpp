@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day03-CrossedWires.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WirePlanter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day03-CrossedWires.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WirePlanter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
