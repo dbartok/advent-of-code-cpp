@@ -35,6 +35,14 @@ struct Wire
     std::vector<WireSection> wireSections;
 };
 
+using WireID = unsigned;
+
+struct FieldWireInfo
+{
+    std::unordered_set<WireID> wires;
+    int numTotalWireSteps = 0;
+};
+
 class WirePlanter
 {
 public:
@@ -51,13 +59,21 @@ public:
         for (const auto& wire : m_wires)
         {
             Coordinates currentCoordinates{0, 0};
+            unsigned numWireSteps = 0;
 
             for (const auto& wireSection : wire.wireSections)
             {
                 for (size_t i = 0; i < wireSection.length; ++i)
                 {
+                    ++numWireSteps;
+
                     currentCoordinates = getNeighborCoordinate(currentCoordinates, wireSection.direction);
-                    m_coordinatesToWires[currentCoordinates].insert(id);
+
+                    bool isNotSelfIntersection = m_coordinatesToWires[currentCoordinates].wires.insert(id).second;
+                    if (isNotSelfIntersection)
+                    {
+                        m_coordinatesToWires[currentCoordinates].numTotalWireSteps += numWireSteps;
+                    }
                 }
             }
 
@@ -67,31 +83,51 @@ public:
 
     int getDistanceToClosestIntersection() const
     {
-        std::vector<Coordinates> intersectionCoordinates;
+        std::vector<Coordinates> allIntersectionCoordinates = getAllIntersectionCoordinates();
 
-        for (const auto& coordinatesAndWires : m_coordinatesToWires)
-        {
-            if (coordinatesAndWires.second.size() > 1)
-            {
-                intersectionCoordinates.push_back(coordinatesAndWires.first);
-            }
-        }
+        auto minDistanceCoordinates = *std::min_element(allIntersectionCoordinates.cbegin(), allIntersectionCoordinates.cend(), [](const auto& lhs, const auto& rhs) noexcept
+                                                        {
+                                                            return std::abs(lhs.first) + std::abs(lhs.second) < std::abs(rhs.first) + std::abs(rhs.second);
+                                                        });
 
-        auto minDistanceCoord = *std::min_element(intersectionCoordinates.cbegin(), intersectionCoordinates.cend(), [](const auto& lhs, const auto& rhs) noexcept
-                                                  {
-                                                      return std::abs(lhs.first) + std::abs(lhs.second) < std::abs(rhs.first) + std::abs(rhs.second);
-                                                  });
+        return std::abs(minDistanceCoordinates.first) + std::abs(minDistanceCoordinates.second);
+    }
 
-        return std::abs(minDistanceCoord.first) + std::abs(minDistanceCoord.second);
+    int getCombinedWireStepsToClosestIntersection() const
+    {
+        std::vector<Coordinates> allIntersectionCoordinates = getAllIntersectionCoordinates();
+
+        auto minCombinedWireStepsCoordinates = *std::min_element(allIntersectionCoordinates.cbegin(), allIntersectionCoordinates.cend(), [this](const auto& lhs, const auto& rhs)
+                                                                 {
+                                                                     const auto& lhsFieldWireInfo = this->m_coordinatesToWires.at(lhs);
+                                                                     const auto& rhsFieldWireInfo = this->m_coordinatesToWires.at(rhs);
+                                                                     return lhsFieldWireInfo.numTotalWireSteps < rhsFieldWireInfo.numTotalWireSteps;
+                                                                 });
+
+        return m_coordinatesToWires.at(minCombinedWireStepsCoordinates).numTotalWireSteps;
     }
 
 private:
     using Coordinates = std::pair<int, int>;
-    using WireID = unsigned;
 
     std::vector<Wire> m_wires;
 
-    std::unordered_map<Coordinates, std::unordered_set<WireID>, boost::hash<Coordinates>> m_coordinatesToWires;
+    std::unordered_map<Coordinates, FieldWireInfo, boost::hash<Coordinates>> m_coordinatesToWires;
+
+    std::vector<Coordinates> getAllIntersectionCoordinates() const
+    {
+        std::vector<Coordinates> allIntersectionCoordinates;
+
+        for (const auto& coordinatesAndWires : m_coordinatesToWires)
+        {
+            if (coordinatesAndWires.second.wires.size() > 1)
+            {
+                allIntersectionCoordinates.push_back(coordinatesAndWires.first);
+            }
+        }
+
+        return allIntersectionCoordinates;
+    }
 
     static Coordinates getNeighborCoordinate(const Coordinates& coordinates, Direction direction)
     {
@@ -176,6 +212,17 @@ int distanceToClosestIntersection(const std::vector<std::string>& wireLines)
     wp.plant();
 
     return wp.getDistanceToClosestIntersection();
+}
+
+int combinedWireStepsToClosestIntersection(const std::vector<std::string>& wireLines)
+{
+    std::vector<Wire> wires = parseWires(wireLines);
+
+    WirePlanter wp{wires};
+
+    wp.plant();
+
+    return wp.getCombinedWireStepsToClosestIntersection();
 }
 
 }

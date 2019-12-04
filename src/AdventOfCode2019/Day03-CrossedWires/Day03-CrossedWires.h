@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int distanceToClosestIntersection(const std::vector<std::string>& wireLines);
+int combinedWireStepsToClosestIntersection(const std::vector<std::string>& wireLines);
 
 }

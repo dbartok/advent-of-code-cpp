@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::distanceToClosestIntersection(lines) << std::endl;
+    std::cout << "Second part: " << AoC::combinedWireStepsToClosestIntersection(lines) << std::endl;
 }
