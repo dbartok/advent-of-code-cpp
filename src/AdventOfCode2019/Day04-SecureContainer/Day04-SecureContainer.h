@@ -8,6 +8,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-unsigned numDifferentValidPasswords(int lowerBound, int upperBound);
+unsigned numDifferentValidPasswordsSimple(int lowerBound, int upperBound);
+unsigned numDifferentValidPasswordsLargerGroupIsNotMatching(int lowerBound, int upperBound);
 
 }

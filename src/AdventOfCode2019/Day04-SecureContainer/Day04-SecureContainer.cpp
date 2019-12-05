@@ -60,26 +60,60 @@ bool hasTwoAdjacentEqualDigits(const std::vector<int>& digits)
     return false;
 }
 
-bool isValidPassword(int candidate)
+bool hasTwoAdjacentEqualDigitsNotPartOfLargerGroup(const std::vector<int>& digits)
 {
-    std::vector<int> digits = convertIntToDigitVector(candidate);
+    for (size_t i = 0; i < digits.size() - 1; ++i)
+    {
+        size_t equalGroupEndIndex = i;
+        for (; equalGroupEndIndex < digits.size() - 1 && digits.at(equalGroupEndIndex) == digits.at(equalGroupEndIndex + 1); ++equalGroupEndIndex)
+        {
+        }
 
-    return areDigitsIncreasing(digits) && hasTwoAdjacentEqualDigits(digits);
+        if (equalGroupEndIndex == i + 1)
+        {
+            return true;
+        }
+
+        i = equalGroupEndIndex;
+    }
+
+    return false;
 }
 
-unsigned numDifferentValidPasswords(int lowerBound, int upperBound)
+
+unsigned numDifferentValidPasswords(int lowerBound, int upperBound, std::function<bool(std::vector<int>)> validatorFunc)
 {
     unsigned numValidPasswords = 0;
 
     for (int candidate = lowerBound; candidate <= upperBound; ++candidate)
     {
-        if (isValidPassword(candidate))
+        std::vector<int> digits = convertIntToDigitVector(candidate);
+
+        if (validatorFunc(digits))
         {
             ++numValidPasswords;
         }
     }
 
     return numValidPasswords;
+}
+
+unsigned numDifferentValidPasswordsSimple(int lowerBound, int upperBound)
+{
+    return numDifferentValidPasswords(lowerBound, upperBound,
+                                      [](const auto& digits)
+                                      {
+                                          return areDigitsIncreasing(digits) && hasTwoAdjacentEqualDigits(digits);
+                                      });
+}
+
+unsigned numDifferentValidPasswordsLargerGroupIsNotMatching(int lowerBound, int upperBound)
+{
+    return numDifferentValidPasswords(lowerBound, upperBound,
+                                      [](const auto& digits)
+                                      {
+                                          return areDigitsIncreasing(digits) && hasTwoAdjacentEqualDigitsNotPartOfLargerGroup(digits);
+                                      });
 }
 
 }

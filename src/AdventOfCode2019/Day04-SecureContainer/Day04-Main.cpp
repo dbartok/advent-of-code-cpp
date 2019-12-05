@@ -30,5 +30,6 @@ int main()
         throw std::runtime_error("Invalid input");
     }
 
-    std::cout << "First part: " << AoC::numDifferentValidPasswords(rangeBounds.at(0), rangeBounds.at(1)) << std::endl;
+    std::cout << "First part: " << AoC::numDifferentValidPasswordsSimple(rangeBounds.at(0), rangeBounds.at(1)) << std::endl;
+    std::cout << "Second part: " << AoC::numDifferentValidPasswordsLargerGroupIsNotMatching(rangeBounds.at(0), rangeBounds.at(1)) << std::endl;
 }
