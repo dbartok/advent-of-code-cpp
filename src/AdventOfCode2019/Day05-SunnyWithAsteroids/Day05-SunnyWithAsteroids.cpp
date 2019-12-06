@@ -137,6 +137,54 @@ public:
     }
 };
 
+class DoubleParameterIntcodeInstruction : public IntcodeInstruction
+{
+public:
+    DoubleParameterIntcodeInstruction(IntcodeParameter param1, IntcodeParameter param2) noexcept
+        : m_param1{std::move(param1)}
+        , m_param2{std::move(param2)}
+    {
+
+    }
+
+    void moveInstructionPointer(size_t& instructionPointer) const override
+    {
+        instructionPointer += 3;
+    }
+
+protected:
+    IntcodeParameter m_param1;
+    IntcodeParameter m_param2;
+};
+
+class JumpIfTrueIntcodeInstruction : public DoubleParameterIntcodeInstruction
+{
+public:
+    using DoubleParameterIntcodeInstruction::DoubleParameterIntcodeInstruction;
+
+    void execute(IntcodeProgamState& state) const override
+    {
+        if (m_param1.asRvalue(state) != 0)
+        {
+            state.instructionPointer = m_param2.asRvalue(state) - 3;
+        }
+    }
+};
+
+class JumpIfFalseIntcodeInstruction : public DoubleParameterIntcodeInstruction
+{
+public:
+    using DoubleParameterIntcodeInstruction::DoubleParameterIntcodeInstruction;
+
+    void execute(IntcodeProgamState& state) const override
+    {
+        if (m_param1.asRvalue(state) == 0)
+        {
+            state.instructionPointer = m_param2.asRvalue(state) - 3;
+        }
+    }
+};
+
 class TripleParameterIntcodeInstruction : public IntcodeInstruction
 {
 public:
@@ -181,13 +229,30 @@ public:
     }
 };
 
+class LessThanIntcodeInstruction : public TripleParameterIntcodeInstruction
+{
+public:
+    using TripleParameterIntcodeInstruction::TripleParameterIntcodeInstruction;
+
+    void execute(IntcodeProgamState& state) const override
+    {
+        m_param3.asLvalue(state) = (m_param1.asRvalue(state) < m_param2.asRvalue(state));
+    }
+};
+
+class EqualsIntcodeInstruction : public TripleParameterIntcodeInstruction
+{
+public:
+    using TripleParameterIntcodeInstruction::TripleParameterIntcodeInstruction;
+
+    void execute(IntcodeProgamState& state) const override
+    {
+        m_param3.asLvalue(state) = (m_param1.asRvalue(state) == m_param2.asRvalue(state));
+    }
+};
+
 unsigned numParametersForOpcode(int opcode)
 {
-    if (opcode == 1 || opcode == 2)
-    {
-        return 3u;
-    }
-
     if (opcode == 99)
     {
         return 0u;
@@ -196,6 +261,16 @@ unsigned numParametersForOpcode(int opcode)
     if (opcode == 3 || opcode == 4)
     {
         return 1u;
+    }
+
+    if (opcode == 5 || opcode == 6)
+    {
+        return 2u;
+    }
+
+    if (opcode == 1 || opcode == 2 || opcode == 7 || opcode == 8)
+    {
+        return 3u;
     }
 
     throw std::runtime_error("Invalid opcode: " + std::to_string(opcode));
@@ -254,6 +329,14 @@ IntcodeInstruction::SharedPtr createNextInstruction(const IntcodeProgamState& st
             return std::make_shared<InputIntcodeInstruction>(parameters.at(0));
         case 4:
             return std::make_shared<OutputIntcodeInstruction>(parameters.at(0));
+        case 5:
+            return std::make_shared<JumpIfTrueIntcodeInstruction>(parameters.at(0), parameters.at(1));
+        case 6:
+            return std::make_shared<JumpIfFalseIntcodeInstruction>(parameters.at(0), parameters.at(1));
+        case 7:
+            return std::make_shared<LessThanIntcodeInstruction>(parameters.at(0), parameters.at(1), parameters.at(2));
+        case 8:
+            return std::make_shared<EqualsIntcodeInstruction>(parameters.at(0), parameters.at(1), parameters.at(2));
         case 99:
             return std::make_shared<HaltIntcodeInstruction>();
     }
@@ -290,9 +373,9 @@ private:
     IntcodeProgamState m_state;
 };
 
-int diagnosticCodeProducedByProgram(const std::vector<int>& intcodeProgram)
+int diagnosticCodeProducedByProgram(const std::vector<int>& intcodeProgram, const std::vector<int>& inputs)
 {
-    IntcodeExecutor ie{intcodeProgram, {1}};
+    IntcodeExecutor ie{intcodeProgram, inputs};
 
     ie.execute();
 

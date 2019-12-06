@@ -25,5 +25,6 @@ int main()
     std::vector<int> intcodeProgram;
     AoC::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, intcodeProgram, ',');
 
-    std::cout << "First part: " << AoC::diagnosticCodeProducedByProgram(intcodeProgram) << std::endl;
+    std::cout << "First part: " << AoC::diagnosticCodeProducedByProgram(intcodeProgram, {1}) << std::endl;
+    std::cout << "Second part: " << AoC::diagnosticCodeProducedByProgram(intcodeProgram, {5}) << std::endl;
 }
