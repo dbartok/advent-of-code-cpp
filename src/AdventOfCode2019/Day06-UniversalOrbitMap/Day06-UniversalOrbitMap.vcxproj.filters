@@ -20,9 +20,15 @@
     <ClCompile Include="Day06-UniversalOrbitMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OrbitMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day06-UniversalOrbitMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OrbitMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
