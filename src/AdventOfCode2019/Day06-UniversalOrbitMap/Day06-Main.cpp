@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::totalNumberOfDirectAndIndirectOrbits(lines) << std::endl;
+    std::cout << "Second part: " << AoC::minimumNumberOfOrbitalTransfers(lines) << std::endl;
 }

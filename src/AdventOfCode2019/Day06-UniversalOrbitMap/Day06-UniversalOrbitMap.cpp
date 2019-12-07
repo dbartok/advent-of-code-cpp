@@ -16,11 +16,22 @@ namespace AdventOfCode
 using NodeIDType = std::string;
 using NodeIDs = std::vector<NodeIDType>;
 
+enum class EdgeType
+{
+    DIRECTED,
+    UNDIRECTED,
+};
+
 class OrbitMap
 {
 public:
-    void addEdge(NodeIDType from, NodeIDType to)
+    void addEdge(NodeIDType from, NodeIDType to, EdgeType edgeType)
     {
+        if (edgeType == EdgeType::UNDIRECTED)
+        {
+            m_nodeIDToAdjacentNodeIDs[to].push_back(from);
+        }
+
         m_nodeIDToAdjacentNodeIDs[std::move(from)].push_back(std::move(to));
     }
 
@@ -29,8 +40,47 @@ public:
         return getNumTransitiveOrbitsRecursive(CENTER_OF_MASS, 0);
     }
 
+    unsigned getDistanceBetweenStartAndGoal() const
+    {
+        std::unordered_set<NodeIDType> visited;
+        visited.insert(START);
+
+        std::queue<NodeIDAndDistance> nextNodeQueue;
+        nextNodeQueue.push({START, 0});
+
+        while (!nextNodeQueue.empty())
+        {
+            NodeIDAndDistance currentNodeIDAndDistance = nextNodeQueue.front();
+            nextNodeQueue.pop();
+
+            if (currentNodeIDAndDistance.nodeID == GOAL)
+            {
+                return currentNodeIDAndDistance.distance;
+            }
+
+            for (const auto& neighborNodeID : m_nodeIDToAdjacentNodeIDs.at(currentNodeIDAndDistance.nodeID))
+            {
+                if (visited.find(neighborNodeID) == visited.cend())
+                {
+                    visited.insert(neighborNodeID);
+                    nextNodeQueue.push({neighborNodeID, currentNodeIDAndDistance.distance + 1});
+                }
+            }
+        }
+
+        throw std::runtime_error("No path found");
+    }
+
 private:
     const NodeIDType CENTER_OF_MASS = "COM";
+    const NodeIDType START = "YOU";
+    const NodeIDType GOAL = "SAN";
+
+    struct NodeIDAndDistance
+    {
+        NodeIDType nodeID;
+        unsigned distance;
+    };
 
     std::unordered_map<NodeIDType, NodeIDs> m_nodeIDToAdjacentNodeIDs;
 
@@ -54,7 +104,7 @@ private:
     }
 };
 
-OrbitMap parseOrbitMap(const std::vector<std::string>& orbitLines)
+OrbitMap parseOrbitMap(const std::vector<std::string>& orbitLines, EdgeType edgeType)
 {
     OrbitMap orbitMap;
 
@@ -68,7 +118,7 @@ OrbitMap parseOrbitMap(const std::vector<std::string>& orbitLines)
             throw std::runtime_error("Invalid line: " + line);
         }
 
-        orbitMap.addEdge(fromNodeIDAndToNodeID.front(), fromNodeIDAndToNodeID.back());
+        orbitMap.addEdge(fromNodeIDAndToNodeID.front(), fromNodeIDAndToNodeID.back(), edgeType);
     }
 
     return orbitMap;
@@ -76,9 +126,16 @@ OrbitMap parseOrbitMap(const std::vector<std::string>& orbitLines)
 
 unsigned totalNumberOfDirectAndIndirectOrbits(const std::vector<std::string>& orbitLines)
 {
-    OrbitMap orbitMap = parseOrbitMap(orbitLines);
+    OrbitMap orbitMap = parseOrbitMap(orbitLines, EdgeType::DIRECTED);
 
     return orbitMap.getNumTransitiveOrbits();
+}
+
+unsigned minimumNumberOfOrbitalTransfers(const std::vector<std::string>& orbitLines)
+{
+    OrbitMap orbitMap = parseOrbitMap(orbitLines, EdgeType::UNDIRECTED);
+
+    return orbitMap.getDistanceBetweenStartAndGoal() - 2;
 }
 
 }

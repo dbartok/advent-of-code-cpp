@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned totalNumberOfDirectAndIndirectOrbits(const std::vector<std::string>& orbitLines);
+unsigned minimumNumberOfOrbitalTransfers(const std::vector<std::string>& orbitLines);
 
 }
