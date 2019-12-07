@@ -12,6 +12,7 @@ namespace AdventOfCode
 enum class IntcodeProgramExecutionState
 {
     RUNNING,
+    WAITING_FOR_INPUT,
     TERMINATED,
 };
 

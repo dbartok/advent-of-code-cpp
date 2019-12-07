@@ -27,11 +27,13 @@ private:
 class IntcodeInterpreter
 {
 public:
-    IntcodeInterpreter(std::vector<int> program, std::vector<int> inputs);
+    IntcodeInterpreter(std::vector<int> program);
 
     void execute();
 
+    void addInput(int input);
     const std::vector<int>& getOutputs() const;
+    const IntcodeProgramExecutionState getExecutionState() const;
 
 private:
     IntcodeProgamState m_state;

@@ -15,21 +15,21 @@ public:
 
     TEST_METHOD(diagnosticCodeProducedByProgram_SimpleTests)
     {
-        Assert::AreEqual(4, AoC::diagnosticCodeProducedByProgram(std::vector<int>{4, 0, 99}, {}));
+        Assert::AreEqual(4, AoC::diagnosticCodeProducedByProgram(std::vector<int>{4, 0, 99}, 0));
     }
 
     TEST_METHOD(diagnosticCodeProducedByProgram_PositionModeEqualTests)
     {
-        Assert::AreEqual(1, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8}, {8}));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8}, {7}));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8}, {9}));
+        Assert::AreEqual(1, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8}, 8));
+        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8}, 7));
+        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8}, 9));
     }
 
     TEST_METHOD(diagnosticCodeProducedByProgram_PositionModeLessThanTests)
     {
-        Assert::AreEqual(1, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8}, {7}));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8}, {8}));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8}, {9}));
+        Assert::AreEqual(1, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8}, 7));
+        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8}, 8));
+        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8}, 9));
     }
 
     TEST_METHOD(diagnosticCodeProducedByProgram_ImmediateModeEqualTests)

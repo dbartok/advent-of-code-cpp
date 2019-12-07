@@ -13,6 +13,7 @@ namespace AdventOfCode
 {
 
 size_t NUM_AMPLIFIERS = 5;
+size_t FEEDBACK_LOOP_FIRST_PHASE = 5;
 
 int highestPossibleSignalSent(const std::vector<int>& intcodeProgram)
 {
@@ -27,13 +28,61 @@ int highestPossibleSignalSent(const std::vector<int>& intcodeProgram)
 
         for (size_t i = 0; i < NUM_AMPLIFIERS; ++i)
         {
-            IntcodeInterpreter ie{intcodeProgram, {phaseSettings.at(i), previousOutput}};
-            ie.execute();
+            IntcodeInterpreter amplifier{intcodeProgram};
+            amplifier.addInput(phaseSettings.at(i));
+            amplifier.addInput(previousOutput);
+            amplifier.execute();
 
-            previousOutput = ie.getOutputs().back();
+            previousOutput = amplifier.getOutputs().back();
         }
 
         maxOutput = std::max(maxOutput, previousOutput);
+
+        if (!std::next_permutation(phaseSettings.begin(), phaseSettings.end()))
+        {
+            break;
+        }
+    }
+
+    return maxOutput;
+}
+
+int highestPossibleSignalSentWithAmplification(const std::vector<int>& intcodeProgram)
+{
+    std::vector<int> phaseSettings(NUM_AMPLIFIERS);
+    std::iota(phaseSettings.begin(), phaseSettings.end(), FEEDBACK_LOOP_FIRST_PHASE);
+
+    int maxOutput = std::numeric_limits<int>::min();
+
+    while (true)
+    {
+        std::vector<IntcodeInterpreter> amplifiers;
+        for (size_t i = 0; i < NUM_AMPLIFIERS; ++i)
+        {
+            IntcodeInterpreter amplifier{intcodeProgram};
+            amplifier.addInput(phaseSettings.at(i));
+
+            amplifiers.push_back(std::move(amplifier));
+        }
+
+        int previousOutput = 0;
+
+        while (true)
+        {
+            for (size_t i = 0; i < NUM_AMPLIFIERS; ++i)
+            {
+                amplifiers.at(i).addInput(previousOutput);
+                amplifiers.at(i).execute();
+                previousOutput = amplifiers.at(i).getOutputs().back();
+            }
+
+            maxOutput = std::max(maxOutput, previousOutput);
+
+            if (amplifiers.at(0).getExecutionState() == IntcodeProgramExecutionState::TERMINATED)
+            {
+                break;
+            }
+        }
 
         if (!std::next_permutation(phaseSettings.begin(), phaseSettings.end()))
         {

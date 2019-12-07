@@ -41,15 +41,20 @@ IntcodeParameterMode ParameterCreator::createParameterMode(size_t parameterPosit
     throw std::runtime_error("Invalid parameter mode: " + std::to_string(modeNumber));
 }
 
-IntcodeInterpreter::IntcodeInterpreter(std::vector<int> program, std::vector<int> inputs)
-    : m_state{std::move(program), std::move(inputs), {}, IntcodeProgramExecutionState::RUNNING, 0}
+IntcodeInterpreter::IntcodeInterpreter(std::vector<int> program)
+    : m_state{std::move(program), {}, {}, IntcodeProgramExecutionState::RUNNING, 0}
 {
 
 }
 
 void IntcodeInterpreter::execute()
 {
-    while (m_state.executionState != IntcodeProgramExecutionState::TERMINATED)
+    if (m_state.executionState == IntcodeProgramExecutionState::WAITING_FOR_INPUT)
+    {
+        m_state.executionState = IntcodeProgramExecutionState::RUNNING;
+    }
+
+    while (m_state.executionState == IntcodeProgramExecutionState::RUNNING)
     {
         IntcodeInstruction::SharedPtr nextInstruction = createNextInstruction();
 
@@ -58,9 +63,19 @@ void IntcodeInterpreter::execute()
     }
 }
 
+void IntcodeInterpreter::addInput(int input)
+{
+    m_state.inputs.push_back(input);
+}
+
 const std::vector<int>& IntcodeInterpreter::getOutputs() const
 {
     return m_state.outputs;
+}
+
+const IntcodeProgramExecutionState IntcodeInterpreter::getExecutionState() const
+{
+    return m_state.executionState;
 }
 
 IntcodeInstruction::SharedPtr IntcodeInterpreter::createNextInstruction()

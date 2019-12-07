@@ -62,8 +62,16 @@ void HaltIntcodeInstruction::moveInstructionPointer(size_t&) const
 
 void InputIntcodeInstruction::execute(IntcodeProgamState& state) const
 {
-    m_param.asLvalue(state) = state.inputs.front();
-    state.inputs.erase(state.inputs.begin());
+    if (state.inputs.empty())
+    {
+        state.executionState = IntcodeProgramExecutionState::WAITING_FOR_INPUT;
+        state.instructionPointer -= 2;
+    }
+    else
+    {
+        m_param.asLvalue(state) = state.inputs.front();
+        state.inputs.erase(state.inputs.begin());
+    }
 }
 
 void OutputIntcodeInstruction::execute(IntcodeProgamState& state) const

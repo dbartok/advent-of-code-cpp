@@ -13,9 +13,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-int diagnosticCodeProducedByProgram(const std::vector<int>& intcodeProgram, const std::vector<int>& inputs)
+int diagnosticCodeProducedByProgram(const std::vector<int>& intcodeProgram, int input)
 {
-    IntcodeInterpreter ie{intcodeProgram, inputs};
+    IntcodeInterpreter ie{intcodeProgram};
+    ie.addInput(input);
 
     ie.execute();
 

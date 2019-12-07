@@ -10,5 +10,6 @@ namespace AdventOfCode
 {
 
 int highestPossibleSignalSent(const std::vector<int>& intcodeProgram);
+int highestPossibleSignalSentWithAmplification(const std::vector<int>& intcodeProgram);
 
 }
