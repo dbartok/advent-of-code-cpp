@@ -248,6 +248,7 @@
   <ItemGroup>
     <ClCompile Include="..\Day05-SunnyWithAsteroids\IntcodeInstruction.cpp" />
     <ClCompile Include="..\Day05-SunnyWithAsteroids\IntcodeInterpreter.cpp" />
+    <ClCompile Include="AmplifierChain.cpp" />
     <ClCompile Include="Day07-Main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
@@ -266,6 +267,7 @@
     <ClInclude Include="..\Day05-SunnyWithAsteroids\IntcodeInstruction.h" />
     <ClInclude Include="..\Day05-SunnyWithAsteroids\IntcodeInterpreter.h" />
     <ClInclude Include="..\Day05-SunnyWithAsteroids\IntcodeProgramState.h" />
+    <ClInclude Include="AmplifierChain.h" />
     <ClInclude Include="Day07-AmplificationCircuit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
