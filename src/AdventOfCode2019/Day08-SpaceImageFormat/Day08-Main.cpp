@@ -22,4 +22,5 @@ int main()
     encodedImage.erase(std::remove(encodedImage.begin(), encodedImage.end(), '\n'), encodedImage.end());
 
     std::cout << "First part: " << AoC::checksumOfLayerWithMostZeroes(encodedImage) << std::endl;
+    std::cout << "Second part: " << std::endl << AoC::decodeImage(encodedImage) << std::endl;
 }

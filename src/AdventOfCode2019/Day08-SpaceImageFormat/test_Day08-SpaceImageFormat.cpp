@@ -19,4 +19,9 @@ public:
         Assert::AreEqual(6u, AoC::checksumOfLayerWithMostZeroes("003456011212", 3u, 2u));
     }
 
+    TEST_METHOD(decodeImage_SimpleTests)
+    {
+        Assert::AreEqual(std::string{" .\n. \n"}, AoC::decodeImage("0222112222120000", 2u, 2u));
+    }
+
 };
