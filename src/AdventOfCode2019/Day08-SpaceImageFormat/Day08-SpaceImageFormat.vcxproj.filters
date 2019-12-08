@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day08-SpaceImageFormat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SpaceImageFormatDecoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day08-SpaceImageFormat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceImageFormatDecoder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
