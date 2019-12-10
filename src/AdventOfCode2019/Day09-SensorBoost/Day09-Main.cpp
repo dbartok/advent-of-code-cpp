@@ -23,5 +23,6 @@ int main()
     std::vector<AoC::IntcodeNumberType> intcodeProgram;
     AoC::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, intcodeProgram, ',');
 
-    std::cout << "First part: " << AoC::boostKeycodeProduced(intcodeProgram).front() << std::endl;
+    std::cout << "First part: " << AoC::boostKeycodeProduced(intcodeProgram, 1).front() << std::endl;
+    std::cout << "Second part: " << AoC::boostKeycodeProduced(intcodeProgram, 2).front() << std::endl;
 }

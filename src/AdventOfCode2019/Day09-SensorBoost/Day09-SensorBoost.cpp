@@ -8,10 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-std::vector<IntcodeNumberType> boostKeycodeProduced(const std::vector<IntcodeNumberType>& intcodeProgram)
+std::vector<IntcodeNumberType> boostKeycodeProduced(const std::vector<IntcodeNumberType>& intcodeProgram, int input)
 {
     IntcodeInterpreter ie{intcodeProgram};
-    ie.addInput(1);
+    ie.addInput(input);
 
     ie.execute();
 
