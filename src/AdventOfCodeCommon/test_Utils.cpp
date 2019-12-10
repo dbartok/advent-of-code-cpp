@@ -4,38 +4,12 @@
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include "CppUnitTest.h"
+
+#include "UnittestExtraDefinitions.h"
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace AoC = AdventOfCode;
-
-namespace Microsoft
-{
-namespace VisualStudio
-{
-namespace CppUnitTestFramework
-{
-
-template <typename T>
-std::wstring ToString(const std::vector<T> v)
-{
-    std::wstringstream s;
-
-    for (size_t i = 0; i < v.size(); i++)
-    {
-        s << ToString(v[i]);
-        if (i != v.size() - 1)
-        {
-            s << ", ";
-        }
-    }
-
-    return s.str();
-}
-
-}
-}
-}
 
 TEST_CLASS(Utils)
 {

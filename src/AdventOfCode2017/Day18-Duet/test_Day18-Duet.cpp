@@ -9,22 +9,6 @@ __END_LIBRARIES_DISABLE_WARNINGS
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace AoC = AdventOfCode;
 
-namespace Microsoft
-{
-namespace VisualStudio
-{
-namespace CppUnitTestFramework
-{
-
-std::wstring ToString(const long long& l)
-{
-    RETURN_WIDE_STRING(l);
-}
-
-}
-}
-}
-
 TEST_CLASS(Day18Duet)
 {
 public:

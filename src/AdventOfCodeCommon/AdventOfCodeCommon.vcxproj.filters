@@ -25,5 +25,8 @@
     <ClInclude Include="DisableLibraryWarningsMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UnittestExtraDefinitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
