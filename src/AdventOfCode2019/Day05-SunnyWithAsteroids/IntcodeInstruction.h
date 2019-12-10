@@ -17,18 +17,19 @@ enum class IntcodeParameterMode
 {
     IMMEDIATE,
     POSITION,
+    RELATIVE,
 };
 
 class IntcodeParameter
 {
 public:
-    IntcodeParameter(int value, IntcodeParameterMode parameterMode);
+    IntcodeParameter(IntcodeNumberType value, IntcodeParameterMode parameterMode);
 
-    int asRvalue(IntcodeProgamState& executionState) const;
-    int& asLvalue(IntcodeProgamState& executionState) const;
+    IntcodeNumberType asRvalue(IntcodeProgamState& executionState) const;
+    IntcodeNumberType& asLvalue(IntcodeProgamState& executionState) const;
 
 private:
-    int m_value;
+    IntcodeNumberType m_value;
     IntcodeParameterMode m_parameterMode;
 };
 
@@ -71,6 +72,14 @@ public:
 };
 
 class OutputIntcodeInstruction : public SingleParameterIntcodeInstruction
+{
+public:
+    using SingleParameterIntcodeInstruction::SingleParameterIntcodeInstruction;
+
+    void execute(IntcodeProgamState& state) const override;
+};
+
+class RelativeBaseOffsetInstruction : public SingleParameterIntcodeInstruction
 {
 public:
     using SingleParameterIntcodeInstruction::SingleParameterIntcodeInstruction;

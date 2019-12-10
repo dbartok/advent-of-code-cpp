@@ -13,12 +13,12 @@ namespace AdventOfCode
 class ParameterCreator
 {
 public:
-    ParameterCreator(int opcodeWithParameterModes, const AdventOfCode::IntcodeProgamState& state);
+    ParameterCreator(IntcodeNumberType opcodeWithParameterModes, const AdventOfCode::IntcodeProgamState& state);
 
     IntcodeParameter getParam(size_t parameterPosition);
 
 private:
-    int m_opcodeWithParameterModes;
+    IntcodeNumberType m_opcodeWithParameterModes;
     const AdventOfCode::IntcodeProgamState& m_state;
 
     IntcodeParameterMode createParameterMode(size_t parameterPosition);
@@ -27,12 +27,12 @@ private:
 class IntcodeInterpreter
 {
 public:
-    IntcodeInterpreter(std::vector<int> program);
+    IntcodeInterpreter(std::vector<IntcodeNumberType> program);
 
     void execute();
 
-    void addInput(int input);
-    const std::vector<int>& getOutputs() const;
+    void addInput(IntcodeNumberType input);
+    const std::vector<IntcodeNumberType>& getOutputs() const;
     const IntcodeProgramExecutionState getExecutionState() const;
 
 private:

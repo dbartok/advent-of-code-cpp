@@ -8,14 +8,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-IntcodeParameter::IntcodeParameter(int value, IntcodeParameterMode parameterMode)
+IntcodeParameter::IntcodeParameter(IntcodeNumberType value, IntcodeParameterMode parameterMode)
     : m_value{value}
     , m_parameterMode{parameterMode}
 {
 
 }
 
-int IntcodeParameter::asRvalue(IntcodeProgamState& executionState) const
+IntcodeNumberType IntcodeParameter::asRvalue(IntcodeProgamState& executionState) const
 {
     if (m_parameterMode == IntcodeParameterMode::IMMEDIATE)
     {
@@ -25,15 +25,23 @@ int IntcodeParameter::asRvalue(IntcodeProgamState& executionState) const
     {
         return executionState.program.at(m_value);
     }
+    else if (m_parameterMode == IntcodeParameterMode::RELATIVE)
+    {
+        return executionState.program.at(m_value + executionState.relativeBase);
+    }
 
     throw std::runtime_error("Invalid parameter mode for Rvalue resolution: " + std::to_string(static_cast<int>(m_parameterMode)));
 }
 
-int& IntcodeParameter::asLvalue(IntcodeProgamState& executionState) const
+IntcodeNumberType& IntcodeParameter::asLvalue(IntcodeProgamState& executionState) const
 {
     if (m_parameterMode == IntcodeParameterMode::POSITION)
     {
         return executionState.program.at(m_value);
+    }
+    else if (m_parameterMode == IntcodeParameterMode::RELATIVE)
+    {
+        return executionState.program.at(m_value + executionState.relativeBase);
     }
 
     throw std::runtime_error("Invalid parameter mode for Lvalue resolution: " + std::to_string(static_cast<int>(m_parameterMode)));
@@ -77,6 +85,11 @@ void InputIntcodeInstruction::execute(IntcodeProgamState& state) const
 void OutputIntcodeInstruction::execute(IntcodeProgamState& state) const
 {
     state.outputs.push_back(m_param.asRvalue(state));
+}
+
+void RelativeBaseOffsetInstruction::execute(IntcodeProgamState& state) const
+{
+    state.relativeBase += m_param.asRvalue(state);
 }
 
 DoubleParameterIntcodeInstruction::DoubleParameterIntcodeInstruction(IntcodeParameter param1, IntcodeParameter param2) noexcept

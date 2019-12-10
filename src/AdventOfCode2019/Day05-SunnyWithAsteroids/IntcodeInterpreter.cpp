@@ -8,7 +8,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-ParameterCreator::ParameterCreator(int opcodeWithParameterModes, const AdventOfCode::IntcodeProgamState& state)
+ParameterCreator::ParameterCreator(IntcodeNumberType opcodeWithParameterModes, const AdventOfCode::IntcodeProgamState& state)
     : m_opcodeWithParameterModes{opcodeWithParameterModes}
     , m_state{state}
 {
@@ -17,7 +17,7 @@ ParameterCreator::ParameterCreator(int opcodeWithParameterModes, const AdventOfC
 
 IntcodeParameter ParameterCreator::getParam(size_t parameterPosition)
 {
-    const int value = m_state.program.at(m_state.instructionPointer + parameterPosition);
+    const IntcodeNumberType value = m_state.program.at(m_state.instructionPointer + parameterPosition);
     const IntcodeParameterMode parameterMode = createParameterMode(parameterPosition);
 
     return IntcodeParameter{value, parameterMode};
@@ -37,12 +37,16 @@ IntcodeParameterMode ParameterCreator::createParameterMode(size_t parameterPosit
     {
         return IntcodeParameterMode::IMMEDIATE;
     }
+    else if (modeNumber == 2)
+    {
+        return IntcodeParameterMode::RELATIVE;
+    }
 
     throw std::runtime_error("Invalid parameter mode: " + std::to_string(modeNumber));
 }
 
-IntcodeInterpreter::IntcodeInterpreter(std::vector<int> program)
-    : m_state{std::move(program), {}, {}, IntcodeProgramExecutionState::RUNNING, 0}
+IntcodeInterpreter::IntcodeInterpreter(std::vector<IntcodeNumberType> program)
+    : m_state{std::move(program), {}, {}, IntcodeProgramExecutionState::RUNNING, 0, 0}
 {
 
 }
@@ -63,12 +67,12 @@ void IntcodeInterpreter::execute()
     }
 }
 
-void IntcodeInterpreter::addInput(int input)
+void IntcodeInterpreter::addInput(IntcodeNumberType input)
 {
     m_state.inputs.push_back(input);
 }
 
-const std::vector<int>& IntcodeInterpreter::getOutputs() const
+const std::vector<IntcodeNumberType>& IntcodeInterpreter::getOutputs() const
 {
     return m_state.outputs;
 }
@@ -80,7 +84,7 @@ const IntcodeProgramExecutionState IntcodeInterpreter::getExecutionState() const
 
 IntcodeInstruction::SharedPtr IntcodeInterpreter::createNextInstruction()
 {
-    const int opcodeWithParameterModes = m_state.program.at(m_state.instructionPointer);
+    const IntcodeNumberType opcodeWithParameterModes = m_state.program.at(m_state.instructionPointer);
     const int opcode = opcodeWithParameterModes % 100;
 
     ParameterCreator creator{opcodeWithParameterModes, m_state};
@@ -103,6 +107,8 @@ IntcodeInstruction::SharedPtr IntcodeInterpreter::createNextInstruction()
             return std::make_shared<LessThanIntcodeInstruction>(creator.getParam(1), creator.getParam(2), creator.getParam(3));
         case 8:
             return std::make_shared<EqualsIntcodeInstruction>(creator.getParam(1), creator.getParam(2), creator.getParam(3));
+        case 9:
+            return std::make_shared<RelativeBaseOffsetInstruction>(creator.getParam(1));
         case 99:
             return std::make_shared<HaltIntcodeInstruction>();
     }
