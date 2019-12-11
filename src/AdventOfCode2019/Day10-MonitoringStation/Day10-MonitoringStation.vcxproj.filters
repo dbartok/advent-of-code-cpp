@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day10-MonitoringStation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AsteroidMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day10-MonitoringStation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AsteroidMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
