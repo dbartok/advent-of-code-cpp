@@ -21,4 +21,8 @@ int main()
     }
 
     std::cout << "First part: " << AoC::maxNumAsteroidsDetected(lines) << std::endl;
+
+    auto vaporizationOrder = AoC::vaporizationOrder(lines);
+    auto specialAsteroid = vaporizationOrder.at(199);
+    std::cout << "Second part: " << specialAsteroid.first * 100 + specialAsteroid.second << std::endl;
 }

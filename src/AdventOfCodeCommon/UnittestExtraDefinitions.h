@@ -16,7 +16,7 @@ namespace CppUnitTestFramework
 {
 
 template <typename T>
-std::wstring ToString(const std::vector<T> v)
+std::wstring ToString(const std::vector<T>& v)
 {
     std::wstringstream s;
 
@@ -28,6 +28,19 @@ std::wstring ToString(const std::vector<T> v)
             s << ", ";
         }
     }
+
+    return s.str();
+}
+
+
+template <typename T, typename U>
+std::wstring ToString(const std::pair<T, U>& p)
+{
+    std::wstringstream s;
+
+    s << ToString(p.first);
+    s << ", ";
+    s << ToString(p.second);
 
     return s.str();
 }

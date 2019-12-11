@@ -9,7 +9,9 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+using Coordinates = std::pair<int, int>;
 
 unsigned maxNumAsteroidsDetected(const std::vector<std::string> asteroidMapLines);
+std::vector<Coordinates> vaporizationOrder(const std::vector<std::string> asteroidMapLines);
 
 }

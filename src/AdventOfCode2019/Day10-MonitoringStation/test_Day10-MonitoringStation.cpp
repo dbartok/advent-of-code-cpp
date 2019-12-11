@@ -1,5 +1,7 @@
 #include "Day10-MonitoringStation.h"
 
+#include <AdventOfCodeCommon/UnittestExtraDefinitions.h>
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
@@ -70,30 +72,52 @@ public:
         };
         Assert::AreEqual(41u, AoC::maxNumAsteroidsDetected(map4));
 
-        const std::vector<std::string> map5 =
-        {
-            ".#..##.###...#######",
-            "##.############..##.",
-            ".#.######.########.#",
-            ".###.#######.####.#.",
-            "#####.##.#.##.###.##",
-            "..#####..#.#########",
-            "####################",
-            "#.####....###.#.#.##",
-            "##.#################",
-            "#####.##.###..####..",
-            "..######..##.#######",
-            "####.##.####...##..#",
-            ".#####..#.######.###",
-            "##...#.##########...",
-            "#.##########.#######",
-            ".####.#.###.###.#.##",
-            "....##.##.###..#####",
-            ".#.#.###########.###",
-            "#.#.#.#####.####.###",
-            "###.##.####.##.#..##"
-        };
-        Assert::AreEqual(210u, AoC::maxNumAsteroidsDetected(map5));
+        Assert::AreEqual(210u, AoC::maxNumAsteroidsDetected(large_map));
     }
+
+    TEST_METHOD(vaporizationOrder_SimpleTests)
+    {
+        auto vaporizationOrder = AoC::vaporizationOrder(large_map);
+
+        auto dummy = AoC::Coordinates{0, 0};
+        vaporizationOrder.insert(vaporizationOrder.begin(), dummy);
+
+        Assert::AreEqual(AoC::Coordinates{11, 12}, vaporizationOrder.at(1));
+        Assert::AreEqual(AoC::Coordinates{12, 1}, vaporizationOrder.at(2));
+        Assert::AreEqual(AoC::Coordinates{12, 2}, vaporizationOrder.at(3));
+        Assert::AreEqual(AoC::Coordinates{12, 8}, vaporizationOrder.at(10));
+        Assert::AreEqual(AoC::Coordinates{16, 0}, vaporizationOrder.at(20));
+        Assert::AreEqual(AoC::Coordinates{16, 9}, vaporizationOrder.at(50));
+        Assert::AreEqual(AoC::Coordinates{10, 16}, vaporizationOrder.at(100));
+        Assert::AreEqual(AoC::Coordinates{9, 6}, vaporizationOrder.at(199));
+        Assert::AreEqual(AoC::Coordinates{8, 2}, vaporizationOrder.at(200));
+        Assert::AreEqual(AoC::Coordinates{10, 9}, vaporizationOrder.at(201));
+        Assert::AreEqual(AoC::Coordinates{11, 1}, vaporizationOrder.at(299));
+    }
+
+private:
+    const std::vector<std::string> large_map =
+    {
+        ".#..##.###...#######",
+        "##.############..##.",
+        ".#.######.########.#",
+        ".###.#######.####.#.",
+        "#####.##.#.##.###.##",
+        "..#####..#.#########",
+        "####################",
+        "#.####....###.#.#.##",
+        "##.#################",
+        "#####.##.###..####..",
+        "..######..##.#######",
+        "####.##.####...##..#",
+        ".#####..#.######.###",
+        "##...#.##########...",
+        "#.##########.#######",
+        ".####.#.###.###.#.##",
+        "....##.##.###..#####",
+        ".#.#.###########.###",
+        "#.#.#.#####.####.###",
+        "###.##.####.##.#..##"
+    };
 
 };
