@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 unsigned numPanelsPaintedAtLeastOnce(const std::vector<IntcodeNumberType>& intcodeProgram);
+std::string registrationIdentifier(const std::vector<IntcodeNumberType>& intcodeProgram);
 
 }

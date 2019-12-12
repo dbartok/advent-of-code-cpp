@@ -24,4 +24,5 @@ int main()
     AoC::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, intcodeProgram, ',');
 
     std::cout << "First part: " << AoC::numPanelsPaintedAtLeastOnce(intcodeProgram) << std::endl;
+    std::cout << "Second part: " << std::endl << AoC::registrationIdentifier(intcodeProgram) << std::endl;
 }

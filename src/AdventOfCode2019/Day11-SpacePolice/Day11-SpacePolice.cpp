@@ -3,7 +3,10 @@
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include <boost/algorithm/string.hpp>
 #include <boost/functional/hash.hpp>
+
+#include <Eigen/Dense>
 
 #include <unordered_map>
 __END_LIBRARIES_DISABLE_WARNINGS
@@ -13,13 +16,18 @@ namespace AdventOfCode
 
 using Coordinates = std::pair<int, int>;
 
+using Vector2D = Eigen::Matrix<int, 2, 1>;
+
 enum class PaintColor
 {
     BLACK = 0,
     WHITE = 1,
 };
 
-using CoordinatesMap = std::unordered_map<Coordinates, PaintColor, boost::hash<Coordinates>>;
+const char BLACK_CHAR = ' ';
+const char WHITE_CHAR = '.';
+
+using CoordinatesToColor = std::unordered_map<Coordinates, PaintColor, boost::hash<Coordinates>>;
 
 enum class Direction
 {
@@ -33,9 +41,16 @@ class HullPaintingRobot
 {
 public:
     HullPaintingRobot(IntcodeInterpreter interpreter)
+        : HullPaintingRobot(interpreter, {})
+    {
+
+    }
+
+    HullPaintingRobot(IntcodeInterpreter interpreter, CoordinatesToColor initialCoordinatesToColor)
         : m_interpreter{std::move(interpreter)}
         , m_currentCoordinates{0, 0}
         , m_direction{Direction::UP}
+        , m_coordinatesToColor{std::move(initialCoordinatesToColor)}
     {
 
     }
@@ -74,13 +89,45 @@ public:
         return m_coordinatesToColor.size();
     }
 
+    std::string getRegistrationIdentifier()
+    {
+        std::pair<Vector2D, Vector2D> boundingBox = getBoundingBox();
+
+        const Vector2D& offset = boundingBox.first;
+        const Vector2D& size = boundingBox.second;
+
+        const int width = size[0];
+        const int height = size[1];
+
+        std::vector<std::string> serializedLines(height, std::string(width, BLACK_CHAR));
+
+        for (const auto& coordinatesAndColor : m_coordinatesToColor)
+        {
+            if (coordinatesAndColor.second == PaintColor::WHITE)
+            {
+                const Coordinates& coordinates = coordinatesAndColor.first;
+                Vector2D positionVector{coordinates.first, coordinates.second};
+                Vector2D positionRelativeToBoundingBox{positionVector - offset};
+
+                const int posX = positionRelativeToBoundingBox[0];
+                const int posY = positionRelativeToBoundingBox[1];
+
+                serializedLines.at(posY).at(posX) = WHITE_CHAR;
+            }
+        }
+
+        std::reverse(serializedLines.begin(), serializedLines.end());
+
+        return boost::algorithm::join(serializedLines, "\n");
+    }
+
 private:
     IntcodeInterpreter m_interpreter;
 
     Coordinates m_currentCoordinates;
     Direction m_direction;
 
-    CoordinatesMap m_coordinatesToColor;
+    CoordinatesToColor m_coordinatesToColor;
 
     void moveForward()
     {
@@ -141,6 +188,39 @@ private:
         }
         return currentCoordinatesAndColorIter->second;
     }
+
+    std::pair<Vector2D, Vector2D> getBoundingBox() const
+    {
+        auto minmaxXCoordinatesIterPair = std::minmax_element(m_coordinatesToColor.cbegin(), m_coordinatesToColor.cend(), [](const auto& lhs, const auto& rhs)
+                                                              {
+                                                                  const auto& lhsCoords = lhs.first;
+                                                                  const auto& rhsCoords = rhs.first;
+                                                                  return lhsCoords.first < rhsCoords.first;
+                                                              });
+
+        const auto& minXCoordsAndColor = minmaxXCoordinatesIterPair.first;
+        const auto& maxXCoordsAndColor = minmaxXCoordinatesIterPair.second;
+        const auto& minXCoords = minXCoordsAndColor->first;
+        const auto& maxXCoords = maxXCoordsAndColor->first;
+        const int minX = minXCoords.first;
+        const int maxX = maxXCoords.first;
+
+        auto minmaxYCoordinatesIterPair = std::minmax_element(m_coordinatesToColor.cbegin(), m_coordinatesToColor.cend(), [](const auto& lhs, const auto& rhs)
+                                                              {
+                                                                  const auto& lhsCoords = lhs.first;
+                                                                  const auto& rhsCoords = rhs.first;
+                                                                  return lhsCoords.second < rhsCoords.second;
+                                                              });
+
+        const auto& minYCoordsAndColor = minmaxYCoordinatesIterPair.first;
+        const auto& maxYCoordsAndColor = minmaxYCoordinatesIterPair.second;
+        const auto& minYCoords = minYCoordsAndColor->first;
+        const auto& maxYCoords = maxYCoordsAndColor->first;
+        const int minY = minYCoords.second;
+        const int maxY = maxYCoords.second;
+
+        return std::make_pair(Vector2D{minX, minY}, Vector2D{maxX - minX + 1, maxY - minY + 1});
+    }
 };
 
 unsigned numPanelsPaintedAtLeastOnce(const std::vector<IntcodeNumberType>& intcodeProgram)
@@ -152,6 +232,19 @@ unsigned numPanelsPaintedAtLeastOnce(const std::vector<IntcodeNumberType>& intco
     robot.paint();
 
     return robot.getNumPanelsPaintedAtLeastOnce();
+}
+
+std::string registrationIdentifier(const std::vector<IntcodeNumberType>& intcodeProgram)
+{
+    IntcodeInterpreter interpreter{intcodeProgram};
+    CoordinatesToColor initialCoordinatesToColor;
+    initialCoordinatesToColor[{0, 0}] = PaintColor::WHITE;
+
+    HullPaintingRobot robot{std::move(interpreter), initialCoordinatesToColor};
+
+    robot.paint();
+
+    return robot.getRegistrationIdentifier();
 }
 
 }

@@ -23,4 +23,14 @@ public:
         ));
     }
 
+    TEST_METHOD(registrationIdentifier_SimpleTests)
+    {
+        AoC::IntcodeNumberType mem = 1000; // Some high memory address
+        Assert::AreEqual(std::string{"."}, AoC::registrationIdentifier(
+            {
+                3, mem, 104, 1, 104, 0, 99
+            }
+        ));
+    }
+
 };
