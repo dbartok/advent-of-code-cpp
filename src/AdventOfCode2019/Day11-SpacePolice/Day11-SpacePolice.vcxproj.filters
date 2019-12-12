@@ -26,6 +26,9 @@
     <ClCompile Include="..\Day05-SunnyWithAsteroids\IntcodeInterpreter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HullPaintingRobot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day11-SpacePolice.h">
@@ -38,6 +41,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Day05-SunnyWithAsteroids\IntcodeProgramState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HullPaintingRobot.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
