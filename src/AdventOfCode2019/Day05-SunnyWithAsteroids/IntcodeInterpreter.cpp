@@ -77,6 +77,11 @@ const std::vector<IntcodeNumberType>& IntcodeInterpreter::getOutputs() const
     return m_state.outputs;
 }
 
+void IntcodeInterpreter::clearOutputs()
+{
+    m_state.outputs.clear();
+}
+
 const IntcodeProgramExecutionState IntcodeInterpreter::getExecutionState() const
 {
     return m_state.executionState;

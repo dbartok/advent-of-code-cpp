@@ -33,6 +33,7 @@ public:
 
     void addInput(IntcodeNumberType input);
     const std::vector<IntcodeNumberType>& getOutputs() const;
+    void clearOutputs();
     const IntcodeProgramExecutionState getExecutionState() const;
 
 private:
