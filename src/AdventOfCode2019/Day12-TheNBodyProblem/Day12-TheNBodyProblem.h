@@ -16,5 +16,6 @@ namespace AdventOfCode
 {
 
 int totalEnergyAfterSteps(const std::vector<std::string>& moonPositionLines, unsigned numSteps = DEFAULT_NUM_STEPS);
+unsigned long long numStepsUntilRepetition(const std::vector<std::string>& moonPositionLines);
 
 }

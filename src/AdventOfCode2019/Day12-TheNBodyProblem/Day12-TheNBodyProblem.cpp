@@ -3,6 +3,8 @@
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include <boost/math/common_factor_rt.hpp>
+
 #include <Eigen/Dense>
 
 #include <numeric>
@@ -25,15 +27,22 @@ struct Moon
 
     Vector3D pos;
     Vector3D vel;
+
+    bool operator==(const Moon& other) const = default;
+
+    bool isAxisMatching(const Moon& other, size_t axisIndex) const
+    {
+        return pos[axisIndex] == other.pos[axisIndex] && vel[axisIndex] == other.vel[axisIndex];
+    }
 };
 
 class MoonMotionSimulator
 {
 public:
     MoonMotionSimulator(std::vector<Moon> moons)
-        : m_moons{std::move(moons)}
+        : m_initialMoons{std::move(moons)}
     {
-
+        reset();
     }
 
     void simulate(unsigned numSteps)
@@ -44,6 +53,25 @@ public:
         }
     }
 
+    void simulateUntilRepetition()
+    {
+        std::vector<unsigned long long> individualAxisResults;
+
+        for (int axisIndex = 0; axisIndex <= 2; ++axisIndex)
+        {
+            reset();
+
+            simulateAxisUntilRepetition(axisIndex);
+
+            individualAxisResults.push_back(getNumSteps());
+        }
+
+        m_numSteps = std::accumulate(individualAxisResults.cbegin(), individualAxisResults.cend(), 1ull, [](auto total, auto current)
+                                     {
+                                         return boost::math::lcm(total, current);
+                                     });
+    }
+
     int getTotalEnergy() const
     {
         return std::accumulate(m_moons.cbegin(), m_moons.cend(), 0, [](int total, const Moon& moon)
@@ -52,20 +80,29 @@ public:
                                });
     }
 
+    unsigned long long getNumSteps() const
+    {
+        return m_numSteps;
+    }
+
 private:
     std::vector<Moon> m_moons;
 
+    std::vector<Moon> m_initialMoons;
+    unsigned long long m_numSteps;
+
     void step()
     {
+        ++m_numSteps;
         applyAllGravity();
         applyAllVelocity();
     }
 
     void applyAllGravity()
     {
-        for (auto& firstMoonIter = m_moons.begin(); firstMoonIter != m_moons.end(); ++firstMoonIter)
+        for (auto firstMoonIter = m_moons.begin(); firstMoonIter != m_moons.end(); ++firstMoonIter)
         {
-            for (auto& secondMoonIter = std::next(firstMoonIter); secondMoonIter != m_moons.end(); ++secondMoonIter)
+            for (auto secondMoonIter = std::next(firstMoonIter); secondMoonIter != m_moons.end(); ++secondMoonIter)
             {
                 applyGravity(*firstMoonIter, *secondMoonIter);
             }
@@ -78,6 +115,30 @@ private:
         {
             moon.pos += moon.vel;
         }
+    }
+
+    void simulateAxisUntilRepetition(size_t axisIndex)
+    {
+        while (true)
+        {
+            step();
+
+            bool isRepeat = std::equal(m_moons.cbegin(), m_moons.cend(), m_initialMoons.cbegin(), [axisIndex](const auto& lhs, const auto& rhs)
+                                       {
+                                           return lhs.isAxisMatching(rhs, axisIndex);
+                                       });
+
+            if (isRepeat)
+            {
+                break;
+            }
+        }
+    }
+
+    void reset()
+    {
+        m_numSteps = 0;
+        m_moons = m_initialMoons;
     }
 
     static void applyGravity(Moon& firstMoon, Moon& secondMoon)
@@ -140,6 +201,17 @@ int totalEnergyAfterSteps(const std::vector<std::string>& moonPositionLines, uns
     simulator.simulate(numSteps);
 
     return simulator.getTotalEnergy();
+}
+
+unsigned long long numStepsUntilRepetition(const std::vector<std::string>& moonPositionLines)
+{
+    std::vector<Moon> moons = createMoons(moonPositionLines);
+
+    MoonMotionSimulator simulator{std::move(moons)};
+
+    simulator.simulateUntilRepetition();
+
+    return simulator.getNumSteps();
 }
 
 }

@@ -15,23 +15,32 @@ public:
 
     TEST_METHOD(totalEnergyAfterSteps_SimpleTests)
     {
-        const std::vector<std::string> positions1 =
-        {
-            "<x=-1, y=0, z=2>",
-            "<x=2, y=-10, z=-7>",
-            "<x=4, y=-8, z=8>",
-            "<x=3, y=5, z=-1>"
-        };
-        Assert::AreEqual(179, AoC::totalEnergyAfterSteps(positions1, 10));
 
-        const std::vector<std::string> positions2 =
-        {
-            "<x=-8, y=-10, z=0>",
-            "<x=5, y=5, z=10>",
-            "<x=2, y=-7, z=3>",
-            "<x=9, y=-8, z=-3>"
-        };
-        Assert::AreEqual(1940, AoC::totalEnergyAfterSteps(positions2, 100));
+        Assert::AreEqual(179, AoC::totalEnergyAfterSteps(m_positions1, 10));
+        Assert::AreEqual(1940, AoC::totalEnergyAfterSteps(m_positions2, 100));
     }
 
+    TEST_METHOD(numStepsUntilRepetition_SimpleTests)
+    {
+
+        Assert::AreEqual(2772ull, AoC::numStepsUntilRepetition(m_positions1));
+        Assert::AreEqual(4686774924ull, AoC::numStepsUntilRepetition(m_positions2));
+    }
+
+private:
+    const std::vector<std::string> m_positions1 =
+    {
+        "<x=-1, y=0, z=2>",
+        "<x=2, y=-10, z=-7>",
+        "<x=4, y=-8, z=8>",
+        "<x=3, y=5, z=-1>"
+    };
+
+    const std::vector<std::string> m_positions2 =
+    {
+        "<x=-8, y=-10, z=0>",
+        "<x=5, y=5, z=10>",
+        "<x=2, y=-7, z=3>",
+        "<x=9, y=-8, z=-3>"
+    };
 };

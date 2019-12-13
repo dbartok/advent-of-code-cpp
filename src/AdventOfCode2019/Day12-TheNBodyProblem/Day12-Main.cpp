@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::totalEnergyAfterSteps(lines) << std::endl;
+    std::cout << "Second part: " << AoC::numStepsUntilRepetition(lines) << std::endl;
 }
