@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day12-TheNBodyProblem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MoonMotionSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day12-TheNBodyProblem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoonMotionSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
