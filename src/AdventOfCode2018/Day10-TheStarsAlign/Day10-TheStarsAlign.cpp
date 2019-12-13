@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-std::vector<Starlight> parseStarlights(const std::vector<std::string>& starlightLines)
+std::vector<Starlight> createMoons(const std::vector<std::string>& starlightLines)
 {
     std::vector<Starlight> starlights;
 
@@ -36,7 +36,7 @@ std::vector<Starlight> parseStarlights(const std::vector<std::string>& starlight
 
 std::string serializedMessageWhenAligned(const std::vector<std::string>& starlightLines)
 {
-    std::vector<Starlight> starlights = parseStarlights(starlightLines);
+    std::vector<Starlight> starlights = createMoons(starlightLines);
 
     StarAligner starAligner{std::move(starlights)};
     starAligner.align();
@@ -46,7 +46,7 @@ std::string serializedMessageWhenAligned(const std::vector<std::string>& starlig
 
 unsigned timeTakenUntilAligned(const std::vector<std::string>& starlightLines)
 {
-    std::vector<Starlight> starlights = parseStarlights(starlightLines);
+    std::vector<Starlight> starlights = createMoons(starlightLines);
 
     StarAligner starAligner{std::move(starlights)};
     starAligner.align();
