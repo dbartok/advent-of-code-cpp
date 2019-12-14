@@ -1,6 +1,6 @@
 #pragma once
 
-#include <AdventOfCode2019/Day05-SunnyWithAsteroids/IntcodeInterpreter.h>
+#include "ArcadeCabinet.h"
 
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
