@@ -24,4 +24,5 @@ int main()
     AoC::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, intcodeProgram, ',');
 
     std::cout << "First part: " << AoC::numBlockTilesWhenGameExits(intcodeProgram) << std::endl;
+    std::cout << "Second part: " << AoC::scoreAfterLastBlockBroken(intcodeProgram) << std::endl;
 }

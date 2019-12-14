@@ -18,4 +18,9 @@ public:
         Assert::AreEqual(1u, AoC::numBlockTilesWhenGameExits({104, 0, 104, 0, 104, 2, 99}));
     }
 
+    TEST_METHOD(scoreAfterLastBlockBroken_SimpleTests)
+    {
+        Assert::AreEqual(33u, AoC::scoreAfterLastBlockBroken({0, 0, 0, 0, 104, -1, 104, 0, 104, 33, 99}));
+    }
+
 };
