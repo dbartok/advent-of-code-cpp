@@ -14,6 +14,8 @@ namespace
 {
 const char* FUEL = "FUEL";
 const char* ORE = "ORE";
+
+const long long TOTAL_ORE_AVAILABLE = 1'000'000'000'000;
 }
 
 namespace AdventOfCode
@@ -22,14 +24,14 @@ namespace AdventOfCode
 struct QuantifiedChemical
 {
     std::string name;
-    int amount;
+    long long amount;
 };
 
 struct ChemicalReaction
 {
     std::vector<QuantifiedChemical> inputs;
     QuantifiedChemical output;
-    int currentResidueRemaining;
+    long long currentResidueRemaining;
 };
 
 using ChemicalNameToSourceReaction = std::unordered_map<std::string, ChemicalReaction>;
@@ -45,10 +47,10 @@ public:
         }
     }
 
-    void produceFuel()
+    void produceFuel(long long amount)
     {
         std::deque<QuantifiedChemical> workOrders;
-        workOrders.push_back({FUEL, 1});
+        workOrders.push_back({FUEL, amount});
 
         while (!workOrders.empty())
         {
@@ -66,7 +68,7 @@ public:
         }
     }
 
-    int getNumOreConsumed() const
+    long long getOreConsumed() const
     {
         return m_oreConsumed;
     }
@@ -74,7 +76,7 @@ public:
 private:
     ChemicalNameToSourceReaction m_chemicalNameToSourceReaction;
 
-    int m_oreConsumed = 0;
+    long long m_oreConsumed = 0;
 
     std::vector<QuantifiedChemical> calculateIngredients(const QuantifiedChemical& chemicalToProduce)
     {
@@ -88,9 +90,9 @@ private:
             return {};
         }
 
-        int amountToProduce = chemicalToProduce.amount - sourceReaction.currentResidueRemaining;
+        long long amountToProduce = chemicalToProduce.amount - sourceReaction.currentResidueRemaining;
 
-        int numReactionsRequired = std::ceil(amountToProduce / static_cast<double>(sourceReaction.output.amount));
+        long long numReactionsRequired = std::ceil(amountToProduce / static_cast<double>(sourceReaction.output.amount));
 
         sourceReaction.currentResidueRemaining = numReactionsRequired * sourceReaction.output.amount - amountToProduce;
 
@@ -164,15 +166,40 @@ std::vector<ChemicalReaction> createChemicalReactions(const std::vector<std::str
     return chemicalReactions;
 }
 
-int minOreRequiredToProduceFuel(const std::vector<std::string>& reactionLines)
+long long minOreRequiredToProduceFuel(const std::vector<std::string>& reactionLines)
 {
     std::vector<ChemicalReaction> chemicalReactions = createChemicalReactions(reactionLines);
 
     FuelProducer producer{std::move(chemicalReactions)};
 
-    producer.produceFuel();
+    producer.produceFuel(1);
 
-    return producer.getNumOreConsumed();
+    return producer.getOreConsumed();
+}
+
+long long maxProducableFuel(const std::vector<std::string>& reactionLines)
+{
+    std::vector<ChemicalReaction> chemicalReactions = createChemicalReactions(reactionLines);
+
+    long long lowerBound = 1;
+    long long upperBound = TOTAL_ORE_AVAILABLE;
+    while (upperBound - lowerBound > 1)
+    {
+        FuelProducer producer{chemicalReactions};
+
+        long long mid = (lowerBound + upperBound) / 2;
+        producer.produceFuel(mid);
+        if (producer.getOreConsumed() > TOTAL_ORE_AVAILABLE)
+        {
+            upperBound = mid;
+        }
+        else
+        {
+            lowerBound = mid;
+        }
+    }
+
+    return lowerBound;
 }
 
 }

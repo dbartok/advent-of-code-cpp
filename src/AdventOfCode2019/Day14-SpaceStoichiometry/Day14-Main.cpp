@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::minOreRequiredToProduceFuel(lines) << std::endl;
+    std::cout << "Second part: " << AoC::maxProducableFuel(lines) << std::endl;
 }

@@ -10,6 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-int minOreRequiredToProduceFuel(const std::vector<std::string>& reactionLines);
+long long minOreRequiredToProduceFuel(const std::vector<std::string>& reactionLines);
+long long maxProducableFuel(const std::vector<std::string>& reactionLines);
 
 }
