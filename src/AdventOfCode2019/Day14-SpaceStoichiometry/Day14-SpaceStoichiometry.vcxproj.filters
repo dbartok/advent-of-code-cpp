@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day14-SpaceStoichiometry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FuelProducer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day14-SpaceStoichiometry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FuelProducer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
