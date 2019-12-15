@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int fewestNumberOfMovementsToOxygen(const std::vector<IntcodeNumberType>& intcodeProgram);
+int numMinutesUntilOxygenSpreads(const std::vector<IntcodeNumberType>& intcodeProgram);
 
 }

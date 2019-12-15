@@ -23,4 +23,16 @@ public:
         ));
     }
 
+    TEST_METHOD(numMinutesUntilOxygenSpreads_SimpleTests)
+    {
+        AoC::IntcodeNumberType mem = 1000; // Some high memory address
+        Assert::AreEqual(1, AoC::numMinutesUntilOxygenSpreads(
+            {
+                3, mem, 104, 2, // Find oxygen
+                3, mem, 104, 0, 3, mem, 104, 0, 3, mem, 104, 0, 3, mem, 104, 0, // Hit wall in 4 directions
+                3, mem, 104, 1, 99 // Move 1 distance then terminate
+            }
+        ));
+    }
+
 };

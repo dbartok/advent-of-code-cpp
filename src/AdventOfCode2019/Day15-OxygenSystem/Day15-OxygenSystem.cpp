@@ -5,8 +5,8 @@
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/functional/hash.hpp>
 
+#include <algorithm>
 #include <unordered_map>
-#include <iostream>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -42,14 +42,34 @@ public:
         m_coordinatesToDistance[{0, 0}] = 0;
     }
 
-    void repair()
+    void traverse()
     {
-        repairRecursive();
+        traverseRecursive();
+    }
+
+    void moveToOxygen()
+    {
+        traverseRecursive(true /* shouldHaltOnOxygen */);
+
+        m_coordinatesToDistance.clear();
+        m_coordinatesToDistance[m_oxygenCoordinates] = 0;
+        m_numStepsFromStart = 0;
+        m_halted = false;
     }
 
     int getDistanceToOxygen() const
     {
         return m_coordinatesToDistance.at({m_oxygenCoordinates});
+    }
+
+    int getMaxDistance() const
+    {
+        const auto maxElementIter = std::max_element(m_coordinatesToDistance.cbegin(), m_coordinatesToDistance.cend(), [](const auto& lhs, const auto& rhs)
+                                                     {
+                                                         return lhs.second < rhs.second;
+                                                     });
+
+        return maxElementIter->second;
     }
 
 private:
@@ -61,11 +81,13 @@ private:
 
     Coordinates m_oxygenCoordinates;
 
-    void repairRecursive()
+    bool m_halted = false;
+
+    void traverseRecursive(bool shouldHaltOnOxygen = false)
     {
         for (auto direction : getAllDirections())
         {
-            if (m_interpreter.getExecutionState() == IntcodeProgramExecutionState::TERMINATED)
+            if (isHalted())
             {
                 return;
             }
@@ -79,15 +101,23 @@ private:
 
             if (updateDataAfterMove(direction))
             {
-                repairRecursive();
+                traverseRecursive(shouldHaltOnOxygen);
             }
 
             if (statusCode == DroidStatusCode::MOVED_AND_OXYGEN_FOUND)
             {
                 m_oxygenCoordinates = m_currentPosition;
+
+                if (shouldHaltOnOxygen)
+                {
+                    m_halted = true;
+                }
             }
 
-            undoMove(direction);
+            if (!isHalted())
+            {
+                undoMove(direction);
+            }
         }
     }
 
@@ -157,6 +187,11 @@ private:
         updatePosition(oppositeDirection);
     }
 
+    bool isHalted() const
+    {
+        return m_halted || m_interpreter.getExecutionState() == IntcodeProgramExecutionState::TERMINATED;
+    }
+
     static std::vector<Direction> getAllDirections()
     {
         return {Direction::NORTH, Direction::SOUTH, Direction::WEST, Direction::EAST};
@@ -186,9 +221,21 @@ int fewestNumberOfMovementsToOxygen(const std::vector<IntcodeNumberType>& intcod
 
     OxygenRepairDroid droid{std::move(interpreter)};
 
-    droid.repair();
+    droid.traverse();
 
     return droid.getDistanceToOxygen();
+}
+
+int numMinutesUntilOxygenSpreads(const std::vector<IntcodeNumberType>& intcodeProgram)
+{
+    IntcodeInterpreter interpreter{intcodeProgram};
+
+    OxygenRepairDroid droid{std::move(interpreter)};
+
+    droid.moveToOxygen();
+    droid.traverse();
+
+    return droid.getMaxDistance();
 }
 
 }
