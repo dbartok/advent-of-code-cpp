@@ -10,5 +10,6 @@ namespace AdventOfCode
 {
 
 std::string firstEightDigitsOfFinalOutput(const std::string& signalString);
+std::string messageInFinalOutputForRealSignal(const std::string& signalString);
 
 }

@@ -20,4 +20,11 @@ public:
         Assert::AreEqual(std::string{"52432133"}, AoC::firstEightDigitsOfFinalOutput("69317163492948606335995924319873"));
     }
 
+    TEST_METHOD(messageInFinalOutputForRealSignal_SimpleTests)
+    {
+        Assert::AreEqual(std::string{"84462026"}, AoC::messageInFinalOutputForRealSignal("03036732577212944063491565474664"));
+        Assert::AreEqual(std::string{"78725270"}, AoC::messageInFinalOutputForRealSignal("02935109699940807407585447034323"));
+        Assert::AreEqual(std::string{"53553731"}, AoC::messageInFinalOutputForRealSignal("03081770884921959731165446850517"));
+    }
+
 };

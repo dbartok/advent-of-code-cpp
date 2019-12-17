@@ -22,4 +22,5 @@ int main()
     signalString.erase(std::remove(signalString.begin(), signalString.end(), '\n'), signalString.end());
 
     std::cout << "First part: " << AoC::firstEightDigitsOfFinalOutput(signalString) << std::endl;
+    std::cout << "Second part: " << AoC::messageInFinalOutputForRealSignal(signalString) << std::endl;
 }

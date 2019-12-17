@@ -5,6 +5,7 @@
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
 
+#include <algorithm>
 #include <array>
 #include <numeric>
 #include <vector>
@@ -17,6 +18,8 @@ const size_t NUM_ITERATIONS = 100;
 const size_t PATTERN_OFFSET = 1;
 const size_t BASE_PATTERN_SIZE = 4;
 const std::array<int, BASE_PATTERN_SIZE> BASE_PATTERN{0, 1, 0, -1};
+
+const size_t MULTIPLIER_OF_REAL_SIGNAL = 10'000;
 }
 
 namespace AdventOfCode
@@ -86,6 +89,39 @@ std::vector<int> applyPhase(const std::vector<int>& digits)
     return result;
 }
 
+std::vector<int> applyPhaseToShortSuffix(const std::vector<int>& digits)
+{
+    std::vector<int> result;
+
+    // Calculate suffix sum
+    std::partial_sum(digits.crbegin(), digits.crend(), std::back_inserter(result));
+    std::reverse(result.begin(), result.end());
+
+    for (auto& i : result)
+    {
+        i %= 10;
+    }
+
+    return result;
+}
+
+std::vector<int> extendToRealSignalRelevantPart(const std::string& signalString)
+{
+    std::vector<int> digits = convertToVectorOfDigits(signalString);
+    std::vector<int> extendedDigits;
+
+    for (size_t i = 0; i < MULTIPLIER_OF_REAL_SIGNAL; ++i)
+    {
+        std::copy(digits.begin(), digits.end(), std::back_inserter(extendedDigits));
+    }
+
+    std::vector<int> relevantDigits;
+    int messageOffset = std::stoi(signalString.substr(0, 7));
+    std::copy(extendedDigits.cbegin() + messageOffset, extendedDigits.cend(), std::back_inserter(relevantDigits));
+
+    return relevantDigits;
+}
+
 std::string firstEightDigitsOfFinalOutput(const std::string& signalString)
 {
     std::vector<int> digits = convertToVectorOfDigits(signalString);
@@ -96,6 +132,23 @@ std::string firstEightDigitsOfFinalOutput(const std::string& signalString)
     }
 
     std::string digitsAsString = convertToString(digits);
+
+    return digitsAsString.substr(0, 8);
+}
+
+std::string messageInFinalOutputForRealSignal(const std::string& signalString)
+{
+    std::vector<int> relevantDigits = extendToRealSignalRelevantPart(signalString);
+
+    // Under this assumption, applying a phase becomes a simple prefix sum operation
+    assert(relevantDigits.size() < signalString.size() / 2);
+
+    for (size_t i = 0; i < NUM_ITERATIONS; ++i)
+    {
+        relevantDigits = applyPhaseToShortSuffix(relevantDigits);
+    }
+
+    std::string digitsAsString = convertToString(relevantDigits);
 
     return digitsAsString.substr(0, 8);
 }
