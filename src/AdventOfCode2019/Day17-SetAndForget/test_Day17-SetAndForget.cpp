@@ -24,4 +24,18 @@ public:
             }));
     }
 
+    TEST_METHOD(dustCollectedByRobot_SimpleTests)
+    {
+        AoC::IntcodeNumberType mem = 1000; // Some high memory address
+        Assert::AreEqual(1234, AoC::dustCollectedByRobot(
+            {
+                104, 46, 104, 46, 104, 46, 104, 46, 104, 10,   // ....\n
+                104, 94, 104, 35, 104, 46, 104, 35, 104, 10,   // ^#.#\n
+                104, 46, 104, 35, 104, 35, 104, 35, 104, 10,   // .###\n
+                3, mem,                                        // wait for input
+                104, 1234,                                     // output result
+                99
+            }));
+    }
+
 };

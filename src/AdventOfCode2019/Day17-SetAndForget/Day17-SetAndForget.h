@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int sumOfAlignmentParameters(const std::vector<IntcodeNumberType>& intcodeProgram);
+int dustCollectedByRobot(const std::vector<IntcodeNumberType>& intcodeProgram);
 
 }
