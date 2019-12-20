@@ -69,4 +69,31 @@ public:
         Assert::AreEqual(81, AoC::lengthOfShortestPathWithAllKeys(vault5));
     }
 
+    TEST_METHOD(lengthOfShortestPathWithAllKeysMultipleRobots_SimpleTests)
+    {
+        std::vector<std::string> vault1 =
+        {
+            "#######",
+            "#a.#Cd#",
+            "##...##",
+            "##.@.##",
+            "##...##",
+            "#cB#Ab#",
+            "#######"
+        };
+        Assert::AreEqual(8, AoC::lengthOfShortestPathWithAllKeysMultipleRobots(vault1));
+
+        std::vector<std::string> vault2 =
+        {
+            "###############",
+            "#d.ABC.#.....a#",
+            "######...######",
+            "######.@.######",
+            "######...######",
+            "#b.....#.....c#",
+            "###############"
+        };
+        Assert::AreEqual(24, AoC::lengthOfShortestPathWithAllKeysMultipleRobots(vault2));
+    }
+
 };

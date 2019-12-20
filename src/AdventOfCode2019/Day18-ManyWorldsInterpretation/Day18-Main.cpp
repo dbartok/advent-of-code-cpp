@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::lengthOfShortestPathWithAllKeys(lines) << std::endl;
+    std::cout << "Second part: " << AoC::lengthOfShortestPathWithAllKeysMultipleRobots(lines) << std::endl;
 }

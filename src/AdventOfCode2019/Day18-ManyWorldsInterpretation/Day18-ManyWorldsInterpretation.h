@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int lengthOfShortestPathWithAllKeys(const std::vector<std::string>& vaultLines);
+int lengthOfShortestPathWithAllKeysMultipleRobots(const std::vector<std::string>& vaultLines);
 
 }
