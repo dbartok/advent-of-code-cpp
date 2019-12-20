@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day18-ManyWorldsInterpretation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VaultTraverser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day18-ManyWorldsInterpretation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VaultTraverser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
