@@ -251,6 +251,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day20-DonutMaze.cpp" />
+    <ClCompile Include="DonutMazeParser.cpp" />
+    <ClCompile Include="DonutMazeTraverser.cpp" />
     <ClCompile Include="test_Day20-DonutMaze.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -262,6 +264,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day20-DonutMaze.h" />
+    <ClInclude Include="DonutMazeParser.h" />
+    <ClInclude Include="DonutMazeTraverser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
