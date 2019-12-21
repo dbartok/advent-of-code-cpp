@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int numStepsToExit(const std::vector<std::string>& donutMazeLines);
+int numStepsToExitWithMatchingLayers(const std::vector<std::string>& donutMazeLines);
 
 }

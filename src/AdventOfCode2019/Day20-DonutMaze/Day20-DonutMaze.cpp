@@ -162,11 +162,12 @@ private:
 struct DonutMazeSearchNode
 {
     Coordinates coordinates;
+    int layer;
     int numSteps;
 
     bool operator==(const DonutMazeSearchNode& other) const
     {
-        return coordinates == other.coordinates;
+        return coordinates == other.coordinates && layer == other.layer;
     }
 };
 
@@ -177,16 +178,24 @@ struct DonutMazeSearchNodeHash
         std::size_t seed = 0;
 
         boost::hash_combine(seed, node.coordinates);
+        boost::hash_combine(seed, node.layer);
 
         return seed;
     }
 };
 
+enum class TraverseMode
+{
+    IGNORE_LAYERS,
+    RESPECT_LAYERS,
+};
+
 class DonutMazeTraverser
 {
 public:
-    DonutMazeTraverser(DonutMaze donutMaze)
+    DonutMazeTraverser(DonutMaze donutMaze, TraverseMode traverseMode = TraverseMode::IGNORE_LAYERS)
         : m_maze{std::move(donutMaze)}
+        , m_traverseMode{traverseMode}
     {
 
     }
@@ -205,7 +214,7 @@ public:
             DonutMazeSearchNode currentNode = bfsQueue.front();
             bfsQueue.pop();
 
-            if (currentNode.coordinates == m_maze.end)
+            if (hasReachedGoal(currentNode))
             {
                 m_shortestPathLength = currentNode.numSteps;
                 return;
@@ -233,6 +242,7 @@ public:
 
 private:
     DonutMaze m_maze;
+    TraverseMode m_traverseMode;
 
     int m_shortestPathLength = std::numeric_limits<int>::max();
 
@@ -243,7 +253,12 @@ private:
         const auto portalFindResult = m_maze.portalToDestination.find(currentNode.coordinates);
         if (portalFindResult != m_maze.portalToDestination.cend())
         {
-            neighborNodes.push_back({DonutMazeSearchNode{portalFindResult->second, currentNode.numSteps + 1}});
+            int layerModifier = getLayerModifier(currentNode.coordinates);
+            int newLayer = currentNode.layer + layerModifier;
+            if (m_traverseMode == TraverseMode::IGNORE_LAYERS || newLayer >= 0)
+            {
+                neighborNodes.push_back({DonutMazeSearchNode{portalFindResult->second, newLayer, currentNode.numSteps + 1}});
+            }
         }
 
         std::vector<Coordinates> neighborCoordinates = getNeighborCoordinates(currentNode.coordinates);
@@ -251,7 +266,7 @@ private:
         {
             if (m_maze.map.at(coord.second).at(coord.first) == '.')
             {
-                neighborNodes.push_back(DonutMazeSearchNode{std::move(coord), currentNode.numSteps + 1});
+                neighborNodes.push_back(DonutMazeSearchNode{std::move(coord), currentNode.layer, currentNode.numSteps + 1});
             }
         }
 
@@ -267,15 +282,59 @@ private:
         neighborCoordinates.push_back({currentCoordinates.first, currentCoordinates.second - 1});
         return neighborCoordinates;
     }
+
+    bool hasReachedGoal(const DonutMazeSearchNode& node) const
+    {
+        if (node.coordinates == m_maze.end)
+        {
+            if (m_traverseMode == TraverseMode::RESPECT_LAYERS && node.layer != 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    int getLayerModifier(const Coordinates& coordinates) const
+    {
+        bool isOnOuterRing = coordinates.first == 2 ||
+            coordinates.first == m_maze.map.at(coordinates.second).size() - 3 ||
+            coordinates.second == 2 ||
+            coordinates.second == m_maze.map.size() - 3;
+
+        if (isOnOuterRing)
+        {
+            return -1;
+        }
+        else
+        {
+            return 1;
+        }
+    }
 };
 
-int numStepsToExit(const std::vector<std::string>& donutMazeLines)
+DonutMaze createDonutMaze(const std::vector<std::string>& donutMazeLines)
 {
     DonutMazeParser parser{donutMazeLines};
     parser.parse();
-    DonutMaze maze = parser.getDonutMaze();
+    return parser.getDonutMaze();
+}
 
-    DonutMazeTraverser traverser{maze};
+int numStepsToExit(const std::vector<std::string>& donutMazeLines)
+{
+    DonutMazeTraverser traverser{createDonutMaze(donutMazeLines)};
+
+    traverser.traverse();
+
+    return traverser.getShortestPathLength();
+}
+
+int numStepsToExitWithMatchingLayers(const std::vector<std::string>& donutMazeLines)
+{
+    DonutMazeTraverser traverser{createDonutMaze(donutMazeLines), TraverseMode::RESPECT_LAYERS};
 
     traverser.traverse();
 

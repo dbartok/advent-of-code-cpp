@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numStepsToExit(lines) << std::endl;
+    std::cout << "Second part: " << AoC::numStepsToExitWithMatchingLayers(lines) << std::endl;
 }
