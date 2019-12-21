@@ -22,4 +22,13 @@ public:
             }));
     }
 
+    TEST_METHOD(squareClosestPointChecksum_SimpleTests)
+    {
+        AoC::IntcodeNumberType mem = 1000; // Some high memory address
+        Assert::AreEqual(0, AoC::squareClosestPointChecksum(
+            {
+                3, mem, 3, mem, 104, 1, 99
+            }));
+    }
+
 };

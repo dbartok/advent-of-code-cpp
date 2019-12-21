@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int numPointsAffectedByBeam(const std::vector<IntcodeNumberType>& intcodeProgram);
+int squareClosestPointChecksum(const std::vector<IntcodeNumberType>& intcodeProgram);
 
 }

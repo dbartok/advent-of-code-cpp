@@ -24,4 +24,5 @@ int main()
     AoC::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, intcodeProgram, ',');
 
     std::cout << "First part: " << AoC::numPointsAffectedByBeam(intcodeProgram) << std::endl;
+    std::cout << "Second part: " << AoC::squareClosestPointChecksum(intcodeProgram) << std::endl;
 }
