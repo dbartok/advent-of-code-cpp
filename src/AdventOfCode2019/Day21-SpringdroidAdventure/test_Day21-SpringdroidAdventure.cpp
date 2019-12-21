@@ -22,4 +22,13 @@ public:
             }));
     }
 
+    TEST_METHOD(amountOfHullDamageExtendedSensors_SimpleTests)
+    {
+        AoC::IntcodeNumberType mem = 1000; // Some high memory address
+        Assert::AreEqual(12345ll, AoC::amountOfHullDamageExtendedSensors(
+            {
+                3, mem, 104, 12345, 99
+            }));
+    }
+
 };

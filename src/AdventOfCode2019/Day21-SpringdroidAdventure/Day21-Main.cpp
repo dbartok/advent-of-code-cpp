@@ -24,4 +24,5 @@ int main()
     AoC::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, intcodeProgram, ',');
 
     std::cout << "First part: " << AoC::amountOfHullDamage(intcodeProgram) << std::endl;
+    std::cout << "Second part: " << AoC::amountOfHullDamageExtendedSensors(intcodeProgram) << std::endl;
 }

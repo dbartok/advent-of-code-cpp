@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 IntcodeNumberType amountOfHullDamage(const std::vector<IntcodeNumberType>& intcodeProgram);
+IntcodeNumberType amountOfHullDamageExtendedSensors(const std::vector<IntcodeNumberType>& intcodeProgram);
 
 }
