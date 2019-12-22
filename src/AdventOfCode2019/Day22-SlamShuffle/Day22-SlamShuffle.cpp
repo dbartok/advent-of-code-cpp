@@ -4,6 +4,7 @@
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
+#include <boost/integer/mod_inverse.hpp>
 
 #include <numeric>
 __END_LIBRARIES_DISABLE_WARNINGS
@@ -24,45 +25,86 @@ struct ShuffleInstruction
     int arg;
 };
 
-void applyShuffleInstruction(const ShuffleInstruction& shuffleInstruction, std::vector<unsigned>& cards)
+class SlamShuffler
 {
-    if (shuffleInstruction.type == DEAL_INTO_NEW_STACK)
+public:
+    SlamShuffler(std::vector<ShuffleInstruction> instructions, BigNumber deckSize, BigNumber numIterations)
+        : m_instructions{std::move(instructions)}
+        , m_deckSize{deckSize}
+        , m_numIterations{numIterations}
     {
-        std::reverse(cards.begin(), cards.end());
-    }
-    else if (shuffleInstruction.type == CUT)
-    {
-        auto copy{cards};
-        int numCardsToCut = shuffleInstruction.arg;
-        if (numCardsToCut < 0)
-        {
-            numCardsToCut += cards.size();
-        }
-        for (size_t i = 0; i < cards.size(); ++i)
-        {
-            cards[i] = copy[(i + numCardsToCut) % copy.size()];
-        }
-    }
-    else
-    {
-        auto copy{cards};
-        size_t i = 0;
-        for (size_t copyIndex = 0; copyIndex < cards.size(); ++copyIndex)
-        {
-            cards[i] = copy[copyIndex];
 
-            i = (i + shuffleInstruction.arg) % cards.size();
+    }
+
+    BigNumber getCardAtPosition(BigNumber position)
+    {
+        BigNumber iterOneResult = getWhereCardComesFrom(position);
+        BigNumber iterTwoResult = getWhereCardComesFrom(iterOneResult);
+
+        // Subtract the following equations:
+        // slope * position + offset = iterOneResult
+        // slope * iterOneResult + offset = iterTwoResult
+        // -> slope = (iterOneResult - iterTwoResult) / (position - iterOneResult)
+        BigNumber slope = (iterOneResult - iterTwoResult) * boost::integer::mod_inverse(position - iterOneResult + m_deckSize, m_deckSize) % m_deckSize;
+        BigNumber offset = (iterOneResult - slope * position + m_deckSize * position * slope) % m_deckSize;
+
+        // For 2 iterations:
+        // result = slope * (slope * position + offset) + offset
+        // For m_numIterations iterations:
+        // (slope^m_numIterations) * position + (slope^(m_numIterations - 1))) * offset + (slope^(m_numIterations - 2))) * offset + ... + offset
+        // (slope^m_numIterations) * position + (slope^m_numIterations - 1) / (slope - 1) * B
+        BigNumber slopeToTheNumberOfIterations = boost::multiprecision::powm(slope, m_numIterations, m_deckSize);
+        BigNumber firstTerm = slopeToTheNumberOfIterations  * position;
+        BigNumber secondTerm = (slopeToTheNumberOfIterations - 1) * boost::integer::mod_inverse(slope - 1 + m_deckSize, m_deckSize) * offset;
+
+        return (firstTerm + secondTerm) % m_deckSize;
+    }
+
+    std::vector<unsigned> getAllCardsAfterSingleIteration()
+    {
+        std::vector<unsigned> allCards;
+
+        for (int i = 0; i < m_deckSize; ++i)
+        {
+            auto cardAtPosition = getWhereCardComesFrom(i);
+            allCards.push_back(unsigned{cardAtPosition});
+        }
+
+        return allCards;
+    }
+
+private:
+    std::vector<ShuffleInstruction> m_instructions;
+    BigNumber m_deckSize;
+    BigNumber m_numIterations;
+
+    BigNumber getWhereCardComesFrom(BigNumber position)
+    {
+        for (auto instructionIter = m_instructions.crbegin(); instructionIter != m_instructions.crend(); ++instructionIter)
+        {
+            position = executeInReverse(*instructionIter, position);
+        }
+
+        return position;
+    }
+
+    BigNumber executeInReverse(const ShuffleInstruction& instruction, BigNumber position)
+    {
+        if (instruction.type == DEAL_INTO_NEW_STACK)
+        {
+            return m_deckSize - 1 - position;
+        }
+        else if (instruction.type == CUT)
+        {
+            return (position + instruction.arg + m_deckSize) % m_deckSize;
+        }
+        else
+        {
+            BigNumber inverse = boost::integer::mod_inverse(BigNumber{instruction.arg}, m_deckSize);
+            return inverse * position % m_deckSize;
         }
     }
-}
-
-void shuffle(const std::vector<ShuffleInstruction>& shuffleInstructions, std::vector<unsigned>& cards)
-{
-    for (const auto& instruction : shuffleInstructions)
-    {
-        applyShuffleInstruction(instruction, cards);
-    }
-}
+};
 
 std::vector<ShuffleInstruction> createShuffleInstructions(const std::vector<std::string>& shuffleInstructionLines)
 {
@@ -98,12 +140,18 @@ std::vector<unsigned> cardsAfterShuffle(const std::vector<std::string>& shuffleI
 {
     std::vector<ShuffleInstruction> shuffleInstructions = createShuffleInstructions(shuffleInstructionLines);
 
-    std::vector<unsigned> cards(deckSize);
-    std::iota(cards.begin(), cards.end(), 0);
+    SlamShuffler shuffler{shuffleInstructions, deckSize, 1};
 
-    shuffle(shuffleInstructions, cards);
+    return shuffler.getAllCardsAfterSingleIteration();
+}
 
-    return cards;
+BigNumber cardAtPositionAfterMultipleShuffles(const std::vector<std::string>& shuffleInstructionLines, BigNumber deckSize, BigNumber numIterations, BigNumber position)
+{
+    std::vector<ShuffleInstruction> shuffleInstructions = createShuffleInstructions(shuffleInstructionLines);
+
+    SlamShuffler shuffler{shuffleInstructions, deckSize, numIterations};
+
+    return shuffler.getCardAtPosition(position);
 }
 
 }

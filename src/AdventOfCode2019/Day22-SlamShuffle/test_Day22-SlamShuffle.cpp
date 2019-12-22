@@ -57,4 +57,15 @@ public:
         Assert::AreEqual(std::vector<unsigned>{9, 2, 5, 8, 1, 4, 7, 0, 3, 6}, AoC::cardsAfterShuffle(instructions4, 10));
     }
 
+    TEST_METHOD(cardAtPositionAfterMultipleShuffles_SimpleTests)
+    {
+        std::vector<std::string> instructions1 =
+        {
+            "deal with increment 7",
+            "deal into new stack",
+            "deal into new stack",
+        };
+
+        Assert::AreEqual(0ll, static_cast<long long>(AoC::cardAtPositionAfterMultipleShuffles(instructions1, 7, 2, 0)));
+    }
 };
