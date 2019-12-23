@@ -60,16 +60,26 @@ void IntcodeInterpreter::execute()
 
     while (m_state.executionState == IntcodeProgramExecutionState::RUNNING)
     {
-        IntcodeInstruction::SharedPtr nextInstruction = createNextInstruction();
-
-        nextInstruction->execute(m_state);
-        nextInstruction->moveInstructionPointer(m_state.instructionPointer);
+        step();
     }
+}
+
+void IntcodeInterpreter::step()
+{
+    IntcodeInstruction::SharedPtr nextInstruction = createNextInstruction();
+
+    nextInstruction->execute(m_state);
+    nextInstruction->moveInstructionPointer(m_state.instructionPointer);
 }
 
 void IntcodeInterpreter::addInput(IntcodeNumberType input)
 {
     m_state.inputs.push_back(input);
+}
+
+bool IntcodeInterpreter::isBlockedOnInput() const
+{
+    return m_state.executionState == IntcodeProgramExecutionState::WAITING_FOR_INPUT && m_state.inputs.empty();
 }
 
 const std::vector<IntcodeNumberType>& IntcodeInterpreter::getOutputs() const

@@ -30,8 +30,10 @@ public:
     IntcodeInterpreter(std::vector<IntcodeNumberType> program);
 
     void execute();
+    void step();
 
     void addInput(IntcodeNumberType input);
+    bool isBlockedOnInput() const;
     const std::vector<IntcodeNumberType>& getOutputs() const;
     void clearOutputs();
     const IntcodeProgramExecutionState getExecutionState() const;
