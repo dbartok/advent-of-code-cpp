@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day22-SlamShuffle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SlamShuffler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day22-SlamShuffle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SlamShuffler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
