@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int biodiversityRatingOfFirstDuplicateLayout(const std::vector<std::string>& initialLayoutLines);
+unsigned numBugsAfterSimulationRecursiveGrid(const std::vector<std::string>& initialLayoutLines, unsigned numSteps);
 
 }

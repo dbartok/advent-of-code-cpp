@@ -24,7 +24,21 @@ public:
             "#...."
         };
 
-        Assert::AreEqual(2129920, AoC::biodiversityRatingOfFirstDuplicateLayout(initialLayout));
+        Assert::AreEqual(2129920, AoC::biodiversityRatingOfFirstDuplicateLayout(m_initialLayout));
     }
 
+    TEST_METHOD(numBugsAfterSimulationRecursiveGrid_SimpleTests)
+    {
+        Assert::AreEqual(99u, AoC::numBugsAfterSimulationRecursiveGrid(m_initialLayout, 10));
+    }
+
+private:
+    std::vector<std::string> m_initialLayout =
+    {
+        "....#",
+        "#..#.",
+        "#..##",
+        "..#..",
+        "#...."
+    };
 };

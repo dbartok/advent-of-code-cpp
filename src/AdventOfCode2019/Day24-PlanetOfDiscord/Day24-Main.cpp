@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::biodiversityRatingOfFirstDuplicateLayout(lines) << std::endl;
+    std::cout << "Second part: " << AoC::numBugsAfterSimulationRecursiveGrid(lines, 200) << std::endl;
 }
