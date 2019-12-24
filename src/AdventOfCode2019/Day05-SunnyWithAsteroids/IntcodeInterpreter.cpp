@@ -53,11 +53,6 @@ IntcodeInterpreter::IntcodeInterpreter(std::vector<IntcodeNumberType> program)
 
 void IntcodeInterpreter::execute()
 {
-    if (m_state.executionState == IntcodeProgramExecutionState::WAITING_FOR_INPUT)
-    {
-        m_state.executionState = IntcodeProgramExecutionState::RUNNING;
-    }
-
     while (m_state.executionState == IntcodeProgramExecutionState::RUNNING)
     {
         step();
@@ -66,6 +61,11 @@ void IntcodeInterpreter::execute()
 
 void IntcodeInterpreter::step()
 {
+    if (m_state.executionState == IntcodeProgramExecutionState::WAITING_FOR_INPUT)
+    {
+        m_state.executionState = IntcodeProgramExecutionState::RUNNING;
+    }
+
     IntcodeInstruction::SharedPtr nextInstruction = createNextInstruction();
 
     nextInstruction->execute(m_state);

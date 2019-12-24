@@ -24,4 +24,5 @@ int main()
     AoC::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, intcodeProgram, ',');
 
     std::cout << "First part: " << AoC::secondPartOfFirstPacketAtSpecialAddress(intcodeProgram) << std::endl;
+    std::cout << "Second part: " << AoC::secondPartOfFirstDuplicateMessageByNat(intcodeProgram) << std::endl;
 }
