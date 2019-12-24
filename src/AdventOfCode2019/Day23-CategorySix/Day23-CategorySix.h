@@ -1,6 +1,6 @@
 #pragma once
 
-#include <AdventOfCode2019/Day05-SunnyWithAsteroids/IntcodeInterpreter.h>
+#include "IntcodeComputerNetwork.h"
 
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
