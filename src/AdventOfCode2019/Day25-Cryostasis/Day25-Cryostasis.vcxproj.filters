@@ -26,6 +26,9 @@
     <ClCompile Include="..\Day05-SunnyWithAsteroids\IntcodeInterpreter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IntcodeTextAdventure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day25-Cryostasis.h">
@@ -38,6 +41,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Day05-SunnyWithAsteroids\IntcodeProgramState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IntcodeTextAdventure.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
