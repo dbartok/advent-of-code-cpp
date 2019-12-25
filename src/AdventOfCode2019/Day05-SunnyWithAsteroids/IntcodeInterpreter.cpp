@@ -53,10 +53,10 @@ IntcodeInterpreter::IntcodeInterpreter(std::vector<IntcodeNumberType> program)
 
 void IntcodeInterpreter::execute()
 {
-    while (m_state.executionState == IntcodeProgramExecutionState::RUNNING)
+    do
     {
         step();
-    }
+    } while (m_state.executionState == IntcodeProgramExecutionState::RUNNING);
 }
 
 void IntcodeInterpreter::step()
