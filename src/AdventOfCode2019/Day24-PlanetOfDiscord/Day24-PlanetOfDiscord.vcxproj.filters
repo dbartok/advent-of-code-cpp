@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day24-PlanetOfDiscord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BugCellularAutomaton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day24-PlanetOfDiscord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BugCellularAutomaton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
