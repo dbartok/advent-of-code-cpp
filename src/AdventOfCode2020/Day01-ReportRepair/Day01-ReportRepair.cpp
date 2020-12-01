@@ -35,4 +35,22 @@ int productOfTwoEntriesWithGivenSum(const std::vector<int>& entries)
     throw std::runtime_error("Can't find two entries with the given sum.");
 }
 
+int productOfThreeEntriesWithGivenSum(const std::vector<int>& entries)
+{
+    for (auto entryOneIter = entries.cbegin(); entryOneIter != entries.cend(); ++entryOneIter)
+    {
+        for (auto entryTwoIter = std::next(entryOneIter); entryTwoIter != entries.cend(); ++entryTwoIter)
+        {
+            for (auto entryThreeIter = std::next(entryTwoIter); entryThreeIter != entries.cend(); ++entryThreeIter)
+            {
+                if ((*entryOneIter) + (*entryTwoIter) + (*entryThreeIter) == TARGET_SUM)
+                {
+                    return (*entryOneIter) * (*entryTwoIter) * (*entryThreeIter);
+                }
+            }
+        }
+    }
+    throw std::runtime_error("Can't find three entries with the given sum.");
+}
+
 }

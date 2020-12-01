@@ -10,5 +10,6 @@ namespace AdventOfCode
 {
 
 int productOfTwoEntriesWithGivenSum(const std::vector<int>& entries);
+int productOfThreeEntriesWithGivenSum(const std::vector<int>& entries);
 
 }

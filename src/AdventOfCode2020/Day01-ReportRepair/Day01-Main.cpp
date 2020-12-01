@@ -24,4 +24,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::productOfTwoEntriesWithGivenSum(entries) << std::endl;
+    std::cout << "Second part: " << AoC::productOfThreeEntriesWithGivenSum(entries) << std::endl;
 }
