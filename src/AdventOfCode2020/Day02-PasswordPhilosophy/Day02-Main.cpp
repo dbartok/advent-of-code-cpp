@@ -22,5 +22,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::numValidPasswords(lines) << std::endl;
+    std::cout << "First part: " << AoC::numValidPasswordsWithRangePolicy(lines) << std::endl;
+    std::cout << "Second part: " << AoC::numValidPasswordsWithPositionPolicy(lines) << std::endl;
 }

@@ -10,6 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-int numValidPasswords(const std::vector<std::string>& passwordWithPolicyLines);
+int numValidPasswordsWithRangePolicy(const std::vector<std::string>& passwordWithPolicyLines);
+int numValidPasswordsWithPositionPolicy(const std::vector<std::string>& passwordWithPolicyLines);
 
 }

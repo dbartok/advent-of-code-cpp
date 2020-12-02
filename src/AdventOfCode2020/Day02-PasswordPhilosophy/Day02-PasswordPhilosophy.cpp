@@ -11,19 +11,19 @@ namespace AdventOfCode
 
 struct PasswordWithPolicy
 {
-    PasswordWithPolicy(std::string password, char givenLetter, int minNumOccurrences, int maxNumOccurrences)
+    PasswordWithPolicy(std::string password, char givenLetter, int policyFirstNumber, int policySecondNumber)
         : password{std::move(password)}
         , givenLetter{givenLetter}
-        , minNumOccurrences{minNumOccurrences}
-        , maxNumOccurrences{maxNumOccurrences}
+        , policyFirstNumber{policyFirstNumber}
+        , policySecondNumber{policySecondNumber}
     {
 
     }
 
     std::string password;
     char givenLetter;
-    int minNumOccurrences;
-    int maxNumOccurrences;
+    int policyFirstNumber;
+    int policySecondNumber;
 };
 
 PasswordWithPolicy parsePasswordWithPolicy(const std::string& passwordWithPolicyLine)
@@ -40,10 +40,10 @@ PasswordWithPolicy parsePasswordWithPolicy(const std::string& passwordWithPolicy
     }
     const char givenLetter = givenLetterToken.front();
 
-    const int minNumOccurrences = std::stoi(tokens.at(0));
-    const int maxNumOccurrences = std::stoi(tokens.at(1));
+    const int policyFirstNumber = std::stoi(tokens.at(0));
+    const int policySecondNumber = std::stoi(tokens.at(1));
 
-    return PasswordWithPolicy{std::move(password), givenLetter, minNumOccurrences, maxNumOccurrences};
+    return PasswordWithPolicy{std::move(password), givenLetter, policyFirstNumber, policySecondNumber};
 }
 
 std::vector<PasswordWithPolicy> parsePasswordWithPolicyList(const std::vector<std::string>& passwordWithPolicyLines)
@@ -59,7 +59,7 @@ std::vector<PasswordWithPolicy> parsePasswordWithPolicyList(const std::vector<st
     return passwordWithPolicyList;
 }
 
-int numValidPasswords(const std::vector<std::string>& passwordWithPolicyLines)
+int numValidPasswordsWithRangePolicy(const std::vector<std::string>& passwordWithPolicyLines)
 {
     std::vector<PasswordWithPolicy> passwordWithPolicyList = parsePasswordWithPolicyList(passwordWithPolicyLines);
 
@@ -68,8 +68,24 @@ int numValidPasswords(const std::vector<std::string>& passwordWithPolicyLines)
                              const int numOccurrencesOfGivenLetter = std::count(passwordWithPolicy.password.cbegin(),
                                                                           passwordWithPolicy.password.cend(),
                                                                           passwordWithPolicy.givenLetter);
-                             return (numOccurrencesOfGivenLetter >= passwordWithPolicy.minNumOccurrences &&
-                                     numOccurrencesOfGivenLetter <= passwordWithPolicy.maxNumOccurrences);
+                             return (numOccurrencesOfGivenLetter >= passwordWithPolicy.policyFirstNumber &&
+                                     numOccurrencesOfGivenLetter <= passwordWithPolicy.policySecondNumber);
+                         });
+}
+
+int numValidPasswordsWithPositionPolicy(const std::vector<std::string>& passwordWithPolicyLines)
+{
+    std::vector<PasswordWithPolicy> passwordWithPolicyList = parsePasswordWithPolicyList(passwordWithPolicyLines);
+
+    return std::count_if(passwordWithPolicyList.cbegin(), passwordWithPolicyList.cend(), [](const auto& passwordWithPolicy)
+                         {
+                             const bool isFirstCharacterMatching = (passwordWithPolicy.password.at(passwordWithPolicy.policyFirstNumber - 1) ==
+                                 passwordWithPolicy.givenLetter);
+                             const bool isSecondCharacterMatching = (passwordWithPolicy.password.at(passwordWithPolicy.policySecondNumber - 1) ==
+                                 passwordWithPolicy.givenLetter);
+
+                             // Take the XOR of the two booleans
+                             return isFirstCharacterMatching != isSecondCharacterMatching;
                          });
 }
 

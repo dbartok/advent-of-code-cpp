@@ -13,16 +13,21 @@ TEST_CLASS(Day02PasswordPhilosophy)
 {
 public:
 
-    TEST_METHOD(numValidPasswords_SimpleTests)
+    TEST_METHOD(numValidPasswordsWithRangePolicy_SimpleTests)
     {
-        std::vector<std::string> lines =
-        {
-            "1-3 a: abcde",
-            "1-3 b: cdefg",
-            "2-9 c: ccccccccc"
-        };
-
-        Assert::AreEqual(2, AoC::numValidPasswords(lines));
+        Assert::AreEqual(2, AoC::numValidPasswordsWithRangePolicy(m_lines));
     }
 
+    TEST_METHOD(numValidPasswordsWithPositionPolicy_SimpleTests)
+    {
+        Assert::AreEqual(1, AoC::numValidPasswordsWithPositionPolicy(m_lines));
+    }
+
+private:
+    std::vector<std::string> m_lines =
+    {
+        "1-3 a: abcde",
+        "1-3 b: cdefg",
+        "2-9 c: ccccccccc"
+    };
 };
