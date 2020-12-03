@@ -13,24 +13,29 @@ TEST_CLASS(Day03TobogganTrajectory)
 {
 public:
 
-    TEST_METHOD(numTreesEncountered_SimpleTests)
+    TEST_METHOD(numTreesEncounteredSingleSlope_SimpleTests)
     {
-        std::vector<std::string> lines =
-        {
-            "..##.......",
-            "#...#...#..",
-            ".#....#..#.",
-            "..#.#...#.#",
-            ".#...##..#.",
-            "..#.##.....",
-            ".#.#.#....#",
-            ".#........#",
-            "#.##...#...",
-            "#...##....#",
-            ".#..#...#.#"
-        };
-
-        Assert::AreEqual(7, AoC::numTreesEncountered(lines));
+        Assert::AreEqual(7ll, AoC::numTreesEncounteredSingleSlope(m_lines));
     }
 
+    TEST_METHOD(numTreesEncounteredMultipleSlopes_SimpleTests)
+    {
+        Assert::AreEqual(336ll, AoC::numTreesEncounteredMultipleSlopes(m_lines));
+    }
+
+private:
+    std::vector<std::string> m_lines =
+    {
+        "..##.......",
+        "#...#...#..",
+        ".#....#..#.",
+        "..#.#...#.#",
+        ".#...##..#.",
+        "..#.##.....",
+        ".#.#.#....#",
+        ".#........#",
+        "#.##...#...",
+        "#...##....#",
+        ".#..#...#.#"
+    };
 };

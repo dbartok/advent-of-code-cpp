@@ -10,6 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-int numTreesEncountered(const std::vector<std::string>& gridLines);
+int64_t numTreesEncounteredSingleSlope(const std::vector<std::string>& gridLines);
+int64_t numTreesEncounteredMultipleSlopes(const std::vector<std::string>& gridLines);
 
 }
