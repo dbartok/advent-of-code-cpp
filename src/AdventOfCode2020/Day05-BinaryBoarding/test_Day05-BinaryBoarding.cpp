@@ -26,4 +26,17 @@ public:
         Assert::AreEqual(820, AoC::highestSeatID(lines));
     }
 
+    TEST_METHOD(missingSeatID_SimpleTests)
+    {
+        std::vector<std::string> lines =
+        {
+            "FFFFBFFRLR",
+            "FFFFBFFRRL",
+            "FFFFBFBLLL",
+            "FFFFBFBLLR",
+        };
+
+        Assert::AreEqual(39, AoC::missingSeatID(lines));
+    }
+
 };

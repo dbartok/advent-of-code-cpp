@@ -4,6 +4,7 @@
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <algorithm>
+#include <stdexcept>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -49,6 +50,21 @@ std::vector<Seat> parseSeats(const std::vector<std::string>& boardingPassLines)
     return seats;
 }
 
+int calculateMissingSeatID(std::vector<int> seatIDs)
+{
+    std::sort(seatIDs.begin(), seatIDs.end());
+
+    for (size_t i = 0; i < seatIDs.size() - 1; ++i)
+    {
+        if (seatIDs.at(i + 1) != seatIDs.at(i) + 1)
+        {
+            return seatIDs.at(i) + 1;
+        }
+    }
+
+    throw std::runtime_error("Cannot find missing seat ID.");
+}
+
 int highestSeatID(const std::vector<std::string>& boardingPassLines)
 {
     std::vector<Seat> seats = parseSeats(boardingPassLines);
@@ -59,6 +75,18 @@ int highestSeatID(const std::vector<std::string>& boardingPassLines)
                                               });
 
     return highestSeatIDIter->getID();
+}
+
+int missingSeatID(const std::vector<std::string>& boardingPassLines)
+{
+    std::vector<Seat> seats = parseSeats(boardingPassLines);
+    std::vector<int> seatIDs;
+    std::transform(seats.cbegin(), seats.cend(), std::back_inserter(seatIDs), [](const auto& seat)
+                   {
+                       return seat.getID();
+                   });
+
+    return calculateMissingSeatID(std::move(seatIDs));
 }
 
 }

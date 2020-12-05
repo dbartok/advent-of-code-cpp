@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int highestSeatID(const std::vector<std::string>& boardingPassLines);
+int missingSeatID(const std::vector<std::string>& boardingPassLines);
 
 }

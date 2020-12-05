@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::highestSeatID(lines) << std::endl;
+    std::cout << "Second part: " << AoC::missingSeatID(lines) << std::endl;
 }
