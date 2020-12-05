@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numValidPassports(lines) << std::endl;
+    std::cout << "Second part: " << AoC::numValidPassportsStrict(lines) << std::endl;
 }

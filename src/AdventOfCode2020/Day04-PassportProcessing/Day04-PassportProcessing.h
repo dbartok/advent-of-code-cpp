@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int numValidPassports(const std::vector<std::string>& batchFileLines);
+int numValidPassportsStrict(const std::vector<std::string>& batchFileLines);
 
 }
