@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::sumAnyoneAnsweredYes(lines) << std::endl;
+    std::cout << "Second part: " << AoC::sumEveryoneAnsweredYes(lines) << std::endl;
 }

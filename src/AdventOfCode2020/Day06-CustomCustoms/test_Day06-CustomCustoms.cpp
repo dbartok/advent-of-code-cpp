@@ -15,26 +15,32 @@ public:
 
     TEST_METHOD(sumAnyoneAnsweredYes_SimpleTests)
     {
-        std::vector<std::string> lines =
-        {
-            "abc",
-            "",
-            "a",
-            "b",
-            "c",
-            "",
-            "ab",
-            "ac",
-            "",
-            "a",
-            "a",
-            "a",
-            "a",
-            "",
-            "b"
-        };
-
-        Assert::AreEqual(11, AoC::sumAnyoneAnsweredYes(lines));
+        Assert::AreEqual(11, AoC::sumAnyoneAnsweredYes(m_lines));
     }
+
+    TEST_METHOD(sumEveryoneAnsweredYes_SimpleTests)
+    {
+        Assert::AreEqual(6, AoC::sumEveryoneAnsweredYes(m_lines));
+    }
+
+private:
+    std::vector<std::string> m_lines =
+    {
+        "abc",
+        "",
+        "a",
+        "b",
+        "c",
+        "",
+        "ab",
+        "ac",
+        "",
+        "a",
+        "a",
+        "a",
+        "a",
+        "",
+        "b"
+    };
 
 };

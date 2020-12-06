@@ -10,6 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-int sumOfYesAnswers(const std::vector<std::string>& lines);
+int sumAnyoneAnsweredYes(const std::vector<std::string>& lines);
+int sumEveryoneAnsweredYes(const std::vector<std::string>& lines);
 
 }

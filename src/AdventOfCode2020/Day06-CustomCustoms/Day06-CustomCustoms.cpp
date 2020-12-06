@@ -16,19 +16,40 @@ using GroupAnswerTextSection = std::vector<std::string>;
 
 struct GroupAnswer
 {
-    GroupAnswerTextSection answers;
+    GroupAnswerTextSection answerSequences;
 
-    int getNumTotalYesAnswers() const
+    int getUnionOfYesAnswers() const
     {
-        std::unordered_set<char> answerSet;
-        auto allAnswers = boost::join(answers, "");
+        std::unordered_set<char> answerUnion;
+        auto allAnswers = boost::join(answerSequences, "");
 
-        for (auto answer : allAnswers)
+        for (char answer : allAnswers)
         {
-            answerSet.insert(answer);
+            answerUnion.insert(answer);
         }
 
-        return answerSet.size();
+        return answerUnion.size();
+    }
+
+    int getIntersectionOfYesAnswers() const
+    {
+        std::string firstAnswerSequenceSorted = answerSequences.front();
+        std::sort(firstAnswerSequenceSorted.begin(), firstAnswerSequenceSorted.end());
+        std::string answerIntersection{firstAnswerSequenceSorted.cbegin(), firstAnswerSequenceSorted.cend()};
+
+        for (auto answerSequenceIter = std::next(answerSequences.cbegin()); answerSequenceIter != answerSequences.cend(); ++answerSequenceIter)
+        {
+            std::string currentAnswerSequenceSorted = *answerSequenceIter;
+            std::sort(currentAnswerSequenceSorted.begin(), currentAnswerSequenceSorted.end());
+            std::string newAnswerIntersection;
+            std::set_intersection(answerIntersection.cbegin(), answerIntersection.cend(),
+                                  currentAnswerSequenceSorted.cbegin(), currentAnswerSequenceSorted.cend(),
+                                  std::back_inserter(newAnswerIntersection));
+
+            answerIntersection = std::move(newAnswerIntersection);
+        }
+
+        return answerIntersection.size();
     }
 };
 
@@ -47,13 +68,23 @@ std::vector<GroupAnswer> parseGroupAnswers(const std::vector<std::string>& lines
     return groupAnswers;
 }
 
-int sumOfYesAnswers(const std::vector<std::string>& lines)
+int sumAnyoneAnsweredYes(const std::vector<std::string>& lines)
 {
     std::vector<GroupAnswer> groupAnswers = parseGroupAnswers(lines);
     return std::accumulate(groupAnswers.cbegin(), groupAnswers.cend(), 0, [](int acc, const auto& groupAnswer)
                            {
-                               return acc + groupAnswer.getNumTotalYesAnswers();
+                               return acc + groupAnswer.getUnionOfYesAnswers();
                            });
 }
+
+int sumEveryoneAnsweredYes(const std::vector<std::string>& lines)
+{
+    std::vector<GroupAnswer> groupAnswers = parseGroupAnswers(lines);
+    return std::accumulate(groupAnswers.cbegin(), groupAnswers.cend(), 0, [](int acc, const auto& groupAnswer)
+                           {
+                               return acc + groupAnswer.getIntersectionOfYesAnswers();
+                           });
+}
+
 
 }
