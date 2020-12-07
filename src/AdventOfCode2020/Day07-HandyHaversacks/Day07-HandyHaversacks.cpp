@@ -9,6 +9,8 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <unordered_map>
 #include <unordered_set>
 #include <queue>
+#include <cassert>
+#include <numeric>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -38,9 +40,10 @@ struct QuantifiedBag
 class BagTypesAnalyzer
 {
 public:
-    void addRelationship(BagColor containerBagColor, BagColor containedBagColor, int containedQuantity)
+    void addRelationship(const BagColor& containerBagColor, const BagColor& containedBagColor, int containedQuantity)
     {
-        m_bagColorToContainerBags[std::move(containedBagColor)].emplace_back(std::move(containerBagColor), containedQuantity);
+        m_bagColorToContainerBags[containedBagColor].emplace_back(std::move(containerBagColor), containedQuantity);
+        m_bagColorToContainedBags[containerBagColor].emplace_back(std::move(containedBagColor), containedQuantity);
     }
 
     int getNumBagColorsThatCanContainShinyGold() const
@@ -75,8 +78,73 @@ public:
         return visited.size() - 1;
     }
 
+    int getNumTotalBagsContainedInsideShinyGold() const
+    {
+        std::unordered_map<BagColor, int> bagColorToTotalQuantity;
+        bagColorToTotalQuantity[SHINY_GOLD] = 1;
+
+        std::vector<BagColor> topologicalOrder = getTopologicalOrder();
+
+        for (const auto& currentBagColor : topologicalOrder)
+        {
+            const auto containedBagsIter = m_bagColorToContainedBags.find(currentBagColor);
+            if (containedBagsIter == m_bagColorToContainedBags.cend())
+            {
+                continue;
+            }
+
+            int currentBagTotalQuantity = bagColorToTotalQuantity.at(currentBagColor);
+
+            for (const auto& containedBag : containedBagsIter->second)
+            {
+                bagColorToTotalQuantity[containedBag.color] += (currentBagTotalQuantity * containedBag.quantity);
+            }
+        }
+
+
+        int numTotalBags = std::accumulate(bagColorToTotalQuantity.cbegin(), bagColorToTotalQuantity.cend(), 0, [](int acc, const auto& element)
+                                           {
+                                               return acc + element.second;
+                                           });
+        return numTotalBags - 1;
+    }
+
+
 private:
     BagColorToQuantifiedBags m_bagColorToContainerBags;
+    BagColorToQuantifiedBags m_bagColorToContainedBags;
+
+    std::vector<BagColor> getTopologicalOrder() const
+    {
+        std::vector<BagColor> finishedOrder;
+        std::unordered_set<BagColor> visited;
+        visited.insert(SHINY_GOLD);
+
+        getReverseTopologicalOrderRecursive(finishedOrder, visited, SHINY_GOLD);
+
+        std::reverse(finishedOrder.begin(), finishedOrder.end());
+        assert(finishedOrder.front() == SHINY_GOLD);
+
+        return finishedOrder;
+    }
+
+    void getReverseTopologicalOrderRecursive(std::vector<BagColor>& finishedOrder, std::unordered_set<BagColor>& visited, const BagColor& currentBagColor) const
+    {
+        const auto containedBagsIter = m_bagColorToContainedBags.find(currentBagColor);
+        if (containedBagsIter != m_bagColorToContainedBags.cend())
+        {
+            for (const auto& containedBag : containedBagsIter->second)
+            {
+                bool wasInserted = visited.insert(containedBag.color).second;
+                if (wasInserted)
+                {
+                    getReverseTopologicalOrderRecursive(finishedOrder, visited, containedBag.color);
+                }
+            }
+        }
+
+        finishedOrder.push_back(currentBagColor);
+    }
 };
 
 void processContainedBagsSubstring(BagTypesAnalyzer& bagTypesAnalyzer, const std::string& containerBagColor, const std::string& containedBagsString)
@@ -118,6 +186,12 @@ int numBagColorsThatCanContainShinyGold(const std::vector<std::string>& lines)
 {
     BagTypesAnalyzer bagTypesAnalyzer = initializeBagTypesAnalyzer(lines);
     return bagTypesAnalyzer.getNumBagColorsThatCanContainShinyGold();
+}
+
+int numTotalBagsContainedInsideShinyGold(const std::vector<std::string>& lines)
+{
+    BagTypesAnalyzer bagTypesAnalyzer = initializeBagTypesAnalyzer(lines);
+    return bagTypesAnalyzer.getNumTotalBagsContainedInsideShinyGold();
 }
 
 }

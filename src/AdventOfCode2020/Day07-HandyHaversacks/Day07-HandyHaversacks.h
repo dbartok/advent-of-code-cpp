@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int numBagColorsThatCanContainShinyGold(const std::vector<std::string>& lines);
+int numTotalBagsContainedInsideShinyGold(const std::vector<std::string>& lines);
 
 }

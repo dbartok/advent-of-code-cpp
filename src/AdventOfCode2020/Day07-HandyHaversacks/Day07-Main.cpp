@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numBagColorsThatCanContainShinyGold(lines) << std::endl;
+    std::cout << "Second part: " << AoC::numTotalBagsContainedInsideShinyGold(lines) << std::endl;
 }
