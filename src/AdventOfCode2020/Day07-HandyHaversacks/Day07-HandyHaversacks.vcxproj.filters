@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day07-HandyHaversacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BagTypesAnalyzer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day07-HandyHaversacks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BagTypesAnalyzer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
