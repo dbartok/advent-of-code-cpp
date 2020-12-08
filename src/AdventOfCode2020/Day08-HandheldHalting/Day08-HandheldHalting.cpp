@@ -106,4 +106,50 @@ int valueInAccAfterFirstDuplicateInstruction(const std::vector<std::string>& ins
     return handheldGameConsole.getAccumulator();
 }
 
+int valueInAccAfterRepairedProgramTerminates(const std::vector<std::string>& instructionLines)
+{
+    std::vector<Instruction> originalInstructions = parseInstructions(instructionLines);
+
+    for (size_t i = 0; i < originalInstructions.size(); ++i)
+    {
+        auto repairedInstructions{originalInstructions};
+        auto& modifiedInstruction = repairedInstructions.at(i);
+        if (modifiedInstruction.name == "jmp")
+        {
+            modifiedInstruction.name = "nop";
+        }
+        else if (modifiedInstruction.name == "nop")
+        {
+            modifiedInstruction.name = "jmp";
+        }
+        else
+        {
+            continue;
+        }
+
+        HandheldGameConsole handheldGameConsole{std::move(repairedInstructions)};
+
+        std::unordered_set<int> instructionsExecuted;
+
+        while (true)
+        {
+            const int instructionPointer = handheldGameConsole.getInstructionPointer();
+            if (instructionPointer == originalInstructions.size())
+            {
+                return handheldGameConsole.getAccumulator();
+            }
+
+            bool wasInserted = instructionsExecuted.insert(instructionPointer).second;
+            if (!wasInserted)
+            {
+                break;
+            }
+
+            handheldGameConsole.executeCurrentInstruction();
+        }
+    }
+
+    throw std::runtime_error("Cannot repair the program.");
+}
+
 }

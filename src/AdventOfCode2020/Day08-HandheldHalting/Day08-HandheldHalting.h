@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int valueInAccAfterFirstDuplicateInstruction(const std::vector<std::string>& instructionLines);
+int valueInAccAfterRepairedProgramTerminates(const std::vector<std::string>& instructionLines);
 
 }

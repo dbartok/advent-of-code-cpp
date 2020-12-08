@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::valueInAccAfterFirstDuplicateInstruction(lines) << std::endl;
+    std::cout << "Second part: " << AoC::valueInAccAfterRepairedProgramTerminates(lines) << std::endl;
 }
