@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day08-HandheldHalting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HandheldGameConsole.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day08-HandheldHalting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HandheldGameConsole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

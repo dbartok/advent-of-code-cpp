@@ -1,65 +1,15 @@
 #include "Day08-HandheldHalting.h"
 
+#include "HandheldGameConsole.h"
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
-
-#include <unordered_set>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
-
-struct Instruction
-{
-    std::string name;
-    int arg;
-};
-
-class HandheldGameConsole
-{
-public:
-    HandheldGameConsole(std::vector<Instruction> instructions)
-        : m_instructions{std::move(instructions)}
-        , m_accumulator{0}
-        , m_instructionPointer{0}
-    {
-
-    }
-
-    void executeCurrentInstruction()
-    {
-        const auto& currentInstruction = m_instructions.at(m_instructionPointer);
-
-        if (currentInstruction.name == "jmp")
-        {
-            m_instructionPointer += (currentInstruction.arg - 1);
-        }
-        else if (currentInstruction.name == "acc")
-        {
-            m_accumulator += currentInstruction.arg;
-        }
-
-        ++m_instructionPointer;
-    }
-
-    int getInstructionPointer() const
-    {
-        return m_instructionPointer;
-    }
-
-    int getAccumulator() const
-    {
-        return m_accumulator;
-    }
-
-private:
-    std::vector<Instruction> m_instructions;
-
-    int m_accumulator;
-    int m_instructionPointer;
-};
 
 Instruction parseInstruction(const std::string& instructionLine)
 {
@@ -89,19 +39,7 @@ int valueInAccAfterFirstDuplicateInstruction(const std::vector<std::string>& ins
 {
     std::vector<Instruction> instructions = parseInstructions(instructionLines);
     HandheldGameConsole handheldGameConsole{std::move(instructions)};
-
-    std::unordered_set<int> instructionsExecuted;
-
-    while (true)
-    {
-        bool wasInserted = instructionsExecuted.insert(handheldGameConsole.getInstructionPointer()).second;
-        if (!wasInserted)
-        {
-            break;
-        }
-
-        handheldGameConsole.executeCurrentInstruction();
-    }
+    handheldGameConsole.runUntilRepeatedOrTerminates();
 
     return handheldGameConsole.getAccumulator();
 }
@@ -114,13 +52,13 @@ int valueInAccAfterRepairedProgramTerminates(const std::vector<std::string>& ins
     {
         auto repairedInstructions{originalInstructions};
         auto& modifiedInstruction = repairedInstructions.at(i);
-        if (modifiedInstruction.name == "jmp")
+        if (modifiedInstruction.name == JMP)
         {
-            modifiedInstruction.name = "nop";
+            modifiedInstruction.name = NOP;
         }
-        else if (modifiedInstruction.name == "nop")
+        else if (modifiedInstruction.name == NOP)
         {
-            modifiedInstruction.name = "jmp";
+            modifiedInstruction.name = JMP;
         }
         else
         {
@@ -128,24 +66,10 @@ int valueInAccAfterRepairedProgramTerminates(const std::vector<std::string>& ins
         }
 
         HandheldGameConsole handheldGameConsole{std::move(repairedInstructions)};
-
-        std::unordered_set<int> instructionsExecuted;
-
-        while (true)
+        handheldGameConsole.runUntilRepeatedOrTerminates();
+        if (handheldGameConsole.isTerminated())
         {
-            const int instructionPointer = handheldGameConsole.getInstructionPointer();
-            if (instructionPointer == originalInstructions.size())
-            {
-                return handheldGameConsole.getAccumulator();
-            }
-
-            bool wasInserted = instructionsExecuted.insert(instructionPointer).second;
-            if (!wasInserted)
-            {
-                break;
-            }
-
-            handheldGameConsole.executeCurrentInstruction();
+            return handheldGameConsole.getAccumulator();
         }
     }
 
