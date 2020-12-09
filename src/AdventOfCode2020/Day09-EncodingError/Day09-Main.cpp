@@ -24,4 +24,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::firstInvalidNumber(numbers, 25) << std::endl;
+    std::cout << "Second part: " << AoC::encryptionWeakness(numbers, 25) << std::endl;
 }

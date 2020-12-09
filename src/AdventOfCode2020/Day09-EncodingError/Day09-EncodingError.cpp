@@ -43,4 +43,32 @@ int64_t firstInvalidNumber(const std::vector<int64_t>& numbers, size_t windowLen
     throw std::runtime_error("No invalid numbers found.");
 }
 
+int64_t encryptionWeakness(const std::vector<int64_t>& numbers, size_t windowLength)
+{
+    int64_t target = firstInvalidNumber(numbers, windowLength);
+
+    std::deque<int64_t> window;
+    int64_t currentSum = 0;
+
+    for (auto number : numbers)
+    {
+        window.push_back(number);
+        currentSum += number;
+
+        while (currentSum > target)
+        {
+            currentSum -= window.front();
+            window.pop_front();
+        }
+
+        if (currentSum == target)
+        {
+            auto minmaxIter = std::minmax_element(window.cbegin(), window.cend());
+            return *minmaxIter.first + *minmaxIter.second;
+        }
+    }
+
+    throw std::runtime_error("Cannot find encryption weakness.");
+}
+
 }

@@ -15,31 +15,36 @@ public:
 
     TEST_METHOD(firstInvalidNumber_SimpleTests)
     {
-        std::vector<int64_t> numbers =
-        {
-            20,
-            35,
-            15,
-            25,
-            47,
-            40,
-            62,
-            55,
-            65,
-            95,
-            102,
-            117,
-            150,
-            182,
-            127,
-            219,
-            299,
-            277,
-            309,
-            576
-        };
-
-        Assert::AreEqual(127ll, AoC::firstInvalidNumber(numbers, 5));
+        Assert::AreEqual(127ll, AoC::firstInvalidNumber(m_numbers, 5));
     }
+
+    TEST_METHOD(encryptionWeakness_SimpleTests)
+    {
+        Assert::AreEqual(62ll, AoC::encryptionWeakness(m_numbers, 5));
+    }
+
+    std::vector<int64_t> m_numbers =
+    {
+        35,
+        20,
+        15,
+        25,
+        47,
+        40,
+        62,
+        55,
+        65,
+        95,
+        102,
+        117,
+        150,
+        182,
+        127,
+        219,
+        299,
+        277,
+        309,
+        576
+    };
 
 };

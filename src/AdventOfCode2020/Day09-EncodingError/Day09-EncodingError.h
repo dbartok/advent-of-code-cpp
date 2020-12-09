@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int64_t firstInvalidNumber(const std::vector<int64_t>& numbers, size_t windowLength);
+int64_t encryptionWeakness(const std::vector<int64_t>& numbers, size_t windowLength);
 
 }
