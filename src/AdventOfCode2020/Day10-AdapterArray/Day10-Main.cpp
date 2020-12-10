@@ -24,4 +24,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numOneAndThreeJoltDifferencesMultiplied(joltageRatings) << std::endl;
+    std::cout << "Second part: " << AoC::numDistinctAdapterArrangements(joltageRatings) << std::endl;
 }

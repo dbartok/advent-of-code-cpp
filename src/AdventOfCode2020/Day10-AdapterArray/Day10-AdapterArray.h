@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int numOneAndThreeJoltDifferencesMultiplied(std::vector<int> joltageRatings);
+int64_t numDistinctAdapterArrangements(std::vector<int> joltageRatings);
 
 }
