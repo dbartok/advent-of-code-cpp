@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day10-AdapterArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AdapterOrganizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day10-AdapterArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AdapterOrganizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
