@@ -34,20 +34,14 @@ class ShipNavigator
 {
 public:
     ShipNavigator(std::vector<NavigationInstruction> navigationInstructions)
-        : m_navigationInstructions{std::move(navigationInstructions)}
-        , m_positionVector{0, 0}
-        , m_directionVector{1, 0}
+        : ShipNavigator(std::move(navigationInstructions), {1, 0})
     {
-        m_actionToFunc =
-        {
-            {NavigationAction::FORWARD, [this](int value) {this->moveForward(value); }},
-            {NavigationAction::LEFT, [this](int value) {this->turnLeft(value); }},
-            {NavigationAction::RIGHT, [this](int value) {this->turnRight(value); }},
-            {NavigationAction::NORTH, [this](int value) {this->moveNorth(value); }},
-            {NavigationAction::SOUTH, [this](int value) {this->moveSouth(value); }},
-            {NavigationAction::EAST, [this](int value) {this->moveEast(value); }},
-            {NavigationAction::WEST, [this](int value) {this->moveWest(value); }},
-        };
+
+    }
+
+    virtual ~ShipNavigator()
+    {
+
     }
 
     void executeAllInstructions()
@@ -63,13 +57,50 @@ public:
         return m_positionVector.cwiseAbs().sum();
     }
 
-private:
-    std::vector<NavigationInstruction> m_navigationInstructions;
-
-    std::unordered_map<NavigationAction, std::function<void(int)>> m_actionToFunc;
-
+protected:
     Vector2D m_positionVector;
     Vector2D m_directionVector;
+
+    ShipNavigator(std::vector<NavigationInstruction> navigationInstructions, Vector2D directionVector)
+        : m_positionVector{0, 0}
+        , m_directionVector{std::move(directionVector)}
+        , m_navigationInstructions{std::move(navigationInstructions)}
+    {
+        m_actionToFunc =
+        {
+            {NavigationAction::FORWARD, [this](int value) {this->moveForward(value); }},
+            {NavigationAction::LEFT, [this](int value) {this->turnLeft(value); }},
+            {NavigationAction::RIGHT, [this](int value) {this->turnRight(value); }},
+            {NavigationAction::NORTH, [this](int value) {this->moveNorth(value); }},
+            {NavigationAction::SOUTH, [this](int value) {this->moveSouth(value); }},
+            {NavigationAction::EAST, [this](int value) {this->moveEast(value); }},
+            {NavigationAction::WEST, [this](int value) {this->moveWest(value); }},
+        };
+    }
+
+    virtual void moveNorth(int value)
+    {
+        m_positionVector += Vector2D{0, 1} *value;
+    }
+
+    virtual void moveSouth(int value)
+    {
+        m_positionVector += Vector2D{0, -1} *value;
+    }
+
+    virtual void moveEast(int value)
+    {
+        m_positionVector += Vector2D{1, 0} *value;
+    }
+
+    virtual void moveWest(int value)
+    {
+        m_positionVector += Vector2D{-1, 0} *value;
+    }
+
+private:
+    std::vector<NavigationInstruction> m_navigationInstructions;
+    std::unordered_map<NavigationAction, std::function<void(int)>> m_actionToFunc;
 
     void moveForward(int value)
     {
@@ -89,25 +120,36 @@ private:
     {
         turnLeft(360 - value);
     }
+};
 
-    void moveNorth(int value)
+class WaypointShipNavigator : public ShipNavigator
+{
+public:
+    WaypointShipNavigator(std::vector<NavigationInstruction> navigationInstructions)
+        : ShipNavigator(std::move(navigationInstructions), {10, 1})
     {
-        m_positionVector += Vector2D{0, 1} * value;
+
     }
 
-    void moveSouth(int value)
+protected:
+    void moveNorth(int value) override
     {
-        m_positionVector += Vector2D{0, -1} * value;
+        m_directionVector += Vector2D{0, 1} *value;
     }
 
-    void moveEast(int value)
+    void moveSouth(int value) override
     {
-        m_positionVector += Vector2D{1, 0} * value;
+        m_directionVector += Vector2D{0, -1} *value;
     }
 
-    void moveWest(int value)
+    void moveEast(int value) override
     {
-        m_positionVector += Vector2D{-1, 0} * value;
+        m_directionVector += Vector2D{1, 0} *value;
+    }
+
+    void moveWest(int value) override
+    {
+        m_directionVector += Vector2D{-1, 0} *value;
     }
 };
 
@@ -129,8 +171,8 @@ NavigationAction charToNavigationAction(char c)
 
 NavigationInstruction parseInstruction(const std::string& instructionLine)
 {
-    NavigationAction action = charToNavigationAction(instructionLine.front());
-    int value = std::stoi(instructionLine.substr(1));
+    const NavigationAction action = charToNavigationAction(instructionLine.front());
+    const int value = std::stoi(instructionLine.substr(1));
 
     return NavigationInstruction{action, value};
 }
@@ -148,10 +190,18 @@ std::vector<NavigationInstruction> parseInstructions(const std::vector<std::stri
     return instructions;
 }
 
-int manhattanDistanceToEndLocation(const std::vector<std::string>& instructionLines)
+int distanceToEndLocationShipMoves(const std::vector<std::string>& instructionLines)
 {
     std::vector<NavigationInstruction> instructions = parseInstructions(instructionLines);
     ShipNavigator shipNavigator{std::move(instructions)};
+    shipNavigator.executeAllInstructions();
+    return shipNavigator.getManhattanDistanceFromStart();
+}
+
+int distanceToEndLocationWaypointMoves(const std::vector<std::string>& instructionLines)
+{
+    std::vector<NavigationInstruction> instructions = parseInstructions(instructionLines);
+    WaypointShipNavigator shipNavigator{std::move(instructions)};
     shipNavigator.executeAllInstructions();
     return shipNavigator.getManhattanDistanceFromStart();
 }

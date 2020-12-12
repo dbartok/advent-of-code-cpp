@@ -10,6 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-int manhattanDistanceToEndLocation(const std::vector<std::string>& instructionLines);
+int distanceToEndLocationShipMoves(const std::vector<std::string>& instructionLines);
+int distanceToEndLocationWaypointMoves(const std::vector<std::string>& instructionLines);
 
 }

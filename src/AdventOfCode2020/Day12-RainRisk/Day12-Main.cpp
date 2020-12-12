@@ -22,5 +22,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::manhattanDistanceToEndLocation(lines) << std::endl;
+    std::cout << "First part: " << AoC::distanceToEndLocationShipMoves(lines) << std::endl;
+    std::cout << "Second part: " << AoC::distanceToEndLocationWaypointMoves(lines) << std::endl;
 }

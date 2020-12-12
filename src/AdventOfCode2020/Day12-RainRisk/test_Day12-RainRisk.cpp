@@ -13,18 +13,24 @@ TEST_CLASS(Day12RainRisk)
 {
 public:
 
-    TEST_METHOD(manhattanDistanceToEndLocation_SimpleTests)
+    TEST_METHOD(distanceToEndLocationShipMoves_SimpleTests)
     {
-        std::vector<std::string> lines =
-        {
-            "F10",
-            "N3",
-            "F7",
-            "R90",
-            "F11"
-        };
-
-        Assert::AreEqual(25, AoC::manhattanDistanceToEndLocation(lines));
+        Assert::AreEqual(25, AoC::distanceToEndLocationShipMoves(m_lines));
     }
+
+    TEST_METHOD(distanceToEndLocationWaypointMoves_SimpleTests)
+    {
+        Assert::AreEqual(286, AoC::distanceToEndLocationWaypointMoves(m_lines));
+    }
+
+private:
+    std::vector<std::string> m_lines =
+    {
+        "F10",
+        "N3",
+        "F7",
+        "R90",
+        "F11"
+    };
 
 };
