@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day11-SeatingSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SeatingSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day11-SeatingSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SeatingSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
