@@ -22,5 +22,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::numOccupiedSeatsInStabilizedState(lines) << std::endl;
+    std::cout << "First part: " << AoC::numOccupiedSeatsWithAdjacencyRules(lines) << std::endl;
+    std::cout << "Second part: " << AoC::numOccupiedSeatsWithVisibilityRules(lines) << std::endl;
 }

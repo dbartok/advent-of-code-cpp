@@ -12,23 +12,29 @@ TEST_CLASS(Day11SeatingSystem)
 {
 public:
 
-    TEST_METHOD(numOccupiedSeatsInStabilizedState_SimpleTests)
+    TEST_METHOD(numOccupiedSeatsWithAdjacencyRules_SimpleTests)
     {
-        std::vector<std::string> lines =
-        {
-            "L.LL.LL.LL",
-            "LLLLLLL.LL",
-            "L.L.L..L..",
-            "LLLL.LL.LL",
-            "L.LL.LL.LL",
-            "L.LLLLL.LL",
-            "..L.L.....",
-            "LLLLLLLLLL",
-            "L.LLLLLL.L",
-            "L.LLLLL.LL"
-        };
-
-        Assert::AreEqual(37, AoC::numOccupiedSeatsInStabilizedState(lines));
+        Assert::AreEqual(37, AoC::numOccupiedSeatsWithAdjacencyRules(m_lines));
     }
+
+    TEST_METHOD(numOccupiedSeatsWithVisibilityRules_SimpleTests)
+    {
+        Assert::AreEqual(26, AoC::numOccupiedSeatsWithVisibilityRules(m_lines));
+    }
+
+private:
+    std::vector<std::string> m_lines =
+    {
+        "L.LL.LL.LL",
+        "LLLLLLL.LL",
+        "L.L.L..L..",
+        "LLLL.LL.LL",
+        "L.LL.LL.LL",
+        "L.LLLLL.LL",
+        "..L.L.....",
+        "LLLLLLLLLL",
+        "L.LLLLLL.L",
+        "L.LLLLL.LL"
+    };
 
 };

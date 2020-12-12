@@ -10,6 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-int numOccupiedSeatsInStabilizedState(std::vector<std::string> seatLayoutLines);
+int numOccupiedSeatsWithAdjacencyRules(std::vector<std::string> seatLayoutLines);
+int numOccupiedSeatsWithVisibilityRules(std::vector<std::string> seatLayoutLines);
 
 }
