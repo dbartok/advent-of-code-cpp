@@ -22,4 +22,5 @@ int main()
     fileIn >> scheduleDescriptionString;
 
     std::cout << "First part: " << AoC::earliestBusIDMultipliedByWaitTime(earliestDepartureTimestamp, scheduleDescriptionString) << std::endl;
+    std::cout << "Second part: " << AoC::earliestTimestampWithMatchingDepartures(scheduleDescriptionString) << std::endl;
 }

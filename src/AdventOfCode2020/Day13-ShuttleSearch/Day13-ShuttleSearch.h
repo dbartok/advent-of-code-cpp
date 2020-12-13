@@ -10,5 +10,6 @@ namespace AdventOfCode
 {
 
 int earliestBusIDMultipliedByWaitTime(int earliestDepartureTimestamp, const std::string& scheduleDescriptionString);
+int64_t earliestTimestampWithMatchingDepartures(const std::string& scheduleDescriptionString);
 
 }

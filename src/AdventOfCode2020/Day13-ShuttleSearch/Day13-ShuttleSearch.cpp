@@ -12,36 +12,76 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-std::vector<int> parseScheduleDescription(const std::string& scheduleDescriptionString)
+struct BusDeparture
+{
+    int busID;
+    int offset;
+};
+
+std::vector<BusDeparture> parseScheduleDescription(const std::string& scheduleDescriptionString)
 {
     std::vector<std::string> tokens;
     boost::split(tokens, scheduleDescriptionString, boost::is_any_of(","));
 
-    std::vector<std::string> validTokens;
-    std::copy_if(tokens.cbegin(), tokens.cend(), std::back_inserter(validTokens), [](const auto& token) { return token != "x"; });
+    std::vector<BusDeparture> busDepartures;
+    for (int i = 0; i < tokens.size(); ++i)
+    {
+        if (tokens.at(i) == "x")
+        {
+            continue;
+        }
+        const int busID = std::stoi(tokens.at(i));
+        const int offset = i % busID;
+        BusDeparture busDeparture{busID, offset};
+        busDepartures.push_back(std::move(busDeparture));
+    }
 
-    std::vector<int> intTokens;
-    std::transform(validTokens.cbegin(), validTokens.cend(), std::back_inserter(intTokens), [](const auto& token) { return std::stoi(token); });
-
-    return intTokens;
+    return busDepartures;
 }
 
-int getWaitTime(int earliestDepartureTimestamp, int busID)
+int64_t getWaitTime(int64_t earliestDepartureTimestamp, int busID)
 {
-    const int earliestDepartureTimeViaThisBus = std::ceil((static_cast<double>(earliestDepartureTimestamp) / busID)) * busID;
+    int64_t earliestDepartureTimeViaThisBus = (earliestDepartureTimestamp / busID) * busID;
+    if (earliestDepartureTimeViaThisBus < earliestDepartureTimestamp)
+    {
+        earliestDepartureTimeViaThisBus += busID;
+    }
     return earliestDepartureTimeViaThisBus - earliestDepartureTimestamp;
 }
 
 int earliestBusIDMultipliedByWaitTime(int earliestDepartureTimestamp, const std::string& scheduleDescriptionString)
 {
-    std::vector<int> departureTimes = parseScheduleDescription(scheduleDescriptionString);
+    std::vector<BusDeparture> busDepartures = parseScheduleDescription(scheduleDescriptionString);
 
-    const int minWaitTimeBusID = *std::min_element(departureTimes.cbegin(), departureTimes.cend(), [earliestDepartureTimestamp](const auto& lhs, const auto& rhs)
-                                                   {
-                                                       return getWaitTime(earliestDepartureTimestamp, lhs) < getWaitTime(earliestDepartureTimestamp, rhs);
-                                                   });
+    const auto minWaitTimeBusDepartureIter = std::min_element(busDepartures.cbegin(), busDepartures.cend(), [earliestDepartureTimestamp](const auto& lhs, const auto& rhs)
+                                                              {
+                                                                  return getWaitTime(earliestDepartureTimestamp, lhs.busID) < getWaitTime(earliestDepartureTimestamp, rhs.busID);
+                                                              });
+
+    const int minWaitTimeBusID = minWaitTimeBusDepartureIter->busID;
 
     return getWaitTime(earliestDepartureTimestamp, minWaitTimeBusID) * minWaitTimeBusID;
+}
+
+int64_t earliestTimestampWithMatchingDepartures(const std::string& scheduleDescriptionString)
+{
+    std::vector<BusDeparture> busDepartures = parseScheduleDescription(scheduleDescriptionString);
+
+    int64_t delta = 1;
+    int64_t candidate = 0;
+
+    for (const auto& busDeparture : busDepartures)
+    {
+        const int busID = busDeparture.busID;
+        const int offset = busDeparture.offset;
+        while (getWaitTime(candidate, busID) != offset)
+        {
+            candidate += delta;
+        }
+        delta *= busID;
+    }
+
+    return candidate;
 }
 
 }
