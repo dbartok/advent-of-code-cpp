@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 uint64_t sumOfValuesInMemoryAfterCompletion(const std::vector<std::string>& instructionLines);
+uint64_t sumOfValuesInMemoryAfterDecoderCompletion(const std::vector<std::string>& instructionLines);
 
 }

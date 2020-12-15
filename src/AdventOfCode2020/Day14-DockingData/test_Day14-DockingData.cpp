@@ -26,4 +26,17 @@ public:
         Assert::AreEqual(165ull, AoC::sumOfValuesInMemoryAfterCompletion(lines));
     }
 
+    TEST_METHOD(sumOfValuesInMemoryAfterDecoderCompletion_SimpleTests)
+    {
+        std::vector<std::string> lines =
+        {
+            "mask = 000000000000000000000000000000X1001X",
+            "mem[42] = 100",
+            "mask = 00000000000000000000000000000000X0XX",
+            "mem[26] = 1"
+        };
+
+        Assert::AreEqual(208ull, AoC::sumOfValuesInMemoryAfterDecoderCompletion(lines));
+    }
+
 };

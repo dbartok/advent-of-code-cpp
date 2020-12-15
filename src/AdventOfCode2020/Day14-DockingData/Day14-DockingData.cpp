@@ -8,6 +8,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 
 #include <unordered_map>
 #include <numeric>
+#include <vector>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -67,13 +68,34 @@ public:
                                });
     }
 
-private:
+protected:
     std::vector<Instruction> m_instructions;
 
     uint64_t m_andBitmask = ~0ull;
     uint64_t m_orBitmask = 0ull;
     std::unordered_map<uint64_t, uint64_t> m_memoryLocationToValue;
 
+    virtual void executeMemInstruction(const Instruction& instruction)
+    {
+        uint64_t value = std::stoull(instruction.arg);
+        value &= m_andBitmask;
+        value |= m_orBitmask;
+
+        m_memoryLocationToValue[instruction.addr.get()] = value;
+    }
+
+    virtual void executeMaskInstruction(const Instruction& instruction)
+    {
+        std::string orBitmaskString = instruction.arg;
+        boost::replace_all(orBitmaskString, "X", "0");
+        m_orBitmask = std::stoull(orBitmaskString, nullptr, 2);
+
+        std::string andBitmaskString = instruction.arg;
+        boost::replace_all(andBitmaskString, "X", "1");
+        m_andBitmask = std::stoull(andBitmaskString, nullptr, 2);
+    }
+
+private:
     void executeInstruction(const Instruction& instruction)
     {
         if (instruction.type == InstructionType::MEM)
@@ -86,26 +108,72 @@ private:
         }
     }
 
-    void executeMemInstruction(const Instruction& instruction)
+};
+
+class BitmaskDecoderProgramExecutor : public BitmaskProgramExecutor
+{
+public:
+    using BitmaskProgramExecutor::BitmaskProgramExecutor;
+
+protected:
+    virtual void executeMemInstruction(const Instruction& instruction) override
     {
+        uint64_t baseAddress = instruction.addr.get();
+        baseAddress |= m_orBitmask;
+
+        std::vector<uint64_t> addresses = getAllAddresses(baseAddress);
         uint64_t value = std::stoull(instruction.arg);
-        value &= m_andBitmask;
-        value |= m_orBitmask;
 
-        m_memoryLocationToValue[instruction.addr.get()] = value;
+        for (auto address : addresses)
+        {
+            m_memoryLocationToValue[address] = value;
+        }
     }
 
-    void executeMaskInstruction(const Instruction& instruction)
+    virtual void executeMaskInstruction(const Instruction& instruction) override
     {
-        std::string orBitmaskString = instruction.arg;
-        boost::replace_all(orBitmaskString, "X", "0");
-        m_orBitmask = std::stoull(orBitmaskString, nullptr, 2);
+        BitmaskProgramExecutor::executeMaskInstruction(instruction);
 
-        std::string andBitmaskString = instruction.arg;
-        boost::replace_all(andBitmaskString, "X", "1");
-        m_andBitmask = std::stoull(andBitmaskString, nullptr, 2);
+        std::string digitToValue = instruction.arg;
+        std::reverse(digitToValue.begin(), digitToValue.end());
+        m_floatingDigits.clear();
+        for (size_t i = 0; i < digitToValue.size(); ++i)
+        {
+            if (digitToValue[i] == 'X')
+            {
+                m_floatingDigits.push_back(i);
+            }
+        }
     }
 
+private:
+    std::vector<size_t> m_floatingDigits;
+
+    std::vector<uint64_t> getAllAddresses(uint64_t baseAddress) const
+    {
+        std::vector<uint64_t> allAddresses;
+        getAllAddressesRecursive(baseAddress, 0, allAddresses);
+        return allAddresses;
+    }
+
+    void getAllAddressesRecursive(uint64_t baseAddress, size_t floatingDigitsIndex, std::vector<uint64_t>& allAddresses) const
+    {
+        if (floatingDigitsIndex >= m_floatingDigits.size())
+        {
+            allAddresses.push_back(baseAddress);
+            return;
+        }
+
+        size_t floatingIndex = m_floatingDigits.at(floatingDigitsIndex);
+
+        uint64_t baseAddressLower = baseAddress;
+        baseAddressLower &= ~(1ull << floatingIndex);
+        getAllAddressesRecursive(baseAddressLower, floatingDigitsIndex + 1, allAddresses);
+
+        uint64_t baseAddressHigher = baseAddress;
+        baseAddressHigher |= (1ull << floatingIndex);
+        getAllAddressesRecursive(baseAddressHigher, floatingDigitsIndex + 1, allAddresses);
+    }
 };
 
 Instruction parseInstruction(const std::string& instruction)
@@ -142,6 +210,14 @@ uint64_t sumOfValuesInMemoryAfterCompletion(const std::vector<std::string>& inst
     BitmaskProgramExecutor bitmaskProgramExecutor{std::move(instructions)};
     bitmaskProgramExecutor.execute();
     return bitmaskProgramExecutor.getSumOfValuesInMemory();
+}
+
+uint64_t sumOfValuesInMemoryAfterDecoderCompletion(const std::vector<std::string>& instructionLines)
+{
+    std::vector<Instruction> instructions = parseInstructions(instructionLines);
+    BitmaskDecoderProgramExecutor bitmaskDecoderProgramExecutor{std::move(instructions)};
+    bitmaskDecoderProgramExecutor.execute();
+    return bitmaskDecoderProgramExecutor.getSumOfValuesInMemory();
 }
 
 }
