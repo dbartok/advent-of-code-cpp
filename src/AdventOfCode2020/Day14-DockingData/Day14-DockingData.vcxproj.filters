@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day14-DockingData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BitmaskProgramExecutor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day14-DockingData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmaskProgramExecutor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
