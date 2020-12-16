@@ -9,6 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-int nthNumberSpoken(const std::vector<int>& startingNumbers);
+int nthNumberSpokenSmallN(const std::vector<int>& startingNumbers);
+int nthNumberSpokenLargeN(const std::vector<int>& startingNumbers);
 
 }

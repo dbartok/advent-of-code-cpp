@@ -25,5 +25,6 @@ int main()
     std::vector<int> startingNumbers;
     AoC::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, startingNumbers, ',');
 
-    std::cout << "First part: " << AoC::nthNumberSpoken(startingNumbers) << std::endl;
+    std::cout << "First part: " << AoC::nthNumberSpokenSmallN(startingNumbers) << std::endl;
+    std::cout << "Second part: " << AoC::nthNumberSpokenLargeN(startingNumbers) << std::endl;
 }

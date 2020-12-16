@@ -9,14 +9,15 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace
 {
 
-const size_t N = 2020;
+const size_t SMALL_N = 2020;
+const size_t LARGE_N = 30'000'000;
 
 }
 
 namespace AdventOfCode
 {
 
-int nthNumberSpoken(const std::vector<int>& startingNumbers)
+int nthNumberSpoken(const std::vector<int>& startingNumbers, size_t N)
 {
     std::unordered_map<int, size_t> numberToLastSpokenIndex;
 
@@ -44,6 +45,16 @@ int nthNumberSpoken(const std::vector<int>& startingNumbers)
     }
 
     return mostRecentlySpokenNumber;
+}
+
+int nthNumberSpokenSmallN(const std::vector<int>& startingNumbers)
+{
+    return nthNumberSpoken(startingNumbers, SMALL_N);
+}
+
+int nthNumberSpokenLargeN(const std::vector<int>& startingNumbers)
+{
+    return nthNumberSpoken(startingNumbers, LARGE_N);
 }
 
 }
