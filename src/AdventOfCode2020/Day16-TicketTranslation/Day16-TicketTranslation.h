@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int ticketScanningErrorRate(const std::vector<std::string>& noteLines);
+int64_t departureValuesMultiplied(const std::vector<std::string>& noteLines);
 
 }

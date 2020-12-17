@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::ticketScanningErrorRate(lines) << std::endl;
+    std::cout << "Second part: " << AoC::departureValuesMultiplied(lines) << std::endl;
 }

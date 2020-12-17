@@ -8,6 +8,8 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
 
 #include <unordered_map>
+#include <unordered_set>
+#include <numeric>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -83,32 +85,138 @@ public:
         : m_ticketValueClassifier{std::move(ticketValueClassifier)}
         , m_ownTicket{std::move(ownTicket)}
         , m_nearbyTickets{std::move(nearbyTickets)}
+        , m_numTicketFields{m_ownTicket.size()}
+        , m_ticketFieldIndexToPossibleNames(m_numTicketFields)
     {
 
     }
 
+    void discardInvalidTickets()
+    {
+        std::vector<Ticket> validNearbyTickets;
+
+        std::copy_if(m_nearbyTickets.cbegin(), m_nearbyTickets.cend(), std::back_inserter(validNearbyTickets), [this](const auto& ticket)
+                     {
+                         return !std::any_of(ticket.cbegin(), ticket.cend(), [this](const auto& ticketValue)
+                                            {
+                                                return this->m_ticketValueClassifier.getPossibleTicketFieldNames(ticketValue).empty();
+                                            });
+                     });
+
+        m_nearbyTickets = validNearbyTickets;
+    }
+
+    void decode()
+    {
+        determineInitialPossibilities();
+        derivePossibilitiesBasedOnOtherPossibilities();
+    }
+
     int getTicketScanningErrorRate() const
     {
-        int errorRate = 0;
+        return std::accumulate(m_nearbyTickets.cbegin(), m_nearbyTickets.cend(), 0, [this](int acc, const auto& ticket)
+                               {
+                                   return acc + std::accumulate(ticket.cbegin(), ticket.cend(), 0, [this](int ticketAcc, const auto& ticketValue)
+                                                                {
+                                                                    return ticketAcc + (this->m_ticketValueClassifier.getPossibleTicketFieldNames(ticketValue).empty() ? ticketValue : 0);
+                                                                });
+                               });
+    }
 
-        for (const auto& ticket : m_nearbyTickets)
+    int64_t getDepartureValuesMultiplied() const
+    {
+        int64_t departureValuesMultiplied = 1;
+
+        for (size_t i = 0; i < m_numTicketFields; ++i)
         {
-            for (const auto& ticketValue : ticket)
+            const auto& possibleNames = m_ticketFieldIndexToPossibleNames.at(i);
+            assert(possibleNames.size() == 1);
+            const auto& name = *possibleNames.cbegin();
+            if (name.rfind("departure", 0) == 0)
             {
-                if (m_ticketValueClassifier.getPossibleTicketFieldNames(ticketValue).empty())
-                {
-                    errorRate += ticketValue;
-                }
+                departureValuesMultiplied *= m_ownTicket.at(i);
             }
         }
 
-        return errorRate;
+        return departureValuesMultiplied;
     }
 
 private:
     TicketValueClassifier m_ticketValueClassifier;
     Ticket m_ownTicket;
     std::vector<Ticket> m_nearbyTickets;
+
+    std::vector<Ticket> m_allTickets;
+    size_t m_numTicketFields;
+
+    using TicketFieldNameSet = std::unordered_set<std::string>;
+    std::vector<TicketFieldNameSet> m_ticketFieldIndexToPossibleNames;
+
+    void determineInitialPossibilities()
+    {
+        for (size_t fieldIndex = 0; fieldIndex < m_numTicketFields; ++fieldIndex)
+        {
+            std::vector<std::string> possibleNamesBasedOnOwnTicket = m_ticketValueClassifier.getPossibleTicketFieldNames(m_ownTicket.at(fieldIndex));
+            m_ticketFieldIndexToPossibleNames.at(fieldIndex).insert(std::make_move_iterator(possibleNamesBasedOnOwnTicket.begin()),
+                                                                    std::make_move_iterator(possibleNamesBasedOnOwnTicket.end()));
+
+            constrainPossibilitiesForFieldBasedOnNearbyTickets(fieldIndex);
+        }
+    }
+
+    void constrainPossibilitiesForFieldBasedOnNearbyTickets(size_t fieldIndex)
+    {
+        for (const auto& nearbyTicket : m_nearbyTickets)
+        {
+            TicketValue ticketValue = nearbyTicket.at(fieldIndex);
+            std::vector<std::string> possibleNamesBasedOnNearbyTicket = m_ticketValueClassifier.getPossibleTicketFieldNames(ticketValue);
+            std::unordered_set<std::string> possibleNamesBasedOnNearbyTicketSet{std::make_move_iterator(possibleNamesBasedOnNearbyTicket.begin()),
+                                                                               std::make_move_iterator(possibleNamesBasedOnNearbyTicket.end())};
+
+            auto& possibleNames = m_ticketFieldIndexToPossibleNames.at(fieldIndex);
+            std::unordered_set<std::string> constrainedPossibleNames{possibleNames};
+
+            for (const auto& possibleName : possibleNames)
+            {
+                if (possibleNamesBasedOnNearbyTicketSet.find(possibleName) == possibleNamesBasedOnNearbyTicketSet.cend())
+                {
+                    constrainedPossibleNames.erase(possibleName);
+                }
+            }
+
+            possibleNames = constrainedPossibleNames;
+        }
+    }
+
+    void derivePossibilitiesBasedOnOtherPossibilities()
+    {
+        std::unordered_set<size_t> finalizedIndices;
+
+        while (finalizedIndices.size() != m_numTicketFields)
+        {
+            for (size_t i = 0; i < m_numTicketFields; ++i)
+            {
+                if (finalizedIndices.find(i) == finalizedIndices.cend() && m_ticketFieldIndexToPossibleNames.at(i).size() == 1)
+                {
+                    finalizedIndices.insert(i);
+                    eliminatePossibilitiesAtOtherIndicesBasedOnFinalizedIndex(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    void eliminatePossibilitiesAtOtherIndicesBasedOnFinalizedIndex(size_t finalizedIndex)
+    {
+        const std::string& onlyPossibleName = *m_ticketFieldIndexToPossibleNames.at(finalizedIndex).cbegin();
+        for (size_t i = 0; i < m_numTicketFields; ++i)
+        {
+            if (i != finalizedIndex)
+            {
+                m_ticketFieldIndexToPossibleNames.at(i).erase(onlyPossibleName);
+            }
+        }
+    }
 };
 
 Range parseRange(const std::string& rangeString)
@@ -169,9 +277,9 @@ std::vector<Ticket> parseNearbyTickets(const TextSection& rulesSection)
 {
     std::vector<Ticket> tickets;
 
-    for (const auto& ticketString : rulesSection)
+    for (auto ticketStringIter = std::next(rulesSection.cbegin()); ticketStringIter != rulesSection.cend(); ++ticketStringIter)
     {
-        Ticket ticket = parseTicket(ticketString);
+        Ticket ticket = parseTicket(*ticketStringIter);
         tickets.push_back(std::move(ticket));
     }
 
@@ -197,6 +305,14 @@ int ticketScanningErrorRate(const std::vector<std::string>& noteLines)
 {
     TicketDecoder ticketDecoder = createTicketDecoder(noteLines);
     return ticketDecoder.getTicketScanningErrorRate();
+}
+
+int64_t departureValuesMultiplied(const std::vector<std::string>& noteLines)
+{
+    TicketDecoder ticketDecoder = createTicketDecoder(noteLines);
+    ticketDecoder.discardInvalidTickets();
+    ticketDecoder.decode();
+    return ticketDecoder.getDepartureValuesMultiplied();
 }
 
 }
