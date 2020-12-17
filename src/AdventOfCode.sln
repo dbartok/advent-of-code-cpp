@@ -193,6 +193,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day14-DockingData", "Advent
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day15-RambunctiousRecitation", "AdventOfCode2020\Day15-RambunctiousRecitation\Day15-RambunctiousRecitation.vcxproj", "{1FC8ECD3-4A2F-4960-9DE7-E536B5123649}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day16-TicketTranslation", "AdventOfCode2020\Day16-TicketTranslation\Day16-TicketTranslation.vcxproj", "{25787856-4D4F-4CDA-A985-3F1D0736003A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1295,6 +1297,18 @@ Global
 		{1FC8ECD3-4A2F-4960-9DE7-E536B5123649}.Test|x64.Build.0 = Test|x64
 		{1FC8ECD3-4A2F-4960-9DE7-E536B5123649}.Test|x86.ActiveCfg = Test|Win32
 		{1FC8ECD3-4A2F-4960-9DE7-E536B5123649}.Test|x86.Build.0 = Test|Win32
+		{25787856-4D4F-4CDA-A985-3F1D0736003A}.Debug|x64.ActiveCfg = Debug|x64
+		{25787856-4D4F-4CDA-A985-3F1D0736003A}.Debug|x64.Build.0 = Debug|x64
+		{25787856-4D4F-4CDA-A985-3F1D0736003A}.Debug|x86.ActiveCfg = Debug|Win32
+		{25787856-4D4F-4CDA-A985-3F1D0736003A}.Debug|x86.Build.0 = Debug|Win32
+		{25787856-4D4F-4CDA-A985-3F1D0736003A}.Release|x64.ActiveCfg = Release|x64
+		{25787856-4D4F-4CDA-A985-3F1D0736003A}.Release|x64.Build.0 = Release|x64
+		{25787856-4D4F-4CDA-A985-3F1D0736003A}.Release|x86.ActiveCfg = Release|Win32
+		{25787856-4D4F-4CDA-A985-3F1D0736003A}.Release|x86.Build.0 = Release|Win32
+		{25787856-4D4F-4CDA-A985-3F1D0736003A}.Test|x64.ActiveCfg = Test|x64
+		{25787856-4D4F-4CDA-A985-3F1D0736003A}.Test|x64.Build.0 = Test|x64
+		{25787856-4D4F-4CDA-A985-3F1D0736003A}.Test|x86.ActiveCfg = Test|Win32
+		{25787856-4D4F-4CDA-A985-3F1D0736003A}.Test|x86.Build.0 = Test|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1390,6 +1404,7 @@ Global
 		{A3611911-CAA2-4347-B64F-81451699F675} = {6DAE5DA2-0AC0-47F7-8DC1-D128585A8EA1}
 		{09A3E696-BBB0-4342-8061-0AE22F8FBD4C} = {6DAE5DA2-0AC0-47F7-8DC1-D128585A8EA1}
 		{1FC8ECD3-4A2F-4960-9DE7-E536B5123649} = {6DAE5DA2-0AC0-47F7-8DC1-D128585A8EA1}
+		{25787856-4D4F-4CDA-A985-3F1D0736003A} = {6DAE5DA2-0AC0-47F7-8DC1-D128585A8EA1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C73BC1FB-06D6-478E-B2D0-DE1E761743D4}
