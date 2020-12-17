@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day16-TicketTranslation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TicketDecoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day16-TicketTranslation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TicketDecoder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
