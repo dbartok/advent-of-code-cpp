@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day17-ConwayCubes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MultiDimensionalGameOfLifeSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day17-ConwayCubes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiDimensionalGameOfLifeSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
