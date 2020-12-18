@@ -10,6 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-int numCubesInActiveStateAfterBootCycle(const std::vector<std::string>& initialStateLines);
+int numCubesInActiveStateAfterBootCycle3D(const std::vector<std::string>& initialStateLines);
+int numCubesInActiveStateAfterBootCycle4D(const std::vector<std::string>& initialStateLines);
 
 }

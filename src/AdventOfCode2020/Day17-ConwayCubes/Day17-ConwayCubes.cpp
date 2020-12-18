@@ -20,28 +20,29 @@ const size_t BOOT_CYCLE_LENGTH = 6;
 namespace AdventOfCode
 {
 
-using Vector3D = Eigen::Matrix<int, 3, 1>;
+using MultiDimensionalVector = Eigen::Matrix<int, Eigen::Dynamic, 1>;
 
-struct Vector3DHash
+struct MultiDimensionalVectorHash
 {
-    size_t operator()(const Vector3D& vector) const
+    size_t operator()(const MultiDimensionalVector& vector) const
     {
         size_t seed = 0;
 
-        boost::hash_combine(seed, vector[0]);
-        boost::hash_combine(seed, vector[1]);
-        boost::hash_combine(seed, vector[2]);
+        for (size_t i = 0; i < vector.size(); ++i)
+        {
+            boost::hash_combine(seed, vector[i]);
+        }
 
         return seed;
     }
 };
 
-class ThreeDimensionalGameOfLifeSimulator
+class MultiDimensionalGameOfLifeSimulator
 {
 public:
-    ThreeDimensionalGameOfLifeSimulator(std::vector<Vector3D> startingActiveCoordinatesVector)
+    MultiDimensionalGameOfLifeSimulator(std::vector<MultiDimensionalVector> allStartingActiveCoordinates)
     {
-        for (auto& startingActiveCoordinates : startingActiveCoordinatesVector)
+        for (auto& startingActiveCoordinates : allStartingActiveCoordinates)
         {
             m_activeCoordinatesSet.insert(std::move(startingActiveCoordinates));
         }
@@ -61,11 +62,11 @@ public:
     }
 
 private:
-    std::unordered_set<Vector3D, Vector3DHash> m_activeCoordinatesSet;
+    std::unordered_set<MultiDimensionalVector, MultiDimensionalVectorHash> m_activeCoordinatesSet;
 
     void simulateRound()
     {
-        std::unordered_set<Vector3D, Vector3DHash> nextRoundActiveCoordinatesSet;
+        std::unordered_set<MultiDimensionalVector, MultiDimensionalVectorHash> nextRoundActiveCoordinatesSet;
 
         for (const auto& coordinates : getAllRelevantCoordinatesForNextRound())
         {
@@ -78,24 +79,25 @@ private:
         m_activeCoordinatesSet = nextRoundActiveCoordinatesSet;
     }
 
-    std::vector<Vector3D> getAllRelevantCoordinatesForNextRound() const
+    std::unordered_set<MultiDimensionalVector, MultiDimensionalVectorHash> getAllRelevantCoordinatesForNextRound() const
     {
-        std::vector<Vector3D> allRelevantCoordinatesForNextRound;
+        std::unordered_set<MultiDimensionalVector, MultiDimensionalVectorHash> allRelevantCoordinatesForNextRound;
 
-        for (const auto& coordinates : m_activeCoordinatesSet)
+        for (const auto& activeCoordinates : m_activeCoordinatesSet)
         {
-            allRelevantCoordinatesForNextRound.push_back(coordinates);
+            allRelevantCoordinatesForNextRound.insert(activeCoordinates);
 
-            std::vector<Vector3D> allNeighborCoordinates = getAllNeighborCoordinates(coordinates);
-            allRelevantCoordinatesForNextRound.insert(allRelevantCoordinatesForNextRound.end(),
-                                                      std::make_move_iterator(allNeighborCoordinates.begin()),
-                                                      std::make_move_iterator(allNeighborCoordinates.end()));
+            std::vector<MultiDimensionalVector> allNeighborCoordinates = getAllNeighborCoordinates(activeCoordinates);
+            for(const auto& neighborCoordinates : allNeighborCoordinates)
+            {
+                allRelevantCoordinatesForNextRound.insert(neighborCoordinates);
+            }
         }
 
         return allRelevantCoordinatesForNextRound;
     }
 
-    bool isCoordinateActiveInNextRound(const Vector3D& coordinates) const
+    bool isCoordinateActiveInNextRound(const MultiDimensionalVector& coordinates) const
     {
         const bool isCurrentlyActive = (m_activeCoordinatesSet.find(coordinates) != m_activeCoordinatesSet.cend());
         const int numActiveNeighbors = getNumActiveNeighbors(coordinates);
@@ -106,31 +108,40 @@ private:
         return isActiveRemainingActive || isInactiveBecomingActive;
     }
 
-    std::vector<Vector3D> getAllNeighborCoordinates(const Vector3D& coordinates) const
+    std::vector<MultiDimensionalVector> getAllNeighborCoordinates(const MultiDimensionalVector& coordinates) const
     {
-        std::vector<Vector3D> allNeighborCoordinates;
+        std::vector<MultiDimensionalVector> allNeighborCoordinates;
 
-        for (int i = coordinates[0] - 1; i <= coordinates[0] + 1; ++i)
-        {
-            for (int j = coordinates[1] - 1; j <= coordinates[1] + 1; ++j)
-            {
-                for (int k = coordinates[2] - 1; k <= coordinates[2] + 1; ++k)
-                {
-                    Vector3D neighborCoordinates{i, j, k};
-                    if (coordinates != neighborCoordinates)
-                    {
-                        allNeighborCoordinates.push_back(std::move(neighborCoordinates));
-                    }
-                }
-            }
-        }
+        getAllNeighborCoordinatesRecursive(coordinates, coordinates, 0, allNeighborCoordinates);
 
         return allNeighborCoordinates;
     }
 
-    int getNumActiveNeighbors(const Vector3D& coordinates) const
+    void getAllNeighborCoordinatesRecursive(const MultiDimensionalVector& originCoordinates,
+                                            const MultiDimensionalVector& neighborCandidateCoordinates,
+                                            size_t currentDimension,
+                                            std::vector<MultiDimensionalVector>& result) const
     {
-        std::vector<Vector3D> allNeighborCoordinates = getAllNeighborCoordinates(coordinates);
+        if (currentDimension == originCoordinates.size())
+        {
+            if (originCoordinates != neighborCandidateCoordinates)
+            {
+                result.push_back(neighborCandidateCoordinates);
+            }
+            return;
+        }
+
+        for (int i = originCoordinates[currentDimension] - 1; i <= originCoordinates[currentDimension] + 1; ++i)
+        {
+            auto neighborCandidateCoordinatesCopy{neighborCandidateCoordinates};
+            neighborCandidateCoordinatesCopy[currentDimension] = i;
+            getAllNeighborCoordinatesRecursive(originCoordinates, neighborCandidateCoordinatesCopy, currentDimension + 1, result);
+        }
+    }
+
+    int getNumActiveNeighbors(const MultiDimensionalVector& coordinates) const
+    {
+        std::vector<MultiDimensionalVector> allNeighborCoordinates = getAllNeighborCoordinates(coordinates);
         return std::count_if(allNeighborCoordinates.cbegin(), allNeighborCoordinates.cend(), [this](const auto& coords)
                              {
                                  return this->m_activeCoordinatesSet.find(coords) != this->m_activeCoordinatesSet.cend();
@@ -138,9 +149,9 @@ private:
     }
 };
 
-std::vector<Vector3D> createStartingActiveCoordinatesVector(const std::vector<std::string>& initialStateLines)
+std::vector<MultiDimensionalVector> createStartingActiveCoordinatesVector(const std::vector<std::string>& initialStateLines, size_t numDimensions)
 {
-    std::vector<Vector3D> startingActiveCoordinatesVector;
+    std::vector<MultiDimensionalVector> startingActiveCoordinatesVector;
 
     for (int j = 0; j < initialStateLines.size(); ++j)
     {
@@ -148,7 +159,10 @@ std::vector<Vector3D> createStartingActiveCoordinatesVector(const std::vector<st
         {
             if (initialStateLines.at(j).at(i) == ACTIVE_CHAR)
             {
-                startingActiveCoordinatesVector.emplace_back(i, j, 0);
+                MultiDimensionalVector coordinates = MultiDimensionalVector::Zero(numDimensions);
+                coordinates[0] = i;
+                coordinates[1] = j;
+                startingActiveCoordinatesVector.push_back(std::move(coordinates));
             }
         }
     }
@@ -156,10 +170,18 @@ std::vector<Vector3D> createStartingActiveCoordinatesVector(const std::vector<st
     return startingActiveCoordinatesVector;
 }
 
-int numCubesInActiveStateAfterBootCycle(const std::vector<std::string>& initialStateLines)
+int numCubesInActiveStateAfterBootCycle3D(const std::vector<std::string>& initialStateLines)
 {
-    std::vector<Vector3D> startingActiveCoordinatesVector = createStartingActiveCoordinatesVector(initialStateLines);
-    ThreeDimensionalGameOfLifeSimulator simulator{std::move(startingActiveCoordinatesVector)};
+    std::vector<MultiDimensionalVector> startingActiveCoordinatesVector = createStartingActiveCoordinatesVector(initialStateLines, 3);
+    MultiDimensionalGameOfLifeSimulator simulator{std::move(startingActiveCoordinatesVector)};
+    simulator.simulateRounds(BOOT_CYCLE_LENGTH);
+    return simulator.getNumActiveCoordinates();
+}
+
+int numCubesInActiveStateAfterBootCycle4D(const std::vector<std::string>& initialStateLines)
+{
+    std::vector<MultiDimensionalVector> startingActiveCoordinatesVector = createStartingActiveCoordinatesVector(initialStateLines, 4);
+    MultiDimensionalGameOfLifeSimulator simulator{std::move(startingActiveCoordinatesVector)};
     simulator.simulateRounds(BOOT_CYCLE_LENGTH);
     return simulator.getNumActiveCoordinates();
 }

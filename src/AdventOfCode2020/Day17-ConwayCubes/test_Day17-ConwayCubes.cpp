@@ -13,16 +13,22 @@ TEST_CLASS(Day17ConwayCubes)
 {
 public:
 
-    TEST_METHOD(numCubesInActiveStateAfterBootCycle_SimpleTests)
+    TEST_METHOD(numCubesInActiveStateAfterBootCycle3D_SimpleTests)
     {
-        std::vector<std::string> lines =
-        {
-            ".#.",
-            "..#",
-            "###"
-        };
-
-        Assert::AreEqual(112, AoC::numCubesInActiveStateAfterBootCycle(lines));
+        Assert::AreEqual(112, AoC::numCubesInActiveStateAfterBootCycle3D(m_lines));
     }
+
+    TEST_METHOD(numCubesInActiveStateAfterBootCycle4D_SimpleTests)
+    {
+        Assert::AreEqual(848, AoC::numCubesInActiveStateAfterBootCycle4D(m_lines));
+    }
+
+private:
+    std::vector<std::string> m_lines =
+    {
+        ".#.",
+        "..#",
+        "###"
+    };
 
 };
