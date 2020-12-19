@@ -10,6 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-int64_t sumOfResultingValues(const std::vector<std::string>& expressionLines);
+int64_t sumOfResultingValuesWithoutPrecedence(const std::vector<std::string>& expressionLines);
+int64_t sumOfResultingValuesWithPrecedence(const std::vector<std::string>& expressionLines);
 
 }

@@ -22,5 +22,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::sumOfResultingValues(lines) << std::endl;
+    std::cout << "First part: " << AoC::sumOfResultingValuesWithoutPrecedence(lines) << std::endl;
+    std::cout << "Second part: " << AoC::sumOfResultingValuesWithPrecedence(lines) << std::endl;
 }
