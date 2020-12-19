@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day18-OperationOrder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ExpressionNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day18-OperationOrder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpressionNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
