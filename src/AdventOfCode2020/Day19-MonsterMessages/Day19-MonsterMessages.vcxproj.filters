@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day19-MonsterMessages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MessageRulesMaterializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day19-MonsterMessages.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageRulesMaterializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
