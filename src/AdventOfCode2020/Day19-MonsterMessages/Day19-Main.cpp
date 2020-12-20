@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numMessagesMatchingRuleZero(lines) << std::endl;
+    std::cout << "Second part: " << AoC::numMessagesMatchingRuleZeroWithInfiniteRules(lines) << std::endl;
 }

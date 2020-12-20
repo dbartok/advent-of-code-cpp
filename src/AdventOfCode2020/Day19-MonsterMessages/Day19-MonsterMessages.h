@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int numMessagesMatchingRuleZero(const std::vector<std::string>& ruleAndMessageLines);
+int numMessagesMatchingRuleZeroWithInfiniteRules(const std::vector<std::string>& ruleAndMessageLines);
 
 }
