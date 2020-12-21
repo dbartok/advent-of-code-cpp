@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int64_t cornerTileIDsMultiplied(const std::vector<std::string>& cameraArrayLines);
+int numWaterNotPartOfASeaMonster(const std::vector<std::string>& cameraArrayLines);
 
 }

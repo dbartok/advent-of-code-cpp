@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::cornerTileIDsMultiplied(lines) << std::endl;
+    std::cout << "Second part: " << AoC::numWaterNotPartOfASeaMonster(lines) << std::endl;
 }
