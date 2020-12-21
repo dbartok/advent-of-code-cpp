@@ -7,8 +7,10 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 
 #include <regex>
 #include <unordered_map>
+#include <map>
 #include <unordered_set>
 #include <numeric>
+#include <algorithm>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using SortedStringVector = std::vector<std::string>;
@@ -37,6 +39,11 @@ public:
         {
             processIngredientAllergenRelationshipForFood(food);
         }
+
+        for (size_t i = 0; i < m_allergenToPossibleIngredients.size(); ++i)
+        {
+            resolveNextAllergen();
+        }
     }
 
     int getNumAppearancesOfIngredientsNotContainingAllergens() const
@@ -53,9 +60,22 @@ public:
                                });
     }
 
+    std::vector<std::string> getAllergenicIngredientsOrderedByAllergen() const
+    {
+        std::vector<std::string> allergenicIngredientsOrderedByAllergen;
+
+        for (const auto& allergenAndContainingIngredient : m_allergenToContainingIngredient)
+        {
+            allergenicIngredientsOrderedByAllergen.push_back(allergenAndContainingIngredient.second);
+        }
+
+        return allergenicIngredientsOrderedByAllergen;
+    }
+
 private:
     const std::vector<Food> m_foods;
     std::unordered_map<std::string, SortedStringVector> m_allergenToPossibleIngredients;
+    std::map<std::string, std::string> m_allergenToContainingIngredient;
 
     void processIngredientAllergenRelationshipForFood(const Food& food)
     {
@@ -86,6 +106,35 @@ private:
         preexistingIngredientConstraints = combinedIngredientConstraints;
     }
 
+    void resolveNextAllergen()
+    {
+        for (const auto& allergenAndPossibleIngredients : m_allergenToPossibleIngredients)
+        {
+            const auto& allergen = allergenAndPossibleIngredients.first;
+            const auto& possibleIngredients = allergenAndPossibleIngredients.second;
+            if (m_allergenToContainingIngredient.find(allergen) == m_allergenToContainingIngredient.cend() && possibleIngredients.size() == 1)
+            {
+                const std::string& resolvedIngredient = possibleIngredients.front();
+                m_allergenToContainingIngredient[allergen] = resolvedIngredient;
+                eliminateIngredientFromPossibilities(allergen, possibleIngredients.front());
+                return;
+            }
+        }
+    }
+
+    void eliminateIngredientFromPossibilities(const std::string& resolvedAllergen, const std::string& resolvedIngredient)
+    {
+        for (auto& allergenAndPossibleIngredients : m_allergenToPossibleIngredients)
+        {
+            const auto& allergen = allergenAndPossibleIngredients.first;
+            auto& possibleIngredients = allergenAndPossibleIngredients.second;
+            if (allergen != resolvedAllergen)
+            {
+                possibleIngredients.erase(std::remove(possibleIngredients.begin(), possibleIngredients.end(), resolvedIngredient), possibleIngredients.end());
+            }
+        }
+    }
+
     std::unordered_set<std::string> getIngredientsPossiblyContainingAllergens() const
     {
         std::unordered_set<std::string> ingredientsPossiblyContainingAllergens;
@@ -104,7 +153,7 @@ private:
 
 Food parseFoodLine(const std::string& foodLine)
 {
-    const std::regex foodLineRegex{R"(((?:[\w]+\s)+)\(contains\s((?:[\w]+(?:,\s)?)+)\))"};
+    const std::regex foodLineRegex{R"(([\w\s]+)\s\(contains\s([\w\s,]+)\))"};
     std::smatch matches;
     std::regex_search(foodLine, matches, foodLineRegex);
 
@@ -144,6 +193,16 @@ int numAppearancesOfIngredientsNotContainingAllergens(const std::vector<std::str
     FoodListAnalyzer foodListAnalyzer(std::move(foods));
     foodListAnalyzer.determineIngredientAllergenRelationship();
     return foodListAnalyzer.getNumAppearancesOfIngredientsNotContainingAllergens();
+}
+
+std::string canonicalDangerousIngredientList(const std::vector<std::string>& foodLines)
+{
+    std::vector<Food> foods = parseFoodLines(foodLines);
+    FoodListAnalyzer foodListAnalyzer(std::move(foods));
+    foodListAnalyzer.determineIngredientAllergenRelationship();
+    std::vector<std::string> allergenicIngredients = foodListAnalyzer.getAllergenicIngredientsOrderedByAllergen();
+
+    return boost::join(allergenicIngredients, ",");
 }
 
 }

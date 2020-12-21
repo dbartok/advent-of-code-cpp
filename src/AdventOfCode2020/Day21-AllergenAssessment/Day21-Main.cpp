@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::numAppearancesOfIngredientsNotContainingAllergens(lines) << std::endl;
+    std::cout << "Second part: " << AoC::canonicalDangerousIngredientList(lines) << std::endl;
 }

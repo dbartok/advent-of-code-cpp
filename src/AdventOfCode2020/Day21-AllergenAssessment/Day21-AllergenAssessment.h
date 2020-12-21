@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int numAppearancesOfIngredientsNotContainingAllergens(const std::vector<std::string>& foodLines);
+std::string canonicalDangerousIngredientList(const std::vector<std::string>& foodLines);
 
 }

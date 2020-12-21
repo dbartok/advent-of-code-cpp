@@ -14,10 +14,10 @@
     <ClCompile Include="Day21-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Day21-AllergenAssessment.cpp">
+    <ClCompile Include="test_Day21-AllergenAssessment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_Day21-AllergenAssessment.cpp">
+    <ClCompile Include="Day21-AllergenAssessment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
