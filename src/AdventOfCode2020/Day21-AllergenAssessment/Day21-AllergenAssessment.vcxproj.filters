@@ -20,9 +20,15 @@
     <ClCompile Include="Day21-AllergenAssessment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FoodListAnalyzer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day21-AllergenAssessment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FoodListAnalyzer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
