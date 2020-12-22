@@ -15,24 +15,29 @@ public:
 
     TEST_METHOD(winningPlayerScore_SimpleTests)
     {
-        std::vector<std::string> lines =
-        {
-            "Player 1:",
-            "9",
-            "2",
-            "6",
-            "3",
-            "1",
-            "",
-            "Player 2:",
-            "5",
-            "8",
-            "4",
-            "7",
-            "10"
-        };
-
-        Assert::AreEqual(306, AoC::winningPlayerScore(lines));
+        Assert::AreEqual(306, AoC::winningPlayerScore(m_lines));
     }
 
+    TEST_METHOD(winningPlayerScoreRecursiveCombat_SimpleTests)
+    {
+        Assert::AreEqual(291, AoC::winningPlayerScoreRecursiveCombat(m_lines));
+    }
+
+private:
+    std::vector<std::string> m_lines =
+    {
+        "Player 1:",
+        "9",
+        "2",
+        "6",
+        "3",
+        "1",
+        "",
+        "Player 2:",
+        "5",
+        "8",
+        "4",
+        "7",
+        "10"
+    };
 };

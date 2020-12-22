@@ -4,70 +4,146 @@
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
+#include <boost/functional/hash/hash.hpp>
+#include <boost/optional.hpp>
 
 #include <deque>
 #include <numeric>
+#include <unordered_set>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
 
+using Deck = std::deque<int>;
+using DeckPair = std::pair<Deck, Deck>;
+
+enum class Player
+{
+    ONE,
+    TWO,
+};
+
+enum class Action
+{
+    NONE,
+    TERMINATE_GAME,
+};
+
+struct RoundResult
+{
+    RoundResult(Player winningPlayer, Action action = Action::NONE)
+        : winningPlayer{winningPlayer}
+        , action(action)
+    {
+
+    }
+
+    Player winningPlayer;
+    Action action;
+};
+
 class CombatCardGameSimulator
 {
 public:
-    CombatCardGameSimulator(std::deque<int> startingDeckOne, std::deque<int> startingDeckTwo)
-        : m_deckOne{std::move(startingDeckOne)}
-        , m_deckTwo{std::move(startingDeckTwo)}
+    CombatCardGameSimulator(DeckPair startingDecks)
+        : m_decks{std::move(startingDecks)}
     {
 
     }
 
-    void playGame()
+    Player determineWinningPlayer()
     {
-        while (!isGameOver())
+        while (true)
         {
-            auto& winnerThisRound = m_deckOne;
-            auto& loserThisRound = m_deckTwo;
-            if (winnerThisRound.front() < loserThisRound.front())
+            RoundResult roundResult = determineRoundResult();
+            if (roundResult.action == Action::TERMINATE_GAME)
             {
-                std::swap(winnerThisRound, loserThisRound);
+                return roundResult.winningPlayer;
             }
 
-            winnerThisRound.push_back(winnerThisRound.front());
-            winnerThisRound.pop_front();
+            Deck* winnerDeckThisRound = &m_decks.first;
+            Deck* loserDeckThisRound = &m_decks.second;
+            if (roundResult.winningPlayer != Player::ONE)
+            {
+                std::swap(winnerDeckThisRound, loserDeckThisRound);
+            }
 
-            winnerThisRound.push_back(loserThisRound.front());
-            loserThisRound.pop_front();
+            winnerDeckThisRound->push_back(winnerDeckThisRound->front());
+            winnerDeckThisRound->pop_front();
+
+            winnerDeckThisRound->push_back(loserDeckThisRound->front());
+            loserDeckThisRound->pop_front();
         }
     }
 
-    int getWinningPlayerScore() const
+    int getPlayerScore(Player player) const
     {
-        assert(isGameOver());
-
-        const auto& winningDeck = m_deckOne.empty() ? m_deckTwo : m_deckOne;
+        const auto& deck = (player == Player::ONE ? m_decks.first : m_decks.second);
         int multiplier = 1;
 
-        return std::accumulate(winningDeck.crbegin(), winningDeck.crend(), 0, [&multiplier](int acc, int card)
+        return std::accumulate(deck.crbegin(), deck.crend(), 0, [&multiplier](int acc, int card)
                                {
                                    return acc + (multiplier++) * card;
                                });
 
     }
 
-private:
-    std::deque<int> m_deckOne;
-    std::deque<int> m_deckTwo;
+protected:
+    DeckPair m_decks;
 
-    bool isGameOver() const
+    virtual RoundResult determineRoundResult() const
     {
-        return m_deckOne.empty() || m_deckTwo.empty();
+        if (m_decks.first.empty() || m_decks.second.empty())
+        {
+            return {m_decks.second.empty() ? Player::ONE : Player::TWO, Action::TERMINATE_GAME};
+        }
+
+        return m_decks.first.front() > m_decks.second.front() ? Player::ONE : Player::TWO;
     }
 };
 
-std::deque<int> createDeck(const std::vector<std::string>& startingDeckSection)
+class RecursiveCombatCardGameSimulator : public CombatCardGameSimulator
 {
-    std::deque<int> deck;
+public:
+    using CombatCardGameSimulator::CombatCardGameSimulator;
+
+protected:
+    RoundResult determineRoundResult() const override
+    {
+        bool wasInserted = m_previouslySeenStates.insert(m_decks).second;
+        if (!wasInserted)
+        {
+            return {Player::ONE, Action::TERMINATE_GAME};
+        }
+
+        if (m_decks.first.empty() || m_decks.second.empty())
+        {
+            return {m_decks.second.empty() ? Player::ONE : Player::TWO, Action::TERMINATE_GAME};
+        }
+
+        const bool areThereEnoughCardsToRecurse = m_decks.first.front() < m_decks.first.size() && m_decks.second.front() < m_decks.second.size();
+        if (!areThereEnoughCardsToRecurse)
+        {
+            return CombatCardGameSimulator::determineRoundResult();
+        }
+
+        Deck newFirstDeck{m_decks.first.cbegin() + 1, m_decks.first.cbegin() + m_decks.first.front() + 1};
+        Deck newSecondDeck{m_decks.second.cbegin() + 1, m_decks.second.cbegin() + m_decks.second.front() + 1};
+        DeckPair newDeckPair{std::move(newFirstDeck), std::move(newSecondDeck)};
+        RecursiveCombatCardGameSimulator recursiveSimulator{std::move(newDeckPair)};
+
+        return recursiveSimulator.determineWinningPlayer();
+
+    }
+
+private:
+    mutable std::unordered_set<DeckPair, boost::hash<DeckPair>> m_previouslySeenStates;
+};
+
+Deck createDeck(const std::vector<std::string>& startingDeckSection)
+{
+    Deck deck;
 
     for (auto lineIter = std::next(startingDeckSection.cbegin()); lineIter != startingDeckSection.cend(); ++lineIter)
     {
@@ -77,23 +153,32 @@ std::deque<int> createDeck(const std::vector<std::string>& startingDeckSection)
     return deck;
 }
 
-CombatCardGameSimulator creatCombatCardGameSimulator(const std::vector<std::string>& startingDecksLines)
+DeckPair parseStartingDecksLines(const std::vector<std::string>& startingDecksLines)
 {
     std::vector<std::vector<std::string>> startingDeckSections;
     boost::split(startingDeckSections, startingDecksLines, [](const auto& line) {return line.empty(); });
 
-    std::deque<int> deckOne = createDeck(startingDeckSections.at(0));
-    std::deque<int> deckTwo = createDeck(startingDeckSections.at(1));
+    Deck deckOne = createDeck(startingDeckSections.at(0));
+    Deck deckTwo = createDeck(startingDeckSections.at(1));
 
-    return CombatCardGameSimulator{std::move(deckOne), std::move(deckTwo)};
+    return {deckOne, deckTwo};
 
 }
 
 int winningPlayerScore(const std::vector<std::string>& startingDecksLines)
 {
-    CombatCardGameSimulator simulator = creatCombatCardGameSimulator(startingDecksLines);
-    simulator.playGame();
-    return simulator.getWinningPlayerScore();
+    DeckPair startingDeckPair = parseStartingDecksLines(startingDecksLines);
+    CombatCardGameSimulator simulator{std::move(startingDeckPair)};
+    Player winningPlayer = simulator.determineWinningPlayer();
+    return simulator.getPlayerScore(winningPlayer);
+}
+
+int winningPlayerScoreRecursiveCombat(const std::vector<std::string>& startingDecksLines)
+{
+    DeckPair startingDeckPair = parseStartingDecksLines(startingDecksLines);
+    RecursiveCombatCardGameSimulator recursiveSimulator{std::move(startingDeckPair)};
+    Player winningPlayer = recursiveSimulator.determineWinningPlayer();
+    return recursiveSimulator.getPlayerScore(winningPlayer);
 }
 
 }

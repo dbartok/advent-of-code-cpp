@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << AoC::winningPlayerScore(lines) << std::endl;
+    std::cout << "Second part: " << AoC::winningPlayerScoreRecursiveCombat(lines) << std::endl;
 }

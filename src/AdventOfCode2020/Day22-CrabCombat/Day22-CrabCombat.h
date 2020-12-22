@@ -11,5 +11,6 @@ namespace AdventOfCode
 {
 
 int winningPlayerScore(const std::vector<std::string>& startingDecksLines);
+int winningPlayerScoreRecursiveCombat(const std::vector<std::string>& startingDecksLines);
 
 }
