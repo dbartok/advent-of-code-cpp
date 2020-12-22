@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day22-CrabCombat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CombatCardGameSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day22-CrabCombat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatCardGameSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
