@@ -17,4 +17,5 @@ int main()
     fileIn >> initialCupLabellingString;
 
     std::cout << "First part: " << AoC::cupLabelsStartingFromCupOne(initialCupLabellingString, 100) << std::endl;
+    std::cout << "Second part: " << AoC::twoCupLabelsAfterCupOneMultipliedManyCups(initialCupLabellingString, 10'000'000) << std::endl;
 }

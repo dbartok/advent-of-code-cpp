@@ -19,4 +19,9 @@ public:
         Assert::AreEqual(std::string{"67384529"}, AoC::cupLabelsStartingFromCupOne("389125467", 100));
     }
 
+    TEST_METHOD(twoCupLabelsAfterCupOneMultipliedManyCups_SimpleTests)
+    {
+        Assert::AreEqual(149245887792ll, AoC::twoCupLabelsAfterCupOneMultipliedManyCups("389125467", 10'000'000));
+    }
+
 };

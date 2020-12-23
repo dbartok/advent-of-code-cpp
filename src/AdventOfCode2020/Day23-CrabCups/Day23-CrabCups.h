@@ -9,6 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-std::string labelsOnCupsAfterCupOne(const std::string& initialCupLabellingString, size_t numMixes);
+std::string cupLabelsStartingFromCupOne(const std::string& initialCupLabellingString, size_t numMixes);
+int64_t twoCupLabelsAfterCupOneMultipliedManyCups(const std::string& initialCupLabellingString, size_t numMixes);
 
 }
