@@ -23,5 +23,6 @@ int main()
     }
 
 
-    std::cout << "First part: " << AoC::numTilesWithBlackSideUp(lines) << std::endl;
+    std::cout << "First part: " << AoC::numTilesWithBlackSideUpInInitialState(lines) << std::endl;
+    std::cout << "Second part: " << AoC::numTilesWithBlackSideUpAfterMultipleDays(lines) << std::endl;
 }

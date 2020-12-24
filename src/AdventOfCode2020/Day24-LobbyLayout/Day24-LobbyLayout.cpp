@@ -10,6 +10,11 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <unordered_map>
 __END_LIBRARIES_DISABLE_WARNINGS
 
+namespace
+{
+    unsigned NUM_DAYS_TO_SIMULATE = 100;
+}
+
 namespace AdventOfCode
 {
 
@@ -68,7 +73,7 @@ public:
         };
     }
 
-    void flipTiles()
+    void setupInitialState()
     {
         for (const auto& tilePath : m_tilePaths)
         {
@@ -76,35 +81,58 @@ public:
         }
     }
 
-    int getNumTilesWithBlackSideUp() const
+    void simulateMultipleDays(unsigned numDaysToSimulate)
     {
-        return m_tilesWithBlackSideUp.size();
+        for (unsigned i = 0; i < numDaysToSimulate; ++i)
+        {
+            simulateSingleDay();
+        }
+    }
+
+    int getNumBlackTiles() const
+    {
+        return m_blackTileCoordinatesSet.size();
     }
 
 private:
     std::vector<std::string> m_tilePaths;
-    std::unordered_set<Vector2D, Vector2DHash> m_tilesWithBlackSideUp;
+    std::unordered_set<Vector2D, Vector2DHash> m_blackTileCoordinatesSet;
 
     std::unordered_map<std::string, Vector2D> m_directionToUnitVector;
 
     void flipTileAtPath(const std::string& tilePath)
     {
-        Vector2D tileCoordinates = getTileCoordinates(tilePath);
+        Vector2D tileCoordinates = getTileCoordinatesForPath(tilePath);
         flipTileAtCoordinates(tileCoordinates);
     }
 
     void flipTileAtCoordinates(const Vector2D& coordinates)
     {
-        const auto insertionResult = m_tilesWithBlackSideUp.insert(coordinates);
+        const auto insertionResult = m_blackTileCoordinatesSet.insert(coordinates);
         const bool wasInserted = insertionResult.second;
         if (!wasInserted)
         {
             const auto existingElementIterator = insertionResult.first;
-            m_tilesWithBlackSideUp.erase(existingElementIterator);
+            m_blackTileCoordinatesSet.erase(existingElementIterator);
         }
     }
 
-    Vector2D getTileCoordinates(const std::string& tilePath)
+    void simulateSingleDay()
+    {
+        std::unordered_set<Vector2D, Vector2DHash> nextRoundBlackTileCoordinatesSet;
+
+        for (const auto& coordinates : getAllRelevantCoordinatesForNextRound())
+        {
+            if (isTileBlackInNextRound(coordinates))
+            {
+                nextRoundBlackTileCoordinatesSet.insert(coordinates);
+            }
+        }
+
+        m_blackTileCoordinatesSet = nextRoundBlackTileCoordinatesSet;
+    }
+
+    Vector2D getTileCoordinatesForPath(const std::string& tilePath) const
     {
         Vector2D coordinates{0, 0};
         std::string direction;
@@ -122,13 +150,72 @@ private:
 
         return coordinates;
     }
+
+    std::unordered_set<Vector2D, Vector2DHash> getAllRelevantCoordinatesForNextRound() const
+    {
+        std::unordered_set<Vector2D, Vector2DHash> allRelevantCoordinatesForNextRound;
+
+        for (const auto& blackTileCoordinates : m_blackTileCoordinatesSet)
+        {
+            allRelevantCoordinatesForNextRound.insert(blackTileCoordinates);
+
+            std::vector<Vector2D> allNeighborCoordinates = getAllAdjacentTileCoordinates(blackTileCoordinates);
+            for (const auto& neighborCoordinates : allNeighborCoordinates)
+            {
+                allRelevantCoordinatesForNextRound.insert(neighborCoordinates);
+            }
+        }
+
+        return allRelevantCoordinatesForNextRound;
+    }
+
+    bool isTileBlackInNextRound(const Vector2D& coordinates) const
+    {
+        const bool isTileCurrentlyBlack = (m_blackTileCoordinatesSet.find(coordinates) != m_blackTileCoordinatesSet.cend());
+        const int numAdjacentBlackTiles = getNumAdjacentBlackTiles(coordinates);
+
+        const bool isBlackTileRemainingBlack = isTileCurrentlyBlack && (numAdjacentBlackTiles == 1 || numAdjacentBlackTiles == 2);
+        const bool isWhiteTileTurningOverToBlack = !isTileCurrentlyBlack && numAdjacentBlackTiles == 2;
+
+        return isBlackTileRemainingBlack || isWhiteTileTurningOverToBlack;
+    }
+
+    std::vector<Vector2D> getAllAdjacentTileCoordinates(const Vector2D& coordinates) const
+    {
+        std::vector<Vector2D> allAdjacentTileCoordinates;
+
+        for (const auto& directionAndUnitVector : m_directionToUnitVector)
+        {
+            const auto& unitVector = directionAndUnitVector.second;
+            allAdjacentTileCoordinates.push_back(coordinates + unitVector);
+        }
+
+        return allAdjacentTileCoordinates;
+    }
+
+    int getNumAdjacentBlackTiles(const Vector2D& coordinates) const
+    {
+        std::vector<Vector2D> allAdjacentTileCoordinates = getAllAdjacentTileCoordinates(coordinates);
+        return std::count_if(allAdjacentTileCoordinates.cbegin(), allAdjacentTileCoordinates.cend(), [this](const auto& coords)
+                             {
+                                 return this->m_blackTileCoordinatesSet.find(coords) != this->m_blackTileCoordinatesSet.cend();
+                             });
+    }
 };
 
-int numTilesWithBlackSideUp(const std::vector<std::string>& tilePathLines)
+int numTilesWithBlackSideUpInInitialState(const std::vector<std::string>& tilePathLines)
 {
     HexTileFlipper hexTileFlipper{tilePathLines};
-    hexTileFlipper.flipTiles();
-    return hexTileFlipper.getNumTilesWithBlackSideUp();
+    hexTileFlipper.setupInitialState();
+    return hexTileFlipper.getNumBlackTiles();
+}
+
+int numTilesWithBlackSideUpAfterMultipleDays(const std::vector<std::string>& tilePathLines)
+{
+    HexTileFlipper hexTileFlipper{tilePathLines};
+    hexTileFlipper.setupInitialState();
+    hexTileFlipper.simulateMultipleDays(NUM_DAYS_TO_SIMULATE);
+    return hexTileFlipper.getNumBlackTiles();
 }
 
 }

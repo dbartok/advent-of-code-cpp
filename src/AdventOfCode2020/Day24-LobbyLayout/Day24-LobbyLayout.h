@@ -10,6 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace AdventOfCode
 {
 
-int numTilesWithBlackSideUp(const std::vector<std::string>& tilePathLines);
+int numTilesWithBlackSideUpInInitialState(const std::vector<std::string>& tilePathLines);
+int numTilesWithBlackSideUpAfterMultipleDays(const std::vector<std::string>& tilePathLines);
 
 }
