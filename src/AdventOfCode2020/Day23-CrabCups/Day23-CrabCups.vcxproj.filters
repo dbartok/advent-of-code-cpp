@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day23-CrabCups.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CupMixer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day23-CrabCups.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CupMixer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
