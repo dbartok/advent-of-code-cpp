@@ -20,7 +20,7 @@ public:
 
     TEST_METHOD(numTilesWithBlackSideUpAfterMultipleDays_SimpleTests)
     {
-        Assert::AreEqual(10, AoC::numTilesWithBlackSideUpAfterMultipleDays(m_lines));
+        Assert::AreEqual(2208, AoC::numTilesWithBlackSideUpAfterMultipleDays(m_lines));
     }
 
 private:

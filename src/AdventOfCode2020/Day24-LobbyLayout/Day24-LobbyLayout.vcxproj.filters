@@ -20,9 +20,15 @@
     <ClCompile Include="test_Day24-LobbyLayout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HexTileFlipper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day24-LobbyLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HexTileFlipper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
