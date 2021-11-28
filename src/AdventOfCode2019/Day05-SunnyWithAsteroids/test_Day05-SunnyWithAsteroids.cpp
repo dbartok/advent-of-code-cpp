@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2019::Day05;
 
 TEST_CLASS(Day05SunnyWithAsteroids)
 {
@@ -15,47 +15,47 @@ public:
 
     TEST_METHOD(diagnosticCodeProducedByProgram_SimpleTests)
     {
-        Assert::AreEqual(4, AoC::diagnosticCodeProducedByProgram(std::vector<int>{4, 0, 99}, 0));
+        Assert::AreEqual(4, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{4, 0, 99}, 0));
     }
 
     TEST_METHOD(diagnosticCodeProducedByProgram_PositionModeEqualTests)
     {
-        Assert::AreEqual(1, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8}, 8));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8}, 7));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8}, 9));
+        Assert::AreEqual(1, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8}, 8));
+        Assert::AreEqual(0, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8}, 7));
+        Assert::AreEqual(0, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8}, 9));
     }
 
     TEST_METHOD(diagnosticCodeProducedByProgram_PositionModeLessThanTests)
     {
-        Assert::AreEqual(1, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8}, 7));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8}, 8));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8}, 9));
+        Assert::AreEqual(1, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8}, 7));
+        Assert::AreEqual(0, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8}, 8));
+        Assert::AreEqual(0, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8}, 9));
     }
 
     TEST_METHOD(diagnosticCodeProducedByProgram_ImmediateModeEqualTests)
     {
-        Assert::AreEqual(1, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1108, -1, 8, 3, 4, 3, 99}, {8}));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1108, -1, 8, 3, 4, 3, 99}, {7}));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1108, -1, 8, 3, 4, 3, 99}, {9}));
+        Assert::AreEqual(1, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1108, -1, 8, 3, 4, 3, 99}, {8}));
+        Assert::AreEqual(0, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1108, -1, 8, 3, 4, 3, 99}, {7}));
+        Assert::AreEqual(0, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1108, -1, 8, 3, 4, 3, 99}, {9}));
     }
 
     TEST_METHOD(diagnosticCodeProducedByProgram_ImmediateModeLessThanTests)
     {
-        Assert::AreEqual(1, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1107, -1, 8, 3, 4, 3, 99}, {7}));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1107, -1, 8, 3, 4, 3, 99}, {8}));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1107, -1, 8, 3, 4, 3, 99}, {9}));
+        Assert::AreEqual(1, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1107, -1, 8, 3, 4, 3, 99}, {7}));
+        Assert::AreEqual(0, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1107, -1, 8, 3, 4, 3, 99}, {8}));
+        Assert::AreEqual(0, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1107, -1, 8, 3, 4, 3, 99}, {9}));
     }
 
     TEST_METHOD(diagnosticCodeProducedByProgram_PositionModeJumpTests)
     {
-        Assert::AreEqual(1, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9}, {1}));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9}, {0}));
+        Assert::AreEqual(1, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9}, {1}));
+        Assert::AreEqual(0, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9}, {0}));
     }
 
     TEST_METHOD(diagnosticCodeProducedByProgram_ImmediateModeJumpTests)
     {
-        Assert::AreEqual(1, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1}, {1}));
-        Assert::AreEqual(0, AoC::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1}, {0}));
+        Assert::AreEqual(1, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1}, {1}));
+        Assert::AreEqual(0, CurrentDay::diagnosticCodeProducedByProgram(std::vector<int>{3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1}, {0}));
     }
 
     TEST_METHOD(diagnosticCodeProducedByProgram_JumpAndComparisonLargerTest)
@@ -67,9 +67,9 @@ public:
             999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99
         };
 
-        Assert::AreEqual(999, AoC::diagnosticCodeProducedByProgram(largerProgram, {7}));
-        Assert::AreEqual(1000, AoC::diagnosticCodeProducedByProgram(largerProgram, {8}));
-        Assert::AreEqual(1001, AoC::diagnosticCodeProducedByProgram(largerProgram, {9}));
+        Assert::AreEqual(999, CurrentDay::diagnosticCodeProducedByProgram(largerProgram, {7}));
+        Assert::AreEqual(1000, CurrentDay::diagnosticCodeProducedByProgram(largerProgram, {8}));
+        Assert::AreEqual(1001, CurrentDay::diagnosticCodeProducedByProgram(largerProgram, {9}));
     }
 
 };

@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day18
+{
 
 DuetProcessor::DuetProcessor(AssemblyProgram assemblyProgram)
     : m_program0{assemblyProgram}              // Copy into first program
@@ -52,4 +56,6 @@ unsigned DuetProcessor::numTimesProgram1Sent() noexcept
     return m_program1.getNumTimesSent();
 }
 
+}
+}
 }

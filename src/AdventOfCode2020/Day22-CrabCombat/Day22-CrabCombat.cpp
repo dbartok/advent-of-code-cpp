@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day22
+{
 
 Deck createDeck(const std::vector<std::string>& startingDeckSection)
 {
@@ -51,4 +55,6 @@ int winningPlayerScoreRecursiveCombat(const std::vector<std::string>& startingDe
     return recursiveSimulator.getPlayerScore(winningPlayer);
 }
 
+}
+}
 }

@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day18;
 
     std::fstream fileIn("input.txt");
 
@@ -20,6 +20,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::totalResourceValueAfterShortTime(lines) << std::endl;
-    std::cout << "Second part: " << AoC::totalResourceValueAfterLongTime(lines) << std::endl;
+    std::cout << "First part: " << CurrentDay::totalResourceValueAfterShortTime(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::totalResourceValueAfterLongTime(lines) << std::endl;
 }

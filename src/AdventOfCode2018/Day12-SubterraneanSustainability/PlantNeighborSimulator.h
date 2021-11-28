@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day12
+{
 
 using Pots = std::unordered_set<int>;
 using NeighborPattern = std::array<bool, 5>;
@@ -42,4 +46,6 @@ private:
     bool isGrowthInStableState() const;
 };
 
+}
+}
 }

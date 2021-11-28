@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day17
+{
 
 struct Range
 {
@@ -104,4 +108,6 @@ unsigned numTilesWaterRetained(const std::vector<std::string>& clayCoordinatesLi
     return waterFlowSimulator.getNumTilesWithSettledWater();
 }
 
+}
+}
 }

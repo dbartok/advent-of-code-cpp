@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day08
+{
 
 Condition::Condition(std::string registerName, std::string symbol, int argument) noexcept
     : m_registerName{std::move(registerName)}
@@ -51,4 +55,6 @@ bool Condition::isTrue(const State& state) const
     }
 }
 
+}
+}
 }

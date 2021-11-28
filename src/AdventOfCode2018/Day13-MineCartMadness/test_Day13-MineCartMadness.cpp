@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day13;
 
 TEST_CLASS(Day13MineCartMadness)
 {
@@ -25,7 +25,7 @@ public:
             R"(  \------/   )"
         };
 
-        Assert::AreEqual(std::string{"7,3"}, AoC::positionOfFirstCollision(lines));
+        Assert::AreEqual(std::string{"7,3"}, CurrentDay::positionOfFirstCollision(lines));
     }
 
     TEST_METHOD(positionOfLastRemainingCart_SimpleTests)
@@ -41,7 +41,7 @@ public:
             R"(  \<->/)"
         };
 
-        Assert::AreEqual(std::string{"6,4"}, AoC::positionOfLastRemainingCart(lines));
+        Assert::AreEqual(std::string{"6,4"}, CurrentDay::positionOfLastRemainingCart(lines));
     }
 
 };

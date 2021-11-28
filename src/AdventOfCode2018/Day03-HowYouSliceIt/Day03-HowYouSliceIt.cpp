@@ -16,6 +16,10 @@ const size_t GRID_SIZE = 1001;
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day03
+{
 
 OverlapGrid parseOverlapGridFromAreaLines(const std::vector<std::string>& areaLines)
 {
@@ -56,4 +60,6 @@ unsigned findSingleNonOperlappingSquare(const std::vector<std::string>& areaLine
     return OverlapGrid.getSingleNonOverlappingIndex() + 1;
 }
 
+}
+}
 }

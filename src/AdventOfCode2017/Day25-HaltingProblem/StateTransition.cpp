@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day25
+{
 
 StateTransition::StateTransition(StateModifier valueFalseModifier, StateModifier valueTrueModifier) noexcept
     : m_valueFalseModifier{std::move(valueFalseModifier)}
@@ -28,4 +32,6 @@ void StateTransition::apply(TuringMachineState& state) const
     }
 }
 
+}
+}
 }

@@ -15,6 +15,10 @@ const unsigned FIRST_PART_NUM_INSERTIONS = 2017;
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day17
+{
 
 unsigned valueAfterLastWritten(unsigned numStepsForward)
 {
@@ -31,4 +35,6 @@ unsigned valueAfterLastWritten(unsigned numStepsForward)
     return spinLockValues[(currentPos + 1) % spinLockValues.size()];
 }
 
+}
+}
 }

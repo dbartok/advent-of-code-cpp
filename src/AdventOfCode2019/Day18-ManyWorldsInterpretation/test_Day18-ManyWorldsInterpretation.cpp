@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2019::Day18;
 
 TEST_CLASS(Day18ManyWorldsInterpretation)
 {
@@ -21,7 +21,7 @@ public:
             "#b.A.@.a#",
             "#########"
         };
-        Assert::AreEqual(8, AoC::lengthOfShortestPathWithAllKeys(vault1));
+        Assert::AreEqual(8, CurrentDay::lengthOfShortestPathWithAllKeys(vault1));
 
         std::vector<std::string> vault2 =
         {
@@ -31,7 +31,7 @@ public:
             "#d.....................#",
             "########################"
         };
-        Assert::AreEqual(86, AoC::lengthOfShortestPathWithAllKeys(vault2));
+        Assert::AreEqual(86, CurrentDay::lengthOfShortestPathWithAllKeys(vault2));
 
         std::vector<std::string> vault3 =
         {
@@ -41,7 +41,7 @@ public:
             "#.....@.a.B.c.d.A.e.F.g#",
             "########################"
         };
-        Assert::AreEqual(132, AoC::lengthOfShortestPathWithAllKeys(vault3));
+        Assert::AreEqual(132, CurrentDay::lengthOfShortestPathWithAllKeys(vault3));
 
         std::vector<std::string> vault4 =
         {
@@ -55,7 +55,7 @@ public:
             "#l.F..d...h..C.m#",
             "#################"
         };
-        Assert::AreEqual(136, AoC::lengthOfShortestPathWithAllKeys(vault4));
+        Assert::AreEqual(136, CurrentDay::lengthOfShortestPathWithAllKeys(vault4));
 
         std::vector<std::string> vault5 =
         {
@@ -66,7 +66,7 @@ public:
             "###g#h#i################",
             "########################"
         };
-        Assert::AreEqual(81, AoC::lengthOfShortestPathWithAllKeys(vault5));
+        Assert::AreEqual(81, CurrentDay::lengthOfShortestPathWithAllKeys(vault5));
     }
 
     TEST_METHOD(lengthOfShortestPathWithAllKeysMultipleRobots_SimpleTests)
@@ -81,7 +81,7 @@ public:
             "#cB#Ab#",
             "#######"
         };
-        Assert::AreEqual(8, AoC::lengthOfShortestPathWithAllKeysMultipleRobots(vault1));
+        Assert::AreEqual(8, CurrentDay::lengthOfShortestPathWithAllKeysMultipleRobots(vault1));
 
         std::vector<std::string> vault2 =
         {
@@ -93,7 +93,7 @@ public:
             "#b.....#.....c#",
             "###############"
         };
-        Assert::AreEqual(24, AoC::lengthOfShortestPathWithAllKeysMultipleRobots(vault2));
+        Assert::AreEqual(24, CurrentDay::lengthOfShortestPathWithAllKeysMultipleRobots(vault2));
     }
 
 };

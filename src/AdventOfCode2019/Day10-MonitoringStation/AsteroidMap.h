@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day10
+{
 
 using Coordinates = std::pair<int, int>;
 using CoordinatesSet = std::unordered_set<Coordinates, boost::hash<Coordinates>>;
@@ -43,4 +47,6 @@ private:
     double getLaserAngleToAsteroid(const Coordinates& asteroidCoordinates) const;
 };
 
+}
+}
 }

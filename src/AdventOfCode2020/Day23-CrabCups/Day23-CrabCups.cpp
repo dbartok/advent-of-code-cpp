@@ -19,10 +19,14 @@ size_t MANY_CUPS_NUMBER = 1'000'000;
 
 namespace AdventOfCode
 {
-
-std::vector<unsigned> convertStringToDigitwiseVector(const std::string& str)
+namespace Year2020
 {
-    std::vector<unsigned> digitwiseVector;
+namespace Day23
+{
+
+std::vector<size_t> convertStringToDigitwiseVector(const std::string& str)
+{
+    std::vector<size_t> digitwiseVector;
 
     std::transform(str.cbegin(), str.cend(), std::back_inserter(digitwiseVector), [](char c)
                    {
@@ -32,11 +36,11 @@ std::vector<unsigned> convertStringToDigitwiseVector(const std::string& str)
     return digitwiseVector;
 }
 
-std::string convertDigitwiseVectorToString(const std::vector<unsigned>& digitwiseVector)
+std::string convertDigitwiseVectorToString(const std::vector<size_t>& digitwiseVector)
 {
     std::string result;
 
-    std::transform(digitwiseVector.cbegin(), digitwiseVector.cend(), std::back_inserter(result), [](unsigned digit)
+    std::transform(digitwiseVector.cbegin(), digitwiseVector.cend(), std::back_inserter(result), [](size_t digit)
                    {
                        return digit + '0';
                    });
@@ -73,4 +77,6 @@ int64_t twoCupLabelsAfterCupOneMultipliedManyCups(const std::string& initialCupL
     return cupMixer.getTwoCupLabelsAfterCupOneMultiplied();
 }
 
+}
+}
 }

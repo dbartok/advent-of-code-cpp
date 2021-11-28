@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2019::Day01;
 
 TEST_CLASS(Day01TyrannyOfTheRocket)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(getSumOfFuelRequirements_SimpleTests)
     {
-        Assert::AreEqual(34241, AoC::getSumOfFuelRequirements({12, 14, 1969, 100756}));
+        Assert::AreEqual(34241, CurrentDay::getSumOfFuelRequirements({12, 14, 1969, 100756}));
     }
 
     TEST_METHOD(getSumOfFuelRequirementsIncludingFuelItself_SimpleTests)
     {
-        Assert::AreEqual(51314, AoC::getSumOfFuelRequirementsIncludingFuelItself({14, 1969, 100756}));
+        Assert::AreEqual(51314, CurrentDay::getSumOfFuelRequirementsIncludingFuelItself({14, 1969, 100756}));
     }
 
 };

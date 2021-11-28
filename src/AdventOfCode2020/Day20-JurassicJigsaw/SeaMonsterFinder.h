@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day20
+{
 
 class SeaMonsterFinder
 {
@@ -39,4 +43,6 @@ private:
     bool isSeaMonsterStartingAt(size_t x, size_t y) const;
 };
 
+}
+}
 }

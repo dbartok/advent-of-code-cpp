@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day20
+{
 
 SeaMonsterFinder::SeaMonsterFinder(std::vector<std::string> image)
     : m_originalImage{std::move(image)}
@@ -75,4 +79,6 @@ bool SeaMonsterFinder::isSeaMonsterStartingAt(size_t x, size_t y) const
     return true;
 }
 
+}
+}
 }

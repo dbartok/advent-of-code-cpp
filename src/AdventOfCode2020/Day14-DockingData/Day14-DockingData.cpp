@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day14
+{
 
 Instruction parseInstruction(const std::string& instruction)
 {
@@ -55,4 +59,6 @@ uint64_t sumOfValuesInMemoryAfterDecoderCompletion(const std::vector<std::string
     return bitmaskDecoderProgramExecutor.getSumOfValuesInMemory();
 }
 
+}
+}
 }

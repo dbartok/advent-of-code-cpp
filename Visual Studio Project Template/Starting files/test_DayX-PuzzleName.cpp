@@ -7,23 +7,24 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::YearXXXX::DayXX;
 
-TEST_CLASS(DayXPuzzleName) //TODO: Change to the name of the puzzle
+//TODO: Change to the name of the puzzle
+TEST_CLASS(DayXPuzzleName)
 {
 public:
 
     //TODO: Rename and implement unit tests
     TEST_METHOD(solution1_SimpleTests)
     {
-        Assert::AreEqual(101, AoC::solution1(100));
-        Assert::AreEqual(1002, AoC::solution1(1001));
+        Assert::AreEqual(101, CurrentDay::solution1(100));
+        Assert::AreEqual(1002, CurrentDay::solution1(1001));
     }
 
     TEST_METHOD(solution2_SimpleTests)
     {
-        Assert::AreEqual(102, AoC::solution2(100));
-        Assert::AreEqual(1003, AoC::solution2(1001));
+        Assert::AreEqual(102, CurrentDay::solution2(100));
+        Assert::AreEqual(1003, CurrentDay::solution2(1001));
     }
 
 };

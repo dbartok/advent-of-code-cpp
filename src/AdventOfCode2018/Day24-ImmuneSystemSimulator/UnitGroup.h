@@ -5,9 +5,14 @@
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <string>
 #include <unordered_set>
+#include <stdexcept>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
+{
+namespace Year2018
+{
+namespace Day24
 {
 
 using DamageType = std::string;
@@ -134,4 +139,6 @@ private:
     int m_initiative;
 };
 
+}
+}
 }

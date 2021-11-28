@@ -13,7 +13,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2019::Day04;
 
     std::fstream fileIn("input.txt");
     const std::string rangeHyphenSeparated
@@ -23,13 +23,13 @@ int main()
     };
 
     std::vector<int> rangeBounds;
-    AoC::Utils::splitStringIntoTypedVector(rangeHyphenSeparated, rangeBounds, '-');
+    AdventOfCode::Utils::splitStringIntoTypedVector(rangeHyphenSeparated, rangeBounds, '-');
 
     if (rangeBounds.size() != 2)
     {
         throw std::runtime_error("Invalid input");
     }
 
-    std::cout << "First part: " << AoC::numDifferentValidPasswordsSimple(rangeBounds.at(0), rangeBounds.at(1)) << std::endl;
-    std::cout << "Second part: " << AoC::numDifferentValidPasswordsLargerGroupIsNotMatching(rangeBounds.at(0), rangeBounds.at(1)) << std::endl;
+    std::cout << "First part: " << CurrentDay::numDifferentValidPasswordsSimple(rangeBounds.at(0), rangeBounds.at(1)) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numDifferentValidPasswordsLargerGroupIsNotMatching(rangeBounds.at(0), rangeBounds.at(1)) << std::endl;
 }

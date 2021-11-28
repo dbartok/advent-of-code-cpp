@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day15;
 
 TEST_CLASS(Day15BeverageBandits)
 {
@@ -16,58 +16,58 @@ public:
     // First part
     TEST_METHOD(outcomeOfCombat_simple)
     {
-        Assert::AreEqual(27730u, AoC::outcomeOfCombat(m_mapLinesSimple));
+        Assert::AreEqual(27730u, CurrentDay::outcomeOfCombat(m_mapLinesSimple));
     }
 
     TEST_METHOD(outcomeOfCombat_elvesWin)
     {
-        Assert::AreEqual(36334u, AoC::outcomeOfCombat(m_mapLinesElvesWin));
+        Assert::AreEqual(36334u, CurrentDay::outcomeOfCombat(m_mapLinesElvesWin));
     }
 
     TEST_METHOD(outcomeOfCombat_elvesWinLonger)
     {
-        Assert::AreEqual(39514u, AoC::outcomeOfCombat(m_mapLinesElvesWinLonger));
+        Assert::AreEqual(39514u, CurrentDay::outcomeOfCombat(m_mapLinesElvesWinLonger));
     }
 
     TEST_METHOD(outcomeOfCombat_goblinsWin)
     {
-        Assert::AreEqual(27755u, AoC::outcomeOfCombat(m_mapLinesGoblinsWin));
+        Assert::AreEqual(27755u, CurrentDay::outcomeOfCombat(m_mapLinesGoblinsWin));
     }
 
     TEST_METHOD(outcomeOfCombat_goblinsWinLonger)
     {
-        Assert::AreEqual(28944u, AoC::outcomeOfCombat(m_mapLinesGoblinsWinLonger));
+        Assert::AreEqual(28944u, CurrentDay::outcomeOfCombat(m_mapLinesGoblinsWinLonger));
     }
 
     TEST_METHOD(outcomeOfCombat_largerMap)
     {
-        Assert::AreEqual(18740u, AoC::outcomeOfCombat(m_mapLinesLargerMap));
+        Assert::AreEqual(18740u, CurrentDay::outcomeOfCombat(m_mapLinesLargerMap));
     }
 
     // Second part
     TEST_METHOD(outcomeOfCombatIfElvesBarelyWin_simple)
     {
-        Assert::AreEqual(4988u, AoC::outcomeOfCombatIfElvesBarelyWin(m_mapLinesSimple));
+        Assert::AreEqual(4988u, CurrentDay::outcomeOfCombatIfElvesBarelyWin(m_mapLinesSimple));
     }
 
     TEST_METHOD(outcomeOfCombatIfElvesBarelyWin_elvesWinLonger)
     {
-        Assert::AreEqual(31284u, AoC::outcomeOfCombatIfElvesBarelyWin(m_mapLinesElvesWinLonger));
+        Assert::AreEqual(31284u, CurrentDay::outcomeOfCombatIfElvesBarelyWin(m_mapLinesElvesWinLonger));
     }
 
     TEST_METHOD(outcomeOfCombatIfElvesBarelyWin_goblinsWin)
     {
-        Assert::AreEqual(3478u, AoC::outcomeOfCombatIfElvesBarelyWin(m_mapLinesGoblinsWin));
+        Assert::AreEqual(3478u, CurrentDay::outcomeOfCombatIfElvesBarelyWin(m_mapLinesGoblinsWin));
     }
 
     TEST_METHOD(outcomeOfCombatIfElvesBarelyWin_goblinsWinLonger)
     {
-        Assert::AreEqual(6474u, AoC::outcomeOfCombatIfElvesBarelyWin(m_mapLinesGoblinsWinLonger));
+        Assert::AreEqual(6474u, CurrentDay::outcomeOfCombatIfElvesBarelyWin(m_mapLinesGoblinsWinLonger));
     }
 
     TEST_METHOD(outcomeOfCombatIfElvesBarelyWin_largerMap)
     {
-        Assert::AreEqual(1140u, AoC::outcomeOfCombatIfElvesBarelyWin(m_mapLinesLargerMap));
+        Assert::AreEqual(1140u, CurrentDay::outcomeOfCombatIfElvesBarelyWin(m_mapLinesLargerMap));
     }
 
 private:

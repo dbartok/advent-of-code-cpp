@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day25
+{
 
 using CoordinateType = int;
 using Vector4D = Eigen::Matrix<CoordinateType, 4, 1>;
@@ -36,4 +40,6 @@ private:
     static bool isPointConnectedWithCluster(const Vector4D& point, const Points& cluster);
 };
 
+}
+}
 }

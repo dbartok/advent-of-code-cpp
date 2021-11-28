@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day20
+{
 
 class RoomLayoutRegexParser
 {
@@ -26,4 +30,6 @@ private:
     Coordinates getNeighborCoordinates(const Coordinates& coordinates, char neighborDirection);
 };
 
+}
+}
 }

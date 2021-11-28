@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day22
+{
 
 InfiniteGrid<InfectionState> createInfiniteGridFromVirusPosLines(const std::vector<std::string>& virusPosLine)
 {
@@ -51,4 +55,6 @@ unsigned evolvedVirusInfectingBursts(const std::vector<std::string>& initialViru
     return evolvedVirus.getTotalInfectionBursts();
 }
 
+}
+}
 }

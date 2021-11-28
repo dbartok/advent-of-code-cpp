@@ -15,8 +15,14 @@ size_t DEFAULT_HEIGHT = 6;
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day08
+{
 
 unsigned checksumOfLayerWithMostZeroes(const std::string& encodedImage, size_t width = DEFAULT_WIDTH, size_t height = DEFAULT_HEIGHT);
 std::string decodeImage(const std::string& encodedImage, size_t width = DEFAULT_WIDTH, size_t height = DEFAULT_HEIGHT);
 
+}
+}
 }

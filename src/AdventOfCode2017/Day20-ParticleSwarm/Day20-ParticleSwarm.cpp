@@ -18,6 +18,10 @@ const unsigned NUM_SIMULATION_STEPS = 1'000;
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day20
+{
 
 std::vector<Particle> createParticlesFromLines(const std::vector<std::string>& particleLines)
 {
@@ -69,4 +73,6 @@ unsigned numParticlesLeftAfterCollisions(const std::vector<std::string>& particl
     return particleSystem.numParticles();
 }
 
+}
+}
 }

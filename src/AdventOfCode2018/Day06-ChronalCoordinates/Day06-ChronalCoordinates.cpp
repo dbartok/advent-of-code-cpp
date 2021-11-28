@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day06
+{
 
 std::vector<Coordinates> parseCoordinates(const std::vector<std::string>& coordinatesLines)
 {
@@ -48,4 +52,6 @@ unsigned sizeOfAreaWithinGivenDistance(const std::vector<std::string>& coordinat
     return gridAnalyzer.getAreaWithinGivenDistance(distanceThreshold);
 }
 
+}
+}
 }

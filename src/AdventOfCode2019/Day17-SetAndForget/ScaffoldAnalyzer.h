@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day17
+{
 
 using Coordinates = std::pair<int, int>;
 using CoordinatesSet = std::unordered_set<Coordinates, boost::hash<Coordinates>>;
@@ -54,4 +58,6 @@ private:
     Coordinates getCoordinatesInFront() const;
 };
 
+}
+}
 }

@@ -8,8 +8,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day05
+{
 
 unsigned stepsInstructionsIncreasing(const std::vector<int>& instructions);
 unsigned stepsInstructionsIncreasingDecreasing(const std::vector<int>& instructions);
 
+}
+}
 }

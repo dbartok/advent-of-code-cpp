@@ -12,6 +12,10 @@ const int ENOUGH_QUARTERS_TO_PLAY = 2;
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day13
+{
 
 unsigned numBlockTilesWhenGameExits(const std::vector<IntcodeNumberType>& intcodeProgram)
 {
@@ -37,4 +41,6 @@ unsigned scoreAfterLastBlockBroken(const std::vector<IntcodeNumberType>& intcode
     return arcadeCabinet.getScore();
 }
 
+}
+}
 }

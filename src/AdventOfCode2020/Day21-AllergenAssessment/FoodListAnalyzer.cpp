@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day21
+{
 
 FoodListAnalyzer::FoodListAnalyzer(std::vector<Food> foods)
     : m_foods{std::move(foods)}
@@ -128,4 +132,6 @@ std::unordered_set<std::string> FoodListAnalyzer::getIngredientsPossiblyContaini
     return ingredientsPossiblyContainingAllergens;
 }
 
+}
+}
 }

@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day13
+{
 
 using Coordinates = std::pair<unsigned, unsigned>;
 
@@ -45,4 +49,6 @@ private:
     Turn m_nextTurn;
 };
 
+}
+}
 }

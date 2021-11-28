@@ -19,6 +19,10 @@ std::array<unsigned char, 5> EXTRA_SALT_BYTES = {17, 31, 73, 47, 23};
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day10
+{
 
 unsigned firstTwoMultipliedAfterKnotting(size_t listSize, const std::vector<unsigned>& lengths)
 {
@@ -64,4 +68,6 @@ std::string knotHashDenseString(const std::string& stringToHash)
     return knotHasher.denseHashStringAfterMultipleRounds();
 }
 
+}
+}
 }

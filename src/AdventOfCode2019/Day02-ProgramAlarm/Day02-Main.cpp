@@ -15,7 +15,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2019::Day02;
 
     std::fstream fileIn("input.txt");
     const std::string intcodeProgramCommaSeparated
@@ -25,8 +25,8 @@ int main()
     };
 
     std::vector<int> intcodeProgram;
-    AoC::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, intcodeProgram, ',');
+    AdventOfCode::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, intcodeProgram, ',');
 
-    std::cout << "First part: " << AoC::getValueInPositionZeroAfterProgramHalts(intcodeProgram, 12, 2) << std::endl;
-    std::cout << "Second part: " << AoC::getScoreOfNounAndVerbForSpecificOutput(intcodeProgram) << std::endl;
+    std::cout << "First part: " << CurrentDay::getValueInPositionZeroAfterProgramHalts(intcodeProgram, 12, 2) << std::endl;
+    std::cout << "Second part: " << CurrentDay::getScoreOfNounAndVerbForSpecificOutput(intcodeProgram) << std::endl;
 }

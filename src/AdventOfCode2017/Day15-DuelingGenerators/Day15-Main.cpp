@@ -10,18 +10,18 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day15;
 
     std::fstream fileIn("input.txt");
 
     std::string generatorAStartLine;
     std::getline(fileIn, generatorAStartLine);
-    const unsigned generatorAStartInput = AoC::generatorStartFromLine(generatorAStartLine);
+    const unsigned generatorAStartInput = CurrentDay::generatorStartFromLine(generatorAStartLine);
 
     std::string generatorBStartLine;
     std::getline(fileIn, generatorBStartLine);
-    const unsigned generatorBStartInput = AoC::generatorStartFromLine(generatorBStartLine);
+    const unsigned generatorBStartInput = CurrentDay::generatorStartFromLine(generatorBStartLine);
 
-    std::cout << "First part: " << AoC::judgeFinalCountNoCriteria(generatorAStartInput, generatorBStartInput) << std::endl;
-    std::cout << "Second part: " << AoC::judgeFinalCountWithCriteria(generatorAStartInput, generatorBStartInput) << std::endl;
+    std::cout << "First part: " << CurrentDay::judgeFinalCountNoCriteria(generatorAStartInput, generatorBStartInput) << std::endl;
+    std::cout << "Second part: " << CurrentDay::judgeFinalCountWithCriteria(generatorAStartInput, generatorBStartInput) << std::endl;
 }

@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day10
+{
 
 AdapterOrganizer::AdapterOrganizer(std::vector<int> joltageRatings)
     : m_joltageRatings{std::move(joltageRatings)}
@@ -58,4 +62,6 @@ int AdapterOrganizer::numGivenJoltageDifferences(int targetDifference) const
     return result;
 }
 
+}
+}
 }

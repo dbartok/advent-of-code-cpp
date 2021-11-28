@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day02
+{
 
 int getValueInPositionZeroAfterProgramHalts(std::vector<int> intcodeProgram, int noun, int verb)
 {
@@ -72,4 +76,6 @@ int getScoreOfNounAndVerbForSpecificOutput(std::vector<int> intcodeProgram, int 
     throw std::runtime_error("No solution found");
 }
 
+}
+}
 }

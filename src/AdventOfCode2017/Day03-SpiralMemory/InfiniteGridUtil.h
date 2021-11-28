@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day03
+{
 
 template <typename T>
 static T sumOfAllNeighbors(const InfiniteGrid<T>& grid, const std::pair<int, int>& position)
@@ -32,4 +36,6 @@ static T sumOfAllNeighbors(const InfiniteGrid<T>& grid, const std::pair<int, int
     return sum;
 }
 
+}
+}
 }

@@ -17,6 +17,10 @@ const size_t BOOT_CYCLE_LENGTH = 6;
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day17
+{
 
 std::vector<MultiDimensionalVector> createStartingActiveCoordinatesVector(const std::vector<std::string>& initialStateLines, size_t numDimensions)
 {
@@ -55,4 +59,6 @@ int numCubesInActiveStateAfterBootCycle4D(const std::vector<std::string>& initia
     return simulator.getNumActiveCoordinates();
 }
 
+}
+}
 }

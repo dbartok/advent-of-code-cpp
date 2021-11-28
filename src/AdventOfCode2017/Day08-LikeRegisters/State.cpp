@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day08
+{
 
 const State::RegisterValueToNameMap& State::getRegisterValueToNameMap() const noexcept
 {
@@ -46,4 +50,6 @@ int State::getGlobalMaxValueOfRegisters() const noexcept
     return m_globalMaxValueOfRegisters;
 }
 
+}
+}
 }

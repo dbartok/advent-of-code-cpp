@@ -11,9 +11,15 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day20
+{
 
 using Coordinates = std::pair<int, int>;
 using CoordinatesSet = std::unordered_set<Coordinates, boost::hash<Coordinates>>;
 using CoordinatesToNeighborCoordinates = std::unordered_map<Coordinates, CoordinatesSet, boost::hash<Coordinates>>;
 
+}
+}
 }

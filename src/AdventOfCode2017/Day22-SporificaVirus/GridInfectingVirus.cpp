@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day22
+{
 
 GridInfectingVirus::GridInfectingVirus(InfiniteGrid<InfectionState> initialGrid)
     : m_grid{std::move(initialGrid)}
@@ -126,4 +130,6 @@ void EvolvedGridInfectingVirus::makeInfectionStep()
     stepForward();
 }
 
+}
+}
 }

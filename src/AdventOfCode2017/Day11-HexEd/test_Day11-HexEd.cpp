@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day11;
 
 TEST_CLASS(Day11HexEd)
 {
@@ -15,23 +15,23 @@ public:
 
     TEST_METHOD(numStepsFromStart_SimpleTests)
     {
-        Assert::AreEqual(3, AoC::numStepsFromStartAtEnd({"ne", "ne", "ne"}));
-        Assert::AreEqual(0, AoC::numStepsFromStartAtEnd({"ne", "ne", "sw", "sw"}));
-        Assert::AreEqual(2, AoC::numStepsFromStartAtEnd({"ne", "ne", "s", "s"}));
-        Assert::AreEqual(3, AoC::numStepsFromStartAtEnd({"se", "sw", "se", "sw", "sw"}));
+        Assert::AreEqual(3, CurrentDay::numStepsFromStartAtEnd({"ne", "ne", "ne"}));
+        Assert::AreEqual(0, CurrentDay::numStepsFromStartAtEnd({"ne", "ne", "sw", "sw"}));
+        Assert::AreEqual(2, CurrentDay::numStepsFromStartAtEnd({"ne", "ne", "s", "s"}));
+        Assert::AreEqual(3, CurrentDay::numStepsFromStartAtEnd({"se", "sw", "se", "sw", "sw"}));
     }
 
     TEST_METHOD(maxNumStepsFromStart_MaxDistanceEqualsDistanceAtEnd_ReturnDistanceAtEnd)
     {
-        Assert::AreEqual(3, AoC::maxNumStepsFromStart({"ne", "ne", "ne"}));
-        Assert::AreEqual(2, AoC::maxNumStepsFromStart({"ne", "ne", "s", "s"}));
-        Assert::AreEqual(3, AoC::maxNumStepsFromStart({"se", "sw", "se", "sw", "sw"}));
+        Assert::AreEqual(3, CurrentDay::maxNumStepsFromStart({"ne", "ne", "ne"}));
+        Assert::AreEqual(2, CurrentDay::maxNumStepsFromStart({"ne", "ne", "s", "s"}));
+        Assert::AreEqual(3, CurrentDay::maxNumStepsFromStart({"se", "sw", "se", "sw", "sw"}));
     }
 
     TEST_METHOD(maxNumStepsFromStart_MaxDistanceReachedNotAtEnd_ReturnMaxDistance)
     {
-        Assert::AreEqual(2, AoC::maxNumStepsFromStart({"ne", "ne", "sw", "sw"}));
-        Assert::AreEqual(4, AoC::maxNumStepsFromStart({"n", "s", "se", "sw", "s", "s", "s", "n"}));
+        Assert::AreEqual(2, CurrentDay::maxNumStepsFromStart({"ne", "ne", "sw", "sw"}));
+        Assert::AreEqual(4, CurrentDay::maxNumStepsFromStart({"n", "s", "se", "sw", "s", "s", "s", "n"}));
     }
 
 };

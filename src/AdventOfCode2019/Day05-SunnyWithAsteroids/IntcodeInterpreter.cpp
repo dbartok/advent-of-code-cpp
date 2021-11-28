@@ -7,8 +7,12 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day05
+{
 
-ParameterCreator::ParameterCreator(IntcodeNumberType opcodeWithParameterModes, const AdventOfCode::IntcodeProgamState& state)
+ParameterCreator::ParameterCreator(IntcodeNumberType opcodeWithParameterModes, const IntcodeProgamState& state)
     : m_opcodeWithParameterModes{opcodeWithParameterModes}
     , m_state{state}
 {
@@ -131,4 +135,6 @@ IntcodeInstruction::SharedPtr IntcodeInterpreter::createNextInstruction()
     throw std::runtime_error("Invalid opcode: " + std::to_string(opcode));
 }
 
+}
+}
 }

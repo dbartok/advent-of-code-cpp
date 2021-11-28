@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day20
+{
 
 Particle::Particle(unsigned particleID, Vector3D position, Vector3D velocity, Vector3D acceleration) noexcept
     : m_particleID(particleID)
@@ -34,4 +38,6 @@ unsigned Particle::getParticleID() const noexcept
     return m_particleID;
 }
 
+}
+}
 }

@@ -5,9 +5,14 @@
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <unordered_map>
 #include <algorithm>
+#include <stdexcept>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
+{
+namespace Year2018
+{
+namespace Day02
 {
 
 using StringPair = std::pair<std::string, std::string>;
@@ -104,4 +109,6 @@ std::string commonLettersBetweenOneCharacterDiff(const std::vector<std::string>&
     return commonLetters;
 }
 
+}
+}
 }

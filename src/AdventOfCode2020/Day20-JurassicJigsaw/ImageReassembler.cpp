@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day20
+{
 
 ImageReassembler::ImageReassembler(std::vector<Tile> scrambledTiles)
     : m_scrambledTiles{std::move(scrambledTiles)}
@@ -251,4 +255,6 @@ Tile ImageReassembler::getAllTilesCombined() const
     return Tile{0, std::move(combinedImage)};
 }
 
+}
+}
 }

@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day02;
 
 TEST_CLASS(Day02PasswordPhilosophy)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(numValidPasswordsWithRangePolicy_SimpleTests)
     {
-        Assert::AreEqual(2, AoC::numValidPasswordsWithRangePolicy(m_lines));
+        Assert::AreEqual(2, CurrentDay::numValidPasswordsWithRangePolicy(m_lines));
     }
 
     TEST_METHOD(numValidPasswordsWithPositionPolicy_SimpleTests)
     {
-        Assert::AreEqual(1, AoC::numValidPasswordsWithPositionPolicy(m_lines));
+        Assert::AreEqual(1, CurrentDay::numValidPasswordsWithPositionPolicy(m_lines));
     }
 
 private:

@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day08
+{
 
 Layer createLayer(std::istringstream& encodedImageStream, size_t width, size_t height)
 {
@@ -59,4 +63,6 @@ std::string decodeImage(const std::string& encodedImage, size_t width, size_t he
     return oss.str();
 }
 
+}
+}
 }

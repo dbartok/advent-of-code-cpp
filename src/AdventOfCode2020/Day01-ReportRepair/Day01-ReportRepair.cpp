@@ -16,6 +16,10 @@ int TARGET_SUM = 2020;
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day01
+{
 
 int productOfTwoEntriesWithGivenSum(const std::vector<int>& entries)
 {
@@ -53,4 +57,6 @@ int productOfThreeEntriesWithGivenSum(const std::vector<int>& entries)
     throw std::runtime_error("Can't find three entries with the given sum.");
 }
 
+}
+}
 }

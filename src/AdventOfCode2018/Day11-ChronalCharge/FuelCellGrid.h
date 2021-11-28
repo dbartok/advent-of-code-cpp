@@ -14,6 +14,10 @@ const size_t SMALL_SQUARE_SIZE = 3;
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day11
+{
 
 using Coordinates = std::pair<unsigned, unsigned>;
 
@@ -47,4 +51,6 @@ private:
     int getPowerLevelAt(const Coordinates& coordinates, size_t squareSize) const noexcept;
 };
 
+}
+}
 }

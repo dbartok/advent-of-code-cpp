@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2019::Day20;
 
 TEST_CLASS(Day20DonutMaze)
 {
@@ -37,7 +37,7 @@ public:
             "             Z       ",
             "             Z       "
         };
-        Assert::AreEqual(23, AoC::numStepsToExit(donutMaze1));
+        Assert::AreEqual(23, CurrentDay::numStepsToExit(donutMaze1));
 
         std::vector<std::string> donutMaze2 =
         {
@@ -79,7 +79,7 @@ public:
             "           B   J   C               ",
             "           U   P   P               "
         };
-        Assert::AreEqual(58, AoC::numStepsToExit(donutMaze2));
+        Assert::AreEqual(58, CurrentDay::numStepsToExit(donutMaze2));
     }
 
     TEST_METHOD(numStepsToExitWithMatchingLayers_SimpleTests)
@@ -124,7 +124,7 @@ public:
             "               A O F   N                     ",
             "               A A D   M                     "
         };
-        Assert::AreEqual(396, AoC::numStepsToExitWithMatchingLayers(donutMaze1));
+        Assert::AreEqual(396, CurrentDay::numStepsToExitWithMatchingLayers(donutMaze1));
     }
 
 };

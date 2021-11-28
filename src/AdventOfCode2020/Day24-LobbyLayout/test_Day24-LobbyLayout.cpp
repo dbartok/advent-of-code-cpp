@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day24;
 
 TEST_CLASS(Day24LobbyLayout)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(numTilesWithBlackSideUpInInitialState_SimpleTests)
     {
-        Assert::AreEqual(10, AoC::numTilesWithBlackSideUpInInitialState(m_lines));
+        Assert::AreEqual(10, CurrentDay::numTilesWithBlackSideUpInInitialState(m_lines));
     }
 
     TEST_METHOD(numTilesWithBlackSideUpAfterMultipleDays_SimpleTests)
     {
-        Assert::AreEqual(2208, AoC::numTilesWithBlackSideUpAfterMultipleDays(m_lines));
+        Assert::AreEqual(2208, CurrentDay::numTilesWithBlackSideUpAfterMultipleDays(m_lines));
     }
 
 private:

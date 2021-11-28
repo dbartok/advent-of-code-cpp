@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day07
+{
 
 DependencyScheduler::DependencyScheduler(DependencyGraph dependencyGraph, unsigned numWorkers, unsigned additionalDuration)
     : m_dependencyGraph{std::move(dependencyGraph)}
@@ -100,4 +104,6 @@ void DependencyScheduler::executeWorkCycle()
     }
 }
 
+}
+}
 }

@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day21;
 
 TEST_CLASS(Day21AllergenAssessment)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(numAppearancesOfIngredientsNotContainingAllergens_SimpleTests)
     {
-        Assert::AreEqual(5, AoC::numAppearancesOfIngredientsNotContainingAllergens(m_lines));
+        Assert::AreEqual(5, CurrentDay::numAppearancesOfIngredientsNotContainingAllergens(m_lines));
     }
 
     TEST_METHOD(canonicalDangerousIngredientList_SimpleTests)
     {
-        Assert::AreEqual(std::string{"mxmxvkd,sqjhc,fvjkl"}, AoC::canonicalDangerousIngredientList(m_lines));
+        Assert::AreEqual(std::string{"mxmxvkd,sqjhc,fvjkl"}, CurrentDay::canonicalDangerousIngredientList(m_lines));
     }
 
 private:

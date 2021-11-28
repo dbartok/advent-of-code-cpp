@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day24
+{
 
 BridgeGraph::BridgeGraph(NodeIDToNeighbors nodeIDToNeighbors) noexcept
     : m_nodeIDToNeighbors{std::move(nodeIDToNeighbors)}
@@ -59,4 +63,6 @@ void BridgeGraph::traverseForMaxCostWalk(NodeIDType currentNodeID, const Visited
     }
 }
 
+}
+}
 }

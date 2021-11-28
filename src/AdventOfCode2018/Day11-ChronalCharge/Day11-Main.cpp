@@ -9,13 +9,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day11;
 
     std::fstream fileIn("input.txt");
     int gridSerialNumber;
 
     fileIn >> gridSerialNumber;
 
-    std::cout << "First part: " << AoC::highestPowerSmallSquareCoordinates(gridSerialNumber) << std::endl;
-    std::cout << "Second part: " << AoC::highestPowerSquareCoordinatesAndSize(gridSerialNumber) << std::endl;
+    std::cout << "First part: " << CurrentDay::highestPowerSmallSquareCoordinates(gridSerialNumber) << std::endl;
+    std::cout << "Second part: " << CurrentDay::highestPowerSquareCoordinatesAndSize(gridSerialNumber) << std::endl;
 }

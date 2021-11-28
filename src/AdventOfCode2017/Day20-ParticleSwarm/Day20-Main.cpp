@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day20;
 
     std::fstream fileIn("input.txt");
     std::vector<std::string> inputParticleLines;
@@ -20,6 +20,6 @@ int main()
         inputParticleLines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::particleIDClosestToOriginLongTerm(inputParticleLines) << std::endl;
-    std::cout << "Second part: " << AoC::numParticlesLeftAfterCollisions(inputParticleLines) << std::endl;
+    std::cout << "First part: " << CurrentDay::particleIDClosestToOriginLongTerm(inputParticleLines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numParticlesLeftAfterCollisions(inputParticleLines) << std::endl;
 }

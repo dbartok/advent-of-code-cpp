@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day12
+{
 
 using Vector2D = Eigen::Matrix<int, 2, 1>;
 
@@ -73,4 +77,6 @@ protected:
     void moveWest(int value) override;
 };
 
+}
+}
 }

@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day16
+{
 
 using TextSection = std::vector<std::string>;
 
@@ -111,4 +115,6 @@ int64_t departureValuesMultiplied(const std::vector<std::string>& noteLines)
     return ticketDecoder.getDepartureValuesMultiplied();
 }
 
+}
+}
 }

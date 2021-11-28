@@ -11,6 +11,12 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day25
+{
+
+using AdventOfCode::Year2019::Day05::IntcodeProgramExecutionState;
 
 IntcodeTextAdventure::IntcodeTextAdventure(IntcodeInterpreter interpreter, std::istream& in)
     : m_interpreter{std::move(interpreter)}
@@ -58,4 +64,6 @@ void IntcodeTextAdventure::feedInput()
     }
 }
 
+}
+}
 }

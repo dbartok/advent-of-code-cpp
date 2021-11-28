@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day19;
 
 TEST_CLASS(Day19GoWithTheFlow)
 {
@@ -27,13 +27,13 @@ public:
             "seti 9 0 5"
         };
 
-        Assert::AreEqual(7u, AoC::valueInFirstRegisterAfterProcessHalts(lines));
+        Assert::AreEqual(7u, CurrentDay::valueInFirstRegisterAfterProcessHalts(lines));
     }
 
     // Same as the real puzzle, because the solution had to be hand optimized for a specific input
     TEST_METHOD(valueInFirstRegisterAfterNewProcessHalts_SimpleTests)
     {
-        Assert::AreEqual(10915260u, AoC::valueInFirstRegisterAfterNewProcessHalts());
+        Assert::AreEqual(10915260u, CurrentDay::valueInFirstRegisterAfterNewProcessHalts());
     }
 
 };

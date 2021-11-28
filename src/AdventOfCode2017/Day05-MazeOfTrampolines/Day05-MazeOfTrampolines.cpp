@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day05
+{
 
 unsigned stepsWithInstructionModifierFunc(std::vector<int> instructions, std::function<void(int&)> modifierFunc)
 {
@@ -35,4 +39,6 @@ unsigned stepsInstructionsIncreasingDecreasing(const std::vector<int>& instructi
     return stepsWithInstructionModifierFunc(instructions, [](int& i) noexcept { i >= 3 ? --i : ++i; });
 }
 
+}
+}
 }

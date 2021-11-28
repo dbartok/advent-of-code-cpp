@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day08
+{
 
 LicenseTree::LicenseTree(LicenseNodeSharedPtr rootSharedPtr) noexcept
     : m_rootSharedPtr{std::move(rootSharedPtr)}
@@ -45,4 +49,6 @@ Metadatum LicenseTree::getValueOfRootNodeRecursive(const LicenseNode& root)
     return sumForChildren;
 }
 
+}
+}
 }

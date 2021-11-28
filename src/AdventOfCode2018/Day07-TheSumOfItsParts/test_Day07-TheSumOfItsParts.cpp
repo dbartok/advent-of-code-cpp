@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day07;
 
 TEST_CLASS(Day07TheSumOfItsParts)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(topologicalOrderOfInstructions_SimpleTests)
     {
-        Assert::AreEqual({"CABDFE"}, AoC::topologicalOrderOfInstructions(m_lines));
+        Assert::AreEqual({"CABDFE"}, CurrentDay::topologicalOrderOfInstructions(m_lines));
     }
 
     TEST_METHOD(timeUntilAllStepsAreDone_SimpleTests)
     {
-        Assert::AreEqual(15u, AoC::timeUntilAllStepsAreDone(m_lines, 2, 0));
+        Assert::AreEqual(15u, CurrentDay::timeUntilAllStepsAreDone(m_lines, 2, 0));
     }
 
 private:

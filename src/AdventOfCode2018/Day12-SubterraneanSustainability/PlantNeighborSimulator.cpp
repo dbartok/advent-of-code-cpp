@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day12
+{
 
 PlantNeighborSimulator::PlantNeighborSimulator(Pots initialPotsWithPlants, std::vector<NeighborPattern> neighborPatternsResultingInPlant)
         : m_potsWithPlants{std::move(initialPotsWithPlants)}
@@ -112,4 +116,6 @@ bool PlantNeighborSimulator::isGrowthInStableState() const
     return (m_latestGrowthValues.size() == NUM_MAX_LAST_GROWTH_DIFFS) && Utils::allElementsEqual(m_latestGrowthValues.cbegin(), m_latestGrowthValues.cend());
 }
 
+}
+}
 }

@@ -8,8 +8,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day01
+{
 
 unsigned sumOfDigitsMatchNextDigit(const std::string& digitsString);
 unsigned sumOfDigitsMatchHalfwayRoundDigit(const std::string& digitsString);
 
+}
+}
 }

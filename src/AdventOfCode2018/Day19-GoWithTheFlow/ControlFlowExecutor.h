@@ -9,6 +9,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day19
+{
+
+using AdventOfCode::Year2018::Day16::Instruction;
+using AdventOfCode::Year2018::Day16::Registers;
 
 struct DecodedInstruction
 {
@@ -39,4 +46,6 @@ private:
     Registers m_registers;
 };
 
+}
+}
 }

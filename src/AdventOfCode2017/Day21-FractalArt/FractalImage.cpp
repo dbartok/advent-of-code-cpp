@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day21
+{
 
 FractalImage::FractalImage(ImageEnhancer imageEnhancer)
     : m_imageEnhancer{std::move(imageEnhancer)}
@@ -89,4 +93,6 @@ void FractalImage::enhance()
     m_image = completeMatrix;
 }
 
+}
+}
 }

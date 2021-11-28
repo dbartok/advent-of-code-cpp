@@ -8,6 +8,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day21
+{
+
+using AdventOfCode::Year2019::Day05::IntcodeInterpreter;
+
 using SpringScriptProgram = std::array<std::string, 15>;
 
 const SpringScriptProgram WALK_PROGRAM =
@@ -82,4 +89,6 @@ IntcodeNumberType amountOfHullDamageExtendedSensors(const std::vector<IntcodeNum
     return interpreter.getOutputs().back();
 }
 
+}
+}
 }

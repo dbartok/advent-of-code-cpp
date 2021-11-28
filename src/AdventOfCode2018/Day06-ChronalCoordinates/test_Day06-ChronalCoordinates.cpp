@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day06;
 
 TEST_CLASS(Day06ChronalCoordinates)
 {
@@ -15,13 +15,13 @@ public:
 
     TEST_METHOD(sizeOfLargestNonInfiniteArea_SimpleTests)
     {
-        Assert::AreEqual(17u, AoC::sizeOfLargestNonInfiniteArea(m_lines));
+        Assert::AreEqual(17u, CurrentDay::sizeOfLargestNonInfiniteArea(m_lines));
     }
 
 
     TEST_METHOD(sizeOfAreaWithinGivenDistance_SimpleTests)
     {
-        Assert::AreEqual(16u, AoC::sizeOfAreaWithinGivenDistance(m_lines, 32));
+        Assert::AreEqual(16u, CurrentDay::sizeOfAreaWithinGivenDistance(m_lines, 32));
     }
 
 private:

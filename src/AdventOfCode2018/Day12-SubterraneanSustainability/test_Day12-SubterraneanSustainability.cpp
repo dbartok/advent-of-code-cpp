@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day12;
 
 TEST_CLASS(Day12SubterraneanSustainability)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(sumOfPotNumbersWithPlantAfterGrowthShortTime_SimpleTests)
     {
-        Assert::AreEqual(325ll, AoC::sumOfPotNumbersWithPlantAfterGrowthShortTime(m_initialStateLine, m_neighborPatternLines));
+        Assert::AreEqual(325ll, CurrentDay::sumOfPotNumbersWithPlantAfterGrowthShortTime(m_initialStateLine, m_neighborPatternLines));
     }
 
     TEST_METHOD(sumOfPotNumbersWithPlantAfterGrowthLongTime_SimpleTests)
     {
-        Assert::AreEqual(999999999374ll, AoC::sumOfPotNumbersWithPlantAfterGrowthLongTime(m_initialStateLine, m_neighborPatternLines));
+        Assert::AreEqual(999999999374ll, CurrentDay::sumOfPotNumbersWithPlantAfterGrowthLongTime(m_initialStateLine, m_neighborPatternLines));
     }
 
 private:

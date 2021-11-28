@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day13
+{
 
 class RailPiece;
 using RailPieceSharedPtr = std::shared_ptr<RailPiece>;
@@ -60,4 +64,6 @@ public:
     void applyOrientation(MineCart& mineCart) override;
 };
 
+}
+}
 }

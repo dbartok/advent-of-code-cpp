@@ -13,6 +13,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day20
+{
 
 std::vector<std::string> convertImageToStringImage(const Image& image)
 {
@@ -120,4 +124,6 @@ int numWaterNotPartOfASeaMonster(const std::vector<std::string>& cameraArrayLine
     throw std::runtime_error("Unable to find any sea monsters in any of the possible images");
 }
 
+}
+}
 }

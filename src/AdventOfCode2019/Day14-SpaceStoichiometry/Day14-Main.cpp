@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2019::Day14;
 
     std::fstream fileIn("input.txt");
 
@@ -20,6 +20,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::minOreRequiredToProduceFuel(lines) << std::endl;
-    std::cout << "Second part: " << AoC::maxProducableFuel(lines) << std::endl;
+    std::cout << "First part: " << CurrentDay::minOreRequiredToProduceFuel(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::maxProducableFuel(lines) << std::endl;
 }

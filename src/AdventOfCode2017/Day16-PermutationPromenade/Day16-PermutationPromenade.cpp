@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day16
+{
 
 std::vector<DanceMove::SharedPtr> danceMoveSharedPtrsFromStrings (const std::vector<std::string>& danceMoveStrings)
 {
@@ -36,4 +40,6 @@ std::string orderAfterDanceMovesRepetitions(const std::vector<std::string>& danc
     return danceCoordinator.getNameOrderString();
 }
 
+}
+}
 }

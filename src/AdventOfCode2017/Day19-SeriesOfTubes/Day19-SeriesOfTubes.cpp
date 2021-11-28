@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day19
+{
 
 std::string lettersVisited(const std::vector<std::string>& diagramLines)
 {
@@ -25,4 +29,6 @@ unsigned totalNumStepsForPacket(const std::vector<std::string>& diagramLines)
     return pipeDiagramTraverser.getNumStepsTaken();
 }
 
+}
+}
 }

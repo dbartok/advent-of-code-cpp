@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day14;
 
     std::fstream fileIn("input.txt");
     int recipeNumber;
@@ -18,6 +18,6 @@ int main()
 
     std::string recipeSequence = std::to_string(recipeNumber);
 
-    std::cout << "First part: " << AoC::scoresOfTenRecipesAfterSeveralRecipes(recipeNumber) << std::endl;
-    std::cout << "Second part: " << AoC::numRecipesBeforeSequenceAppears(recipeSequence) << std::endl;
+    std::cout << "First part: " << CurrentDay::scoresOfTenRecipesAfterSeveralRecipes(recipeNumber) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numRecipesBeforeSequenceAppears(recipeSequence) << std::endl;
 }

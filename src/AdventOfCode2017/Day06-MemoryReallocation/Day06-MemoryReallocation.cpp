@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day06
+{
 
 template<typename T>
 unsigned wrappingForwardDistance(const T& from, const T& to, size_t size)
@@ -101,4 +105,6 @@ unsigned cyclesUntilReoccurs(MemoryBanks banks)
     }
 }
 
+}
+}
 }

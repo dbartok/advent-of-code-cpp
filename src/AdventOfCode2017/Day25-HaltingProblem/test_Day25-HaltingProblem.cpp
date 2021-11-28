@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day25;
 
 TEST_CLASS(Day25HaltingProblem)
 {
@@ -41,7 +41,7 @@ public:
             "    - Continue with state A.     "
         };
 
-        Assert::AreEqual(3u, AoC::diagnosticChecksum(turingMachineLines));
+        Assert::AreEqual(3u, CurrentDay::diagnosticChecksum(turingMachineLines));
     }
 
 };

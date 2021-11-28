@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day18
+{
 
 DuetMessageQueue::DuetMessageQueue() noexcept
     : m_programIDToQueue(2) // Size constructor
@@ -45,4 +49,6 @@ void DuetMessageQueue::validateQueueID(unsigned queueID)
     }
 }
 
+}
+}
 }

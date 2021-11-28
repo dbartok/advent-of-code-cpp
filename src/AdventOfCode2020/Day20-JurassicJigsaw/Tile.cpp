@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day20
+{
 
 Tile::Tile(int id, Image image)
     : m_id{id}
@@ -79,4 +83,6 @@ bool Tile::operator==(const Tile& other) const
     return this->m_id == other.m_id;
 }
 
+}
+}
 }

@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day18
+{
 
 enum class Acre;
 using LumberAreaRow = std::vector<Acre>;
@@ -31,8 +35,8 @@ public:
 
 private:
     LumberArea m_lumberArea;
-    unsigned m_width;
-    unsigned m_height;
+    size_t m_width;
+    size_t m_height;
 
     std::vector<LumberArea> m_previousResults;
 
@@ -43,4 +47,6 @@ private:
     unsigned countAll(Acre acreToCount) const;
 };
 
+}
+}
 }

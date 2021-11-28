@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day16;
 
 TEST_CLASS(Day16TicketTranslation)
 {
@@ -31,7 +31,7 @@ public:
             "38,6,12"
         };
 
-        Assert::AreEqual(71, AoC::ticketScanningErrorRate(lines));
+        Assert::AreEqual(71, CurrentDay::ticketScanningErrorRate(lines));
     }
 
     TEST_METHOD(ticketScanningErrorRate_SimpleTests)
@@ -51,7 +51,7 @@ public:
             "5,14,9"
         };
 
-        Assert::AreEqual(132ll, AoC::departureValuesMultiplied(lines));
+        Assert::AreEqual(132ll, CurrentDay::departureValuesMultiplied(lines));
     }
 
 };

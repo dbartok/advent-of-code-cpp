@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day05;
 
 TEST_CLASS(Day05MazeOfTrampolines)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(jumpInstructionsIncreasing_SimpleTests)
     {
-        Assert::AreEqual(5u, AoC::stepsInstructionsIncreasing(m_instructions));
+        Assert::AreEqual(5u, CurrentDay::stepsInstructionsIncreasing(m_instructions));
     }
 
     TEST_METHOD(jumpInstructionsIncreasingDecreasing_SimpleTests)
     {
-        Assert::AreEqual(10u, AoC::stepsInstructionsIncreasingDecreasing(m_instructions));
+        Assert::AreEqual(10u, CurrentDay::stepsInstructionsIncreasingDecreasing(m_instructions));
     }
 
 private:

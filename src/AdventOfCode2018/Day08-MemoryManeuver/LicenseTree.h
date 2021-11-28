@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day08
+{
 
 class LicenseTree
 {
@@ -42,4 +46,6 @@ static AccumulationResultType LicenseTree::accumulateNodes(const std::vector<Lic
     return accumulatedNodes;
 }
 
+}
+}
 }

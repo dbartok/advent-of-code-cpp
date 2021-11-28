@@ -14,6 +14,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day07
+{
 
 class WeightedTree
 {
@@ -55,4 +59,6 @@ private:
     int traverseForCorrectWeightFromNode(const TreeNode& currentNode, int weightSurplus) const;
 };
 
+}
+}
 }

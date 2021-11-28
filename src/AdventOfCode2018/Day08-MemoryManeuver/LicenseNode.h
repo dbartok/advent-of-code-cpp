@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day08
+{
 
 class LicenseNode;
 using LicenseNodeSharedPtr = std::shared_ptr<LicenseNode>;
@@ -39,4 +43,6 @@ private:
     std::vector<Metadatum> m_metadata;
 };
 
+}
+}
 }

@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2019::Day03;
 
     std::fstream fileIn("input.txt");
 
@@ -20,6 +20,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::distanceToClosestIntersection(lines) << std::endl;
-    std::cout << "Second part: " << AoC::combinedWireStepsToClosestIntersection(lines) << std::endl;
+    std::cout << "First part: " << CurrentDay::distanceToClosestIntersection(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::combinedWireStepsToClosestIntersection(lines) << std::endl;
 }

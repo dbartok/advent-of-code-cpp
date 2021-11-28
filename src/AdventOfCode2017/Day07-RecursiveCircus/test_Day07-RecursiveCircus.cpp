@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day07;
 
 TEST_CLASS(Day07RecursiveCircus)
 {
@@ -15,16 +15,16 @@ public:
 
     TEST_METHOD(nameOfBottomProgram_SimpleTests)
     {
-        Assert::AreEqual(std::string("tknk"), AoC::nameOfBottomProgram(m_nodeDescriptors));
+        Assert::AreEqual(std::string("tknk"), CurrentDay::nameOfBottomProgram(m_nodeDescriptors));
     }
 
     TEST_METHOD(correctWeightOfWrongWeightProgram_SimpleTests)
     {
-        Assert::AreEqual(60, AoC::correctWeightOfWrongWeight(m_nodeDescriptors));
+        Assert::AreEqual(60, CurrentDay::correctWeightOfWrongWeight(m_nodeDescriptors));
     }
 
 private:
-    std::vector<AoC::NodeDescriptor> m_nodeDescriptors =
+    std::vector<CurrentDay::NodeDescriptor> m_nodeDescriptors =
     {
         {"pbga", 66, {}},
         {"xhth", 57, {}},

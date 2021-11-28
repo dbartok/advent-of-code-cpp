@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day04
+{
 
 std::vector<int> convertIntToDigitVector(int number)
 {
@@ -116,4 +120,6 @@ unsigned numDifferentValidPasswordsLargerGroupIsNotMatching(int lowerBound, int 
                                       });
 }
 
+}
+}
 }

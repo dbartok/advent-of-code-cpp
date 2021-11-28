@@ -3,10 +3,14 @@
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
-// Add library includes here
+#include <stdexcept>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
+{
+namespace Year2017
+{
+namespace Day09
 {
 
 unsigned totalScoreForAllGroups(const std::string& groupedString)
@@ -109,4 +113,6 @@ unsigned totalGarbageCount(const std::string& groupedString)
     return garbageCount;
 }
 
+}
+}
 }

@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2019::Day03;
 
 TEST_CLASS(Day03CrossedWires)
 {
@@ -15,16 +15,16 @@ public:
 
     TEST_METHOD(distanceToClosestIntersection_SimpleTests)
     {
-        Assert::AreEqual(6, AoC::distanceToClosestIntersection(testWireLines1));
-        Assert::AreEqual(159, AoC::distanceToClosestIntersection(testWireLines2));
-        Assert::AreEqual(135, AoC::distanceToClosestIntersection(testWireLines3));
+        Assert::AreEqual(6, CurrentDay::distanceToClosestIntersection(testWireLines1));
+        Assert::AreEqual(159, CurrentDay::distanceToClosestIntersection(testWireLines2));
+        Assert::AreEqual(135, CurrentDay::distanceToClosestIntersection(testWireLines3));
     }
 
     TEST_METHOD(combinedWireStepsToClosestIntersection_SimpleTests)
     {
-        Assert::AreEqual(30, AoC::combinedWireStepsToClosestIntersection(testWireLines1));
-        Assert::AreEqual(610, AoC::combinedWireStepsToClosestIntersection(testWireLines2));
-        Assert::AreEqual(410, AoC::combinedWireStepsToClosestIntersection(testWireLines3));
+        Assert::AreEqual(30, CurrentDay::combinedWireStepsToClosestIntersection(testWireLines1));
+        Assert::AreEqual(610, CurrentDay::combinedWireStepsToClosestIntersection(testWireLines2));
+        Assert::AreEqual(410, CurrentDay::combinedWireStepsToClosestIntersection(testWireLines3));
     }
 
 private:

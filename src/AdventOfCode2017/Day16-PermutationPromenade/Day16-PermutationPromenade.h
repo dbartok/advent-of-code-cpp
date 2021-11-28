@@ -19,6 +19,10 @@ const unsigned DEFAULT_NUM_REPETITIONS = 1'000'000'000;
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day16
+{
 
 std::string orderAfterDanceMovesSingleRepetition(const std::vector<std::string>& danceMoveStrings, unsigned numParticipants = DEFAULT_NUM_PARTICIPANTS);
 
@@ -26,4 +30,6 @@ std::string orderAfterDanceMovesRepetitions(const std::vector<std::string>& danc
                                             unsigned numRepetitions = DEFAULT_NUM_REPETITIONS,
                                             unsigned numParticipants = DEFAULT_NUM_PARTICIPANTS);
 
+}
+}
 }

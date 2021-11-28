@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day03
+{
 
 struct Rectangle;
 using Rectangles = std::vector<Rectangle>;
@@ -39,4 +43,6 @@ private:
     std::vector<Rectangle> m_rectangles;
 };
 
+}
+}
 }

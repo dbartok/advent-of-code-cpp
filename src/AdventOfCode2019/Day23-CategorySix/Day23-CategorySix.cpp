@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day23
+{
 
 IntcodeNumberType secondPartOfFirstPacketAtSpecialAddress(const std::vector<IntcodeNumberType>& intcodeProgram)
 {
@@ -26,4 +30,6 @@ IntcodeNumberType secondPartOfFirstDuplicateMessageByNat(const std::vector<Intco
     return network.getSecondPartOfNatPacket();
 }
 
+}
+}
 }

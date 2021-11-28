@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day04;
 
 TEST_CLASS(Day04ReposeRecord)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(guardMostMinutesSleptTimesMinute_SimpleTests)
     {
-        Assert::AreEqual(240u, AoC::guardMostMinutesSleptTimesMinute(m_lines));
+        Assert::AreEqual(240u, CurrentDay::guardMostMinutesSleptTimesMinute(m_lines));
     }
 
     TEST_METHOD(guardMostFrequentlyMinuteSleptTimesMinute_SimpleTests)
     {
-        Assert::AreEqual(4455u, AoC::guardMostFrequentlyMinuteSleptTimesMinute(m_lines));
+        Assert::AreEqual(4455u, CurrentDay::guardMostFrequentlyMinuteSleptTimesMinute(m_lines));
     }
 
 private:

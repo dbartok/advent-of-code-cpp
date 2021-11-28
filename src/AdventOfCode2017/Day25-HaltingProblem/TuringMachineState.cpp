@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day25
+{
 
 TuringMachineState::TuringMachineState(StateIDType currentStateID, int cursorPos)
     : currentStateID{currentStateID}
@@ -17,4 +21,6 @@ TuringMachineState::TuringMachineState(StateIDType currentStateID, int cursorPos
 
 }
 
+}
+}
 }

@@ -24,6 +24,10 @@ const size_t MULTIPLIER_OF_REAL_SIGNAL = 10'000;
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day16
+{
 
 std::vector<int> convertToVectorOfDigits(const std::string& s)
 {
@@ -153,4 +157,6 @@ std::string messageInFinalOutputForRealSignal(const std::string& signalString)
     return digitsAsString.substr(0, 8);
 }
 
+}
+}
 }

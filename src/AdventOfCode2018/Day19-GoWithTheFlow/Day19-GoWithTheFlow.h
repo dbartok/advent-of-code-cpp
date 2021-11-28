@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day19
+{
 
 unsigned valueInFirstRegisterAfterProcessHalts(const std::vector<std::string>& programLines);
 unsigned valueInFirstRegisterAfterNewProcessHalts();
 
+}
+}
 }

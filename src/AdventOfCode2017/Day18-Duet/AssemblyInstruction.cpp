@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day18
+{
 
 RegisterOrNumberArg::RegisterOrNumberArg(std::string argString)
     : m_registerNameOrRawValue{std::move(argString)}
@@ -170,4 +174,6 @@ bool JumpNotZeroInstruction::increasesInstructionIndex() const noexcept
     return false;
 }
 
+}
+}
 }

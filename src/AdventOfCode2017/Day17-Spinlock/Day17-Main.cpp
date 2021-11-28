@@ -9,13 +9,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day17;
 
     std::fstream fileIn("input.txt");
     unsigned inputStepsForward;
 
     fileIn >> inputStepsForward;
 
-    std::cout << "First part: " << AoC::valueAfterLastWritten(inputStepsForward) << std::endl;
-    std::cout << "Second part: " << AoC::valueAfterZeroAfterManyInsertions(inputStepsForward) << std::endl;
+    std::cout << "First part: " << CurrentDay::valueAfterLastWritten(inputStepsForward) << std::endl;
+    std::cout << "Second part: " << CurrentDay::valueAfterZeroAfterManyInsertions(inputStepsForward) << std::endl;
 }

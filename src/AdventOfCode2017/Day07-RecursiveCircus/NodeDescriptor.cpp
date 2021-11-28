@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day07
+{
 
 NodeDescriptor::NodeDescriptor(std::string name, int weight, std::vector<std::string> childrenNames) noexcept
     : name{std::move(name)}
@@ -50,4 +54,6 @@ NodeDescriptor NodeDescriptor::fromString(const std::string& nodeDescriptorStrin
     return NodeDescriptor{name, weight, childrenNames};
 }
 
+}
+}
 }

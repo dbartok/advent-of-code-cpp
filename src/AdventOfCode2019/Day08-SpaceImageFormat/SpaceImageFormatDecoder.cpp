@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day08
+{
 
 SpaceImageLayer::SpaceImageLayer(Layer layer)
     : m_layer{std::move(layer)}
@@ -92,4 +96,6 @@ SpaceImageLayer SpaceImageFormatDecoder::getDecodedImage() const
     return currentSpaceImageLayer;
 }
 
+}
+}
 }

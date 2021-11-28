@@ -7,8 +7,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day07
+{
 
-AmplifierChain::AmplifierChain(const std::vector<int>& intcodeProgram, const std::vector<int>& phaseSettings)
+using AdventOfCode::Year2019::Day05::IntcodeProgramExecutionState;
+
+AmplifierChain::AmplifierChain(const std::vector<IntcodeNumberType>& intcodeProgram, const std::vector<int>& phaseSettings)
 {
     for (size_t i = 0; i < phaseSettings.size(); ++i)
     {
@@ -43,4 +49,6 @@ int AmplifierChain::getLastOutput() const
     return m_amplifiers.back().getOutputs().back();
 }
 
+}
+}
 }

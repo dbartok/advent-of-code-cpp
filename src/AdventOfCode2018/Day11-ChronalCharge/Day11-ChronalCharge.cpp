@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day11
+{
 
 std::string highestPowerSmallSquareCoordinates(int gridSerialNumber)
 {
@@ -28,4 +32,6 @@ std::string highestPowerSquareCoordinatesAndSize(int gridSerialNumber, size_t ma
     return std::to_string(coordinates.first) + "," + std::to_string(coordinates.second) + "," + std::to_string(size);
 }
 
+}
+}
 }

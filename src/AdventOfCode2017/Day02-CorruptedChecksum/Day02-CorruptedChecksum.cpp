@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day02
+{
 
 unsigned checkSumDiffSmallestLargest(const RowsOfNumbers& rows)
 {
@@ -56,4 +60,6 @@ unsigned sumEvenlyDivisbleValues(const RowsOfNumbers& rows)
     return sum;
 }
 
+}
+}
 }

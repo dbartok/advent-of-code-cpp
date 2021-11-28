@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day18
+{
 
 AssemblyProgram::AssemblyProgram(std::vector<AssemblyInstruction::SharedPtr> instructions) noexcept
     : m_instructions{std::move(instructions)}
@@ -101,4 +105,6 @@ unsigned AssemblyProgram::getNumTimesMultInvoked() const noexcept
     return m_state.getNumTimesMultInvoked();
 }
 
+}
+}
 }

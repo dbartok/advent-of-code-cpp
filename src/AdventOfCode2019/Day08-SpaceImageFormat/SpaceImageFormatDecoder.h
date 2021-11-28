@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day08
+{
 
 
 using Line = std::vector<int>;
@@ -46,4 +50,6 @@ private:
     std::vector<SpaceImageLayer> m_spaceImageLayers;
 };
 
+}
+}
 }

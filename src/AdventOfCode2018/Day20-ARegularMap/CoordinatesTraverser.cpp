@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day20
+{
 
 CoordinatesTraverser::CoordinatesTraverser(CoordinatesToNeighborCoordinates layoutMap, unsigned distanceThreshold)
     : m_layoutMap{std::move(layoutMap)}
@@ -68,4 +72,6 @@ unsigned CoordinatesTraverser::getNumRoomsAboveDistanceThreshold() const
     return m_numRoomsAboveDistanceThreshold;
 }
 
+}
+}
 }

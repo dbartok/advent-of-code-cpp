@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day20
+{
 
 class CoordinatesTraverser
 {
@@ -30,4 +34,6 @@ private:
     unsigned m_numRoomsAboveDistanceThreshold = 0;
 };
 
+}
+}
 }

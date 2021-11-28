@@ -10,7 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2019::Day08;
 
     std::fstream fileIn("input.txt");
     std::string encodedImage
@@ -21,6 +21,6 @@ int main()
 
     encodedImage.erase(std::remove(encodedImage.begin(), encodedImage.end(), '\n'), encodedImage.end());
 
-    std::cout << "First part: " << AoC::checksumOfLayerWithMostZeroes(encodedImage) << std::endl;
-    std::cout << "Second part: " << std::endl << AoC::decodeImage(encodedImage) << std::endl;
+    std::cout << "First part: " << CurrentDay::checksumOfLayerWithMostZeroes(encodedImage) << std::endl;
+    std::cout << "Second part: " << std::endl << CurrentDay::decodeImage(encodedImage) << std::endl;
 }

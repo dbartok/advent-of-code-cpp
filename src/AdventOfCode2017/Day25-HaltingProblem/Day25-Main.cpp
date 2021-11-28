@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day25;
 
     std::fstream fileIn("input.txt");
     std::vector<std::string> inputTuringMachineLines;
@@ -20,5 +20,5 @@ int main()
         inputTuringMachineLines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::diagnosticChecksum(inputTuringMachineLines) << std::endl;
+    std::cout << "First part: " << CurrentDay::diagnosticChecksum(inputTuringMachineLines) << std::endl;
 }

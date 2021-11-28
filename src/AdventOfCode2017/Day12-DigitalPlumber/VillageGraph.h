@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day12
+{
 
 class VillageGraph
 {
@@ -33,4 +37,6 @@ private:
     void dfsRecordVisitedNodes(NodeIDType startNodeID, NodeIDSet& visitedNodeIDs) const;
 };
 
+}
+}
 }

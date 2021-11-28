@@ -13,6 +13,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day16
+{
 
 std::vector<unsigned> parseAllNumbers(std::string line)
 {
@@ -130,4 +134,6 @@ unsigned valueInFirstRegisterAfterProgramFinishes(const std::vector<std::string>
     return programExecutor.getValueInFirstRegister();
 }
 
+}
+}
 }

@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day08
+{
 
 class State
 {
@@ -28,4 +32,6 @@ private:
     int m_globalMaxValueOfRegisters = std::numeric_limits<int>::min();
 };
 
+}
+}
 }

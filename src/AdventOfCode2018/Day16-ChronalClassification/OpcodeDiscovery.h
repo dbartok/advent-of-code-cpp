@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day16
+{
 
 using OpcodeToOpcodeStrings = std::unordered_map<unsigned, OpcodeStringSet>;
 
@@ -56,4 +60,6 @@ private:
     void removeOpcodeStringsFromPossibilities(const std::vector<unsigned>& newlyDisambiguatedOpcodes);
 };
 
+}
+}
 }

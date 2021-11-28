@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day08
+{
 
 extern const char* ACC;
 extern const char* JMP;
@@ -39,4 +43,6 @@ private:
     void executeCurrentInstruction();
 };
 
+}
+}
 }

@@ -13,6 +13,10 @@ const int DEFAULT_HIT_POINTS = 200;
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day15
+{
 
 enum class Faction
 {
@@ -79,4 +83,6 @@ private:
     int m_hitPoints;
 };
 
+}
+}
 }

@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day12;
 
     std::fstream fileIn("input.txt");
     std::vector<std::string> inputNeighborsLines;
@@ -22,6 +22,6 @@ int main()
         inputNeighborsLines.push_back(lineBuffer);
     }
 
-    std::cout << "First part: " << AoC::numNodesInGroupNodeZero(inputNeighborsLines) << std::endl;
-    std::cout << "Second part: " << AoC::numTotalGroups(inputNeighborsLines) << std::endl;
+    std::cout << "First part: " << CurrentDay::numNodesInGroupNodeZero(inputNeighborsLines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numTotalGroups(inputNeighborsLines) << std::endl;
 }

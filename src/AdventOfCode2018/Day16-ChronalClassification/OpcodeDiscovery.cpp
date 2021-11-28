@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day16
+{
 
 OpcodeDiscovery::OpcodeDiscovery(std::vector<CapturedSample> capturedSamples)
     : m_capturedSamples{std::move(capturedSamples)}
@@ -143,4 +147,6 @@ void OpcodeDiscovery::removeOpcodeStringsFromPossibilities(const std::vector<uns
     }
 }
 
+}
+}
 }

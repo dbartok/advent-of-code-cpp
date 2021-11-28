@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day08
+{
 
 const char* ACC = "acc";
 const char* JMP = "jmp";
@@ -68,4 +72,6 @@ void HandheldGameConsole::executeCurrentInstruction()
     ++m_instructionPointer;
 }
 
+}
+}
 }

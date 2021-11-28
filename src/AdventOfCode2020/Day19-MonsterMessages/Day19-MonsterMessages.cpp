@@ -20,6 +20,10 @@ const int RIGHT_INFINITE_RULE_NUMBER = 31;
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day19
+{
 
 size_t getChunkSize(const std::vector<std::string>& messageLines)
 {
@@ -67,7 +71,7 @@ bool isInfiniteMatching(const std::vector<std::string>& messageChunks, const std
     const size_t numMessagesThatCannotBeMatchedFromLeft = messageChunks.size() - numMaximalLeftMatches;
 
     // The right infinite rule needs to occur at least once
-    const size_t numRequiredRightMatches = std::max(1u, numMessagesThatCannotBeMatchedFromLeft);
+    const size_t numRequiredRightMatches = std::max(static_cast<size_t>(1u), numMessagesThatCannotBeMatchedFromLeft);
 
     if (numRequiredRightMatches > numMaximalRightMatches)
     {
@@ -125,4 +129,6 @@ int numMessagesMatchingRuleZeroWithInfiniteRules(const std::vector<std::string>&
                          });
 }
 
+}
+}
 }

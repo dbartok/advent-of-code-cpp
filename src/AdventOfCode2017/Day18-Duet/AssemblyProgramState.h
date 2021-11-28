@@ -14,6 +14,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day18
+{
 
 enum class ExecutionState
 {
@@ -64,4 +68,6 @@ private:
     DuetMessageQueue::SharedPtr m_messageQueueSharedPtr;
 };
 
+}
+}
 }

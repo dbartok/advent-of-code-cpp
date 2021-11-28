@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day03
+{
 
 StressTestWriter::StressTestWriter()
     : m_grid{}
@@ -61,4 +65,6 @@ void StressTestWriter::executeNextTurn() noexcept
     m_head.turnLeft();
 }
 
+}
+}
 }

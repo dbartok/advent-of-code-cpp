@@ -14,6 +14,10 @@ const unsigned NUM_ADDITIONAL_RECIPES = 10;
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day14
+{
 
 std::string scoresOfTenRecipesAfterSeveralRecipes(unsigned numRecipes)
 {
@@ -33,4 +37,6 @@ unsigned numRecipesBeforeSequenceAppears(const std::string& targetSequence)
     return recipeGenerator.getNumRecipes() - targetSequence.length();
 }
 
+}
+}
 }

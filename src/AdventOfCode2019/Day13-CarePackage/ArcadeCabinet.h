@@ -12,6 +12,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day13
+{
+
+using AdventOfCode::Year2019::Day05::IntcodeNumberType;
+using AdventOfCode::Year2019::Day05::IntcodeInterpreter;
 
 using Coordinates = std::pair<int, int>;
 
@@ -51,4 +58,6 @@ private:
     int getNextInput() const;
 };
 
+}
+}
 }

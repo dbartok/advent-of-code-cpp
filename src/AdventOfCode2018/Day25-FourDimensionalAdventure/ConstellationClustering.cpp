@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day25
+{
 
 ConstellationClustering::ConstellationClustering(Points points)
     : m_points{std::move(points)}
@@ -63,4 +67,6 @@ bool ConstellationClustering::isPointConnectedWithCluster(const Vector4D& point,
     return false;
 }
 
+}
+}
 }

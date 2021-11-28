@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day07
+{
 
 DependencyGraph parseDependencyGraphFromInstructionLines(const std::vector<std::string>& instructionLines)
 {
@@ -51,4 +55,6 @@ unsigned timeUntilAllStepsAreDone(const std::vector<std::string>& instructionLin
     return scheduler.getNumElapsedSteps();
 }
 
+}
+}
 }

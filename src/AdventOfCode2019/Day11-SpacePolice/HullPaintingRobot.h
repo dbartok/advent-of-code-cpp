@@ -14,6 +14,12 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day11
+{
+
+using AdventOfCode::Year2019::Day05::IntcodeInterpreter;
 
 using Coordinates = std::pair<int, int>;
 
@@ -65,4 +71,6 @@ private:
     std::pair<Vector2D, Vector2D> getBoundingBox() const;
 };
 
+}
+}
 }

@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day19
+{
 
 DecodedInstruction parseDecodedInstruction(const std::string& decodedInstructionLine)
 {
@@ -56,4 +60,6 @@ unsigned valueInFirstRegisterAfterNewProcessHalts()
     return finalValueOfRegister0_v5();
 }
 
+}
+}
 }

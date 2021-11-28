@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day08;
 
 TEST_CLASS(Day08HandheldHalting)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(valueInAccAfterFirstDuplicateInstruction_SimpleTests)
     {
-        Assert::AreEqual(5, AoC::valueInAccAfterFirstDuplicateInstruction(m_lines));
+        Assert::AreEqual(5, CurrentDay::valueInAccAfterFirstDuplicateInstruction(m_lines));
     }
 
     TEST_METHOD(valueInAccAfterRepairedProgramTerminates_SimpleTests)
     {
-        Assert::AreEqual(8, AoC::valueInAccAfterRepairedProgramTerminates(m_lines));
+        Assert::AreEqual(8, CurrentDay::valueInAccAfterRepairedProgramTerminates(m_lines));
     }
 
 private:

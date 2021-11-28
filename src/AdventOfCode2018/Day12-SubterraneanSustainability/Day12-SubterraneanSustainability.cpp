@@ -17,6 +17,10 @@ const unsigned long long NUM_GROWTH_CYCLES_LONG = 50'000'000'000;
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day12
+{
 
 Pots parseInitialPotsWithPlants(const std::string& initialStateLine)
 {
@@ -93,4 +97,6 @@ long long sumOfPotNumbersWithPlantAfterGrowthLongTime(const std::string& initial
     return sumOfPotNumbersWithPlantAfterGrowthGivenTime(initialStateLine, neighborPatternLines, NUM_GROWTH_CYCLES_LONG);
 }
 
+}
+}
 }

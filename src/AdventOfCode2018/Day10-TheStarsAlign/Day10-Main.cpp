@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day10;
 
     std::fstream fileIn("input.txt");
 
@@ -20,6 +20,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << std::endl << AoC::serializedMessageWhenAligned(lines) << std::endl << std::endl;
-    std::cout << "Second part: " << AoC::timeTakenUntilAligned(lines) << std::endl;
+    std::cout << "First part: " << std::endl << CurrentDay::serializedMessageWhenAligned(lines) << std::endl << std::endl;
+    std::cout << "Second part: " << CurrentDay::timeTakenUntilAligned(lines) << std::endl;
 }

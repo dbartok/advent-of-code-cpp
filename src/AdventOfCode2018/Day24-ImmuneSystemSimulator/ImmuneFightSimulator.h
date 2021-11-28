@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day24
+{
 
 using UnitGroupIDToUnitGroupIDMap = std::unordered_map<UnitGroupIDType, UnitGroupIDType>;
 using UnitGroupIDToUnitGroupMap = std::unordered_map<UnitGroupIDType, UnitGroup>;
@@ -52,4 +56,6 @@ private:
     static bool isBetterTarget(const UnitGroup& attacker, const boost::optional<UnitGroup>& bestTargetOpt, const UnitGroup& potentialTarget);
 };
 
+}
+}
 }

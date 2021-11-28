@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day16
+{
 
 class ProgramExecutor
 {
@@ -26,4 +30,6 @@ private:
     Registers m_registers;
 };
 
+}
+}
 }

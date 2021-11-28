@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day16
+{
 
 DanceCoordinator::DanceCoordinator(std::vector<DanceMove::SharedPtr> danceMoves, unsigned numRepetitions, unsigned numParticipants)
     : m_danceMoves{std::move(danceMoves)}
@@ -80,4 +84,6 @@ const std::string& DanceCoordinator::getNameOrderString() const noexcept
     return m_nameOrderString;
 }
 
+}
+}
 }

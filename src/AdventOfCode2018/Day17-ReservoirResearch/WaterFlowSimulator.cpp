@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day17
+{
 WaterFlowSimulator::WaterFlowSimulator(CoordinatesToTile clayCoordinates)
     : m_coordinatesToTile{std::move(clayCoordinates)}
 {
@@ -162,4 +166,6 @@ void WaterFlowSimulator::setTileAt(const Coordinates& coordinates, Tile newValue
     m_coordinatesToTile[coordinates] = newValue;
 }
 
+}
+}
 }

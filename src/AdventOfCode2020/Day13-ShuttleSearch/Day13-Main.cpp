@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2020::Day13;
 
     std::fstream fileIn("input.txt");
 
@@ -21,6 +21,6 @@ int main()
     std::string scheduleDescriptionString;
     fileIn >> scheduleDescriptionString;
 
-    std::cout << "First part: " << AoC::earliestBusIDMultipliedByWaitTime(earliestDepartureTimestamp, scheduleDescriptionString) << std::endl;
-    std::cout << "Second part: " << AoC::earliestTimestampWithMatchingDepartures(scheduleDescriptionString) << std::endl;
+    std::cout << "First part: " << CurrentDay::earliestBusIDMultipliedByWaitTime(earliestDepartureTimestamp, scheduleDescriptionString) << std::endl;
+    std::cout << "Second part: " << CurrentDay::earliestTimestampWithMatchingDepartures(scheduleDescriptionString) << std::endl;
 }

@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day18
+{
 
 AssemblyProgramState::AssemblyProgramState() noexcept
     : m_executionState{ExecutionState::RUNNING}
@@ -125,4 +129,6 @@ std::shared_ptr<RegisterValueType> AssemblyProgramState::getRegisterValueSharedP
     return foundIter->second;
 }
 
+}
+}
 }

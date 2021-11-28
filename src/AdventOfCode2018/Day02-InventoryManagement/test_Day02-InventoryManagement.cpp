@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day02;
 
 TEST_CLASS(Day02InventoryManagement)
 {
@@ -26,7 +26,7 @@ public:
             "ababab"
         };
 
-        Assert::AreEqual(4u * 3u, AoC::checksumTwoOrThreeOfAnyLetter(words));
+        Assert::AreEqual(4u * 3u, CurrentDay::checksumTwoOrThreeOfAnyLetter(words));
     }
 
     TEST_METHOD(commonLettersBetweenOneCharacterDiff_SimpleTests)
@@ -42,7 +42,7 @@ public:
             "wvxyz"
         };
 
-        Assert::AreEqual(std::string{"fgij"}, AoC::commonLettersBetweenOneCharacterDiff(words));
+        Assert::AreEqual(std::string{"fgij"}, CurrentDay::commonLettersBetweenOneCharacterDiff(words));
     }
 
 

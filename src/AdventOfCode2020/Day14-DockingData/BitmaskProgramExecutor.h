@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day14
+{
 
 enum class InstructionType
 {
@@ -68,4 +72,6 @@ private:
     void getAllAddressesRecursive(uint64_t baseAddress, size_t floatingDigitsIndex, std::vector<uint64_t>& allAddresses) const;
 };
 
+}
+}
 }

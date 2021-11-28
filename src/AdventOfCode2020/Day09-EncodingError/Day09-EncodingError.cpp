@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day09
+{
 
 template<typename ContainerType>
 bool isNumberTheSumOfTwoNumbers(int64_t target, const ContainerType& numbers)
@@ -71,4 +75,6 @@ int64_t encryptionWeakness(const std::vector<int64_t>& numbers, size_t windowLen
     throw std::runtime_error("Cannot find encryption weakness.");
 }
 
+}
+}
 }

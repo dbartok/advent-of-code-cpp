@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day21
+{
 
 SmallSquare createSquareFromString(const std::string& matrixString)
 {
@@ -71,4 +75,6 @@ unsigned numPixelsOnLargeIterations(const std::vector<std::string>& enhancementR
     return numPixelsOnAfterEnhancements(enhancementRuleLines, numIterations);
 }
 
+}
+}
 }

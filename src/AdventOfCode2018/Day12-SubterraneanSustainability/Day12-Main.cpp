@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day12;
 
     std::fstream fileIn("input.txt");
 
@@ -28,6 +28,6 @@ int main()
         }
     }
 
-    std::cout << "First part: " << AoC::sumOfPotNumbersWithPlantAfterGrowthShortTime(initialStateLine, neighborPatterLines) << std::endl;
-    std::cout << "Second part: " << AoC::sumOfPotNumbersWithPlantAfterGrowthLongTime(initialStateLine, neighborPatterLines) << std::endl;
+    std::cout << "First part: " << CurrentDay::sumOfPotNumbersWithPlantAfterGrowthShortTime(initialStateLine, neighborPatterLines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumOfPotNumbersWithPlantAfterGrowthLongTime(initialStateLine, neighborPatterLines) << std::endl;
 }

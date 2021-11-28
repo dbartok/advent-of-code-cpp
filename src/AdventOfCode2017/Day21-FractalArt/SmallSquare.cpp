@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day21
+{
 
 SmallSquare::SmallSquare(DynamicBoolMatrix squareData)
     : m_squareData(squareData)
@@ -41,4 +45,6 @@ const DynamicBoolMatrix& SmallSquare::getMatrix() const noexcept
     return m_squareData;
 }
 
+}
+}
 }

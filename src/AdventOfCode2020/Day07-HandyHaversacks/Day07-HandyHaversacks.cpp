@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day07
+{
 
 void processContainedBagsSubstring(BagTypesAnalyzer& bagTypesAnalyzer, const std::string& containerBagColor, const std::string& containedBagsString)
 {
@@ -60,4 +64,6 @@ int numTotalBagsContainedInsideShinyGold(const std::vector<std::string>& lines)
     return bagTypesAnalyzer.getNumTotalBagsContainedInsideShinyGold();
 }
 
+}
+}
 }

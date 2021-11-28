@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day03
+{
 
 enum class Direction
 {
@@ -60,4 +64,6 @@ private:
     static Coordinates getNeighborCoordinates(const Coordinates& coordinates, Direction direction);
 };
 
+}
+}
 }

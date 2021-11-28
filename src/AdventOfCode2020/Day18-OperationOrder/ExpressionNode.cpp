@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day18
+{
 
 ExpressionNode::~ExpressionNode()
 {
@@ -41,4 +45,6 @@ int64_t NumberNode::evaluate() const
     return m_number;
 }
 
+}
+}
 }

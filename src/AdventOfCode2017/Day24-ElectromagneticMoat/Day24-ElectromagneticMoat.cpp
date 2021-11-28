@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day24
+{
 
 namespace
 {
@@ -60,4 +64,6 @@ unsigned strengthOfStrongestLongestBridge(const std::vector<std::string>& compon
     return bridgeGraph.maxCostLongestWalk();
 }
 
+}
+}
 }

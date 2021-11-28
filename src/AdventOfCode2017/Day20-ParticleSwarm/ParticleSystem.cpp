@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day20
+{
 
 ParticleSystem::ParticleSystem(std::vector<Particle> particles) noexcept
     : m_particles{std::move(particles)}
@@ -96,4 +100,6 @@ void ParticleSystem::removeAllCollidingParticles()
     }
 }
 
+}
+}
 }

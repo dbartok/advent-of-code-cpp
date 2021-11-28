@@ -15,6 +15,10 @@ const int DEFAULT_ATTACK_POWER = 3;
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day15
+{
 
 GameManager parseGameManager(const std::vector<std::string>& mapLines, int elfAttackPower = DEFAULT_ATTACK_POWER)
 {
@@ -77,4 +81,6 @@ unsigned outcomeOfCombatIfElvesBarelyWin(const std::vector<std::string>& mapLine
     }
 }
 
+}
+}
 }

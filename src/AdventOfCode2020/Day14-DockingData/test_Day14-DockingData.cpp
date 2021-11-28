@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day14;
 
 TEST_CLASS(Day14DockingData)
 {
@@ -23,7 +23,7 @@ public:
             "mem[8] = 0"
         };
 
-        Assert::AreEqual(165ull, AoC::sumOfValuesInMemoryAfterCompletion(lines));
+        Assert::AreEqual(165ull, CurrentDay::sumOfValuesInMemoryAfterCompletion(lines));
     }
 
     TEST_METHOD(sumOfValuesInMemoryAfterDecoderCompletion_SimpleTests)
@@ -36,7 +36,7 @@ public:
             "mem[26] = 1"
         };
 
-        Assert::AreEqual(208ull, AoC::sumOfValuesInMemoryAfterDecoderCompletion(lines));
+        Assert::AreEqual(208ull, CurrentDay::sumOfValuesInMemoryAfterDecoderCompletion(lines));
     }
 
 };

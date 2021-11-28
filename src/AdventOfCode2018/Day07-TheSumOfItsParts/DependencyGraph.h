@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day07
+{
 
 using NodeIDType = char;
 using OrderedNodeIDs = std::set<NodeIDType, std::greater<NodeIDType>>;
@@ -34,4 +38,6 @@ private:
     void dfsFillOutFinishedNodes(const NodeIDType& startNodeID, std::unordered_set<NodeIDType>& visitedNodes, std::vector<NodeIDType>& finishedNodes) const;
 };
 
+}
+}
 }

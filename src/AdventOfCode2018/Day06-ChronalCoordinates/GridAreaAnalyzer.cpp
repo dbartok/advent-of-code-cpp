@@ -11,11 +11,15 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
 {
-const AdventOfCode::CoordinateIDType NO_CLAIM_COORDINATE_ID = '.';
-const AdventOfCode::CoordinateIDType STARTING_COORDINATE_ID = 'a';
+const AdventOfCode::Year2018::Day06::CoordinateIDType NO_CLAIM_COORDINATE_ID = '.';
+const AdventOfCode::Year2018::Day06::CoordinateIDType STARTING_COORDINATE_ID = 'a';
 }
 
 namespace AdventOfCode
+{
+namespace Year2018
+{
+namespace Day06
 {
 
 GridAreaAnalyzer::GridAreaAnalyzer(std::vector<Coordinates> allCoordinates)
@@ -141,4 +145,6 @@ std::vector<CoordinateIDAndDistancePair> GridAreaAnalyzer::getDistanceFromEachCo
     return distanceFromEachCoordinate;
 }
 
+}
+}
 }

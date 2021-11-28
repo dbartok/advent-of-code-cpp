@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day17
+{
 struct Coordinates;
 enum class Tile;
 struct CoordinatesHash;
@@ -87,4 +91,6 @@ private:
     void setTileAt(const Coordinates& coordinates, Tile newValue);
 };
 
+}
+}
 }

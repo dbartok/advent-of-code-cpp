@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day12;
 
 TEST_CLASS(Day12DigitalPlumber)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(numNodesInGroupNodeZero_SimpleTests)
     {
-        Assert::AreEqual(6u, AoC::numNodesInGroupNodeZero(m_neighborsLines));
+        Assert::AreEqual(6u, CurrentDay::numNodesInGroupNodeZero(m_neighborsLines));
     }
 
     TEST_METHOD(numTotalGroups_SimpleTests)
     {
-        Assert::AreEqual(2u, AoC::numTotalGroups(m_neighborsLines));
+        Assert::AreEqual(2u, CurrentDay::numTotalGroups(m_neighborsLines));
     }
 
 private:

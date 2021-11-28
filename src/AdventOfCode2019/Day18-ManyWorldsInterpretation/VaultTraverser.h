@@ -17,6 +17,10 @@ const size_t ALPHABET_LENGTH = 26;
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day18
+{
 
 using VaultMap = std::vector<std::string>;
 
@@ -58,4 +62,6 @@ private:
     char getKeyForDoor(char door) const;
 };
 
+}
+}
 }

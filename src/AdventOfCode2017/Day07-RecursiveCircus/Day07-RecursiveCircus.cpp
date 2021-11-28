@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day07
+{
 
 std::string nameOfBottomProgram(const std::vector<NodeDescriptor>& nodeDescriptors)
 {
@@ -53,4 +57,6 @@ int correctWeightOfWrongWeight(const std::vector<NodeDescriptor>& nodeDescriptor
     return weightedTree.getCorrectWeightForSingleWrongWeight();
 }
 
+}
+}
 }

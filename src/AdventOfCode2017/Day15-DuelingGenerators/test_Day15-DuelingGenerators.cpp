@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day15;
 
 TEST_CLASS(Day15DuelingGenerators)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(judgeFinalCountNoCriteria_SimpleTests)
     {
-        Assert::AreEqual(588u, AoC::judgeFinalCountNoCriteria(m_generatorAStart, m_generatorBStart));
+        Assert::AreEqual(588u, CurrentDay::judgeFinalCountNoCriteria(m_generatorAStart, m_generatorBStart));
     }
 
     TEST_METHOD(judgeFinalCountWithCriteria_SimpleTests)
     {
-        Assert::AreEqual(309u, AoC::judgeFinalCountWithCriteria(m_generatorAStart, m_generatorBStart));
+        Assert::AreEqual(309u, CurrentDay::judgeFinalCountWithCriteria(m_generatorAStart, m_generatorBStart));
     }
 
 private:

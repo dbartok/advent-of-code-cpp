@@ -15,6 +15,10 @@ const char* ORE = "ORE";
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day14
+{
 
 FuelProducer::FuelProducer(std::vector<ChemicalReaction> reactions)
 {
@@ -74,4 +78,6 @@ std::vector<QuantifiedChemical> FuelProducer::calculateIngredients(const Quantif
     return ingredients;
 }
 
+}
+}
 }

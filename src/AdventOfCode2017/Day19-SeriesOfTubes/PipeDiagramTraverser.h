@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day19
+{
 
 class PipeDiagramTraverser
 {
@@ -53,4 +57,6 @@ private:
     static bool areOppositeDirections(Direction d1, Direction d2);
 };
 
+}
+}
 }

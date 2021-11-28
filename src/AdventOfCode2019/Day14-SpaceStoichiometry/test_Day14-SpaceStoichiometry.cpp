@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2019::Day14;
 
 TEST_CLASS(Day14SpaceStoichiometry)
 {
@@ -16,19 +16,19 @@ public:
     TEST_METHOD(minOreRequiredToProduceFuel_SimpleTests)
     {
 
-        Assert::AreEqual(31ll, AoC::minOreRequiredToProduceFuel(m_reactions1));
+        Assert::AreEqual(31ll, CurrentDay::minOreRequiredToProduceFuel(m_reactions1));
 
-        Assert::AreEqual(13312ll, AoC::minOreRequiredToProduceFuel(m_reactions2));
-        Assert::AreEqual(180697ll, AoC::minOreRequiredToProduceFuel(m_reactions3));
-        Assert::AreEqual(2210736ll, AoC::minOreRequiredToProduceFuel(m_reactions4));
+        Assert::AreEqual(13312ll, CurrentDay::minOreRequiredToProduceFuel(m_reactions2));
+        Assert::AreEqual(180697ll, CurrentDay::minOreRequiredToProduceFuel(m_reactions3));
+        Assert::AreEqual(2210736ll, CurrentDay::minOreRequiredToProduceFuel(m_reactions4));
     }
 
 
     TEST_METHOD(maxProducableFuel_SimpleTests)
     {
-        Assert::AreEqual(82892753ll, AoC::maxProducableFuel(m_reactions2));
-        Assert::AreEqual(5586022ll, AoC::maxProducableFuel(m_reactions3));
-        Assert::AreEqual(460664ll, AoC::maxProducableFuel(m_reactions4));
+        Assert::AreEqual(82892753ll, CurrentDay::maxProducableFuel(m_reactions2));
+        Assert::AreEqual(5586022ll, CurrentDay::maxProducableFuel(m_reactions3));
+        Assert::AreEqual(460664ll, CurrentDay::maxProducableFuel(m_reactions4));
     }
 
 private:

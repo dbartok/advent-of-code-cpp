@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day03
+{
 
 unsigned previousOddNumber(unsigned number) noexcept
 {
@@ -84,4 +88,6 @@ unsigned stressTestFirstValueGreaterThan(unsigned threshold)
     return writer.getLastWritten();
 }
 
+}
+}
 }

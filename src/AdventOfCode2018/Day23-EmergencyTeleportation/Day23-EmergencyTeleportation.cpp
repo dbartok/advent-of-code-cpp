@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day23
+{
 
 std::vector<Nanobot> parseNanobots(const std::vector<std::string>& nanobotLines)
 {
@@ -52,4 +56,6 @@ int lowestDistanceFromOriginWithMostNanobots(const std::vector<std::string>& nan
     return nanobotsAnalyzer.lowestDistanceFromOriginWithMostNanobots();
 }
 
+}
+}
 }

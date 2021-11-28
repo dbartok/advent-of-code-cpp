@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day25;
 
 TEST_CLASS(Day25FourDimensionalAdventure)
 {
@@ -27,7 +27,7 @@ public:
             "12,0,0,0"
         };
 
-        Assert::AreEqual(2u, AoC::numConstellationsFormed(lines));
+        Assert::AreEqual(2u, CurrentDay::numConstellationsFormed(lines));
     }
 
     TEST_METHOD(numConstellationsFormed_NegativePointsLessConnected)
@@ -46,7 +46,7 @@ public:
             "3,0,0,0"
         };
 
-        Assert::AreEqual(4u, AoC::numConstellationsFormed(lines));
+        Assert::AreEqual(4u, CurrentDay::numConstellationsFormed(lines));
     }
 
     TEST_METHOD(numConstellationsFormed_NegativePointsMoreConnected)
@@ -65,7 +65,7 @@ public:
             "3,2,0,2"
         };
 
-        Assert::AreEqual(3u, AoC::numConstellationsFormed(lines));
+        Assert::AreEqual(3u, CurrentDay::numConstellationsFormed(lines));
     }
 
     TEST_METHOD(numConstellationsFormed_PointsDisconnected)
@@ -84,7 +84,7 @@ public:
             "-1,-2,0,-2",
         };
 
-        Assert::AreEqual(8u, AoC::numConstellationsFormed(lines));
+        Assert::AreEqual(8u, CurrentDay::numConstellationsFormed(lines));
     }
 
 };

@@ -4,9 +4,14 @@
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <algorithm>
+#include <stdexcept>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
+{
+namespace Year2017
+{
+namespace Day08
 {
 
 Processor::Processor(std::vector<Instruction> instructions)
@@ -45,4 +50,6 @@ int Processor::globalMaxValueOfRegisters() const noexcept
     return m_state.getGlobalMaxValueOfRegisters();
 }
 
+}
+}
 }

@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day21
+{
 
 Food parseFoodLine(const std::string& foodLine)
 {
@@ -67,4 +71,6 @@ std::string canonicalDangerousIngredientList(const std::vector<std::string>& foo
     return boost::join(allergenicIngredients, ",");
 }
 
+}
+}
 }

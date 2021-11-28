@@ -16,6 +16,10 @@ const char LIGHT = '#';
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day10
+{
 
 using CoordinateLongNumericType = long long;
 
@@ -127,4 +131,6 @@ StarBoundingBox StarAligner::getBoundingBox() const
     return StarBoundingBox{Vector2D{minX, minY}, Vector2D{maxX - minX + 1, maxY - minY + 1}};
 }
 
+}
+}
 }

@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2020::Day10;
 
     std::fstream fileIn("input.txt");
     std::vector<int> joltageRatings;
@@ -23,6 +23,6 @@ int main()
         joltageRatings.push_back(entry);
     }
 
-    std::cout << "First part: " << AoC::numOneAndThreeJoltDifferencesMultiplied(joltageRatings) << std::endl;
-    std::cout << "Second part: " << AoC::numDistinctAdapterArrangements(joltageRatings) << std::endl;
+    std::cout << "First part: " << CurrentDay::numOneAndThreeJoltDifferencesMultiplied(joltageRatings) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numDistinctAdapterArrangements(joltageRatings) << std::endl;
 }

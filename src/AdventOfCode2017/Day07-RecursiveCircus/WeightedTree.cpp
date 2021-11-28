@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day07
+{
 
 WeightedTree::TreeNode::TreeNode(std::string name, int weight) noexcept
     : name{std::move(name)}
@@ -207,4 +211,6 @@ int WeightedTree::traverseForCorrectWeightFromNode(const TreeNode& currentNode, 
     }
 }
 
+}
+}
 }

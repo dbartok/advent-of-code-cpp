@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day10
+{
 
 using CoordinateNumericType = int;
 using Vector2D = Eigen::Matrix<CoordinateNumericType, 2, 1>;
@@ -51,4 +55,6 @@ private:
     StarBoundingBox getBoundingBox() const;
 };
 
+}
+}
 }

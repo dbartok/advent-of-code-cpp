@@ -8,8 +8,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day14
+{
 
 unsigned numSquaresUsed(const std::string& keyString);
 unsigned numRegionsOfAdjcacentSquares(const std::string& keyString);
 
+}
+}
 }

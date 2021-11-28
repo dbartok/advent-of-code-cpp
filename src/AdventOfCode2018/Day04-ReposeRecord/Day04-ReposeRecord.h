@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day04
+{
 
 unsigned guardMostMinutesSleptTimesMinute(const std::vector<std::string>& eventLines);
 unsigned guardMostFrequentlyMinuteSleptTimesMinute(const std::vector<std::string>& eventLines);
 
+}
+}
 }

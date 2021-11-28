@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day17
+{
 
 using MultiDimensionalVector = Eigen::Matrix<int, Eigen::Dynamic, 1>;
 
@@ -55,4 +59,6 @@ private:
     int getNumActiveNeighbors(const MultiDimensionalVector& coordinates) const;
 };
 
+}
+}
 }

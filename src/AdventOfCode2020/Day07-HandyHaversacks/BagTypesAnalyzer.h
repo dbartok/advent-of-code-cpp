@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day07
+{
 
 using BagColor = std::string;
 struct QuantifiedBag;
@@ -42,4 +46,6 @@ private:
     void getReverseTopologicalOrderRecursive(std::vector<BagColor>& finishedOrder, std::unordered_set<BagColor>& visited, const BagColor& currentBagColor) const;
 };
 
+}
+}
 }

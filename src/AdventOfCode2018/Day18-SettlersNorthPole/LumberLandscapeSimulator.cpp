@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day18
+{
 
 LumberLandscapeSimulator::LumberLandscapeSimulator(LumberArea initialArea)
     : m_lumberArea{std::move(initialArea)}
@@ -130,4 +134,6 @@ unsigned LumberLandscapeSimulator::countAll(Acre acreToCount) const
                             });
 }
 
+}
+}
 }

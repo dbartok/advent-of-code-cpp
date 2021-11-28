@@ -14,6 +14,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day24
+{
 
 using Vector2D = Eigen::Matrix<int, 2, 1>;
 
@@ -80,4 +84,6 @@ private:
     int getNumAdjacentBlackTiles(const Vector2D& coordinates) const;
 };
 
+}
+}
 }

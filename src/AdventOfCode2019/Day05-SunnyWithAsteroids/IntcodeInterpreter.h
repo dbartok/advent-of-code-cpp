@@ -9,17 +9,21 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day05
+{
 
 class ParameterCreator
 {
 public:
-    ParameterCreator(IntcodeNumberType opcodeWithParameterModes, const AdventOfCode::IntcodeProgamState& state);
+    ParameterCreator(IntcodeNumberType opcodeWithParameterModes, const IntcodeProgamState& state);
 
     IntcodeParameter getParam(size_t parameterPosition);
 
 private:
     IntcodeNumberType m_opcodeWithParameterModes;
-    const AdventOfCode::IntcodeProgamState& m_state;
+    const IntcodeProgamState& m_state;
 
     IntcodeParameterMode createParameterMode(size_t parameterPosition);
 };
@@ -44,4 +48,6 @@ private:
     IntcodeInstruction::SharedPtr createNextInstruction();
 };
 
+}
+}
 }

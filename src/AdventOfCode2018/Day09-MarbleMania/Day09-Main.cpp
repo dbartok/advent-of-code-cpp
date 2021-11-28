@@ -10,13 +10,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day09;
 
     std::fstream fileIn("input.txt");
 
     std::string line;
     std::getline(fileIn, line);
 
-    std::cout << "First part: " << AoC::winningElfsScore(line) << std::endl;
-    std::cout << "Second part: " << AoC::winningElfsScoreLongerGame(line) << std::endl;
+    std::cout << "First part: " << CurrentDay::winningElfsScore(line) << std::endl;
+    std::cout << "Second part: " << CurrentDay::winningElfsScoreLongerGame(line) << std::endl;
 }

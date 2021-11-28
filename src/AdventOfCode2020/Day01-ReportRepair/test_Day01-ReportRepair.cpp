@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day01;
 
 TEST_CLASS(Day01ReportRepair)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(productOfTwoEntriesWithGivenSum_SimpleTests)
     {
-        Assert::AreEqual(514579, AoC::productOfTwoEntriesWithGivenSum(m_entries));
+        Assert::AreEqual(514579, CurrentDay::productOfTwoEntriesWithGivenSum(m_entries));
     }
 
     TEST_METHOD(productOfThreeEntriesWithGivenSum_SimpleTests)
     {
-        Assert::AreEqual(241861950, AoC::productOfThreeEntriesWithGivenSum(m_entries));
+        Assert::AreEqual(241861950, CurrentDay::productOfThreeEntriesWithGivenSum(m_entries));
     }
 
 private:

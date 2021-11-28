@@ -14,6 +14,13 @@ const int RIGHT_INPUT = 1;
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day13
+{
+
+using AdventOfCode::Year2019::Day05::IntcodeNumberType;
+using AdventOfCode::Year2019::Day05::IntcodeProgramExecutionState;
 
 ArcadeCabinet::ArcadeCabinet(IntcodeInterpreter interpreter)
     : m_interpreter{std::move(interpreter)}
@@ -99,4 +106,6 @@ int ArcadeCabinet::getNextInput() const
     }
 }
 
+}
+}
 }

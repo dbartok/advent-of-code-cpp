@@ -8,6 +8,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day15
+{
+
+using AdventOfCode::Year2019::Day05::IntcodeNumberType;
+using AdventOfCode::Year2019::Day05::IntcodeProgramExecutionState;
 
 OxygenRepairDroid::OxygenRepairDroid(IntcodeInterpreter interpreter)
     : m_interpreter{std::move(interpreter)}
@@ -178,4 +185,6 @@ Direction OxygenRepairDroid::getOppositeDirection(Direction direction)
     }
 }
 
+}
+}
 }

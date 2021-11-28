@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day23
+{
 
 NanobotsAnalyzer::NanobotsAnalyzer(std::vector<Nanobot> nanobots)
     : m_nanobots{std::move(nanobots)}
@@ -100,4 +104,6 @@ CoordinateType NanobotsAnalyzer::getManhattanDistance(const Vector3D& position1,
     return distanceVector.cwiseAbs().sum();
 }
 
+}
+}
 }

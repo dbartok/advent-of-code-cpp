@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day20
+{
 
 DonutMazeParser::DonutMazeParser(std::vector<std::string> donutMazeLines)
     : m_map{std::move(donutMazeLines)}
@@ -132,4 +136,6 @@ char DonutMazeParser::atCoordinates(const Coordinates& coordinates) const
     return m_map.at(coordinates.second).at(coordinates.first);
 }
 
+}
+}
 }

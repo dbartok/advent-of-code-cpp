@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day08
+{
 
 Instruction::Instruction(Operation operation, Condition condition)
     : m_operation{operation}
@@ -52,4 +56,6 @@ Instruction Instruction::fromString(const std::string& instructionString)
     return Instruction{std::move(operation), std::move(condition)};
 }
 
+}
+}
 }

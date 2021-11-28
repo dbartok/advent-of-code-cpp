@@ -10,6 +10,12 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day22
+{
+
+using AdventOfCode::Year2017::Day03::InfiniteGrid;
 
 enum class InfectionState
 {
@@ -89,4 +95,6 @@ protected:
     void makeInfectionStep() override;
 };
 
+}
+}
 }

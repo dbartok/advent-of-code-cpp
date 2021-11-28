@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day22;
 
 TEST_CLASS(Day22CrabCombat)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(winningPlayerScore_SimpleTests)
     {
-        Assert::AreEqual(306, AoC::winningPlayerScore(m_lines));
+        Assert::AreEqual(306, CurrentDay::winningPlayerScore(m_lines));
     }
 
     TEST_METHOD(winningPlayerScoreRecursiveCombat_SimpleTests)
     {
-        Assert::AreEqual(291, AoC::winningPlayerScoreRecursiveCombat(m_lines));
+        Assert::AreEqual(291, CurrentDay::winningPlayerScoreRecursiveCombat(m_lines));
     }
 
 private:

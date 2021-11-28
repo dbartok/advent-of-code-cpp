@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day12
+{
 
 std::vector<Moon> createMoons(const std::vector<std::string>& moonPositionLines)
 {
@@ -55,4 +59,6 @@ unsigned long long numStepsUntilRepetition(const std::vector<std::string>& moonP
     return simulator.getNumSteps();
 }
 
+}
+}
 }

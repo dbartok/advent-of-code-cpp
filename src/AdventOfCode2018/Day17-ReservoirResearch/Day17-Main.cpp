@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day17;
 
     std::fstream fileIn("input.txt");
 
@@ -20,6 +20,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::numTilesWaterCanReach(lines) << std::endl;
-    std::cout << "Second part: " << AoC::numTilesWaterRetained(lines) << std::endl;
+    std::cout << "First part: " << CurrentDay::numTilesWaterCanReach(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numTilesWaterRetained(lines) << std::endl;
 }

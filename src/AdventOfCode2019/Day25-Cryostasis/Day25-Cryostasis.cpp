@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day25
+{
 
 std::array<std::string, 23> INPUTS =
 {
@@ -56,4 +60,6 @@ std::string passwordForMainAirlock(const std::vector<IntcodeNumberType>& intcode
     return textAdventure.getPasscode();
 }
 
+}
+}
 }

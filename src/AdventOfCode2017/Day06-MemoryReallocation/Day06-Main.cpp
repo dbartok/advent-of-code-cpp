@@ -9,10 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day06;
 
     std::fstream fileIn("input.txt");
-    AoC::MemoryBanks inputBanks;
+    CurrentDay::MemoryBanks inputBanks;
 
     unsigned inputBank;
     while (fileIn >> inputBank)
@@ -20,6 +20,6 @@ int main()
         inputBanks.push_back(inputBank);
     }
 
-    std::cout << "First part: " << AoC::numUniqueRedistributions(inputBanks) << std::endl;
-    std::cout << "Second part: " << AoC::cyclesUntilReoccurs(inputBanks) << std::endl;
+    std::cout << "First part: " << CurrentDay::numUniqueRedistributions(inputBanks) << std::endl;
+    std::cout << "Second part: " << CurrentDay::cyclesUntilReoccurs(inputBanks) << std::endl;
 }

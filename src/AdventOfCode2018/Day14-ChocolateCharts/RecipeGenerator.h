@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day14
+{
 
 using Recipes = std::list<unsigned>;
 
@@ -33,4 +37,6 @@ private:
     void stepRecipeIterForwards(Recipes::iterator& recipeIter, unsigned steps);
 };
 
+}
+}
 }

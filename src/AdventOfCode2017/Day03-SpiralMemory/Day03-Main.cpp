@@ -9,13 +9,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day03;
 
     std::fstream fileIn("input.txt");
     unsigned input;
 
     fileIn >> input;
 
-    std::cout << "First part: " << AoC::stepsToCarryBack(input) << std::endl;
-    std::cout << "Second part: " << AoC::stressTestFirstValueGreaterThan(input) << std::endl;
+    std::cout << "First part: " << CurrentDay::stepsToCarryBack(input) << std::endl;
+    std::cout << "Second part: " << CurrentDay::stressTestFirstValueGreaterThan(input) << std::endl;
 }

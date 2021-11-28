@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day24
+{
 
 Coordinates midpoint(size_t size)
 {
@@ -314,4 +318,6 @@ void BugCellularAutomaton::addAllCoordsAtGivenLevel(std::vector<LeveledCoordinat
     }
 }
 
+}
+}
 }

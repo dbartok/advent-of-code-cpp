@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day07
+{
 
 template <typename WorkIDType>
 class Worker
@@ -79,4 +83,6 @@ void Worker<WorkIDType>::advanceCycle() noexcept
     }
 }
 
+}
+}
 }

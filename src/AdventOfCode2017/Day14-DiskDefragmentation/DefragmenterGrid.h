@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day14
+{
 
 class DefragmenterGrid
 {
@@ -27,4 +31,6 @@ private:
     static void clearRegion(DiskGrid& diskGrid, size_t i, size_t j);
 };
 
+}
+}
 }

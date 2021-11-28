@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day20
+{
 
 using MazeMap = std::vector<std::string>;
 using Coordinates = std::pair<int, int>;
@@ -48,4 +52,6 @@ private:
     char atCoordinates(const Coordinates& coordinates) const;
 };
 
+}
+}
 }

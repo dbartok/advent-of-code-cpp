@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day16
+{
 
 TicketFieldValidator::TicketFieldValidator(std::vector<Range> ranges)
     : m_ranges{std::move(ranges)}
@@ -177,4 +181,6 @@ void TicketDecoder::eliminatePossibilitiesAtOtherIndicesBasedOnFinalizedIndex(si
     }
 }
 
+}
+}
 }

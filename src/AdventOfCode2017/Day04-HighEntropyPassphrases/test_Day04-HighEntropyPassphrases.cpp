@@ -10,7 +10,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day04;
 
 TEST_CLASS(Day04HighEntropyPassphrases)
 {
@@ -25,7 +25,7 @@ public:
             "aa bb cc dd aaa"
         };
 
-        Assert::AreEqual(2u, AoC::numPassphrasesNoDuplicateWords(passphrases));
+        Assert::AreEqual(2u, CurrentDay::numPassphrasesNoDuplicateWords(passphrases));
     }
 
     TEST_METHOD(numPassphrasesNoAnagramWords_SimpleTests)
@@ -39,7 +39,7 @@ public:
             "oiii ioii iioi iiio"
         };
 
-        Assert::AreEqual(3u, AoC::numPassphrasesNoAnagramWords(passphrases));
+        Assert::AreEqual(3u, CurrentDay::numPassphrasesNoAnagramWords(passphrases));
     }
 
 };

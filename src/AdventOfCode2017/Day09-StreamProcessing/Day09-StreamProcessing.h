@@ -8,8 +8,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day09
+{
 
 unsigned totalScoreForAllGroups(const std::string& groupedString);
 unsigned totalGarbageCount(const std::string& groupedString);
 
+}
+}
 }

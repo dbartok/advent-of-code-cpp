@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2019::Day01;
 
     std::fstream fileIn("input.txt");
     std::vector<int> moduleMasses;
@@ -23,6 +23,6 @@ int main()
         moduleMasses.push_back(moduleMass);
     }
 
-    std::cout << "First part: " << AoC::getSumOfFuelRequirements(moduleMasses) << std::endl;
-    std::cout << "Second part: " << AoC::getSumOfFuelRequirementsIncludingFuelItself(moduleMasses) << std::endl;
+    std::cout << "First part: " << CurrentDay::getSumOfFuelRequirements(moduleMasses) << std::endl;
+    std::cout << "Second part: " << CurrentDay::getSumOfFuelRequirementsIncludingFuelItself(moduleMasses) << std::endl;
 }

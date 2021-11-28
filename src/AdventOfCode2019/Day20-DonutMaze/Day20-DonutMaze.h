@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day20
+{
 
 int numStepsToExit(const std::vector<std::string>& donutMazeLines);
 int numStepsToExitWithMatchingLayers(const std::vector<std::string>& donutMazeLines);
 
+}
+}
 }

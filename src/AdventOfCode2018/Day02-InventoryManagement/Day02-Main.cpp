@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day02;
 
     std::fstream fileIn("input.txt");
     std::vector<std::string> words;
@@ -20,6 +20,6 @@ int main()
         words.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::checksumTwoOrThreeOfAnyLetter(words) << std::endl;
-    std::cout << "Second part: " << AoC::commonLettersBetweenOneCharacterDiff(words) << std::endl;
+    std::cout << "First part: " << CurrentDay::checksumTwoOrThreeOfAnyLetter(words) << std::endl;
+    std::cout << "Second part: " << CurrentDay::commonLettersBetweenOneCharacterDiff(words) << std::endl;
 }

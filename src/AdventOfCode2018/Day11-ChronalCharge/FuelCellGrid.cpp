@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day11
+{
 
 FuelCellSubSquare::FuelCellSubSquare() noexcept
     : coordinates{}
@@ -110,4 +114,6 @@ FuelCellSubSquare FuelCellGrid::highestPowerGivenSizeSubSquare(size_t squareSize
     return FuelCellSubSquare{std::move(maxCoordinates), squareSize, maxPowerLevel};
 }
 
+}
+}
 }

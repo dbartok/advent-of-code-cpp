@@ -12,6 +12,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day23
+{
+
+using AdventOfCode::Year2017::Day18::AssemblyProgram;
+using AdventOfCode::Year2017::Day18::AssemblyProgramParser;
 
 unsigned numTimesMultInvoked(const std::vector<std::string>& instructionStrings)
 {
@@ -28,4 +35,6 @@ unsigned overheatFinalValueOfH() noexcept
     return optimizedFinalValueOfH();
 }
 
+}
+}
 }

@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2020::Day19;
 
     std::fstream fileIn("input.txt");
 
@@ -22,6 +22,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::numMessagesMatchingRuleZero(lines) << std::endl;
-    std::cout << "Second part: " << AoC::numMessagesMatchingRuleZeroWithInfiniteRules(lines) << std::endl;
+    std::cout << "First part: " << CurrentDay::numMessagesMatchingRuleZero(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numMessagesMatchingRuleZeroWithInfiniteRules(lines) << std::endl;
 }

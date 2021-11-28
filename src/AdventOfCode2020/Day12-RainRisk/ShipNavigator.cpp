@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day12
+{
 
 ShipNavigator::ShipNavigator(std::vector<NavigationInstruction> navigationInstructions)
     : ShipNavigator(std::move(navigationInstructions), {1, 0})
@@ -115,4 +119,6 @@ void WaypointShipNavigator::moveWest(int value)
     m_directionVector += Vector2D{-1, 0} *value;
 }
 
+}
+}
 }

@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day24
+{
 
 UnitGroupsParser::UnitGroupsParser(std::vector<std::string> armiesLines, int immuneSystemBoost)
     : m_armiesLines{std::move(armiesLines)}
@@ -85,4 +89,6 @@ DamageTypes UnitGroupsParser::parseDamageTypes(const std::string& armyLine, cons
     return damageTypes;
 }
 
+}
+}
 }

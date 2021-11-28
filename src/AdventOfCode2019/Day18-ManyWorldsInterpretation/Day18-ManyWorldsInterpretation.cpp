@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day18
+{
 
 void writeNewStartingPositions(VaultMap& vaultMap, int midX, int midY)
 {
@@ -83,4 +87,6 @@ int lengthOfShortestPathWithAllKeysMultipleRobots(const std::vector<std::string>
     return totalLength;
 }
 
+}
+}
 }

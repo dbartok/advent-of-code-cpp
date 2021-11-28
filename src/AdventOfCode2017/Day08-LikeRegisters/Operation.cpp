@@ -3,10 +3,14 @@
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
-// Add library includes here
+#include <stdexcept>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
+{
+namespace Year2017
+{
+namespace Day08
 {
 
 Operation::Operation(std::string target, std::string name, int argument) noexcept
@@ -33,4 +37,6 @@ void Operation::execute(State& state) const
     }
 }
 
+}
+}
 }

@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day22
+{
 
 RoundResult::RoundResult(Player winningPlayer, Action action)
     : winningPlayer{winningPlayer}
@@ -97,4 +101,6 @@ RoundResult RecursiveCombatCardGameSimulator::determineRoundResult() const
 
 }
 
+}
+}
 }

@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day18;
 
 TEST_CLASS(Day18SettlersNorthPole)
 {
@@ -29,7 +29,7 @@ public:
             "...#.|..|."
         };
 
-        Assert::AreEqual(1147u, AoC::totalResourceValueAfterShortTime(lines));
+        Assert::AreEqual(1147u, CurrentDay::totalResourceValueAfterShortTime(lines));
     }
 
     TEST_METHOD(totalResourceValueAfterLongTime_SimpleTests)
@@ -41,7 +41,7 @@ public:
             ".|#"
         };
 
-        Assert::AreEqual(12u, AoC::totalResourceValueAfterLongTime(lines));
+        Assert::AreEqual(12u, CurrentDay::totalResourceValueAfterLongTime(lines));
     }
 
 };

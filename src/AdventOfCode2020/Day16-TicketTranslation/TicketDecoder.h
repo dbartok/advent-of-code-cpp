@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day16
+{
 
 using TicketValue = int;
 using Ticket = std::vector<TicketValue>;
@@ -68,4 +72,6 @@ private:
     void eliminatePossibilitiesAtOtherIndicesBasedOnFinalizedIndex(size_t finalizedIndex);
 };
 
+}
+}
 }

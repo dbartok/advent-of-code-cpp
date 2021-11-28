@@ -5,10 +5,16 @@
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include <boost/functional/hash/hash.hpp>
+
 #include <unordered_map>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
+{
+namespace Year2018
+{
+namespace Day15
 {
 
 using WallsGridLine = std::vector<bool>;
@@ -62,4 +68,6 @@ private:
     bool isOnlyOneFactionRemaining() const;
 };
 
+}
+}
 }

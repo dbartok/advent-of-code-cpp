@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day18
+{
 
 class ExpressionNode
 {
@@ -56,4 +60,6 @@ private:
     int64_t m_number;
 };
 
+}
+}
 }

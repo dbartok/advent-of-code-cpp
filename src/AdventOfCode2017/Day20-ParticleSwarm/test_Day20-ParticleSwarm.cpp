@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day20;
 
 TEST_CLASS(Day20ParticleSwarm)
 {
@@ -21,7 +21,7 @@ public:
             "p=< 4,0,0>, v=< 0,0,0>, a=<-2,0,0>"
         };
 
-        Assert::AreEqual(0u, AoC::particleIDClosestToOriginLongTerm(particleLines));
+        Assert::AreEqual(0u, CurrentDay::particleIDClosestToOriginLongTerm(particleLines));
     }
 
     TEST_METHOD(numParticlesLeftAfterCollisions_SimpleTests)
@@ -34,7 +34,7 @@ public:
             "p=< 3,0,0>, v=<-1,0,0>, a=< 0,0,0>"
         };
 
-        Assert::AreEqual(1u, AoC::numParticlesLeftAfterCollisions(particleLines));
+        Assert::AreEqual(1u, CurrentDay::numParticlesLeftAfterCollisions(particleLines));
     }
 
 };

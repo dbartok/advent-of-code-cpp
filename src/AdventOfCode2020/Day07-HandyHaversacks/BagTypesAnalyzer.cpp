@@ -15,6 +15,10 @@ namespace
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day07
+{
 
 const BagColor SHINY_GOLD = "shiny gold";
 
@@ -126,4 +130,6 @@ void BagTypesAnalyzer::getReverseTopologicalOrderRecursive(std::vector<BagColor>
     finishedOrder.push_back(currentBagColor);
 }
 
+}
+}
 }

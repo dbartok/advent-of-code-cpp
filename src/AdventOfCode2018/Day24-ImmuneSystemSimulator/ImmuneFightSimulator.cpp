@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day24
+{
 
 ImmuneFightSimulator::ImmuneFightSimulator(std::vector<UnitGroup> unitGroups)
     : m_unitGroupMap{}
@@ -192,4 +196,6 @@ bool ImmuneFightSimulator::isBetterTarget(const UnitGroup& attacker, const boost
     return potentialTarget.getInitiative() > bestTarget.getInitiative();
 }
 
+}
+}
 }

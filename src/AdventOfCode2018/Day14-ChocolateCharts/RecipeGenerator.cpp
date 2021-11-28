@@ -16,6 +16,10 @@ const std::array<unsigned, 2> DEFAULT_RECIPES = {3, 7};
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day14
+{
 
 RecipeGenerator::RecipeGenerator()
     : m_recipes{DEFAULT_RECIPES.cbegin(), DEFAULT_RECIPES.cend()}
@@ -94,4 +98,6 @@ void RecipeGenerator::stepRecipeIterForwards(std::list<unsigned>::iterator& reci
     }
 }
 
+}
+}
 }

@@ -10,13 +10,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day05;
 
     std::fstream fileIn("input.txt");
     std::string line;
 
     fileIn >> line;
 
-    std::cout << "First part: " << AoC::getReducedPolymerLength(line) << std::endl;
-    std::cout << "Second part: " << AoC::getOneUnitRemovedShortestReducedLength(line) << std::endl;
+    std::cout << "First part: " << CurrentDay::getReducedPolymerLength(line) << std::endl;
+    std::cout << "Second part: " << CurrentDay::getOneUnitRemovedShortestReducedLength(line) << std::endl;
 }

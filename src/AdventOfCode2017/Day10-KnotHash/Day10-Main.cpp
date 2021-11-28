@@ -14,7 +14,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day10;
 
     std::fstream fileIn("input.txt");
 
@@ -22,8 +22,8 @@ int main()
     std::getline(fileIn, inputLengthsString);
 
     std::vector<unsigned> inputLengths;
-    AoC::Utils::splitStringIntoTypedVector(inputLengthsString, inputLengths, ',');
+    AdventOfCode::Utils::splitStringIntoTypedVector(inputLengthsString, inputLengths, ',');
 
-    std::cout << "First part: " << AoC::firstTwoMultipliedAfterKnotting(AoC::KnotHasher::STANDARD_LIST_SIZE, inputLengths) << std::endl;
-    std::cout << "Second part: " << AoC::knotHashDenseString(inputLengthsString) << std::endl;
+    std::cout << "First part: " << CurrentDay::firstTwoMultipliedAfterKnotting(CurrentDay::KnotHasher::STANDARD_LIST_SIZE, inputLengths) << std::endl;
+    std::cout << "Second part: " << CurrentDay::knotHashDenseString(inputLengthsString) << std::endl;
 }

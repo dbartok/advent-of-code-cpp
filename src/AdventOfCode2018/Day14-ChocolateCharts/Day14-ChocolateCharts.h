@@ -8,8 +8,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day14
+{
 
 std::string scoresOfTenRecipesAfterSeveralRecipes(unsigned numRecipes);
 unsigned numRecipesBeforeSequenceAppears(const std::string& sequence);
 
+}
+}
 }

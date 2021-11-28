@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day17
+{
 
 MultiDimensionalGameOfLifeSimulator::MultiDimensionalGameOfLifeSimulator(std::vector<MultiDimensionalVector> allStartingActiveCoordinates)
 {
@@ -113,4 +117,6 @@ int MultiDimensionalGameOfLifeSimulator::getNumActiveNeighbors(const MultiDimens
                             });
 }
 
+}
+}
 }

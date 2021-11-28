@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day19
+{
 
 const std::array<PipeDiagramTraverser::Direction, 4> PipeDiagramTraverser::ALL_DIRECTIONS{Direction::LEFT, Direction::RIGHT, Direction::UP, Direction::DOWN};
 
@@ -214,4 +218,6 @@ bool PipeDiagramTraverser::areOppositeDirections(Direction d1, Direction d2)
     }
 }
 
+}
+}
 }

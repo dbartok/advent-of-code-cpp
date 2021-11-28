@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day08;
 
 TEST_CLASS(Day08MemoryManeuver)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(sumOfAllMetadataEntries_SimpleTests)
     {
-        Assert::AreEqual(138u, AoC::sumOfAllMetadataEntries(nodeNumbers));
+        Assert::AreEqual(138u, CurrentDay::sumOfAllMetadataEntries(nodeNumbers));
     }
 
     TEST_METHOD(valueOfRootNode_SimpleTests)
     {
-        Assert::AreEqual(66u, AoC::valueOfRootNode(nodeNumbers));
+        Assert::AreEqual(66u, CurrentDay::valueOfRootNode(nodeNumbers));
     }
 
 private:

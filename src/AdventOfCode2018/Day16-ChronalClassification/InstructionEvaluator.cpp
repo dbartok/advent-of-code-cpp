@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day16
+{
 InstructionEvaluator::InstructionEvaluator(Instruction instruction, Registers registers)
     : m_instruction{std::move(instruction)}
     , m_registers{std::move(registers)}
@@ -136,4 +140,6 @@ void InstructionEvaluator::eqrr()
     m_registers[m_instruction.c] = (m_registers[m_instruction.a] == m_registers[m_instruction.b]) ? 1u : 0u;
 }
 
+}
+}
 }

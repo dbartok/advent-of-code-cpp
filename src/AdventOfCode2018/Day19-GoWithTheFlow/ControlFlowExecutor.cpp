@@ -7,6 +7,12 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day19
+{
+
+using AdventOfCode::Year2018::Day16::InstructionEvaluator;
 
 ControlFlowExecutor::ControlFlowExecutor(unsigned instructionPtrRegister, std::vector<DecodedInstruction> decodedInstructions)
     : m_instructionPtrRegister{instructionPtrRegister}
@@ -40,4 +46,6 @@ unsigned ControlFlowExecutor::getValueInFirstRegister() const
     return m_registers.front();
 }
 
+}
+}
 }

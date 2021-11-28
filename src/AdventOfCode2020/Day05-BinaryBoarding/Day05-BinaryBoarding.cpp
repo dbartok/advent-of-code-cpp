@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day05
+{
 
 struct Seat
 {
@@ -89,4 +93,6 @@ int missingSeatID(const std::vector<std::string>& boardingPassLines)
     return calculateMissingSeatID(std::move(seatIDs));
 }
 
+}
+}
 }

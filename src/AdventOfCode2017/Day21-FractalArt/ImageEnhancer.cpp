@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day21
+{
 
 ImageEnhancer::ImageEnhancer(EnhancementMap enhancementMap)
     : m_enhancementMap{std::move(enhancementMap)}
@@ -64,4 +68,6 @@ std::vector<SmallSquare> ImageEnhancer::generateUniqueEquivalentSquares(const Sm
     return {std::make_move_iterator(allEquivalentSquares.begin()), std::make_move_iterator(allEquivalentSquares.end())};
 }
 
+}
+}
 }

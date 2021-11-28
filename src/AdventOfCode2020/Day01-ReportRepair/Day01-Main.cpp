@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2020::Day01;
 
     std::fstream fileIn("input.txt");
     std::vector<int> entries;
@@ -23,6 +23,6 @@ int main()
         entries.push_back(entry);
     }
 
-    std::cout << "First part: " << AoC::productOfTwoEntriesWithGivenSum(entries) << std::endl;
-    std::cout << "Second part: " << AoC::productOfThreeEntriesWithGivenSum(entries) << std::endl;
+    std::cout << "First part: " << CurrentDay::productOfTwoEntriesWithGivenSum(entries) << std::endl;
+    std::cout << "Second part: " << CurrentDay::productOfThreeEntriesWithGivenSum(entries) << std::endl;
 }

@@ -31,6 +31,10 @@ const unsigned JUDGE_NUM_BINARY_DIGITS_TO_MATCH = 16;
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day15
+{
 
 unsigned generatorStartFromLine(const std::string& line)
 {
@@ -103,4 +107,6 @@ unsigned judgeFinalCountWithCriteria(unsigned generatorAStart, unsigned generato
     return judgeFinalCount(generatorAStart, generatorBStart, CRITERIA_NUM_ROUNDS, true);
 }
 
+}
+}
 }

@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day06
+{
 
 using GroupAnswerTextSection = std::vector<std::string>;
 
@@ -87,4 +91,6 @@ int sumEveryoneAnsweredYes(const std::vector<std::string>& lines)
 }
 
 
+}
+}
 }

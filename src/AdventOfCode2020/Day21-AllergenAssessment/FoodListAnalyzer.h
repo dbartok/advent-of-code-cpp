@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day21
+{
 
 using SortedStringVector = std::vector<std::string>;
 
@@ -43,4 +47,6 @@ private:
     std::unordered_set<std::string> getIngredientsPossiblyContainingAllergens() const;
 };
 
+}
+}
 }

@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day14
+{
 
 DefragmenterGrid::DefragmenterGrid(DiskGrid diskGrid) noexcept
     : m_diskGrid{std::move(diskGrid)}
@@ -96,4 +100,6 @@ void DefragmenterGrid::clearRegion(DiskGrid& diskGrid, size_t i, size_t j)
     }
 }
 
+}
+}
 }

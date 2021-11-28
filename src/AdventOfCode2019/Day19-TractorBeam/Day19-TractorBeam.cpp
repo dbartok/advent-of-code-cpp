@@ -13,6 +13,12 @@ size_t SQUARE_SIZE = 100;
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day19
+{
+
+using AdventOfCode::Year2019::Day05::IntcodeInterpreter;
 
 bool isPointAffected(const std::vector<IntcodeNumberType>& intcodeProgram, int x, int y)
 {
@@ -72,4 +78,6 @@ int squareClosestPointChecksum(const std::vector<IntcodeNumberType>& intcodeProg
     return i * 10000 + j;
 }
 
+}
+}
 }

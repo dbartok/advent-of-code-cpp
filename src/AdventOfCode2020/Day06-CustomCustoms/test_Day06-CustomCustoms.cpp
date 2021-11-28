@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day06;
 
 TEST_CLASS(Day06CustomCustoms)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(sumAnyoneAnsweredYes_SimpleTests)
     {
-        Assert::AreEqual(11, AoC::sumAnyoneAnsweredYes(m_lines));
+        Assert::AreEqual(11, CurrentDay::sumAnyoneAnsweredYes(m_lines));
     }
 
     TEST_METHOD(sumEveryoneAnsweredYes_SimpleTests)
     {
-        Assert::AreEqual(6, AoC::sumEveryoneAnsweredYes(m_lines));
+        Assert::AreEqual(6, CurrentDay::sumEveryoneAnsweredYes(m_lines));
     }
 
 private:

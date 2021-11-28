@@ -14,6 +14,10 @@ const unsigned SECOND_PART_NUM_INSERTIONS = 50'000'000;
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day17
+{
 
 unsigned valueAfterLastWritten(unsigned numStepsForward);
 
@@ -43,4 +47,6 @@ constexpr unsigned valueAfterZeroAfterManyInsertions(unsigned numStepsForward) n
     return valueAfterZero;
 }
 
+}
+}
 }

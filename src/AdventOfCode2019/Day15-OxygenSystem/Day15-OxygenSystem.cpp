@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day15
+{
 
 int fewestNumberOfMovementsToOxygen(const std::vector<IntcodeNumberType>& intcodeProgram)
 {
@@ -31,4 +35,6 @@ int numMinutesUntilOxygenSpreads(const std::vector<IntcodeNumberType>& intcodePr
     return droid.getMaxDistance();
 }
 
+}
+}
 }

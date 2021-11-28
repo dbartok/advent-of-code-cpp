@@ -5,6 +5,7 @@
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include <stdexcept>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
@@ -14,6 +15,10 @@ const unsigned NUM_CYCLES_LONG = 1'000'000'000;
 }
 
 namespace AdventOfCode
+{
+namespace Year2018
+{
+namespace Day18
 {
 
 Acre parseAcre(char acreChar)
@@ -80,4 +85,6 @@ unsigned totalResourceValueAfterLongTime(const std::vector<std::string>& lumberA
     return lumberLandscapeSimulator.getResourceValue();
 }
 
+}
+}
 }

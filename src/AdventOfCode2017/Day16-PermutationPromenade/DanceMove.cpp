@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day16
+{
 
 DanceMove::SharedPtr DanceMove::sharedPtrFromString(const std::string& danceMoveString)
 {
@@ -116,4 +120,6 @@ void PartnerMove::execute(std::string& nameOrderString) const
     std::swap(nameOrderString[name1Pos], nameOrderString[name2Pos]);
 }
 
+}
+}
 }

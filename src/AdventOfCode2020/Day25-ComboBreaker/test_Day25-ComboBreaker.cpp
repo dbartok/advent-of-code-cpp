@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day25;
 
 TEST_CLASS(Day25ComboBreaker)
 {
@@ -15,7 +15,7 @@ public:
 
     TEST_METHOD(encryptionKeyForHandshake_SimpleTests)
     {
-        Assert::AreEqual(14897079ll, AoC::encryptionKeyForHandshake(5764801ll, 17807724ll));
+        Assert::AreEqual(14897079ll, CurrentDay::encryptionKeyForHandshake(5764801ll, 17807724ll));
     }
 
 };

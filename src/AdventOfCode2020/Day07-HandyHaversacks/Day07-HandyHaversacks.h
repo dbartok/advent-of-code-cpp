@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day07
+{
 
 int numBagColorsThatCanContainShinyGold(const std::vector<std::string>& lines);
 int numTotalBagsContainedInsideShinyGold(const std::vector<std::string>& lines);
 
+}
+}
 }

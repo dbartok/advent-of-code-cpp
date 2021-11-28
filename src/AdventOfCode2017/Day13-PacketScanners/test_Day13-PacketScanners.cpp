@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day13;
 
 TEST_CLASS(Day13PacketScanners)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(severityOfWholeTrip_SimpleTests)
     {
-        Assert::AreEqual(24u, AoC::severityOfWholeTrip(m_scannerRangeLines));
+        Assert::AreEqual(24u, CurrentDay::severityOfWholeTrip(m_scannerRangeLines));
     }
 
     TEST_METHOD(smallestDelayNotToGetCaught_SimpleTests)
     {
-        Assert::AreEqual(10u, AoC::smallestDelayNotToGetCaught(m_scannerRangeLines));
+        Assert::AreEqual(10u, CurrentDay::smallestDelayNotToGetCaught(m_scannerRangeLines));
     }
 
 private:

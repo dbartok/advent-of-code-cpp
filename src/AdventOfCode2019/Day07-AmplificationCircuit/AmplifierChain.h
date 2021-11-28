@@ -10,11 +10,18 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day07
+{
+
+using AdventOfCode::Year2019::Day05::IntcodeNumberType;
+using AdventOfCode::Year2019::Day05::IntcodeInterpreter;
 
 class AmplifierChain
 {
 public:
-    AmplifierChain(const std::vector<int>& intcodeProgram, const std::vector<int>& phaseSettings);
+    AmplifierChain(const std::vector<IntcodeNumberType>& intcodeProgram, const std::vector<int>& phaseSettings);
 
     void execute(int initialInput);
     void executeWithFeedbackLoop(int initialInput);
@@ -25,4 +32,6 @@ private:
     std::vector<IntcodeInterpreter> m_amplifiers;
 };
 
+}
+}
 }

@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day23;
 
 TEST_CLASS(Day23CoprocessorConflagration)
 {
@@ -25,13 +25,13 @@ public:
             "mul a 6"
         };
 
-        Assert::AreEqual(2u, AoC::numTimesMultInvoked(instructionStrings));
+        Assert::AreEqual(2u, CurrentDay::numTimesMultInvoked(instructionStrings));
     }
 
     // Test is the same as the real puzzle input in this case, because the solution is meant to be optimized solely for that
     TEST_METHOD(overheatFinalValueOfH_Returns911AsTheAnswer)
     {
-        Assert::AreEqual(911u, AoC::overheatFinalValueOfH());
+        Assert::AreEqual(911u, CurrentDay::overheatFinalValueOfH());
     }
 
 };

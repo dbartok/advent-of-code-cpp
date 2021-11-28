@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day11
+{
 
 using Vector2D = Eigen::Matrix<int, 2, 1>;
 
@@ -47,4 +51,6 @@ private:
     static std::vector<Vector2D> getAllDirectionVectors();
 };
 
+}
+}
 }

@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day22
+{
 
 ShuffleInstruction createShuffleInstruction(const std::vector<std::string>& tokens)
 {
@@ -67,4 +71,6 @@ BigNumber cardAtPositionAfterMultipleShuffles(const std::vector<std::string>& sh
     return shuffler.getCardAtPosition(position);
 }
 
+}
+}
 }

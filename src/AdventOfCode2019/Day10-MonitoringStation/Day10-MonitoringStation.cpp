@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day10
+{
 
 CoordinatesSet createAsteroidCoordinatesSet(const std::vector<std::string> asteroidMapLines)
 {
@@ -44,4 +48,6 @@ std::vector<Coordinates> vaporizationOrder(const std::vector<std::string> astero
     return asteroidMap.vaporize();
 }
 
+}
+}
 }

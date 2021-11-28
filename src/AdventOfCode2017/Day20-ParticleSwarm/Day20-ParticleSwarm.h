@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day20
+{
 
 unsigned particleIDClosestToOriginLongTerm(const std::vector<std::string>& particleLines);
 unsigned numParticlesLeftAfterCollisions(const std::vector<std::string>& particleLines);
 
+}
+}
 }

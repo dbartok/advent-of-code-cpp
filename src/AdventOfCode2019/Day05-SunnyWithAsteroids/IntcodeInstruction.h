@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day05
+{
 
 enum class IntcodeParameterMode
 {
@@ -160,4 +164,6 @@ public:
     void execute(IntcodeProgamState& state) const override;
 };
 
+}
+}
 }

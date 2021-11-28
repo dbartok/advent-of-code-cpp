@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day08
+{
 
 class Operation
 {
@@ -23,4 +27,6 @@ private:
     int m_argument;
 };
 
+}
+}
 }

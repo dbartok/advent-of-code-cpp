@@ -15,6 +15,10 @@ const long long TOTAL_ORE_AVAILABLE = 1'000'000'000'000;
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day14
+{
 
 QuantifiedChemical createQuantifiedChemical(std::string quantifiedChemicalString)
 {
@@ -113,4 +117,6 @@ long long maxProducableFuel(const std::vector<std::string>& reactionLines)
     return lowerBoundInclusive;
 }
 
+}
+}
 }

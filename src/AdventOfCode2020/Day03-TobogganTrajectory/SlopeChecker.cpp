@@ -14,6 +14,10 @@ const char TREE = '#';
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day03
+{
 
 SlopeChecker::SlopeChecker(TreeGrid treeGrid)
     : m_treeGrid{std::move(treeGrid)}
@@ -40,4 +44,6 @@ int64_t SlopeChecker::getNumTreesForSlope(const Vector2D& slope) const
     return numTrees;
 }
 
+}
+}
 }

@@ -22,6 +22,12 @@ const unsigned GRID_SIZE = 128;
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day14
+{
+
+using AdventOfCode::Year2017::Day10::knotHashDenseString;
 
 std::vector<bool> hexStringDigitsToBoolVector(const std::string& hexString)
 {
@@ -84,4 +90,6 @@ unsigned numRegionsOfAdjcacentSquares(const std::string& keyString)
     return defragmenterGrid.numRegionsOfAdjcacentSquares();
 }
 
+}
+}
 }

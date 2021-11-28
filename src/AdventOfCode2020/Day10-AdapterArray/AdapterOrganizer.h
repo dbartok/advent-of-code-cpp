@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day10
+{
 
 class AdapterOrganizer
 {
@@ -23,4 +27,6 @@ private:
     int numGivenJoltageDifferences(int targetDifference) const;
 };
 
+}
+}
 }

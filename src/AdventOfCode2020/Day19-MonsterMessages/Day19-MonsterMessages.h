@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day19
+{
 
 int numMessagesMatchingRuleZero(const std::vector<std::string>& ruleAndMessageLines);
 int numMessagesMatchingRuleZeroWithInfiniteRules(const std::vector<std::string>& ruleAndMessageLines);
 
+}
+}
 }

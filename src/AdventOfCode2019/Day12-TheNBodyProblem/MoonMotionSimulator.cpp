@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day12
+{
 
 
 Moon::Moon(Vector3D pos)
@@ -148,4 +152,6 @@ void MoonMotionSimulator::pullCloser(int p1, int p2, int& v1, int& v2)
     }
 }
 
+}
+}
 }

@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day05
+{
 
 using IntcodeNumberType = long long;
 
@@ -59,4 +63,6 @@ struct IntcodeProgamState
     IntcodeNumberType relativeBase;
 };
 
+}
+}
 }

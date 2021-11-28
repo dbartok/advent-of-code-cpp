@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day13;
 
     std::fstream fileIn("input.txt");
 
@@ -25,6 +25,6 @@ int main()
         }
     }
 
-    std::cout << "First part: " << AoC::positionOfFirstCollision(lines) << std::endl;
-    std::cout << "Second part: " << AoC::positionOfLastRemainingCart(lines) << std::endl;
+    std::cout << "First part: " << CurrentDay::positionOfFirstCollision(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::positionOfLastRemainingCart(lines) << std::endl;
 }

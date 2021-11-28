@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day20
+{
 
 using Image = Eigen::Matrix<bool, Eigen::Dynamic, Eigen::Dynamic>;
 
@@ -35,4 +39,6 @@ private:
     Image m_image;
 };
 
+}
+}
 }

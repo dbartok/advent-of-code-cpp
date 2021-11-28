@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day08
+{
 
 Instruction parseInstruction(const std::string& instructionLine)
 {
@@ -76,4 +80,6 @@ int valueInAccAfterRepairedProgramTerminates(const std::vector<std::string>& ins
     throw std::runtime_error("Cannot repair the program.");
 }
 
+}
+}
 }

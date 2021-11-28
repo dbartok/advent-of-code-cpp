@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day23;
 
     std::fstream fileIn("input.txt");
     std::vector<std::string> inputInstructionStrings;
@@ -22,6 +22,6 @@ int main()
         inputInstructionStrings.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::numTimesMultInvoked(inputInstructionStrings) << std::endl;
-    std::cout << "Second part: " << AoC::overheatFinalValueOfH() << std::endl;
+    std::cout << "First part: " << CurrentDay::numTimesMultInvoked(inputInstructionStrings) << std::endl;
+    std::cout << "Second part: " << CurrentDay::overheatFinalValueOfH() << std::endl;
 }

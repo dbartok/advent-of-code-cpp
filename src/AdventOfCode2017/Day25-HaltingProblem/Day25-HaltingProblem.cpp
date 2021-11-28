@@ -13,6 +13,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day25
+{
 
 StateModifier createStateModifierFromLines(const std::vector<std::string>& stateModifierLines)
 {
@@ -142,4 +146,6 @@ unsigned diagnosticChecksum(const std::vector<std::string>& turingMachineLines)
     return turingMachine.getChecksum();
 }
 
+}
+}
 }

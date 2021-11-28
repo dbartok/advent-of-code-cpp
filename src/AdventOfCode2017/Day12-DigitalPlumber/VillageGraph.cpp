@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day12
+{
 
 VillageGraph::VillageGraph(NeighborSetToNodeID neighborSets) noexcept
     : m_neighborSets(std::move(neighborSets))
@@ -86,4 +90,6 @@ void VillageGraph::dfsRecordVisitedNodes(NodeIDType startNodeID, NodeIDSet& visi
     }
 }
 
+}
+}
 }

@@ -9,13 +9,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day09;
 
     std::fstream fileIn("input.txt");
     std::string groupedStringInput;
 
     fileIn >> groupedStringInput;
 
-    std::cout << "First part: " << AoC::totalScoreForAllGroups(groupedStringInput) << std::endl;
-    std::cout << "Second part: " << AoC::totalGarbageCount(groupedStringInput) << std::endl;
+    std::cout << "First part: " << CurrentDay::totalScoreForAllGroups(groupedStringInput) << std::endl;
+    std::cout << "Second part: " << CurrentDay::totalGarbageCount(groupedStringInput) << std::endl;
 }

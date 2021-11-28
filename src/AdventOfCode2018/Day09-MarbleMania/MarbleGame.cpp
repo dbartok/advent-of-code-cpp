@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day09
+{
 
 MarbleGame::MarbleGame(unsigned numPlayers, unsigned lastMarbleScore)
     : m_playerToScore(numPlayers, 0)
@@ -73,4 +77,6 @@ void MarbleGame::stepCurrentMarbleIterBackwards(unsigned steps)
     }
 }
 
+}
+}
 }

@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day05;
 
 TEST_CLASS(Day05BinaryBoarding)
 {
@@ -23,7 +23,7 @@ public:
             "BBFFBBFRLL",
         };
 
-        Assert::AreEqual(820, AoC::highestSeatID(lines));
+        Assert::AreEqual(820, CurrentDay::highestSeatID(lines));
     }
 
     TEST_METHOD(missingSeatID_SimpleTests)
@@ -36,7 +36,7 @@ public:
             "FFFFBFBLLR",
         };
 
-        Assert::AreEqual(39, AoC::missingSeatID(lines));
+        Assert::AreEqual(39, CurrentDay::missingSeatID(lines));
     }
 
 };

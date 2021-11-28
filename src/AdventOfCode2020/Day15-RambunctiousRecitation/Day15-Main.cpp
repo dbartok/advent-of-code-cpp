@@ -13,7 +13,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2020::Day15;
 
     std::fstream fileIn("input.txt");
     const std::string intcodeProgramCommaSeparated
@@ -23,8 +23,8 @@ int main()
     };
 
     std::vector<int> startingNumbers;
-    AoC::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, startingNumbers, ',');
+    AdventOfCode::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, startingNumbers, ',');
 
-    std::cout << "First part: " << AoC::nthNumberSpokenSmallN(startingNumbers) << std::endl;
-    std::cout << "Second part: " << AoC::nthNumberSpokenLargeN(startingNumbers) << std::endl;
+    std::cout << "First part: " << CurrentDay::nthNumberSpokenSmallN(startingNumbers) << std::endl;
+    std::cout << "Second part: " << CurrentDay::nthNumberSpokenLargeN(startingNumbers) << std::endl;
 }

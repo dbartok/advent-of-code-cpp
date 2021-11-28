@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day17
+{
 
 unsigned numTilesWaterCanReach(const std::vector<std::string>& clayCoordinatesLines);
 unsigned numTilesWaterRetained(const std::vector<std::string>& clayCoordinatesLines);
 
+}
+}
 }

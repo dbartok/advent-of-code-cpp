@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day08
+{
 
 class Instruction
 {
@@ -26,4 +30,6 @@ private:
     Condition m_condition;
 };
 
+}
+}
 }

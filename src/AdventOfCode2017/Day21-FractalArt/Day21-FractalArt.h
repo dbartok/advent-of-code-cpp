@@ -17,8 +17,14 @@ unsigned LARGE_NUM_ITERATIONS = 18;
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day21
+{
 
 unsigned numPixelsOnSmallIterations(const std::vector<std::string>& enhancementRuleLines, unsigned numIterations = SMALL_NUM_ITERATIONS);
 unsigned numPixelsOnLargeIterations(const std::vector<std::string>& enhancementRuleLines, unsigned numIterations = LARGE_NUM_ITERATIONS);
 
+}
+}
 }

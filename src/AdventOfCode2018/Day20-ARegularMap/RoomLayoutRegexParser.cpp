@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day20
+{
 
 RoomLayoutRegexParser::RoomLayoutRegexParser(std::string roomLayoutRegex)
     : m_roomLayoutRegex{std::move(roomLayoutRegex)}
@@ -79,4 +83,6 @@ Coordinates RoomLayoutRegexParser::getNeighborCoordinates(const Coordinates& coo
     return neighborCoordinates;
 }
 
+}
+}
 }

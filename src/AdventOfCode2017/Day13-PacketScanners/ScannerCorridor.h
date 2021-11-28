@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day13
+{
 
 class ScannerCorridor
 {
@@ -28,4 +32,6 @@ private:
     RangeToDepthMap m_rangeToDepthMap;
 };
 
+}
+}
 }

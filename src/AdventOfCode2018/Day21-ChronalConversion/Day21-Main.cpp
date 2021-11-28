@@ -9,8 +9,8 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day21;
 
-    std::cout << "First part: " << AoC::lowestValueForFirstRegisterFewestInstructions() << std::endl;
-    std::cout << "Second part: " << AoC::lowestValueForFirstRegisterMostInstructions() << std::endl;
+    std::cout << "First part: " << CurrentDay::lowestValueForFirstRegisterFewestInstructions() << std::endl;
+    std::cout << "Second part: " << CurrentDay::lowestValueForFirstRegisterMostInstructions() << std::endl;
 }

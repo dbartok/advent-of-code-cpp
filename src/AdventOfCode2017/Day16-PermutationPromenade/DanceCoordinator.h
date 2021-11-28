@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day16
+{
 
 class DanceCoordinator
 {
@@ -25,4 +29,6 @@ private:
     std::string m_nameOrderString;
 };
 
+}
+}
 }

@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day19;
 
     std::fstream fileIn("input.txt");
     std::vector<std::string> inputDiagramLines;
@@ -20,6 +20,6 @@ int main()
         inputDiagramLines.push_back(std::move(inputDiagramLine));
     }
 
-    std::cout << "First part: " << AoC::lettersVisited(inputDiagramLines) << std::endl;
-    std::cout << "Second part: " << AoC::totalNumStepsForPacket(inputDiagramLines) << std::endl;
+    std::cout << "First part: " << CurrentDay::lettersVisited(inputDiagramLines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::totalNumStepsForPacket(inputDiagramLines) << std::endl;
 }

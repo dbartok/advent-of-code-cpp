@@ -12,8 +12,12 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day05
+{
 
-int diagnosticCodeProducedByProgram(const std::vector<int>& intcodeProgram, int input)
+int diagnosticCodeProducedByProgram(const std::vector<IntcodeNumberType>& intcodeProgram, int input)
 {
     IntcodeInterpreter ie{intcodeProgram};
     ie.addInput(input);
@@ -23,4 +27,6 @@ int diagnosticCodeProducedByProgram(const std::vector<int>& intcodeProgram, int 
     return ie.getOutputs().back();
 }
 
+}
+}
 }

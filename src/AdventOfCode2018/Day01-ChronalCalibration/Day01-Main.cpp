@@ -10,7 +10,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day01;
 
     std::fstream fileIn("input.txt");
     std::vector<int> numbers;
@@ -22,6 +22,6 @@ int main()
         numbers.push_back(number);
     }
 
-    std::cout << "First part: " << AoC::sumOfAllNumbers(numbers) << std::endl;
-    std::cout << "Second part: " << AoC::firstDuplicateSumReached(numbers) << std::endl;
+    std::cout << "First part: " << CurrentDay::sumOfAllNumbers(numbers) << std::endl;
+    std::cout << "Second part: " << CurrentDay::firstDuplicateSumReached(numbers) << std::endl;
 }

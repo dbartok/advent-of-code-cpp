@@ -15,6 +15,10 @@ unsigned DEFAULT_ADDITIONAL_DURATION = 60;
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day07
+{
 
 std::string topologicalOrderOfInstructions(const std::vector<std::string>& instructionLines);
 unsigned timeUntilAllStepsAreDone(
@@ -22,4 +26,6 @@ unsigned timeUntilAllStepsAreDone(
     unsigned numWorkers = DEFAULT_NUM_WORKERS,
     unsigned additionalDuration = DEFAULT_ADDITIONAL_DURATION);
 
+}
+}
 }

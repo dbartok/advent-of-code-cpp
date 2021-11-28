@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day18
+{
 
 struct VaultSearchNodeHash
 {
@@ -162,4 +166,6 @@ char VaultTraverser::getKeyForDoor(char door) const
     return std::tolower(door);
 }
 
+}
+}
 }

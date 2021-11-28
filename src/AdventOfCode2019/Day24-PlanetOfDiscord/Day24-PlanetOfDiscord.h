@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day24
+{
 
 int biodiversityRatingOfFirstDuplicateLayout(const std::vector<std::string>& initialLayoutLines);
 unsigned numBugsAfterSimulationRecursiveGrid(const std::vector<std::string>& initialLayoutLines, unsigned numSteps);
 
+}
+}
 }

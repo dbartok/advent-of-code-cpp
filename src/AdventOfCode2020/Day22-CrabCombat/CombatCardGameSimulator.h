@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day22
+{
 
 using Deck = std::deque<int>;
 using DeckPair = std::pair<Deck, Deck>;
@@ -62,4 +66,6 @@ private:
     mutable std::unordered_set<DeckPair, boost::hash<DeckPair>> m_previouslySeenStates;
 };
 
+}
+}
 }

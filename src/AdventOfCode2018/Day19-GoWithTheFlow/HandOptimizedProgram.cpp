@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day19
+{
 
 // Original program from the puzzle:
 
@@ -243,4 +247,6 @@ unsigned finalValueOfRegister0_v5()
     return sumOfDivisors;
 }
 
+}
+}
 }

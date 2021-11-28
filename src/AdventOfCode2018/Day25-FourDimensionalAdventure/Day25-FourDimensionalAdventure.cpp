@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day25
+{
 
 Points parsePoints(const std::vector<std::string>& pointsLines)
 {
@@ -43,4 +47,6 @@ unsigned numConstellationsFormed(const std::vector<std::string>& pointsLines)
     return constellationClustering.getNumClusters();
 }
 
+}
+}
 }

@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day13
+{
 
 ScannerCorridor::ScannerCorridor(RangeToDepthMap rangeToDepthMap)
     : m_rangeToDepthMap{rangeToDepthMap}
@@ -126,4 +130,6 @@ constexpr bool ScannerCorridor::isCaught(unsigned range, unsigned depth, unsigne
     return scannerPos == 0;
 }
 
+}
+}
 }

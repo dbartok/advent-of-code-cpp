@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day19;
 
 TEST_CLASS(Day19SeriesOfTubes)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(lettersVisited_SimpleTests)
     {
-        Assert::AreEqual(std::string{"ABCDEF"}, AoC::lettersVisited(m_diagramLines));
+        Assert::AreEqual(std::string{"ABCDEF"}, CurrentDay::lettersVisited(m_diagramLines));
     }
 
     TEST_METHOD(totalNumStepsForPacket_SimpleTests)
     {
-        Assert::AreEqual(38u, AoC::totalNumStepsForPacket(m_diagramLines));
+        Assert::AreEqual(38u, CurrentDay::totalNumStepsForPacket(m_diagramLines));
     }
 
 private:

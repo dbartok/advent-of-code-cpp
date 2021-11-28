@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day16;
 
 TEST_CLASS(Day16ChronalClassification)
 
@@ -24,7 +24,7 @@ public:
             "",
         };
 
-        Assert::AreEqual(1u, AoC::numSamplesBehaveMoreThanThreeOpcodes(opcodeManualLines));
+        Assert::AreEqual(1u, CurrentDay::numSamplesBehaveMoreThanThreeOpcodes(opcodeManualLines));
     }
 
 };

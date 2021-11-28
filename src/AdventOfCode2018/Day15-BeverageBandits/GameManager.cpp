@@ -16,6 +16,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day15
+{
 
 GameManager::GameManager(WallGrid wallGrid, CoordinatesToUnit coordinatesToUnit)
     : m_wallGrid{std::move(wallGrid)}
@@ -265,4 +269,6 @@ bool GameManager::isOnlyOneFactionRemaining() const
                                     });
 }
 
+}
+}
 }

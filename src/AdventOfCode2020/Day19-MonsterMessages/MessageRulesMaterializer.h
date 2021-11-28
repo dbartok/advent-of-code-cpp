@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day19
+{
 
 class MessageRulesMaterializer
 {
@@ -29,4 +33,6 @@ private:
     void replaceTokensWithMaterializedRules(std::vector<std::string>& tokens);
 };
 
+}
+}
 }

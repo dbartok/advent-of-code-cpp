@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day04
+{
 
 using GuardIDType = unsigned;
 
@@ -44,4 +48,6 @@ private:
     std::unordered_map<GuardIDType, Guard> m_guards;
 };
 
+}
+}
 }

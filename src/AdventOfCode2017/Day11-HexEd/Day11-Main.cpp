@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day11;
 
     std::fstream fileIn("input.txt");
 
@@ -21,6 +21,6 @@ int main()
     std::vector<std::string> inputPath;
     boost::split(inputPath, commaSeparatedPath, boost::is_any_of(","));
 
-    std::cout << "First part: " << AoC::numStepsFromStartAtEnd(inputPath) << std::endl;
-    std::cout << "Second part: " << AoC::maxNumStepsFromStart(inputPath) << std::endl;
+    std::cout << "First part: " << CurrentDay::numStepsFromStartAtEnd(inputPath) << std::endl;
+    std::cout << "Second part: " << CurrentDay::maxNumStepsFromStart(inputPath) << std::endl;
 }

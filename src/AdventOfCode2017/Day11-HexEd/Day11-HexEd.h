@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day11
+{
 
 int numStepsFromStartAtEnd(const std::vector<std::string>& path);
 int maxNumStepsFromStart(const std::vector<std::string>& path);
 
+}
+}
 }

@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day06
+{
 
 using Coordinates = std::pair<unsigned, unsigned>;
 using CoordinateIDType = char;
@@ -30,4 +34,6 @@ private:
     std::vector<CoordinateIDAndDistancePair> getDistanceFromEachCoordinate(const Coordinates& origin) const;
 };
 
+}
+}
 }

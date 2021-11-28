@@ -10,18 +10,18 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day07;
 
     std::fstream fileIn("input.txt");
-    std::vector<AoC::NodeDescriptor> nodeDescriptors;
+    std::vector<CurrentDay::NodeDescriptor> nodeDescriptors;
 
     std::string lineBuffer;
     while (std::getline(fileIn, lineBuffer))
     {
-        AoC::NodeDescriptor nodeDescriptor = AoC::NodeDescriptor::fromString(lineBuffer);
+        CurrentDay::NodeDescriptor nodeDescriptor = CurrentDay::NodeDescriptor::fromString(lineBuffer);
         nodeDescriptors.push_back(std::move(nodeDescriptor));
     }
 
-    std::cout << "First part: " << AoC::nameOfBottomProgram(nodeDescriptors) << std::endl;
-    std::cout << "Second part: " << AoC::correctWeightOfWrongWeight(nodeDescriptors) << std::endl;
+    std::cout << "First part: " << CurrentDay::nameOfBottomProgram(nodeDescriptors) << std::endl;
+    std::cout << "Second part: " << CurrentDay::correctWeightOfWrongWeight(nodeDescriptors) << std::endl;
 }

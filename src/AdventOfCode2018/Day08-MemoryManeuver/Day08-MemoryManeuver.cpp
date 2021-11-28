@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day08
+{
 
 LicenseNodeSharedPtr parseChild(std::vector<unsigned>::const_iterator& nodeNumbersIter)
 {
@@ -75,4 +79,6 @@ unsigned valueOfRootNode(const std::vector<unsigned>& nodeNumbers)
     return licenseTree.getValueOfRootNode();
 }
 
+}
+}
 }

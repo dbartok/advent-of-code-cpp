@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day11
+{
 
 SeatingSimulator::SeatingSimulator(std::vector<std::string> seatLayoutLines, size_t visionRange, size_t numVisibleOccupiedSeatsThreshold)
     : m_seatLayout{std::move(seatLayoutLines)}
@@ -149,4 +153,6 @@ std::vector<Vector2D> SeatingSimulator::getAllDirectionVectors()
     };
 }
 
+}
+}
 }

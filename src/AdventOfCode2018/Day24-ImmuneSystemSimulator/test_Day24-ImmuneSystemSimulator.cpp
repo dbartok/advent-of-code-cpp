@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day24;
 
 TEST_CLASS(Day24ImmuneSystemSimulator)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(numUnitsOfWinningArmy_SimpleTests)
     {
-        Assert::AreEqual(5216u, AoC::numUnitsOfWinningArmy(m_lines));
+        Assert::AreEqual(5216u, CurrentDay::numUnitsOfWinningArmy(m_lines));
     }
 
     TEST_METHOD(numUnitsImmuneSystemSmallestBoost_SimpleTests)
     {
-        Assert::AreEqual(51u, AoC::numUnitsImmuneSystemSmallestBoost(m_lines));
+        Assert::AreEqual(51u, CurrentDay::numUnitsImmuneSystemSmallestBoost(m_lines));
     }
 
 private:

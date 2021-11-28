@@ -8,8 +8,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day03
+{
 
 unsigned stepsToCarryBack(unsigned location);
 unsigned stressTestFirstValueGreaterThan(unsigned location);
 
+}
+}
 }

@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day10;
 
 TEST_CLASS(Day10TheStarsAlign)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(serializedMessageWhenAligned_SimpleTests)
     {
-        Assert::AreEqual(m_expectedSerializedMessageWhenAligned, AoC::serializedMessageWhenAligned(m_starlightLines));
+        Assert::AreEqual(m_expectedSerializedMessageWhenAligned, CurrentDay::serializedMessageWhenAligned(m_starlightLines));
     }
 
     TEST_METHOD(timeTakenUntilAligned_SimpleTests)
     {
-        Assert::AreEqual(3u, AoC::timeTakenUntilAligned(m_starlightLines));
+        Assert::AreEqual(3u, CurrentDay::timeTakenUntilAligned(m_starlightLines));
     }
 
 private:

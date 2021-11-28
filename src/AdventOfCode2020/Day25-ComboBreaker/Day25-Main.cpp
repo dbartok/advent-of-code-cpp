@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2020::Day25;
 
     std::fstream fileIn("input.txt");
 
@@ -19,5 +19,5 @@ int main()
     int doorPublicKey;
     fileIn >> doorPublicKey;
 
-    std::cout << "First part: " << AoC::encryptionKeyForHandshake(cardPublicKey, doorPublicKey) << std::endl;
+    std::cout << "First part: " << CurrentDay::encryptionKeyForHandshake(cardPublicKey, doorPublicKey) << std::endl;
 }

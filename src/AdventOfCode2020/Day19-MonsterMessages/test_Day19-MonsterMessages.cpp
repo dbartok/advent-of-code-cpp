@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day19;
 
 TEST_CLASS(Day19MonsterMessages)
 {
@@ -31,17 +31,17 @@ public:
             "aaaabbb"
         };
 
-        Assert::AreEqual(2, AoC::numMessagesMatchingRuleZero(lines));
+        Assert::AreEqual(2, CurrentDay::numMessagesMatchingRuleZero(lines));
     }
 
     TEST_METHOD(numMessagesMatchingRuleZero_SecondPartExample)
     {
-        Assert::AreEqual(3, AoC::numMessagesMatchingRuleZero(m_secondPartExampleLines));
+        Assert::AreEqual(3, CurrentDay::numMessagesMatchingRuleZero(m_secondPartExampleLines));
     }
 
     TEST_METHOD(numMessagesMatchingRuleZeroWithInfiniteRules_SecondPartExample)
     {
-        Assert::AreEqual(12, AoC::numMessagesMatchingRuleZeroWithInfiniteRules(m_secondPartExampleLines));
+        Assert::AreEqual(12, CurrentDay::numMessagesMatchingRuleZeroWithInfiniteRules(m_secondPartExampleLines));
     }
 
 private:

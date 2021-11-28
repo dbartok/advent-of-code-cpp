@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day18
+{
 
 AssemblyProgramParser::AssemblyProgramParser(std::vector<std::string> instructionStrings) noexcept
     : m_instructionStrings{std::move(instructionStrings)}
@@ -154,4 +158,6 @@ AssemblyInstruction::SharedPtr MessageQueueProgramParser::createCustomInstructio
     }
 }
 
+}
+}
 }

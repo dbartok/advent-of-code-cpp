@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day12
+{
 
 NavigationAction charToNavigationAction(char c)
 {
@@ -63,4 +67,6 @@ int distanceToEndLocationWaypointMoves(const std::vector<std::string>& instructi
     return shipNavigator.getManhattanDistanceFromStart();
 }
 
+}
+}
 }

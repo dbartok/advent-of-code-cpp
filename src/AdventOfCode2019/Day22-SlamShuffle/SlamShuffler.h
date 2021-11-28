@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day22
+{
 
 using BigNumber = boost::multiprecision::int256_t;
 
@@ -42,4 +46,6 @@ private:
     BigNumber executeInReverse(const ShuffleInstruction& instruction, BigNumber position) const;
 };
 
+}
+}
 }

@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day22;
 
 TEST_CLASS(Day22ModeMaze)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(riskLevelOfSmallestArea_SimpleTests)
     {
-        Assert::AreEqual(114u, AoC::riskLevelOfSmallestArea(m_lines));
+        Assert::AreEqual(114u, CurrentDay::riskLevelOfSmallestArea(m_lines));
     }
 
     TEST_METHOD(fewestMinutesToTarget_SimpleTests)
     {
-        Assert::AreEqual(45u, AoC::fewestMinutesToTarget(m_lines));
+        Assert::AreEqual(45u, CurrentDay::fewestMinutesToTarget(m_lines));
     }
 
 private:

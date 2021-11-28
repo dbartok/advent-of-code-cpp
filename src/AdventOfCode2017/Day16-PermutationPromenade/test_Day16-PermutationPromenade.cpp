@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day16;
 
 TEST_CLASS(Day16PermutationPromenade)
 {
@@ -15,18 +15,18 @@ public:
 
     TEST_METHOD(orderAfterDanceMovesSingleRepetition_SimpleTests)
     {
-        Assert::AreEqual(std::string{"baedc"}, AoC::orderAfterDanceMovesSingleRepetition(m_danceMoveStrings, 5u));
+        Assert::AreEqual(std::string{"baedc"}, CurrentDay::orderAfterDanceMovesSingleRepetition(m_danceMoveStrings, 5u));
     }
 
     TEST_METHOD(orderAfterDanceMovesRepetitions_SimpleTests)
     {
-        Assert::AreEqual(std::string{"ceadb"}, AoC::orderAfterDanceMovesRepetitions(m_danceMoveStrings, 2u, 5u));
+        Assert::AreEqual(std::string{"ceadb"}, CurrentDay::orderAfterDanceMovesRepetitions(m_danceMoveStrings, 2u, 5u));
     }
 
     TEST_METHOD(orderAfterDanceMovesRepetitions_RepetitionsLargerThanCycleSize)
     {
-        Assert::AreEqual(std::string{"ceadb"}, AoC::orderAfterDanceMovesRepetitions(m_danceMoveStrings, 6u, 5u));
-        Assert::AreEqual(std::string{"ceadb"}, AoC::orderAfterDanceMovesRepetitions(m_danceMoveStrings, 10u, 5u));
+        Assert::AreEqual(std::string{"ceadb"}, CurrentDay::orderAfterDanceMovesRepetitions(m_danceMoveStrings, 6u, 5u));
+        Assert::AreEqual(std::string{"ceadb"}, CurrentDay::orderAfterDanceMovesRepetitions(m_danceMoveStrings, 10u, 5u));
     }
 
 private:

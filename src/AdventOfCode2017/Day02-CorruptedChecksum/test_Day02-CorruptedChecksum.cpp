@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day02;
 
 TEST_CLASS(Day02CorruptedChecksum)
 {
@@ -15,26 +15,26 @@ public:
 
     TEST_METHOD(checkSumDiffSmallestLargest_SimpleTests)
     {
-        AoC::RowsOfNumbers rows =
+        CurrentDay::RowsOfNumbers rows =
         {
             {5, 1, 9, 5},
             {7, 5, 3,  },
             {2, 4, 6, 8}
         };
 
-        Assert::AreEqual(18u, AoC::checkSumDiffSmallestLargest(rows));
+        Assert::AreEqual(18u, CurrentDay::checkSumDiffSmallestLargest(rows));
     }
 
     TEST_METHOD(sumEvenlyDivisbleValues_SimpleTests)
     {
-        AoC::RowsOfNumbers rows =
+        CurrentDay::RowsOfNumbers rows =
         {
             {5, 9, 2, 8},
             {9, 4, 7, 3},
             {3, 8, 6, 5}
         };
 
-        Assert::AreEqual(9u, AoC::sumEvenlyDivisbleValues(rows));
+        Assert::AreEqual(9u, CurrentDay::sumEvenlyDivisbleValues(rows));
     }
 
 };

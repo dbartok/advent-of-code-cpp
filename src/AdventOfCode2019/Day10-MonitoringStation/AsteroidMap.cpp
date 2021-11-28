@@ -15,6 +15,10 @@ const int SOME_NUMBER_LARGER_THAN_GRID_SIZE = 10000;
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day10
+{
 
 AsteroidMap::AsteroidMap(CoordinatesSet asteroidCoordinatesSet)
     : m_asteroidCoordinatesSet{std::move(asteroidCoordinatesSet)}
@@ -153,4 +157,6 @@ double AsteroidMap::getLaserAngleToAsteroid(const Coordinates& asteroidCoordinat
     return angle;
 }
 
+}
+}
 }

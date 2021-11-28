@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day10;
 
 TEST_CLASS(Day10AdapterArray)
 {
@@ -15,15 +15,15 @@ public:
 
     TEST_METHOD(numOneAndThreeJoltDifferencesMultiplied_SimpleTests)
     {
-        Assert::AreEqual(7 * 5, AoC::numOneAndThreeJoltDifferencesMultiplied(m_joltageRatingsShort));
-        Assert::AreEqual(22 * 10, AoC::numOneAndThreeJoltDifferencesMultiplied(m_joltageRatingsLong));
+        Assert::AreEqual(7 * 5, CurrentDay::numOneAndThreeJoltDifferencesMultiplied(m_joltageRatingsShort));
+        Assert::AreEqual(22 * 10, CurrentDay::numOneAndThreeJoltDifferencesMultiplied(m_joltageRatingsLong));
 
     }
 
     TEST_METHOD(numDistinctAdapterArrangements_SimpleTests)
     {
-        Assert::AreEqual(8ll, AoC::numDistinctAdapterArrangements(m_joltageRatingsShort));
-        Assert::AreEqual(19208ll, AoC::numDistinctAdapterArrangements(m_joltageRatingsLong));
+        Assert::AreEqual(8ll, CurrentDay::numDistinctAdapterArrangements(m_joltageRatingsShort));
+        Assert::AreEqual(19208ll, CurrentDay::numDistinctAdapterArrangements(m_joltageRatingsLong));
     }
 
 private:

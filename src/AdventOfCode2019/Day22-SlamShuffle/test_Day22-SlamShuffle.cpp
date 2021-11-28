@@ -9,7 +9,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2019::Day22;
 
 TEST_CLASS(Day22SlamShuffle)
 {
@@ -23,7 +23,7 @@ public:
             "deal into new stack",
             "deal into new stack",
         };
-        Assert::AreEqual(std::vector<unsigned>{0, 3, 6, 9, 2, 5, 8, 1, 4, 7}, AoC::cardsAfterShuffle(instructions1, 10));
+        Assert::AreEqual(std::vector<unsigned>{0, 3, 6, 9, 2, 5, 8, 1, 4, 7}, CurrentDay::cardsAfterShuffle(instructions1, 10));
 
         std::vector<std::string> instructions2 =
         {
@@ -31,7 +31,7 @@ public:
             "deal with increment 7",
             "deal into new stack"
         };
-        Assert::AreEqual(std::vector<unsigned>{3, 0, 7, 4, 1, 8, 5, 2, 9, 6}, AoC::cardsAfterShuffle(instructions2, 10));
+        Assert::AreEqual(std::vector<unsigned>{3, 0, 7, 4, 1, 8, 5, 2, 9, 6}, CurrentDay::cardsAfterShuffle(instructions2, 10));
 
         std::vector<std::string> instructions3 =
         {
@@ -39,7 +39,7 @@ public:
             "deal with increment 9",
             "cut -2"
         };
-        Assert::AreEqual(std::vector<unsigned>{6, 3, 0, 7, 4, 1, 8, 5, 2, 9}, AoC::cardsAfterShuffle(instructions3, 10));
+        Assert::AreEqual(std::vector<unsigned>{6, 3, 0, 7, 4, 1, 8, 5, 2, 9}, CurrentDay::cardsAfterShuffle(instructions3, 10));
 
         std::vector<std::string> instructions4 =
         {
@@ -54,7 +54,7 @@ public:
             "deal with increment 3",
             "cut -1"
         };
-        Assert::AreEqual(std::vector<unsigned>{9, 2, 5, 8, 1, 4, 7, 0, 3, 6}, AoC::cardsAfterShuffle(instructions4, 10));
+        Assert::AreEqual(std::vector<unsigned>{9, 2, 5, 8, 1, 4, 7, 0, 3, 6}, CurrentDay::cardsAfterShuffle(instructions4, 10));
     }
 
     TEST_METHOD(cardAtPositionAfterMultipleShuffles_SimpleTests)
@@ -66,6 +66,6 @@ public:
             "deal into new stack",
         };
 
-        Assert::AreEqual(0ll, static_cast<long long>(AoC::cardAtPositionAfterMultipleShuffles(instructions1, 7, 2, 0)));
+        Assert::AreEqual(0ll, static_cast<long long>(CurrentDay::cardAtPositionAfterMultipleShuffles(instructions1, 7, 2, 0)));
     }
 };

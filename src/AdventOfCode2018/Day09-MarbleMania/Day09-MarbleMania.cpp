@@ -18,6 +18,10 @@ const unsigned LONGER_GAME_MULTIPLYING_FACTOR = 100;
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day09
+{
 
 MarbleGame parseMarbleGame(const std::string& gameDescriptionLine, bool longerGame = false)
 {
@@ -59,4 +63,6 @@ unsigned winningElfsScoreLongerGame(const std::string& gameDescriptionLine)
     return marbleGame.getWinningElfsScore();
 }
 
+}
+}
 }

@@ -8,12 +8,16 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace
 {
 unsigned NUM_COMPUTERS = 50;
-AdventOfCode::IntcodeNumberType DEFAULT_INPUT = -1;
+AdventOfCode::Year2019::Day05::IntcodeNumberType DEFAULT_INPUT = -1;
 size_t NAT_ADDRESS = 255;
 unsigned IDLE_THRESHOLD_NUM_STEPS = 10000;
 }
 
 namespace AdventOfCode
+{
+namespace Year2019
+{
+namespace Day23
 {
 
 IntcodeComputerNetwork::IntcodeComputerNetwork(const std::vector<IntcodeNumberType>& program)
@@ -114,4 +118,6 @@ bool IntcodeComputerNetwork::isSystemIdle() const
     return m_numStepsSincePacketSent > IDLE_THRESHOLD_NUM_STEPS;
 }
 
+}
+}
 }

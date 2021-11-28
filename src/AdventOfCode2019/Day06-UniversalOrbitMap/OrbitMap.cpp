@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day06
+{
 
 void OrbitMap::addEdge(NodeIDType from, NodeIDType to, EdgeType edgeType)
 {
@@ -75,4 +79,6 @@ unsigned OrbitMap::getNumTransitiveOrbitsRecursive(const NodeIDType& startNodeID
     return numAncestors + numTransitiveOrbitsFromThisNode;
 }
 
+}
+}
 }

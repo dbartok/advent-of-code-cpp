@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day24
+{
 
 unsigned numUnitsOfWinningArmy(const std::vector<std::string>& armiesLines);
 unsigned numUnitsImmuneSystemSmallestBoost(const std::vector<std::string>& armiesLines);
 
+}
+}
 }

@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day03
+{
 
 unsigned numOverlappingSquares(const std::vector<std::string>& areaLines);
 unsigned findSingleNonOperlappingSquare(const std::vector<std::string>& areaLines);
 
+}
+}
 }

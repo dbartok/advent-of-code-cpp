@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day03
+{
 
 Head::Head(std::pair<int, int> position, Direction direction) noexcept
     : m_position{std::move(position)}
@@ -70,4 +74,6 @@ void Head::turnLeft() noexcept
     }
 }
 
+}
+}
 }

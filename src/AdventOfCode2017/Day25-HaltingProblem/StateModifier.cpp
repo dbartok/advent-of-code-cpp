@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day25
+{
 
 StateModifier::StateModifier(bool writtenValue, int cursorOffset, StateIDType nextStateID) noexcept
     : m_writtenValue{writtenValue}
@@ -33,4 +37,6 @@ void StateModifier::modify(TuringMachineState& state) const
     state.currentStateID = m_nextStateID;
 }
 
+}
+}
 }

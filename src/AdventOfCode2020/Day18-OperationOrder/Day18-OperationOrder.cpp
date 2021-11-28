@@ -13,6 +13,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day18
+{
 
 bool isOperator(char c)
 {
@@ -128,4 +132,6 @@ int64_t sumOfResultingValuesWithPrecedence(const std::vector<std::string>& expre
     return sumOfResultingValues(expressionLines, '+');
 }
 
+}
+}
 }

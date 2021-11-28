@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day20
+{
 
 enum class Direction
 {
@@ -57,4 +61,6 @@ private:
     Tile getAllTilesCombined() const;
 };
 
+}
+}
 }

@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day17
+{
 
 ScaffoldAnalyzer::ScaffoldAnalyzer(RobotCameraView robotCameraView)
     : m_robotCameraView{std::move(robotCameraView)}
@@ -145,4 +149,6 @@ Coordinates ScaffoldAnalyzer::getCoordinatesInFront() const
     }
 }
 
+}
+}
 }

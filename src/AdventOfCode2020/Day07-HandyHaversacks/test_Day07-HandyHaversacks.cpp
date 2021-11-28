@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day07;
 
 TEST_CLASS(Day07HandyHaversacks)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(numBagColorsThatCanContainShinyGold_SimpleTests)
     {
-        Assert::AreEqual(4, AoC::numBagColorsThatCanContainShinyGold(m_lines));
+        Assert::AreEqual(4, CurrentDay::numBagColorsThatCanContainShinyGold(m_lines));
     }
 
     TEST_METHOD(numTotalBagsContainedInsideShinyGold_SimpleTests)
     {
-        Assert::AreEqual(32, AoC::numTotalBagsContainedInsideShinyGold(m_lines));
+        Assert::AreEqual(32, CurrentDay::numTotalBagsContainedInsideShinyGold(m_lines));
     }
 
     TEST_METHOD(numTotalBagsContainedInsideShinyGold_DeeplyNestedBags)
@@ -36,7 +36,7 @@ public:
             "dark violet bags contain no other bags."
         };
 
-        Assert::AreEqual(126, AoC::numTotalBagsContainedInsideShinyGold(lines));
+        Assert::AreEqual(126, CurrentDay::numTotalBagsContainedInsideShinyGold(lines));
     }
 
 private:

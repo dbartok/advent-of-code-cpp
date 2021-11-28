@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day07
+{
 
 void DependencyGraph::addEdge(NodeIDType from, NodeIDType to)
 {
@@ -94,4 +98,6 @@ void DependencyGraph::dfsFillOutFinishedNodes(const NodeIDType& startNodeID, std
     finishedNodes.push_back(startNodeID);
 }
 
+}
+}
 }

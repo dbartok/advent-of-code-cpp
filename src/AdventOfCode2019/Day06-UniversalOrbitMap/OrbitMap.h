@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day06
+{
 
 using NodeIDType = std::string;
 using NodeIDs = std::vector<NodeIDType>;
@@ -43,4 +47,6 @@ private:
     unsigned getNumTransitiveOrbitsRecursive(const NodeIDType& startNodeID, unsigned numAncestors) const;
 };
 
+}
+}
 }

@@ -17,6 +17,12 @@ size_t CHARACTER_LIMIT = 20;
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day17
+{
+
+using AdventOfCode::Year2019::Day05::IntcodeInterpreter;
 
 Direction createDirection(char c)
 {
@@ -158,4 +164,6 @@ int dustCollectedByRobot(const std::vector<IntcodeNumberType>& intcodeProgram)
 }
 
 
+}
+}
 }

@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day04;
 
 TEST_CLASS(Day04PassportProcessing)
 {
@@ -32,7 +32,7 @@ public:
             "iyr:2011 ecl:brn hgt:59in",
         };
 
-        Assert::AreEqual(2, AoC::numValidPassports(lines));
+        Assert::AreEqual(2, CurrentDay::numValidPassports(lines));
     }
 
     TEST_METHOD(numValidPassportsStrict_AllInvalid)
@@ -54,7 +54,7 @@ public:
             "pid:3556412378 byr:2007"
         };
 
-        Assert::AreEqual(0, AoC::numValidPassportsStrict(allInvalidLines));
+        Assert::AreEqual(0, CurrentDay::numValidPassportsStrict(allInvalidLines));
     }
 
     TEST_METHOD(numValidPassportsStrict_AllValid)
@@ -75,7 +75,7 @@ public:
             "iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719"
         };
 
-        Assert::AreEqual(4, AoC::numValidPassportsStrict(allValidLines));
+        Assert::AreEqual(4, CurrentDay::numValidPassportsStrict(allValidLines));
     }
 
 };

@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day13
+{
 
 struct BusDeparture
 {
@@ -84,4 +88,6 @@ int64_t earliestTimestampWithMatchingDepartures(const std::string& scheduleDescr
     return candidate;
 }
 
+}
+}
 }

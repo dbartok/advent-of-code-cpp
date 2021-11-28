@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day22
+{
 
 using Coordinates = std::pair<unsigned, unsigned>;
 
@@ -34,4 +38,6 @@ private:
     unsigned calculateErosionLevelAt(const Coordinates& coordinates);
 };
 
+}
+}
 }

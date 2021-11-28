@@ -8,7 +8,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day18
+{
 
 using RegisterValueType = long long;
 
+}
+}
 }

@@ -8,6 +8,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day11
+{
+
+using AdventOfCode::Year2019::Day05::IntcodeNumberType;
+using AdventOfCode::Year2019::Day05::IntcodeProgramExecutionState;
 
 HullPaintingRobot::HullPaintingRobot(IntcodeInterpreter interpreter)
     : HullPaintingRobot(interpreter, {})
@@ -183,4 +190,6 @@ std::pair<Vector2D, Vector2D> HullPaintingRobot::getBoundingBox() const
     return std::make_pair(Vector2D{minX, minY}, Vector2D{maxX - minX + 1, maxY - minY + 1});
 }
 
+}
+}
 }

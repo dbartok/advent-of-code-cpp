@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day14
+{
 
 Instruction::Instruction(InstructionType type, std::string arg, uint64_t addr)
     : type{type}
@@ -137,4 +141,6 @@ void BitmaskDecoderProgramExecutor::getAllAddressesRecursive(uint64_t baseAddres
     getAllAddressesRecursive(baseAddressHigher, floatingDigitsIndex + 1, allAddresses);
 }
 
+}
+}
 }

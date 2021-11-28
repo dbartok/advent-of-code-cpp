@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day06
+{
 
 OrbitMap parseOrbitMap(const std::vector<std::string>& orbitLines, EdgeType edgeType)
 {
@@ -46,4 +50,6 @@ unsigned minimumNumberOfOrbitalTransfers(const std::vector<std::string>& orbitLi
     return orbitMap.getDistanceBetweenStartAndGoal() - 2;
 }
 
+}
+}
 }

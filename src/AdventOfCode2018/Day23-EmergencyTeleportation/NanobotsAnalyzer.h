@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day23
+{
 
 using CoordinateType = int;
 using Vector3D = Eigen::Matrix<CoordinateType, 3, 1>;
@@ -46,4 +50,6 @@ private:
     static CoordinateType getManhattanDistance(const Vector3D& position1, const Vector3D& position2);
 };
 
+}
+}
 }

@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day24;
 
     std::fstream fileIn("input.txt");
     std::vector<std::string> inputComponentLines;
@@ -23,6 +23,6 @@ int main()
         inputComponentLines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::strengthOfStrongestBridge(inputComponentLines) << std::endl;
-    std::cout << "Second part: " << AoC::strengthOfStrongestLongestBridge(inputComponentLines) << std::endl;
+    std::cout << "First part: " << CurrentDay::strengthOfStrongestBridge(inputComponentLines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::strengthOfStrongestLongestBridge(inputComponentLines) << std::endl;
 }

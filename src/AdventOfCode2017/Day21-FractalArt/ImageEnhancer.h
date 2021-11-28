@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day21
+{
 
 class ImageEnhancer
 {
@@ -45,4 +49,6 @@ private:
     static std::vector<SmallSquare> generateUniqueEquivalentSquares(const SmallSquare& square);
 };
 
+}
+}
 }

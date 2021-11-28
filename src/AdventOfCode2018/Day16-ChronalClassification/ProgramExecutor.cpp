@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day16
+{
 
 ProgramExecutor::ProgramExecutor(std::vector<Instruction> instructions, OpcodeToOpcodeString opcodeToOpcodeString)
     : m_instructions{std::move(instructions)}
@@ -32,4 +36,6 @@ unsigned ProgramExecutor::getValueInFirstRegister() const
     return m_registers.front();
 }
 
+}
+}
 }

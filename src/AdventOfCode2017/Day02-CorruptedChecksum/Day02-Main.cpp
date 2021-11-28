@@ -12,19 +12,19 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day02;
 
     std::fstream fileIn("input.txt");
-    AoC::RowsOfNumbers inputRows;
+    CurrentDay::RowsOfNumbers inputRows;
 
     std::string lineBuffer;
     while (std::getline(fileIn, lineBuffer))
     {
-        AoC::RowOfNumbers row;
-        AoC::Utils::splitStringIntoTypedVector(lineBuffer, row);
+        CurrentDay::RowOfNumbers row;
+        AdventOfCode::Utils::splitStringIntoTypedVector(lineBuffer, row);
         inputRows.push_back(std::move(row));
     }
 
-    std::cout << "First part: " << AoC::checkSumDiffSmallestLargest(inputRows) << std::endl;
-    std::cout << "Second part: " << AoC::sumEvenlyDivisbleValues(inputRows) << std::endl;
+    std::cout << "First part: " << CurrentDay::checkSumDiffSmallestLargest(inputRows) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumEvenlyDivisbleValues(inputRows) << std::endl;
 }

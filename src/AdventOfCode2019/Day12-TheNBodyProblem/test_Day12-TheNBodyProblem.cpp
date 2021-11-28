@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2019::Day12;
 
 TEST_CLASS(Day12TheNBodyProblem)
 {
@@ -16,15 +16,15 @@ public:
     TEST_METHOD(totalEnergyAfterSteps_SimpleTests)
     {
 
-        Assert::AreEqual(179, AoC::totalEnergyAfterSteps(m_positions1, 10));
-        Assert::AreEqual(1940, AoC::totalEnergyAfterSteps(m_positions2, 100));
+        Assert::AreEqual(179, CurrentDay::totalEnergyAfterSteps(m_positions1, 10));
+        Assert::AreEqual(1940, CurrentDay::totalEnergyAfterSteps(m_positions2, 100));
     }
 
     TEST_METHOD(numStepsUntilRepetition_SimpleTests)
     {
 
-        Assert::AreEqual(2772ull, AoC::numStepsUntilRepetition(m_positions1));
-        Assert::AreEqual(4686774924ull, AoC::numStepsUntilRepetition(m_positions2));
+        Assert::AreEqual(2772ull, CurrentDay::numStepsUntilRepetition(m_positions1));
+        Assert::AreEqual(4686774924ull, CurrentDay::numStepsUntilRepetition(m_positions2));
     }
 
 private:

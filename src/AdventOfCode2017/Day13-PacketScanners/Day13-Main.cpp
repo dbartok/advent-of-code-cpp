@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2017::Day13;
 
     std::fstream fileIn("input.txt");
     std::vector<std::string> inputScannerRangeLines;
@@ -20,6 +20,6 @@ int main()
         inputScannerRangeLines.push_back(lineBuffer);
     }
 
-    std::cout << "First part: " << AoC::severityOfWholeTrip(inputScannerRangeLines) << std::endl;
-    std::cout << "Second part: " << AoC::smallestDelayNotToGetCaught(inputScannerRangeLines) << std::endl;
+    std::cout << "First part: " << CurrentDay::severityOfWholeTrip(inputScannerRangeLines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::smallestDelayNotToGetCaught(inputScannerRangeLines) << std::endl;
 }

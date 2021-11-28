@@ -13,7 +13,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2019::Day05;
 
     std::fstream fileIn("input.txt");
     const std::string intcodeProgramCommaSeparated
@@ -22,9 +22,9 @@ int main()
         (std::istreambuf_iterator<char>())
     };
 
-    std::vector<int> intcodeProgram;
-    AoC::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, intcodeProgram, ',');
+    std::vector<CurrentDay::IntcodeNumberType> intcodeProgram;
+    AdventOfCode::Utils::splitStringIntoTypedVector(intcodeProgramCommaSeparated, intcodeProgram, ',');
 
-    std::cout << "First part: " << AoC::diagnosticCodeProducedByProgram(intcodeProgram, 1) << std::endl;
-    std::cout << "Second part: " << AoC::diagnosticCodeProducedByProgram(intcodeProgram, 5) << std::endl;
+    std::cout << "First part: " << CurrentDay::diagnosticCodeProducedByProgram(intcodeProgram, 1) << std::endl;
+    std::cout << "Second part: " << CurrentDay::diagnosticCodeProducedByProgram(intcodeProgram, 5) << std::endl;
 }

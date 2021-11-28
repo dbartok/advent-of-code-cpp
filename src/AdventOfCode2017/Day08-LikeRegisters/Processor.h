@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day08
+{
 
 class Processor
 {
@@ -22,4 +26,6 @@ private:
     State m_state;
 };
 
+}
+}
 }

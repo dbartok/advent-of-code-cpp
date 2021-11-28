@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day05
+{
 
 IntcodeParameter::IntcodeParameter(IntcodeNumberType value, IntcodeParameterMode parameterMode)
     : m_value{value}
@@ -153,4 +157,6 @@ void EqualsIntcodeInstruction::execute(IntcodeProgamState& state) const
     m_param3.asLvalue(state) = (m_param1.asRvalue(state) == m_param2.asRvalue(state));
 }
 
+}
+}
 }

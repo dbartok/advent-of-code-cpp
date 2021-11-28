@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day20;
 
 TEST_CLASS(Day20JurassicJigsaw)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(cornerTileIDsMultiplied_SimpleTests)
     {
-        Assert::AreEqual(20899048083289ll, AoC::cornerTileIDsMultiplied(m_lines));
+        Assert::AreEqual(20899048083289ll, CurrentDay::cornerTileIDsMultiplied(m_lines));
     }
 
     TEST_METHOD(numWaterNotPartOfASeaMonster_SimpleTests)
     {
-        Assert::AreEqual(273, AoC::numWaterNotPartOfASeaMonster(m_lines));
+        Assert::AreEqual(273, CurrentDay::numWaterNotPartOfASeaMonster(m_lines));
     }
 
 private:

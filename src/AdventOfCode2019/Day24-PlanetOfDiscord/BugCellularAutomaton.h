@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day24
+{
 
 const size_t GRID_SIZE = 5;
 
@@ -83,4 +87,6 @@ private:
     static void addAllCoordsAtGivenLevel(std::vector<LeveledCoordinates>& destination, const std::vector<Coordinates>& source, int level);
 };
 
+}
+}
 }

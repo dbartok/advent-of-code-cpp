@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day20;
 
 TEST_CLASS(Day20ARegularMap)
 {
@@ -15,17 +15,17 @@ public:
 
     TEST_METHOD(distanceToFarthestRoom_SimpleTests)
     {
-        Assert::AreEqual(3u, AoC::distanceToFarthestRoom("^WNE$"));
-        Assert::AreEqual(10u, AoC::distanceToFarthestRoom("^ENWWW(NEEE|SSE(EE|N))$"));
-        Assert::AreEqual(18u, AoC::distanceToFarthestRoom("^ENNWSWW(NEWS|)SSSEEN(WNSE|)EE(SWEN|)NNN$"));
-        Assert::AreEqual(23u, AoC::distanceToFarthestRoom("^ESSWWN(E|NNENN(EESS(WNSE|)SSS|WWWSSSSE(SW|NNNE)))$"));
-        Assert::AreEqual(31u, AoC::distanceToFarthestRoom("^WSSEESWWWNW(S|NENNEEEENN(ESSSSW(NWSW|SSEN)|WSWWN(E|WWS(E|SS))))$"));
+        Assert::AreEqual(3u, CurrentDay::distanceToFarthestRoom("^WNE$"));
+        Assert::AreEqual(10u, CurrentDay::distanceToFarthestRoom("^ENWWW(NEEE|SSE(EE|N))$"));
+        Assert::AreEqual(18u, CurrentDay::distanceToFarthestRoom("^ENNWSWW(NEWS|)SSSEEN(WNSE|)EE(SWEN|)NNN$"));
+        Assert::AreEqual(23u, CurrentDay::distanceToFarthestRoom("^ESSWWN(E|NNENN(EESS(WNSE|)SSS|WWWSSSSE(SW|NNNE)))$"));
+        Assert::AreEqual(31u, CurrentDay::distanceToFarthestRoom("^WSSEESWWWNW(S|NENNEEEENN(ESSSSW(NWSW|SSEN)|WSWWN(E|WWS(E|SS))))$"));
     }
 
     TEST_METHOD(numRoomsWithLargeDistance_SimpleTests)
     {
-        Assert::AreEqual(2u, AoC::numRoomsWithLargeDistance("^WNE$", 2));
-        Assert::AreEqual(1u, AoC::numRoomsWithLargeDistance("^WNE$", 3));
+        Assert::AreEqual(2u, CurrentDay::numRoomsWithLargeDistance("^WNE$", 2));
+        Assert::AreEqual(1u, CurrentDay::numRoomsWithLargeDistance("^WNE$", 3));
     }
 
 };

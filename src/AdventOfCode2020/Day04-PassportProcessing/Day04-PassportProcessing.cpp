@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day04
+{
 
 using PassportData = std::unordered_map<std::string, std::string>;
 
@@ -254,4 +258,6 @@ int numValidPassportsStrict(const std::vector<std::string>& batchFileLines)
                          });
 }
 
+}
+}
 }

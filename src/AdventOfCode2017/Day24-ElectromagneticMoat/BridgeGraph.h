@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day24
+{
 
 class BridgeGraph
 {
@@ -61,4 +65,6 @@ private:
     void traverseForMaxCostWalk(NodeIDType currentNodeID, const VisitedEdgeSet& visitedEdgeSet, unsigned currentCost, unsigned& maxCost, const Walk& currentWalk, Walk& maxWalk) const;
 };
 
+}
+}
 }

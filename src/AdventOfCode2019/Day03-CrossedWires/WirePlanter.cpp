@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day03
+{
 
 WirePlanter::WirePlanter(std::vector<Wire> wires)
     : m_wires{std::move(wires)}
@@ -102,4 +106,6 @@ WirePlanter::Coordinates WirePlanter::getNeighborCoordinates(const WirePlanter::
     throw std::runtime_error("Unknown direction: " + std::to_string(static_cast<int>(direction)));
 }
 
+}
+}
 }

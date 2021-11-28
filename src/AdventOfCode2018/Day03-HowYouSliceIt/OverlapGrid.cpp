@@ -5,9 +5,14 @@
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <numeric>
 #include <algorithm>
+#include <stdexcept>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
+{
+namespace Year2018
+{
+namespace Day03
 {
 
 Rectangle::Rectangle(unsigned topLeftX, unsigned topLeftY, unsigned width, unsigned height) noexcept
@@ -77,4 +82,6 @@ unsigned OverlapGrid::getSingleNonOverlappingIndex() const
     throw std::runtime_error("No rectangle found without overlaps.");
 }
 
+}
+}
 }

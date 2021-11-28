@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day01
+{
 
 constexpr int getFuelRequirement(int moduleMass) noexcept
 {
@@ -44,4 +48,6 @@ int getSumOfFuelRequirementsIncludingFuelItself(const std::vector<int>& moduleMa
                            });
 }
 
+}
+}
 }

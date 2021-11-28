@@ -21,6 +21,10 @@ const int INITIAL_INPUT = 0;
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day07
+{
 
 enum class AmplifierLayout
 {
@@ -28,7 +32,7 @@ enum class AmplifierLayout
     FEEDBACK_LOOP,
 };
 
-int highestPossibleSignalSent(const std::vector<int>& intcodeProgram, AmplifierLayout layout, int firstPhase)
+int highestPossibleSignalSent(const std::vector<IntcodeNumberType>& intcodeProgram, AmplifierLayout layout, int firstPhase)
 {
     std::vector<int> phaseSettings(NUM_AMPLIFIERS);
     std::iota(phaseSettings.begin(), phaseSettings.end(), firstPhase);
@@ -58,14 +62,16 @@ int highestPossibleSignalSent(const std::vector<int>& intcodeProgram, AmplifierL
     return maxOutput;
 }
 
-int highestPossibleSignalSent(const std::vector<int>& intcodeProgram)
+int highestPossibleSignalSent(const std::vector<IntcodeNumberType>& intcodeProgram)
 {
     return highestPossibleSignalSent(intcodeProgram, AmplifierLayout::SERIAL, SERIAL_FIRST_PHASE);
 }
 
-int highestPossibleSignalSentWithAmplification(const std::vector<int>& intcodeProgram)
+int highestPossibleSignalSentWithAmplification(const std::vector<IntcodeNumberType>& intcodeProgram)
 {
     return highestPossibleSignalSent(intcodeProgram, AmplifierLayout::FEEDBACK_LOOP, FEEDBACK_LOOP_FIRST_PHASE);
 }
 
+}
+}
 }

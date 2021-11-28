@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day16
+{
 
 class DanceMove
 {
@@ -84,4 +88,6 @@ private:
     std::string m_name2;
 };
 
+}
+}
 }

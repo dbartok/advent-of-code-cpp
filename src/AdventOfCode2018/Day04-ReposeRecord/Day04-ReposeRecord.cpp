@@ -16,6 +16,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day04
+{
 
 const int SOME_VALID_YEAR_FOR_TIMESTAMP = 1970 - 1900;
 
@@ -70,9 +74,9 @@ std::vector<Event> parseEventsFromEventLines(const std::vector<std::string>& eve
     return events;
 }
 
-std::vector<std::vector<AdventOfCode::Event>> getEventsForEachDay(std::vector<AdventOfCode::Event> &events)
+std::vector<std::vector<Event>> getEventsForEachDay(std::vector<Event> &events)
 {
-    std::vector<std::vector<AdventOfCode::Event>> eventsForEachDay;
+    std::vector<std::vector<Event>> eventsForEachDay;
 
     std::vector<Event> eventsForADay;
     for (auto iter = events.begin(); iter != events.end(); ++iter)
@@ -179,4 +183,6 @@ unsigned guardMostFrequentlyMinuteSleptTimesMinute(const std::vector<std::string
     return mostFrequentlyMinuteSleptGuardID * mostSleptMinute;
 }
 
+}
+}
 }

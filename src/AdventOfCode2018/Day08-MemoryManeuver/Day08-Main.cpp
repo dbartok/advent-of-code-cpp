@@ -12,7 +12,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day08;
 
     std::fstream fileIn("t_input.txt");
 
@@ -20,8 +20,8 @@ int main()
     std::getline(fileIn, line);
 
     std::vector<unsigned> nodeNumbers;
-    AoC::Utils::splitStringIntoTypedVector(line, nodeNumbers, ' ');
+    AdventOfCode::Utils::splitStringIntoTypedVector(line, nodeNumbers, ' ');
 
-    std::cout << "First part: " << AoC::sumOfAllMetadataEntries(nodeNumbers) << std::endl;
-    std::cout << "Second part: " << AoC::valueOfRootNode(nodeNumbers) << std::endl;
+    std::cout << "First part: " << CurrentDay::sumOfAllMetadataEntries(nodeNumbers) << std::endl;
+    std::cout << "Second part: " << CurrentDay::valueOfRootNode(nodeNumbers) << std::endl;
 }

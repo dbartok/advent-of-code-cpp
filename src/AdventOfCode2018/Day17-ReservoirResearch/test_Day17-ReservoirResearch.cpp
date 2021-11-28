@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day17;
 
 TEST_CLASS(Day17ReservoirResearch)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(numTilesWaterCanReach_SimpleTests)
     {
-        Assert::AreEqual(57u, AoC::numTilesWaterCanReach(m_lines));
+        Assert::AreEqual(57u, CurrentDay::numTilesWaterCanReach(m_lines));
     }
 
     TEST_METHOD(numTilesWaterRetained_SimpleTests)
     {
-        Assert::AreEqual(29u, AoC::numTilesWaterRetained(m_lines));
+        Assert::AreEqual(29u, CurrentDay::numTilesWaterRetained(m_lines));
     }
 
 private:

@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day24
+{
 
 Layout createLayout(const std::vector<std::string>& layoutLines)
 {
@@ -50,4 +54,6 @@ unsigned numBugsAfterSimulationRecursiveGrid(const std::vector<std::string>& ini
     return automaton.getNumBugs();
 }
 
+}
+}
 }

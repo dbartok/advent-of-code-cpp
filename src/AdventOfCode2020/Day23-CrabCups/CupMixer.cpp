@@ -14,6 +14,10 @@ size_t NUM_CUPS_TO_PICK_UP = 3;
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day23
+{
 
 CupMixer::CupMixer(const std::vector<Cup>& initialCups)
     : m_cups{initialCups.cbegin(), initialCups.cend()}
@@ -115,4 +119,6 @@ void CupMixer::advanceCupIterCircularly(CupLinkedHashSet::const_iterator& cupIte
     cupIter = (std::next(cupIter) == m_cups.cend()) ? m_cups.cbegin() : std::next(cupIter);
 }
 
+}
+}
 }

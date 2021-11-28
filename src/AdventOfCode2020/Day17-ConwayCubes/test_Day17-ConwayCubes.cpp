@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2020::Day17;
 
 TEST_CLASS(Day17ConwayCubes)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(numCubesInActiveStateAfterBootCycle3D_SimpleTests)
     {
-        Assert::AreEqual(112, AoC::numCubesInActiveStateAfterBootCycle3D(m_lines));
+        Assert::AreEqual(112, CurrentDay::numCubesInActiveStateAfterBootCycle3D(m_lines));
     }
 
     TEST_METHOD(numCubesInActiveStateAfterBootCycle4D_SimpleTests)
     {
-        Assert::AreEqual(848, AoC::numCubesInActiveStateAfterBootCycle4D(m_lines));
+        Assert::AreEqual(848, CurrentDay::numCubesInActiveStateAfterBootCycle4D(m_lines));
     }
 
 private:

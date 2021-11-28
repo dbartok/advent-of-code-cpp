@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day18
+{
 
 class RegisterOrNumberArg
 {
@@ -226,4 +230,6 @@ public:
     bool increasesInstructionIndex() const noexcept override;
 };
 
+}
+}
 }

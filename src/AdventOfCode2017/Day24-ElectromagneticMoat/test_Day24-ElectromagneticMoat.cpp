@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day24;
 
 TEST_CLASS(Day24ElectromagneticMoat)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(strengthOfStrongestBridge_SimpleTests)
     {
-        Assert::AreEqual(31u, AoC::strengthOfStrongestBridge(m_componentLines));
+        Assert::AreEqual(31u, CurrentDay::strengthOfStrongestBridge(m_componentLines));
     }
 
     TEST_METHOD(strengthOfStrongestLongestBridge_SimpleTests)
     {
-        Assert::AreEqual(19u, AoC::strengthOfStrongestLongestBridge(m_componentLines));
+        Assert::AreEqual(19u, CurrentDay::strengthOfStrongestLongestBridge(m_componentLines));
     }
 
 private:

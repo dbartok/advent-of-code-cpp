@@ -18,6 +18,10 @@ int64_t SUBJECT_NUMBER_TO_DETERMINE_PUBLIC_KEY = 7;
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day25
+{
 
 int64_t applyTransformationStep(int64_t subjectNumber, int64_t value)
 {
@@ -55,4 +59,6 @@ int64_t encryptionKeyForHandshake(int64_t cardPublicKey, int64_t doorPublicKey)
     return encryptionKey;
 }
 
+}
+}
 }

@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day24
+{
 
 HexTileFlipper::HexTileFlipper(std::vector<std::string> tilePaths)
     : m_tilePaths{std::move(tilePaths)}
@@ -145,4 +149,6 @@ int HexTileFlipper::getNumAdjacentBlackTiles(const Vector2D& coordinates) const
                             });
 }
 
+}
+}
 }

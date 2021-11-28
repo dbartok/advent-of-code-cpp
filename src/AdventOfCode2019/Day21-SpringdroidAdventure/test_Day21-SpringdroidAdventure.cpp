@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2019::Day21;
 
 TEST_CLASS(Day21SpringdroidAdventure)
 {
@@ -15,8 +15,8 @@ public:
 
     TEST_METHOD(amountOfHullDamage_SimpleTests)
     {
-        AoC::IntcodeNumberType mem = 1000; // Some high memory address
-        Assert::AreEqual(10000ll, AoC::amountOfHullDamage(
+        CurrentDay::IntcodeNumberType mem = 1000; // Some high memory address
+        Assert::AreEqual(10000ll, CurrentDay::amountOfHullDamage(
             {
                 3, mem, 104, 10000, 99
             }));
@@ -24,8 +24,8 @@ public:
 
     TEST_METHOD(amountOfHullDamageExtendedSensors_SimpleTests)
     {
-        AoC::IntcodeNumberType mem = 1000; // Some high memory address
-        Assert::AreEqual(12345ll, AoC::amountOfHullDamageExtendedSensors(
+        CurrentDay::IntcodeNumberType mem = 1000; // Some high memory address
+        Assert::AreEqual(12345ll, CurrentDay::amountOfHullDamageExtendedSensors(
             {
                 3, mem, 104, 12345, 99
             }));

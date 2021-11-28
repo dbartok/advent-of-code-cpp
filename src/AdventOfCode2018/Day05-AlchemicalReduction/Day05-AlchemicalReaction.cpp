@@ -17,6 +17,10 @@ const int REDUCIBLE_DISTANCE = std::abs('A' - 'a');
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day05
+{
 
 bool isReducible(char a, char b)
 {
@@ -110,4 +114,6 @@ unsigned getOneUnitRemovedShortestReducedLength(const std::string& polymerString
     return oneUnitRemovedReducedPolymerString.length();
 }
 
+}
+}
 }

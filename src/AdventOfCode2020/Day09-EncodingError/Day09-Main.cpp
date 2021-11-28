@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2020::Day09;
 
     std::fstream fileIn("input.txt");
     std::vector<int64_t> numbers;
@@ -23,6 +23,6 @@ int main()
         numbers.push_back(entry);
     }
 
-    std::cout << "First part: " << AoC::firstInvalidNumber(numbers, 25) << std::endl;
-    std::cout << "Second part: " << AoC::encryptionWeakness(numbers, 25) << std::endl;
+    std::cout << "First part: " << CurrentDay::firstInvalidNumber(numbers, 25) << std::endl;
+    std::cout << "Second part: " << CurrentDay::encryptionWeakness(numbers, 25) << std::endl;
 }

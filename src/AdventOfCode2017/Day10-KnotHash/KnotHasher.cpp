@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day10
+{
 
 KnotHasher::KnotHasher(std::vector<unsigned char> bytesToHash, size_t listSize, size_t blockSize)
     : m_knotLengths{std::move(bytesToHash)}
@@ -132,4 +136,6 @@ std::string KnotHasher::bytesToStandardString(const std::vector<unsigned char>& 
     return denseHashStringStream.str();
 }
 
+}
+}
 }

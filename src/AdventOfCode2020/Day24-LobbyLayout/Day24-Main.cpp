@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2020::Day24;
 
     std::fstream fileIn("input.txt");
 
@@ -23,6 +23,6 @@ int main()
     }
 
 
-    std::cout << "First part: " << AoC::numTilesWithBlackSideUpInInitialState(lines) << std::endl;
-    std::cout << "Second part: " << AoC::numTilesWithBlackSideUpAfterMultipleDays(lines) << std::endl;
+    std::cout << "First part: " << CurrentDay::numTilesWithBlackSideUpInInitialState(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numTilesWithBlackSideUpAfterMultipleDays(lines) << std::endl;
 }

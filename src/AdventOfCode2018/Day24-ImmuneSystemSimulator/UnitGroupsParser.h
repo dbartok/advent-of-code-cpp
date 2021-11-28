@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day24
+{
 
 class UnitGroupsParser
 {
@@ -35,4 +39,6 @@ private:
     DamageTypes parseDamageTypes(const std::string& armyLine, const std::string& name);
 };
 
+}
+}
 }

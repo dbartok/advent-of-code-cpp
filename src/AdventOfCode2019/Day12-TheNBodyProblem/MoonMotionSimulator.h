@@ -10,6 +10,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day12
+{
 
 using Vector3D = Eigen::Matrix<int, 3, 1>;
 
@@ -52,4 +56,6 @@ private:
     static void pullCloser(int p1, int p2, int& v1, int& v2);
 };
 
+}
+}
 }

@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day14
+{
 
 struct QuantifiedChemical
 {
@@ -41,4 +45,6 @@ private:
     std::vector<QuantifiedChemical> calculateIngredients(const QuantifiedChemical& chemicalToProduce);
 };
 
+}
+}
 }

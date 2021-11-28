@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day22
+{
 
 CaveTraverser::CaveTraverser(CaveMap caveMap)
     : m_caveMap{std::move(caveMap)}
@@ -161,4 +165,6 @@ bool CaveTraverser::isEquipmentCompatibleWithRiskLevel(Equipment equipment, unsi
     }
 }
 
+}
+}
 }

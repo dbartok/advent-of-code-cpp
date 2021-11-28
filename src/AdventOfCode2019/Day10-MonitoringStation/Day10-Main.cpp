@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2019::Day10;
 
     std::fstream fileIn("input.txt");
 
@@ -20,9 +20,9 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::maxNumAsteroidsDetected(lines) << std::endl;
+    std::cout << "First part: " << CurrentDay::maxNumAsteroidsDetected(lines) << std::endl;
 
-    auto vaporizationOrder = AoC::vaporizationOrder(lines);
+    auto vaporizationOrder = CurrentDay::vaporizationOrder(lines);
     auto specialAsteroid = vaporizationOrder.at(199);
     std::cout << "Second part: " << specialAsteroid.first * 100 + specialAsteroid.second << std::endl;
 }

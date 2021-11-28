@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day18
+{
 
 unsigned totalResourceValueAfterShortTime(const std::vector<std::string>& lumberAreaLines);
 unsigned totalResourceValueAfterLongTime(const std::vector<std::string>& lumberAreaLines);
 
+}
+}
 }

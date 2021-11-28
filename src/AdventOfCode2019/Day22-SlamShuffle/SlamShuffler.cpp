@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2019
+{
+namespace Day22
+{
 
 SlamShuffler::SlamShuffler(std::vector<ShuffleInstruction> instructions, BigNumber deckSize, BigNumber numIterations)
     : m_instructions{std::move(instructions)}
@@ -81,4 +85,6 @@ BigNumber SlamShuffler::executeInReverse(const ShuffleInstruction& instruction, 
     }
 }
 
+}
+}
 }

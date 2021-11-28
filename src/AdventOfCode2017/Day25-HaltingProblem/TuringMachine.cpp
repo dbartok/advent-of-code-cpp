@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day25
+{
 
 TuringMachine::TuringMachine(TransitionMap stateIDToTransition, StateIDType startingStateID, unsigned numIterations)
     : m_stateIDToTransition{std::move(stateIDToTransition)}
@@ -31,4 +35,6 @@ unsigned TuringMachine::getChecksum() const noexcept
     return m_state.tapeTrueSet.size();
 }
 
+}
+}
 }

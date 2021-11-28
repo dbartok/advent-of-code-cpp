@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day16
+{
 
 int ticketScanningErrorRate(const std::vector<std::string>& noteLines);
 int64_t departureValuesMultiplied(const std::vector<std::string>& noteLines);
 
+}
+}
 }

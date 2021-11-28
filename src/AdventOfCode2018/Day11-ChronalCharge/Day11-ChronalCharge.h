@@ -14,8 +14,14 @@ namespace
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day11
+{
 
 std::string highestPowerSmallSquareCoordinates(int gridSerialNumber);
 std::string highestPowerSquareCoordinatesAndSize(int gridSerialNumber, size_t maxSize = GRID_SIZE);
 
+}
+}
 }

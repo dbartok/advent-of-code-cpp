@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day14;
 
 TEST_CLASS(Day14DiskDefragmentation)
 {
@@ -15,12 +15,12 @@ public:
 
     TEST_METHOD(numSquaresUsed_SimpleTests)
     {
-        Assert::AreEqual(8108u, AoC::numSquaresUsed(m_keyString));
+        Assert::AreEqual(8108u, CurrentDay::numSquaresUsed(m_keyString));
     }
 
     TEST_METHOD(numRegionsOfAdjcacentSquares_SimpleTests)
     {
-        Assert::AreEqual(1242u, AoC::numRegionsOfAdjcacentSquares(m_keyString));
+        Assert::AreEqual(1242u, CurrentDay::numRegionsOfAdjcacentSquares(m_keyString));
     }
 
 private:

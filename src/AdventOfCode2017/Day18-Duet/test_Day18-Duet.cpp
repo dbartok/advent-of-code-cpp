@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day18;
 
 TEST_CLASS(Day18Duet)
 {
@@ -29,7 +29,7 @@ public:
             "jgz a -2"
         };
 
-        Assert::AreEqual(4ll, AoC::valueOfFirstRecoveredFrequency(instructionStrings));
+        Assert::AreEqual(4ll, CurrentDay::valueOfFirstRecoveredFrequency(instructionStrings));
     }
 
     TEST_METHOD(numTimesProgram1Sent_SimpleTests)
@@ -45,7 +45,7 @@ public:
             "rcv d"
         };
 
-        Assert::AreEqual(3u, AoC::numTimesProgram1Sent(instructionStrings));
+        Assert::AreEqual(3u, CurrentDay::numTimesProgram1Sent(instructionStrings));
     }
 
 };

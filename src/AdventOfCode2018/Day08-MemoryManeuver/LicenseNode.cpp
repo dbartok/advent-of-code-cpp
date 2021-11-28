@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day08
+{
 
 LicenseNode::LicenseNode(unsigned expectedChildCount, unsigned expectedMetadataCount) noexcept
     : m_expectedChildCount{expectedChildCount}
@@ -66,4 +70,6 @@ void LicenseNode::addMetadatum(Metadatum metadatum)
     m_metadata.push_back(std::move(metadatum));
 }
 
+}
+}
 }

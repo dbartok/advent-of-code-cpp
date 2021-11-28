@@ -7,6 +7,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day22
+{
 
 CaveMap::CaveMap(unsigned depth, Coordinates targetCoordinates)
     : m_depth{depth}
@@ -89,4 +93,6 @@ unsigned CaveMap::calculateErosionLevelAt(const Coordinates& coordinates)
     return (geologicalIndex + m_depth) % 20183;
 }
 
+}
+}
 }

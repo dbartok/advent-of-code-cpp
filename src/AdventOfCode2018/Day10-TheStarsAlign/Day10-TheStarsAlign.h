@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day10
+{
 
 std::string serializedMessageWhenAligned(const std::vector<std::string>& starlightLines);
 unsigned timeTakenUntilAligned(const std::vector<std::string>& starlightLines);
 
+}
+}
 }

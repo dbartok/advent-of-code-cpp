@@ -10,13 +10,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2018::Day20;
 
     std::fstream fileIn("input.txt");
 
     std::string roomLayoutRegex;
     fileIn >> roomLayoutRegex;
 
-    std::cout << "First part: " << AoC::distanceToFarthestRoom(roomLayoutRegex) << std::endl;
-    std::cout << "Second part: " << AoC::numRoomsWithLargeDistance(roomLayoutRegex) << std::endl;
+    std::cout << "First part: " << CurrentDay::distanceToFarthestRoom(roomLayoutRegex) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numRoomsWithLargeDistance(roomLayoutRegex) << std::endl;
 }

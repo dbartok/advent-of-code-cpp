@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day23
+{
 
 // --- Original assembly code from the puzzle ---
 // set b 93
@@ -233,4 +237,6 @@ unsigned optimizedFinalValueOfH() noexcept
     return numComposites;
 }
 
+}
+}
 }

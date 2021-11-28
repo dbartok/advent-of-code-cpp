@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace
 {
 
-using AdventOfCode::Vector2D;
+using AdventOfCode::Year2020::Day03::Vector2D;
 
 const Vector2D STANDARD_SLOPE{3, 1};
 const std::array<Vector2D, 5> ALL_SLOPES{STANDARD_SLOPE, Vector2D{1, 1}, Vector2D{5, 1}, Vector2D{7, 1}, Vector2D{1, 2}};
@@ -19,6 +19,10 @@ const std::array<Vector2D, 5> ALL_SLOPES{STANDARD_SLOPE, Vector2D{1, 1}, Vector2
 }
 
 namespace AdventOfCode
+{
+namespace Year2020
+{
+namespace Day03
 {
 
 int64_t numTreesEncounteredSingleSlope(const std::vector<std::string>& gridLines)
@@ -41,4 +45,6 @@ int64_t numTreesEncounteredMultipleSlopes(const std::vector<std::string>& gridLi
     return productOfNumTreesOnAllSlopes;
 }
 
+}
+}
 }

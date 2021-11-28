@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day13
+{
 
 using MineMapLine = std::vector<RailPieceSharedPtr>;
 using MineMap = std::vector<MineMapLine>;
@@ -104,4 +108,6 @@ void MineManager::reorientMineCart(MineCart& mineCart)
     railPiece->applyOrientation(mineCart);
 }
 
+}
+}
 }

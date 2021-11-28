@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2019::Day06;
 
 TEST_CLASS(Day06UniversalOrbitMap)
 {
@@ -30,7 +30,7 @@ public:
             "K)L"
         };
 
-        Assert::AreEqual(42u, AoC::totalNumberOfDirectAndIndirectOrbits(lines));
+        Assert::AreEqual(42u, CurrentDay::totalNumberOfDirectAndIndirectOrbits(lines));
     }
 
     TEST_METHOD(minimumNumberOfOrbitalTransfers_SimpleTests)
@@ -52,7 +52,7 @@ public:
             "I)SAN"
         };
 
-        Assert::AreEqual(4u, AoC::minimumNumberOfOrbitalTransfers(lines));
+        Assert::AreEqual(4u, CurrentDay::minimumNumberOfOrbitalTransfers(lines));
     }
 
 };

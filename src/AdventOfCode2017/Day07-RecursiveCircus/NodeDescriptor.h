@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day07
+{
 
 struct NodeDescriptor
 {
@@ -21,4 +25,6 @@ struct NodeDescriptor
     static NodeDescriptor fromString(const std::string& nodeDescriptorString);
 };
 
+}
+}
 }

@@ -9,6 +9,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day10
+{
 
 class KnotHasher
 {
@@ -46,4 +50,6 @@ private:
     static std::string bytesToStandardString(const std::vector<unsigned char>& bytes);
 };
 
+}
+}
 }

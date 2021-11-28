@@ -8,6 +8,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day03
+{
 
 template <class T>
 class InfiniteGrid
@@ -67,4 +71,6 @@ void InfiniteGrid<T>::setValue(int x, int y, T value)
     }
 }
 
+}
+}
 }

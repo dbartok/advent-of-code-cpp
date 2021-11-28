@@ -11,6 +11,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2017
+{
+namespace Day18
+{
 
 class AssemblyProgramParser
 {
@@ -68,4 +72,6 @@ protected:
     AssemblyInstruction::SharedPtr createCustomInstruction(const std::string& instructionName, const std::vector<std::string>& args) const noexcept override;
 };
 
+}
+}
 }

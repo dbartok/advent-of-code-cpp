@@ -12,6 +12,10 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day22
+{
 
 CaveMap parseCaveMap(const std::vector<std::string>& depthAndTargetLines)
 {
@@ -43,4 +47,6 @@ unsigned fewestMinutesToTarget(const std::vector<std::string>& depthAndTargetLin
     return caveTraverser.getLowestCostToTarget();
 }
 
+}
+}
 }

@@ -11,8 +11,12 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day23
+{
 
-using Cup = unsigned;
+using Cup = size_t;
 
 struct list {};
 struct hash {};
@@ -56,4 +60,6 @@ private:
     void advanceCupIterCircularly(CupLinkedHashSet::const_iterator& cupIter) const;
 };
 
+}
+}
 }

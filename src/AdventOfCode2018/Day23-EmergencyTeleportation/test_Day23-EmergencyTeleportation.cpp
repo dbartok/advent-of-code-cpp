@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2018::Day23;
 
 TEST_CLASS(Day23EmergencyTeleportation)
 {
@@ -28,7 +28,7 @@ public:
             "pos=<1,3,1>, r=1"
         };
 
-        Assert::AreEqual(7u, AoC::numNanobotsInStrongestRange(lines));
+        Assert::AreEqual(7u, CurrentDay::numNanobotsInStrongestRange(lines));
     }
 
     TEST_METHOD(lowestDistanceFromOriginWithMostNanobots_SimpleTests)
@@ -43,7 +43,7 @@ public:
             "pos=<10,10,10>, r=5"
         };
 
-        Assert::AreEqual(36, AoC::lowestDistanceFromOriginWithMostNanobots(lines));
+        Assert::AreEqual(36, CurrentDay::lowestDistanceFromOriginWithMostNanobots(lines));
     }
 
 };

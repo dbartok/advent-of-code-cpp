@@ -11,7 +11,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2020::Day11;
 
     std::fstream fileIn("input.txt");
 
@@ -22,6 +22,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << AoC::numOccupiedSeatsWithAdjacencyRules(lines) << std::endl;
-    std::cout << "Second part: " << AoC::numOccupiedSeatsWithVisibilityRules(lines) << std::endl;
+    std::cout << "First part: " << CurrentDay::numOccupiedSeatsWithAdjacencyRules(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numOccupiedSeatsWithVisibilityRules(lines) << std::endl;
 }

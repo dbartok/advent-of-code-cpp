@@ -9,7 +9,13 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2018
+{
+namespace Day25
+{
 
 unsigned numConstellationsFormed(const std::vector<std::string>& pointsLines);
 
+}
+}
 }

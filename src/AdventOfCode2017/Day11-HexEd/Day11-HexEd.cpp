@@ -5,9 +5,14 @@
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <algorithm>
 #include <cassert>
+#include <stdexcept>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
+{
+namespace Year2017
+{
+namespace Day11
 {
 // Coordinates are defined as following:
 //
@@ -117,4 +122,6 @@ int maxNumStepsFromStart(const std::vector<std::string>& path)
     return maxDistance;
 }
 
+}
+}
 }

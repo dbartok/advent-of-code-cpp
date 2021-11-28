@@ -16,6 +16,10 @@ const size_t LARGE_N = 30'000'000;
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day15
+{
 
 int nthNumberSpoken(const std::vector<int>& startingNumbers, size_t N)
 {
@@ -57,4 +61,6 @@ int nthNumberSpokenLargeN(const std::vector<int>& startingNumbers)
     return nthNumberSpoken(startingNumbers, LARGE_N);
 }
 
+}
+}
 }

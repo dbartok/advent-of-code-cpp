@@ -9,7 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 int main()
 {
-    namespace AoC = AdventOfCode;
+    namespace CurrentDay = AdventOfCode::Year2019::Day22;
 
     std::fstream fileIn("input.txt");
 
@@ -20,7 +20,7 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    auto cards = AoC::cardsAfterShuffle(lines, 10007);
+    auto cards = CurrentDay::cardsAfterShuffle(lines, 10007);
     std::cout << "First part: " << (std::find(cards.cbegin(), cards.cend(), 2019) - cards.cbegin()) << std::endl;
-    std::cout << "Second part: " << AoC::cardAtPositionAfterMultipleShuffles(lines, 119315717514047, 101741582076661, 2020) << std::endl;
+    std::cout << "Second part: " << CurrentDay::cardAtPositionAfterMultipleShuffles(lines, 119315717514047, 101741582076661, 2020) << std::endl;
 }

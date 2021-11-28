@@ -9,8 +9,14 @@ __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
 {
+namespace Year2020
+{
+namespace Day18
+{
 
 int64_t sumOfResultingValuesWithoutPrecedence(const std::vector<std::string>& expressionLines);
 int64_t sumOfResultingValuesWithPrecedence(const std::vector<std::string>& expressionLines);
 
+}
+}
 }

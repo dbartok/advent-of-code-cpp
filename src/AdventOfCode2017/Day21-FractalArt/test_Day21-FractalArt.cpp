@@ -7,7 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 __END_LIBRARIES_DISABLE_WARNINGS
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace AoC = AdventOfCode;
+namespace CurrentDay = AdventOfCode::Year2017::Day21;
 
 TEST_CLASS(Day21FractalArt)
 {
@@ -15,13 +15,13 @@ public:
 
     TEST_METHOD(numPixelsOnSmallIterations_SimpleTests)
     {
-        Assert::AreEqual(4u, AoC::numPixelsOnSmallIterations(m_enhancementRuleLines, 1));
+        Assert::AreEqual(4u, CurrentDay::numPixelsOnSmallIterations(m_enhancementRuleLines, 1));
     }
 
 
     TEST_METHOD(numPixelsOnLargeIterations_SimpleTests)
     {
-        Assert::AreEqual(12u, AoC::numPixelsOnLargeIterations(m_enhancementRuleLines, 2));
+        Assert::AreEqual(12u, CurrentDay::numPixelsOnLargeIterations(m_enhancementRuleLines, 2));
     }
 
 private:

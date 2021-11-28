@@ -3,9 +3,14 @@
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include <stdexcept>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
+{
+namespace Year2018
+{
+namespace Day13
 {
 
 void DeterministicOrientingRailPiece::applyOrientation(MineCart& mineCart)
@@ -54,4 +59,6 @@ void IntersectionRailPiece::applyOrientation(MineCart& mineCart)
     mineCart.turnToNextOrientation();
 }
 
+}
+}
 }
