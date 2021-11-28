@@ -6,6 +6,9 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <unordered_map>
 __END_LIBRARIES_DISABLE_WARNINGS
 
+namespace AdventOfCode
+{
+
 class State
 {
 public:
@@ -24,3 +27,5 @@ private:
     RegisterValueToNameMap m_registerValueToNameMap;
     int m_globalMaxValueOfRegisters = std::numeric_limits<int>::min();
 };
+
+}
