@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29519.87
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdventOfCodeCommon", "AdventOfCodeCommon\AdventOfCodeCommon.vcxproj", "{CACB5746-DED5-4746-82AA-8AA8F76CEC06}"
 EndProject
@@ -212,6 +212,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day24-LobbyLayout", "AdventOfCode2020\Day24-LobbyLayout\Day24-LobbyLayout.vcxproj", "{9208A4B4-DD20-41A9-AFEC-56F2EB109D1B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day25-ComboBreaker", "AdventOfCode2020\Day25-ComboBreaker\Day25-ComboBreaker.vcxproj", "{7B84EA7D-67B8-4458-B354-19D877633403}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AdventOfCode2021", "AdventOfCode2021", "{4E50D8EF-4119-449A-B2EE-F4FB2E86BCF1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day01-SonarSweep", "AdventOfCode2021\Day01-SonarSweep\Day01-SonarSweep.vcxproj", "{F8351FED-E7D4-447C-9350-DE3F38D65E9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1435,6 +1439,18 @@ Global
 		{7B84EA7D-67B8-4458-B354-19D877633403}.Test|x64.Build.0 = Test|x64
 		{7B84EA7D-67B8-4458-B354-19D877633403}.Test|x86.ActiveCfg = Test|Win32
 		{7B84EA7D-67B8-4458-B354-19D877633403}.Test|x86.Build.0 = Test|Win32
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A}.Debug|x64.ActiveCfg = Debug|x64
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A}.Debug|x64.Build.0 = Debug|x64
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A}.Debug|x86.ActiveCfg = Debug|Win32
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A}.Debug|x86.Build.0 = Debug|Win32
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A}.Release|x64.ActiveCfg = Release|x64
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A}.Release|x64.Build.0 = Release|x64
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A}.Release|x86.ActiveCfg = Release|Win32
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A}.Release|x86.Build.0 = Release|Win32
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A}.Test|x64.ActiveCfg = Test|x64
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A}.Test|x64.Build.0 = Test|x64
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A}.Test|x86.ActiveCfg = Test|Win32
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A}.Test|x86.Build.0 = Test|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1540,6 +1556,7 @@ Global
 		{0EB4A0DA-2334-47E6-85A3-932F8B8CF45D} = {6DAE5DA2-0AC0-47F7-8DC1-D128585A8EA1}
 		{9208A4B4-DD20-41A9-AFEC-56F2EB109D1B} = {6DAE5DA2-0AC0-47F7-8DC1-D128585A8EA1}
 		{7B84EA7D-67B8-4458-B354-19D877633403} = {6DAE5DA2-0AC0-47F7-8DC1-D128585A8EA1}
+		{F8351FED-E7D4-447C-9350-DE3F38D65E9A} = {4E50D8EF-4119-449A-B2EE-F4FB2E86BCF1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C73BC1FB-06D6-478E-B2D0-DE1E761743D4}
