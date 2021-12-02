@@ -15,6 +15,14 @@ public:
 
     TEST_METHOD(numDepthMeasurementIncreases_SimpleTests)
     {
-        Assert::AreEqual(7u, CurrentDay::numDepthMeasurementIncreases({199, 200, 208, 210, 200, 207, 240, 269, 260, 263}));
+        Assert::AreEqual(7u, CurrentDay::numDepthMeasurementIncreases(m_depthMeasurements));
     }
+
+    TEST_METHOD(numDepthMeasurementIncreasesWithRollingWindow_SimpleTests)
+    {
+        Assert::AreEqual(5u, CurrentDay::numDepthMeasurementIncreasesWithRollingWindow(m_depthMeasurements));
+    }
+
+private:
+    std::vector<unsigned> m_depthMeasurements{199, 200, 208, 210, 200, 207, 240, 269, 260, 263};
 };
