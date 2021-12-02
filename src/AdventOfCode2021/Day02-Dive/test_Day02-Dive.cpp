@@ -15,17 +15,22 @@ public:
 
     TEST_METHOD(finalHorizontalPositionAndDepthMultiplied_SimpleTests)
     {
-        const std::vector<std::string> instructions =
-        {
-            "forward 5",
-            "down 5",
-            "forward 8",
-            "up 3",
-            "down 8",
-            "forward 2"
-        };
-
         Assert::AreEqual(150, CurrentDay::finalHorizontalPositionAndDepthMultiplied(instructions));
     }
 
+    TEST_METHOD(finalHorizontalPositionAndDepthMultipliedWithAdjustedCourse_SimpleTests)
+    {
+        Assert::AreEqual(900, CurrentDay::finalHorizontalPositionAndDepthMultipliedWithAdjustedCourse(instructions));
+    }
+
+private:
+    const std::vector<std::string> instructions =
+    {
+        "forward 5",
+        "down 5",
+        "forward 8",
+        "up 3",
+        "down 8",
+        "forward 2"
+    };
 };

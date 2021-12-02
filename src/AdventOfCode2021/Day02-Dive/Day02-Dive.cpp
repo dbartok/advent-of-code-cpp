@@ -48,12 +48,33 @@ public:
         return m_horizontalPosition * m_depth;
     }
 
-private:
-    std::vector<Instruction> m_instructions;
+    virtual ~Submarine()
+    {
+
+    }
+
+protected:
     int m_horizontalPosition = 0;
     int m_depth = 0;
 
-    void executeInstruction(const Instruction& instruction)
+    virtual void executeInstruction(const Instruction& instruction) = 0;
+
+private:
+    std::vector<Instruction> m_instructions;
+};
+
+class SimpleCourseSubmarine : public Submarine
+{
+public:
+    using Submarine::Submarine;
+
+    virtual ~SimpleCourseSubmarine()
+    {
+
+    }
+
+protected:
+    void executeInstruction(const Instruction& instruction) override
     {
         if (instruction.direction == Direction::UP)
         {
@@ -72,6 +93,42 @@ private:
             throw std::runtime_error("Invalid direction: " + std::to_string(static_cast<int>(instruction.direction)));
         }
     }
+};
+
+class AdjustedCourseSubmarine : public Submarine
+{
+public:
+    using Submarine::Submarine;
+
+    virtual ~AdjustedCourseSubmarine()
+    {
+
+    }
+
+protected:
+    void executeInstruction(const Instruction& instruction) override
+    {
+        if (instruction.direction == Direction::UP)
+        {
+            m_aim -= instruction.length;
+        }
+        else if (instruction.direction == Direction::DOWN)
+        {
+            m_aim += instruction.length;
+        }
+        else if (instruction.direction == Direction::FORWARD)
+        {
+            m_horizontalPosition += instruction.length;
+            m_depth += m_aim * instruction.length;
+        }
+        else
+        {
+            throw std::runtime_error("Invalid direction: " + std::to_string(static_cast<int>(instruction.direction)));
+        }
+    }
+
+private:
+    int m_aim = 0;
 };
 
 Direction parseDirection(const std::string& directionString)
@@ -121,7 +178,15 @@ std::vector<Instruction> parseInstructions(std::vector<std::string> instructionL
 int finalHorizontalPositionAndDepthMultiplied(const std::vector<std::string>& instructionLines)
 {
     std::vector<Instruction> instructions = parseInstructions(instructionLines);
-    Submarine submarine{instructions};
+    SimpleCourseSubmarine submarine{instructions};
+    submarine.moveToFinalPosition();
+    return submarine.getHorizontalPositionAndDepthMultiplied();
+}
+
+int finalHorizontalPositionAndDepthMultipliedWithAdjustedCourse(const std::vector<std::string>& instructionLines)
+{
+    std::vector<Instruction> instructions = parseInstructions(instructionLines);
+    AdjustedCourseSubmarine submarine{instructions};
     submarine.moveToFinalPosition();
     return submarine.getHorizontalPositionAndDepthMultiplied();
 }

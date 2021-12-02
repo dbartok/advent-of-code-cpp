@@ -15,6 +15,7 @@ namespace Day02
 {
 
 int finalHorizontalPositionAndDepthMultiplied(const std::vector<std::string>& instructionLines);
+int finalHorizontalPositionAndDepthMultipliedWithAdjustedCourse(const std::vector<std::string>& instructionLines);
 
 }
 }

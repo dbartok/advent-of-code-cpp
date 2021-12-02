@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::finalHorizontalPositionAndDepthMultiplied(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::finalHorizontalPositionAndDepthMultipliedWithAdjustedCourse(lines) << std::endl;
 }
