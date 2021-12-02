@@ -1,5 +1,7 @@
 #include "Day02-Dive.h"
 
+#include "Submarine.h"
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
@@ -12,124 +14,6 @@ namespace Year2021
 {
 namespace Day02
 {
-
-enum class Direction
-{
-    UP,
-    DOWN,
-    FORWARD,
-};
-
-struct Instruction
-{
-    Direction direction;
-    int length;
-};
-
-class Submarine
-{
-public:
-    Submarine(std::vector<Instruction> instructions)
-        : m_instructions(std::move(instructions))
-    {
-
-    }
-
-    void moveToFinalPosition()
-    {
-        for (const auto& instruction : m_instructions)
-        {
-            executeInstruction(instruction);
-        }
-    }
-
-    int getHorizontalPositionAndDepthMultiplied() const
-    {
-        return m_horizontalPosition * m_depth;
-    }
-
-    virtual ~Submarine()
-    {
-
-    }
-
-protected:
-    int m_horizontalPosition = 0;
-    int m_depth = 0;
-
-    virtual void executeInstruction(const Instruction& instruction) = 0;
-
-private:
-    std::vector<Instruction> m_instructions;
-};
-
-class SimpleCourseSubmarine : public Submarine
-{
-public:
-    using Submarine::Submarine;
-
-    virtual ~SimpleCourseSubmarine()
-    {
-
-    }
-
-protected:
-    void executeInstruction(const Instruction& instruction) override
-    {
-        if (instruction.direction == Direction::UP)
-        {
-            m_depth -= instruction.length;
-        }
-        else if (instruction.direction == Direction::DOWN)
-        {
-            m_depth += instruction.length;
-        }
-        else if (instruction.direction == Direction::FORWARD)
-        {
-            m_horizontalPosition += instruction.length;
-        }
-        else
-        {
-            throw std::runtime_error("Invalid direction: " + std::to_string(static_cast<int>(instruction.direction)));
-        }
-    }
-};
-
-class AdjustedCourseSubmarine : public Submarine
-{
-public:
-    using Submarine::Submarine;
-
-    virtual ~AdjustedCourseSubmarine()
-    {
-
-    }
-
-protected:
-    void executeInstruction(const Instruction& instruction) override
-    {
-        if (instruction.direction == Direction::UP)
-        {
-            m_aim -= instruction.length;
-        }
-        else if (instruction.direction == Direction::DOWN)
-        {
-            m_aim += instruction.length;
-        }
-        else if (instruction.direction == Direction::FORWARD)
-        {
-            m_horizontalPosition += instruction.length;
-            m_depth += m_aim * instruction.length;
-        }
-        else
-        {
-            throw std::runtime_error("Invalid direction: " + std::to_string(static_cast<int>(instruction.direction)));
-        }
-    }
-
-private:
-    int m_aim = 0;
-};
 
 Direction parseDirection(const std::string& directionString)
 {
