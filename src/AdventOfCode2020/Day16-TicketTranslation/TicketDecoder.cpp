@@ -6,6 +6,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <numeric>
 #include <algorithm>
 #include <cassert>
+#include <iterator>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
