@@ -15,6 +15,7 @@ namespace Day03
 {
 
 int submarinePowerConsumption(const std::vector<std::string>& diagnosticReportLines);
+int lifeSupportRating(const std::vector<std::string>& diagnosticReportLines);
 
 }
 }

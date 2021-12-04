@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::submarinePowerConsumption(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::lifeSupportRating(lines) << std::endl;
 }
