@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::winningBoardFinalScore(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::lastToWinBoardFinalScore(lines) << std::endl;
 }

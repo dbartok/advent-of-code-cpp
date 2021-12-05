@@ -15,6 +15,7 @@ namespace Day04
 {
 
 int winningBoardFinalScore(const std::vector<std::string>& bingoSubsystemInputLines);
+int lastToWinBoardFinalScore(const std::vector<std::string>& bingoSubsystemInputLines);
 
 }
 }

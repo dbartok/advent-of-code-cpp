@@ -32,11 +32,25 @@ public:
     void markNumber(int number)
     {
         m_markedNumbers.push_back(number);
+        if (!m_hasWon)
+        {
+            m_hasWon = isAnyRowCompleted() || isAnyColumnCompleted();
+            m_hasJustWon = m_hasWon;
+        }
+        else
+        {
+            m_hasJustWon = false;
+        }
     }
 
     bool hasWon() const
     {
-        return isAnyRowCompleted() || isAnyColumnCompleted();
+        return m_hasWon;
+    }
+
+    bool hasJustWon() const
+    {
+        return m_hasJustWon;
     }
 
     int getScore() const
@@ -60,6 +74,9 @@ public:
 private:
     NumberTable m_numberTable;
     std::vector<int> m_markedNumbers;
+
+    bool m_hasWon = false;
+    bool m_hasJustWon = false;
 
     bool isAnyRowCompleted() const
     {
@@ -144,14 +161,33 @@ public:
         throw std::runtime_error("No winning board");
     }
 
-    int getWinningBoardScore() const
+    void playUntilLastWinner()
     {
-        const auto winningBoardIter = std::find_if(m_boards.cbegin(), m_boards.cend(), [](const auto& board)
-                                                {
-                                                    return board.hasWon();
-                                                });
+        for (auto number : m_numbersDrawn)
+        {
+            processNumberDrawn(number);
+            if (haveAllBoardsWon())
+            {
+                return;
+            }
+        }
 
-        return winningBoardIter->getScore();
+        throw std::runtime_error("Not all boards have won");
+    }
+
+    int getLatestToWinBoardScore() const
+    {
+        const auto lastToWinBoardIter = std::find_if(m_boards.cbegin(), m_boards.cend(), [](const auto& board)
+                                                   {
+                                                       return board.hasJustWon();
+                                                   });
+
+        if (lastToWinBoardIter == m_boards.cend())
+        {
+            throw std::runtime_error("No boards have just won");
+        }
+
+        return lastToWinBoardIter->getScore();
     }
 
 private:
@@ -163,12 +199,24 @@ private:
         for (auto& board : m_boards)
         {
             board.markNumber(number);
+            if (board.hasWon())
+            {
+
+            }
         }
     }
 
     bool hasAnyBoardWon() const
     {
         return std::any_of(m_boards.cbegin(), m_boards.cend(), [](const auto& board)
+                           {
+                               return board.hasWon();
+                           });
+    }
+
+    bool haveAllBoardsWon() const
+    {
+        return std::all_of(m_boards.cbegin(), m_boards.cend(), [](const auto& board)
                            {
                                return board.hasWon();
                            });
@@ -222,7 +270,14 @@ int winningBoardFinalScore(const std::vector<std::string>& bingoSubsystemInputLi
 {
     BingoSubsystem bingoSubsystem = parseBingoSubsystemInputLines(bingoSubsystemInputLines);
     bingoSubsystem.playUntilFirstWinner();
-    return bingoSubsystem.getWinningBoardScore();
+    return bingoSubsystem.getLatestToWinBoardScore();
+}
+
+int lastToWinBoardFinalScore(const std::vector<std::string>& bingoSubsystemInputLines)
+{
+    BingoSubsystem bingoSubsystem = parseBingoSubsystemInputLines(bingoSubsystemInputLines);
+    bingoSubsystem.playUntilLastWinner();
+    return bingoSubsystem.getLatestToWinBoardScore();
 }
 
 }
