@@ -45,6 +45,15 @@ public:
         Assert::AreEqual(expectedStrings, resultStrings);
     }
 
+    TEST_METHOD(splitStringIntoTypedVector_EmptyTokensAreIgnored)
+    {
+        std::string inputInts{"  1  2      3 "};
+        std::vector<int> resultInts;
+        std::vector<int> expectedInts{1, 2, 3};
+        AdventOfCode::Utils::splitStringIntoTypedVector(inputInts, resultInts);
+        Assert::AreEqual(expectedInts, resultInts);
+    }
+
     TEST_METHOD(allElementsEqual_RangeIsEqual_ReturnTrue)
     {
         std::string emptyString{""};

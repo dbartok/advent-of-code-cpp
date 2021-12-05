@@ -22,6 +22,11 @@ void splitStringIntoTypedVector(const std::string& inputString, std::vector<T>& 
     T element;
     while (std::getline(inputStringStream, token, delimiter))
     {
+        if (token.empty())
+        {
+            continue;
+        }
+
         std::istringstream conversionStringStream(token);
         conversionStringStream >> element;
 
