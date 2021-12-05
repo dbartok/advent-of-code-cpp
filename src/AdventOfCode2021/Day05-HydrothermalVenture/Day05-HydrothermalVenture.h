@@ -15,6 +15,7 @@ namespace Day05
 {
 
 int numPointsWhereHorizontalOrVerticalLinesOverlap(const std::vector<std::string>& ventLines);
+int numPointsWhereLinesOverlap(const std::vector<std::string>& ventLines);
 
 }
 }

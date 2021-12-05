@@ -76,14 +76,11 @@ public:
 
     }
 
-    void analyzeOverlapsForAxisParallelLines()
+    void analyzeOverlaps()
     {
         for (const auto& ventLineSegment : m_ventLineSegments)
         {
-            if (ventLineSegment.isAxisParallel())
-            {
-                markCoveredPoints(ventLineSegment);
-            }
+            markCoveredPoints(ventLineSegment);
         }
     }
 
@@ -146,8 +143,22 @@ std::vector<LineSegment> parseVentLines(const std::vector<std::string>& ventLine
 int numPointsWhereHorizontalOrVerticalLinesOverlap(const std::vector<std::string>& ventLines)
 {
     std::vector<LineSegment> ventLineSegments = parseVentLines(ventLines);
+    std::vector<LineSegment> axisParallelVentLineSegments;
+    std::copy_if(ventLineSegments.cbegin(), ventLineSegments.cend(), std::back_inserter(axisParallelVentLineSegments), [](const auto& lineSegment)
+                 {
+                     return lineSegment.isAxisParallel();
+                 });
+
+    HydrothermalVentAnalyzer hydrothermalVentAnalyzer{axisParallelVentLineSegments};
+    hydrothermalVentAnalyzer.analyzeOverlaps();
+    return hydrothermalVentAnalyzer.getNumPointsWithOverlap();
+}
+
+int numPointsWhereLinesOverlap(const std::vector<std::string>& ventLines)
+{
+    std::vector<LineSegment> ventLineSegments = parseVentLines(ventLines);
     HydrothermalVentAnalyzer hydrothermalVentAnalyzer{ventLineSegments};
-    hydrothermalVentAnalyzer.analyzeOverlapsForAxisParallelLines();
+    hydrothermalVentAnalyzer.analyzeOverlaps();
     return hydrothermalVentAnalyzer.getNumPointsWithOverlap();
 }
 

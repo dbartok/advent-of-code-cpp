@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numPointsWhereHorizontalOrVerticalLinesOverlap(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numPointsWhereLinesOverlap(lines) << std::endl;
 }
