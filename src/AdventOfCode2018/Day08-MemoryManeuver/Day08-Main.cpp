@@ -14,7 +14,7 @@ int main()
 {
     namespace CurrentDay = AdventOfCode::Year2018::Day08;
 
-    std::fstream fileIn("t_input.txt");
+    std::fstream fileIn("input.txt");
 
     std::string line;
     std::getline(fileIn, line);
