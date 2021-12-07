@@ -20,9 +20,15 @@
     <ClCompile Include="Day06-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LanterfishSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day06-Lanternfish.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LanterfishSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
