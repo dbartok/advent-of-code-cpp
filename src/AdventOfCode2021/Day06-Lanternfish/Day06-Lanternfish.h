@@ -13,7 +13,8 @@ namespace Year2021
 namespace Day06
 {
 
-unsigned numLanternfishAfterMultipleDays(const std::vector<int>& initialState);
+uint64_t numLanternfishAfterSmallNumberOfDays(const std::vector<int>& initialState);
+uint64_t numLanternfishAfterLargeNumberOfDays(const std::vector<int>& initialState);
 
 }
 }

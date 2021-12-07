@@ -13,9 +13,17 @@ TEST_CLASS(Day06Lanternfish)
 {
 public:
 
-    TEST_METHOD(numLanternfishAfterMultipleDays_SimpleTests)
+    TEST_METHOD(numLanternfishAfterSmallNumberOfDays_SimpleTests)
     {
-        Assert::AreEqual(5934u, CurrentDay::numLanternfishAfterMultipleDays({3, 4, 3, 1, 2}));
+        Assert::AreEqual(5934ull, CurrentDay::numLanternfishAfterSmallNumberOfDays(m_initialState));
     }
+
+    TEST_METHOD(numLanternfishAfterLargeNumberOfDays_SimpleTests)
+    {
+        Assert::AreEqual(26984457539ull, CurrentDay::numLanternfishAfterLargeNumberOfDays(m_initialState));
+    }
+
+public:
+    const std::vector<int> m_initialState = {3, 4, 3, 1, 2};
 
 };

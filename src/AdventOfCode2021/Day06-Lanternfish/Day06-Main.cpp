@@ -22,5 +22,6 @@ int main()
     std::vector<int> initialState;
     AdventOfCode::Utils::splitStringIntoTypedVector(initialStateString, initialState, ',');
 
-    std::cout << "First part: " << CurrentDay::numLanternfishAfterMultipleDays(initialState) << std::endl;
+    std::cout << "First part: " << CurrentDay::numLanternfishAfterSmallNumberOfDays(initialState) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numLanternfishAfterLargeNumberOfDays(initialState) << std::endl;
 }
