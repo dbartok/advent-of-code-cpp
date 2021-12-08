@@ -22,6 +22,11 @@ int getMiddleValue(std::vector<int> vec)
     return vec.at(middleElementIndex);
 }
 
+double getAverage(const std::vector<int>& vec)
+{
+    return std::accumulate(vec.cbegin(), vec.cend(), 0.0) / vec.size();
+}
+
 std::vector<int> getDistancesFromValue(std::vector<int> vec, int valueToMeasureFrom)
 {
     std::transform(vec.begin(), vec.end(), vec.begin(), [valueToMeasureFrom](const auto& elem)
@@ -31,29 +36,38 @@ std::vector<int> getDistancesFromValue(std::vector<int> vec, int valueToMeasureF
     return vec;
 }
 
+int getAlignmentFuelCostWithNoIncrease(const std::vector<int>& horizontalPositions, int alignmentPosition)
+{
+    const std::vector<int> distancesFromAlignmentPosition = getDistancesFromValue(horizontalPositions, alignmentPosition);
+    return std::accumulate(distancesFromAlignmentPosition.cbegin(), distancesFromAlignmentPosition.cend(), 0);
+}
+
+int getAlignmentFuelCostWithLinearIncrease(const std::vector<int>& horizontalPositions, int alignmentPosition)
+{
+    const std::vector<int> distancesFromAlignmentPosition = getDistancesFromValue(horizontalPositions, alignmentPosition);
+    return std::accumulate(distancesFromAlignmentPosition.cbegin(), distancesFromAlignmentPosition.cend(), 0, [](const auto& acc, const auto& elem)
+                           {
+                               return acc + elem * (elem + 1) / 2;
+                           });
+}
+
 int leastAmountOfFuelSpentToAlign(const std::vector<int>& horizontalPositions)
 {
     const int middleValue = getMiddleValue(horizontalPositions);
-    const std::vector<int> distancesFromMiddleValue = getDistancesFromValue(horizontalPositions, middleValue);
-    return std::accumulate(distancesFromMiddleValue.cbegin(), distancesFromMiddleValue.cend(), 0);
+    return getAlignmentFuelCostWithNoIncrease(horizontalPositions, middleValue);
 }
 
 int leastAmountOfFuelSpentToAlignWithIncreasingCosts(const std::vector<int>& horizontalPositions)
 {
-    const auto bounds = std::minmax_element(horizontalPositions.cbegin(), horizontalPositions.cend());
+    const double average = getAverage(horizontalPositions);
 
-    std::vector<int> possibleFuelCosts;
-    for (int alignmentPosition = *bounds.first; alignmentPosition <= *bounds.second; ++alignmentPosition)
-    {
-        const std::vector<int> distancesFromAlignmentPosition = getDistancesFromValue(horizontalPositions, alignmentPosition);
-        const int fuelCost = std::accumulate(distancesFromAlignmentPosition.cbegin(), distancesFromAlignmentPosition.cend(), 0, [](const auto& acc, const auto& elem)
-                                             {
-                                                 return acc + elem * (elem + 1) / 2;
-                                             });
-        possibleFuelCosts.push_back(fuelCost);
-    }
+    const int alignmentPositionCandidateOne = std::floor(average);
+    const int alignmentPositionCandidateTwo = std::ceil(average);
 
-    return *std::min_element(possibleFuelCosts.cbegin(), possibleFuelCosts.cend());
+    const int possibleFuelCostOne = getAlignmentFuelCostWithLinearIncrease(horizontalPositions, alignmentPositionCandidateOne);
+    const int possibleFuelCostTwo = getAlignmentFuelCostWithLinearIncrease(horizontalPositions, alignmentPositionCandidateTwo);
+
+    return std::min(possibleFuelCostOne, possibleFuelCostTwo);
 }
 
 }
