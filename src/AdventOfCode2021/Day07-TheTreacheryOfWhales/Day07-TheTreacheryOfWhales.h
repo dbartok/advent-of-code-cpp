@@ -14,6 +14,7 @@ namespace Day07
 {
 
 int leastAmountOfFuelSpentToAlign(const std::vector<int>& horizontalPositions);
+int leastAmountOfFuelSpentToAlignWithIncreasingCosts(const std::vector<int>& horizontalPositions);
 
 }
 }

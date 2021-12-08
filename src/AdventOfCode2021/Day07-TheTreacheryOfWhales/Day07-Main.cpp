@@ -24,4 +24,5 @@ int main()
     AdventOfCode::Utils::splitStringIntoTypedVector(horizontalPositionsString, horizontalPositions, ',');
 
     std::cout << "First part: " << CurrentDay::leastAmountOfFuelSpentToAlign(horizontalPositions) << std::endl;
+    std::cout << "Second part: " << CurrentDay::leastAmountOfFuelSpentToAlignWithIncreasingCosts(horizontalPositions) << std::endl;
 }

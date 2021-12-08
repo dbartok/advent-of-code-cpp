@@ -15,7 +15,14 @@ public:
 
     TEST_METHOD(leastAmountOfFuelSpentToAlign_SimpleTests)
     {
-        Assert::AreEqual(37, CurrentDay::leastAmountOfFuelSpentToAlign({16, 1, 2, 0, 4, 2, 7, 1, 2, 14}));
+        Assert::AreEqual(37, CurrentDay::leastAmountOfFuelSpentToAlign(m_horizontalPositions));
     }
 
+    TEST_METHOD(leastAmountOfFuelSpentToAlignWithIncreasingCosts_SimpleTests)
+    {
+        Assert::AreEqual(168, CurrentDay::leastAmountOfFuelSpentToAlignWithIncreasingCosts(m_horizontalPositions));
+    }
+
+private:
+    std::vector<int> m_horizontalPositions = {16, 1, 2, 0, 4, 2, 7, 1, 2, 14};
 };
