@@ -20,9 +20,15 @@
     <ClCompile Include="Day08-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SignalDecoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day08-SevenSegmentSearch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SignalDecoder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
