@@ -15,6 +15,7 @@ namespace Day08
 {
 
 unsigned numEasyDigitsInOutput(const std::vector<std::string>& signalDecodingEntryLines);
+int sumOfDecodedOutputValues(const std::vector<std::string>& signalDecodingEntryLines);
 
 }
 }

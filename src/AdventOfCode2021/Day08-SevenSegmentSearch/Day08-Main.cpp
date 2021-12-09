@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numEasyDigitsInOutput(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumOfDecodedOutputValues(lines) << std::endl;
 }
