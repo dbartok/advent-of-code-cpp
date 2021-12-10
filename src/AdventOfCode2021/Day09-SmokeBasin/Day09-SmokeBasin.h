@@ -15,6 +15,7 @@ namespace Day09
 {
 
 int sumOfRiskLevelsOfAllLowPoints(const std::vector<std::string>& heightmapLines);
+int multipleOfThreeLargestBasinSizes(const std::vector<std::string>& heightmapLines);
 
 }
 }

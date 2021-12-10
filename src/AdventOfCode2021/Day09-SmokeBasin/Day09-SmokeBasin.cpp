@@ -6,7 +6,17 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <algorithm>
 #include <iterator>
 #include <numeric>
+#include <unordered_set>
+
+#include <boost/functional/hash.hpp>
 __END_LIBRARIES_DISABLE_WARNINGS
+
+namespace
+{
+
+const int MAX_HEIGHT = 9;
+
+}
 
 namespace AdventOfCode
 {
@@ -19,6 +29,7 @@ using HeightmapRow = std::vector<int>;
 using Heightmap = std::vector<HeightmapRow>;
 
 using Coordinates = std::pair<int, int>;
+using CoordinatesSet = std::unordered_set<Coordinates, boost::hash<Coordinates>>;
 
 class HeightmapAnalyzer
 {
@@ -39,6 +50,13 @@ public:
                                {
                                    return acc + this->getHeightAt(point) + 1;
                                });
+    }
+
+    int getMultipleOfThreeLargestBasinSizes() const
+    {
+        std::vector<int> basinSizes = getBasinSizes();
+        std::sort(basinSizes.begin(), basinSizes.end(), std::greater<int>());
+        return basinSizes.at(0) * basinSizes.at(1) * basinSizes.at(2);
     }
 
 private:
@@ -109,6 +127,51 @@ private:
     {
         return coordinates.first >= 0 && coordinates.first < m_width&& coordinates.second >= 0 && coordinates.second < m_height;
     }
+
+    std::vector<int> getBasinSizes() const
+    {
+        const std::vector<Coordinates> allLowPointCoordinates = getAllLowPointCoordinates();
+
+        std::vector<int> basinSizes;
+
+        for (const auto& lowPointCoordinates : allLowPointCoordinates)
+        {
+            const int basinSize = getBasinSizeAt(lowPointCoordinates);
+            basinSizes.push_back(basinSize);
+        }
+
+        return basinSizes;
+    }
+
+    int getBasinSizeAt(const Coordinates& startCoordinates) const
+    {
+        CoordinatesSet visitedCoordinates;
+        return getBasinSizeAtRecursive(startCoordinates, visitedCoordinates);
+    }
+
+    int getBasinSizeAtRecursive(const Coordinates& startCoordinates, CoordinatesSet& visitedCoordinates) const
+    {
+        const auto insertResult = visitedCoordinates.insert(startCoordinates);
+        if(!insertResult.second)
+        {
+            return 0;
+        }
+
+        const std::vector<Coordinates> allAdjacentLocationCoordinates = getAllAdjacentLocationCoordinates(startCoordinates);
+
+        int basinSizeStartingFromAdjacentLocations = 0;
+        for (const auto& adjacentLocationCoordinates : allAdjacentLocationCoordinates)
+        {
+            const int adjacentLocationHeight = getHeightAt(adjacentLocationCoordinates);
+            if (adjacentLocationHeight >= getHeightAt(startCoordinates) && adjacentLocationHeight != MAX_HEIGHT)
+            {
+                basinSizeStartingFromAdjacentLocations += getBasinSizeAtRecursive(adjacentLocationCoordinates, visitedCoordinates);
+            }
+        }
+
+        return basinSizeStartingFromAdjacentLocations + 1;
+
+    }
 };
 
 HeightmapRow parseHeightmapLine(const std::string& heightmapLine)
@@ -132,7 +195,7 @@ Heightmap parseHeightmapLines(const std::vector<std::string>& heightmapLines)
         HeightmapRow heightmapRow = parseHeightmapLine(line);
         heightmap.push_back(std::move(heightmapRow));
     }
-    
+
     return heightmap;
 }
 
@@ -141,6 +204,13 @@ int sumOfRiskLevelsOfAllLowPoints(const std::vector<std::string>& heightmapLines
     Heightmap heightmap = parseHeightmapLines(heightmapLines);
     HeightmapAnalyzer heightmapAnalyzer{std::move(heightmap)};
     return heightmapAnalyzer.getSumOfRiskLevelsOfAllLowPoints();
+}
+
+int multipleOfThreeLargestBasinSizes(const std::vector<std::string>& heightmapLines)
+{
+    Heightmap heightmap = parseHeightmapLines(heightmapLines);
+    HeightmapAnalyzer heightmapAnalyzer{std::move(heightmap)};
+    return heightmapAnalyzer.getMultipleOfThreeLargestBasinSizes();
 }
 
 }

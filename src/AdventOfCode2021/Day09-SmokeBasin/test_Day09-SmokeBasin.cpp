@@ -15,16 +15,21 @@ public:
 
     TEST_METHOD(sumOfRiskLevelsOfAllLowPoints_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "2199943210",
-            "3987894921",
-            "9856789892",
-            "8767896789",
-            "9899965678"
-        };
-
-        Assert::AreEqual(15, CurrentDay::sumOfRiskLevelsOfAllLowPoints(lines));
+        Assert::AreEqual(15, CurrentDay::sumOfRiskLevelsOfAllLowPoints(m_lines));
     }
 
+    TEST_METHOD(multipleOfThreeLargestBasinSizes_SimpleTests)
+    {
+        Assert::AreEqual(1134, CurrentDay::multipleOfThreeLargestBasinSizes(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "2199943210",
+        "3987894921",
+        "9856789892",
+        "8767896789",
+        "9899965678"
+    };
 };

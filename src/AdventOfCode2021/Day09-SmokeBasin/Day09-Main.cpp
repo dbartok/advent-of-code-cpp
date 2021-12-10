@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::sumOfRiskLevelsOfAllLowPoints(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::multipleOfThreeLargestBasinSizes(lines) << std::endl;
 }
