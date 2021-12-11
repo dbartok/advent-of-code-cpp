@@ -15,22 +15,27 @@ public:
 
     TEST_METHOD(totalSyntaxErrorScore_SimpleTests)
     {
-        const std::vector<std::string> lines =
-
-        {
-            "[({(<(())[]>[[{[]{<()<>>",
-            "[(()[<>])]({[<{<<[]>>(",
-            "{([(<{}[<>[]}>{[]{[(<()>",
-            "(((({<>}<{<{<>}{[]{[]{}",
-            "[[<[([]))<([[{}[[()]]]",
-            "[{[{({}]{}}([{[{{{}}([]",
-            "{<[[]]>}<{[{[{[]{()[[[]",
-            "[<(<(<(<{}))><([]([]()",
-            "<{([([[(<>()){}]>(<<{{",
-            "<{([{{}}[<[[[<>{}]]]>[]]"
-        };
-
-        Assert::AreEqual(26397, CurrentDay::totalSyntaxErrorScore(lines));
+        Assert::AreEqual(26397, CurrentDay::totalSyntaxErrorScore(m_lines));
     }
+
+    TEST_METHOD(middleAutocompleteScore_SimpleTests)
+    {
+        Assert::AreEqual(288957ll, CurrentDay::middleAutocompleteScore(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "[({(<(())[]>[[{[]{<()<>>",
+        "[(()[<>])]({[<{<<[]>>(",
+        "{([(<{}[<>[]}>{[]{[(<()>",
+        "(((({<>}<{<{<>}{[]{[]{}",
+        "[[<[([]))<([[{}[[()]]]",
+        "[{[{({}]{}}([{[{{{}}([]",
+        "{<[[]]>}<{[{[{[]{()[[[]",
+        "[<(<(<(<{}))><([]([]()",
+        "<{([([[(<>()){}]>(<<{{",
+        "<{([{{}}[<[[[<>{}]]]>[]]"
+    };
 
 };
