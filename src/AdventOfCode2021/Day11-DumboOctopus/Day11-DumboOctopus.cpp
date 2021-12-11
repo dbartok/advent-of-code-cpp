@@ -50,9 +50,32 @@ public:
         }
     }
 
+    void simulateUntilSynchronizedFlash()
+    {
+        unsigned allPreviousStepsNumFlashes = 0;
+
+        while (true)
+        {
+            simulateDay();
+
+            const unsigned currentStepNumFlashes = m_numTotalFlashes - allPreviousStepsNumFlashes;
+            if (currentStepNumFlashes == m_height * m_width)
+            {
+                break;
+            }
+
+            allPreviousStepsNumFlashes += currentStepNumFlashes;
+         }
+    }
+
     unsigned getNumTotalFlashes()
     {
         return m_numTotalFlashes;
+    }
+
+    unsigned getNumStepsElapsed()
+    {
+        return m_numStepsElapsed;
     }
 
 private:
@@ -62,9 +85,12 @@ private:
     const size_t m_height;
 
     unsigned m_numTotalFlashes = 0;
+    unsigned m_numStepsElapsed = 0;
 
     void simulateDay()
     {
+        ++m_numStepsElapsed;
+
         for (size_t j = 0; j < m_height; ++j)
         {
             for (size_t i = 0; i < m_width; ++i)
@@ -174,6 +200,14 @@ unsigned numTotalFlashes(const std::vector<std::string>& initialEnergyLevelLines
     OctopusGridSimulator octopusGridSimulator{std::move(initialEnergyLevelGrid)};
     octopusGridSimulator.simulate(NUM_STEPS);
     return octopusGridSimulator.getNumTotalFlashes();
+}
+
+unsigned numStepsUntilSynchonizedFlash(const std::vector<std::string>& initialEnergyLevelLines)
+{
+    EnergyLevelGrid initialEnergyLevelGrid = parseEnergyLevelLines(initialEnergyLevelLines);
+    OctopusGridSimulator octopusGridSimulator{std::move(initialEnergyLevelGrid)};
+    octopusGridSimulator.simulateUntilSynchronizedFlash();
+    return octopusGridSimulator.getNumStepsElapsed();
 }
 
 }

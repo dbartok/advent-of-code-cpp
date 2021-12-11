@@ -15,6 +15,7 @@ namespace Day11
 {
 
 unsigned numTotalFlashes(const std::vector<std::string>& initialEnergyLevelLines);
+unsigned numStepsUntilSynchonizedFlash(const std::vector<std::string>& initialEnergyLevelLines);
 
 }
 }
