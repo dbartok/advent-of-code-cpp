@@ -14,8 +14,8 @@ namespace Year2021
 namespace Day10
 {
 
-int totalSyntaxErrorScore(const std::vector<std::string>& navigationSubsystemSyntaxLines);
-int64_t middleAutocompleteScore(const std::vector<std::string>& navigationSubsystemSyntaxLines);
+int totalSyntaxErrorScore(const std::vector<std::string>& syntaxLines);
+int64_t middleAutocompleteScore(const std::vector<std::string>& syntaxLines);
 
 }
 }
