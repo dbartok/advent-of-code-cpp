@@ -20,9 +20,15 @@
     <ClCompile Include="Day11-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OctopusGridSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day11-DumboOctopus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OctopusGridSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
