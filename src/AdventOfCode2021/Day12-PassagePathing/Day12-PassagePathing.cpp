@@ -75,27 +75,97 @@ public:
         return m_numPathsFromStartToEnd;
     }
 
-private:
-    std::unordered_map<Cave, Caves> m_caveConnectedCaves;
+protected:
+    virtual bool canVisitLowercaseCave(const std::vector<Cave>& pathSoFar, const Cave& cave) = 0;
 
-    unsigned m_numPathsFromStartToEnd = 0;
-
-    static bool canVisitCave(const std::vector<Cave>& pathSoFar, const Cave& cave)
-    {
-        if (canVisitCaveAnyNumberOfTimes(cave))
-        {
-            return true;
-        }
-
-        return std::find(pathSoFar.cbegin(), pathSoFar.cend(), cave) == pathSoFar.cend();
-    }
-
-    static bool canVisitCaveAnyNumberOfTimes(const Cave& cave)
+    static bool isUppercaseCave(const Cave& cave)
     {
         return std::all_of(cave.cbegin(), cave.cend(), [](const auto& c)
                            {
                                return std::isupper(c);
                            });
+    }
+
+private:
+    std::unordered_map<Cave, Caves> m_caveConnectedCaves;
+
+    unsigned m_numPathsFromStartToEnd = 0;
+
+    bool canVisitCave(const std::vector<Cave>& pathSoFar, const Cave& cave)
+    {
+        if (isUppercaseCave(cave))
+        {
+            return true;
+        }
+
+        else
+        {
+            return canVisitLowercaseCave(pathSoFar, cave);
+        }
+    }
+};
+
+class CaveTraverserWithSingleVisitationLimitLowercase : public CaveTraverser
+{
+public:
+    using CaveTraverser::CaveTraverser;
+
+protected:
+    bool canVisitLowercaseCave(const std::vector<Cave>& pathSoFar, const Cave& cave) override
+    {
+        return std::find(pathSoFar.cbegin(), pathSoFar.cend(), cave) == pathSoFar.cend();
+    }
+};
+
+class CaveTraverserWithDoubleVisitationLimitForOneLowercase : public CaveTraverser
+{
+public:
+    using CaveTraverser::CaveTraverser;
+
+protected:
+    bool canVisitLowercaseCave(const std::vector<Cave>& pathSoFar, const Cave& cave) override
+    {
+        if (cave == START_CAVE || cave == END_CAVE)
+        {
+            return false;
+        }
+
+        std::unordered_map<Cave, int> caveToNumOccurencesInPath = getLowerCaseCaveToNumOccurencesInPath(pathSoFar);
+        const auto caveToNumOccurrencesIter = caveToNumOccurencesInPath.find(cave);
+        const int caveCountInPath = caveToNumOccurrencesIter != caveToNumOccurencesInPath.cend() ? caveToNumOccurrencesIter->second : 0;
+
+        if (caveCountInPath == 0)
+        {
+            return true;
+        }
+        else if (caveCountInPath == 1)
+        {
+            const unsigned numLowercaseCavesDuplicatedAlreadyInPath = std::count_if(caveToNumOccurencesInPath.cbegin(), caveToNumOccurencesInPath.cend(), [](const auto& elem)
+                                                                                    {
+                                                                                        return elem.second == 2;
+                                                                                    });
+            return numLowercaseCavesDuplicatedAlreadyInPath == 0;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+private:
+    static std::unordered_map<Cave, int> getLowerCaseCaveToNumOccurencesInPath(const std::vector<Cave>& pathSoFar)
+    {
+        std::unordered_map<Cave, int> caveToNumOccurencesInPath;
+
+        for (const auto& cave : pathSoFar)
+        {
+            if (!isUppercaseCave(cave))
+            {
+                ++caveToNumOccurencesInPath[cave];
+            }
+        }
+
+        return caveToNumOccurencesInPath;
     }
 };
 
@@ -123,7 +193,15 @@ std::vector<CaveConnection> parseCaveConnectionLines(const std::vector<std::stri
 unsigned numPathsWithSmallCavesVisitedAtMostOnce(const std::vector<std::string>& caveConnectionLines)
 {
     std::vector<CaveConnection> caveConnections = parseCaveConnectionLines(caveConnectionLines);
-    CaveTraverser caveTraverser{std::move(caveConnections)};
+    CaveTraverserWithSingleVisitationLimitLowercase caveTraverser{std::move(caveConnections)};
+    caveTraverser.traverse();
+    return caveTraverser.getNumPathsFromStartToEnd();
+}
+
+unsigned numPathsWithSmallCavesVisitedAtMostTwice(const std::vector<std::string>& caveConnectionLines)
+{
+    std::vector<CaveConnection> caveConnections = parseCaveConnectionLines(caveConnectionLines);
+    CaveTraverserWithDoubleVisitationLimitForOneLowercase caveTraverser{std::move(caveConnections)};
     caveTraverser.traverse();
     return caveTraverser.getNumPathsFromStartToEnd();
 }

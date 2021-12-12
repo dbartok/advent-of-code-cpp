@@ -15,6 +15,7 @@ namespace Day12
 {
 
 unsigned numPathsWithSmallCavesVisitedAtMostOnce(const std::vector<std::string>& caveConnectionLines);
+unsigned numPathsWithSmallCavesVisitedAtMostTwice(const std::vector<std::string>& caveConnectionLines);
 
 }
 }

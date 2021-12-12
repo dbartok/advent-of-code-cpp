@@ -24,4 +24,5 @@ int main()
 
 
     std::cout << "First part: " << CurrentDay::numPathsWithSmallCavesVisitedAtMostOnce(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numPathsWithSmallCavesVisitedAtMostTwice(lines) << std::endl;
 }
