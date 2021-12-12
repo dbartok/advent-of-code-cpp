@@ -20,9 +20,15 @@
     <ClCompile Include="Day12-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CaveTraverser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day12-PassagePathing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CaveTraverser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
