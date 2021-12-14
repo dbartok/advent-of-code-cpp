@@ -11,6 +11,14 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <unordered_set>
 __END_LIBRARIES_DISABLE_WARNINGS
 
+namespace
+{
+
+const char FILLED_CHAR = '#';
+const char UNFILLED_CHAR = '.';
+
+}
+
 namespace AdventOfCode
 {
 namespace Year2021
@@ -35,6 +43,12 @@ using FoldInstructions = std::vector<FoldInstruction>;
 using Coordinates = std::pair<int, int>;
 using CoordinatesSet = std::unordered_set<Coordinates, boost::hash<Coordinates>>;
 
+struct BoundingBox
+{
+    Coordinates offset;
+    Coordinates size;
+};
+
 using TextSection = std::vector<std::string>;
 
 class TransparentPaperFolder
@@ -58,6 +72,57 @@ public:
         {
             foldRightHalfLeft(currentInstruction.position);
         }
+    }
+
+    void foldCompletely()
+    {
+        while (m_instructionIndex < m_foldInstructions.size())
+        {
+            foldOnce();
+        }
+    }
+
+    std::string getSerializedMessage() const
+    {
+        const BoundingBox boundingBox = getBoundingBox();
+
+        const int width = boundingBox.size.first;
+        const int height = boundingBox.size.second;
+
+        std::vector<std::string> serializedLines(height, std::string(width, UNFILLED_CHAR));
+
+        for (const auto& dotCoordinates : m_dotCoordinatesSet)
+        {
+            Coordinates offsetDotCoordinates{dotCoordinates.first - boundingBox.offset.first, dotCoordinates.second - boundingBox.offset.second};
+
+            const int xPos = offsetDotCoordinates.first;
+            const int yPos = offsetDotCoordinates.second;
+
+            serializedLines.at(yPos).at(xPos) = FILLED_CHAR;
+        }
+
+        return boost::algorithm::join(serializedLines, "\n");
+    }
+
+    BoundingBox getBoundingBox() const
+    {
+        const auto minmaxPositionXIter = std::minmax_element(m_dotCoordinatesSet.cbegin(), m_dotCoordinatesSet.cend(), [](const auto& lhs, const auto& rhs)
+                                                             {
+                                                                 return lhs.first < rhs.first;
+                                                             });
+
+        const int xMin = minmaxPositionXIter.first->first;
+        const int xMax = minmaxPositionXIter.second->first;
+
+        const auto minmaxPositionYIter = std::minmax_element(m_dotCoordinatesSet.cbegin(), m_dotCoordinatesSet.cend(), [](const auto& lhs, const auto& rhs)
+                                                             {
+                                                                 return lhs.second < rhs.second;
+                                                             });
+
+        const int yMin = minmaxPositionYIter.first->second;
+        const int yMax = minmaxPositionYIter.second->second;
+
+        return BoundingBox{{xMin, yMin}, {xMax - xMin + 1, yMax - yMin + 1}};
     }
 
     unsigned getNumVisibleDots() const
@@ -174,6 +239,13 @@ unsigned numVisibleDotsAfterFirstFold(const std::vector<std::string>& instructio
     TransparentPaperFolder transparentPaperFolder = parseInstructionManualLines(instructionManualLines);
     transparentPaperFolder.foldOnce();
     return transparentPaperFolder.getNumVisibleDots();
+}
+
+std::string thermalCameraActivationCode(const std::vector<std::string>& instructionManualLines)
+{
+    TransparentPaperFolder transparentPaperFolder = parseInstructionManualLines(instructionManualLines);
+    transparentPaperFolder.foldCompletely();
+    return transparentPaperFolder.getSerializedMessage();
 }
 
 }

@@ -15,6 +15,7 @@ namespace Day13
 {
 
 unsigned numVisibleDotsAfterFirstFold(const std::vector<std::string>& instructionManualLines);
+std::string thermalCameraActivationCode(const std::vector<std::string>& instructionManualLines);
 
 }
 }

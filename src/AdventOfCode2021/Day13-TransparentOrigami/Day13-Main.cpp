@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numVisibleDotsAfterFirstFold(lines) << std::endl;
+    std::cout << "Second part:\n" << CurrentDay::thermalCameraActivationCode(lines) << std::endl;
 }
