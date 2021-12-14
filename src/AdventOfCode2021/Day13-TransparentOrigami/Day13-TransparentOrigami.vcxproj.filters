@@ -20,9 +20,15 @@
     <ClCompile Include="Day13-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TransparentPaperFolder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day13-TransparentOrigami.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TransparentPaperFolder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
