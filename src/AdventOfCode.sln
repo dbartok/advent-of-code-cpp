@@ -241,6 +241,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day12-PassagePathing", "Adv
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day13-TransparentOrigami", "AdventOfCode2021\Day13-TransparentOrigami\Day13-TransparentOrigami.vcxproj", "{A5EC6083-EE1A-458A-A7AA-EF1A14D09947}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day14-ExtendedPolymerization", "AdventOfCode2021\Day14-ExtendedPolymerization\Day14-ExtendedPolymerization.vcxproj", "{6A1F6FD4-A021-408C-9A80-946A408A7C4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1619,6 +1621,18 @@ Global
 		{A5EC6083-EE1A-458A-A7AA-EF1A14D09947}.Test|x64.Build.0 = Test|x64
 		{A5EC6083-EE1A-458A-A7AA-EF1A14D09947}.Test|x86.ActiveCfg = Test|Win32
 		{A5EC6083-EE1A-458A-A7AA-EF1A14D09947}.Test|x86.Build.0 = Test|Win32
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A}.Debug|x64.ActiveCfg = Debug|x64
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A}.Debug|x64.Build.0 = Debug|x64
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A}.Debug|x86.ActiveCfg = Debug|Win32
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A}.Debug|x86.Build.0 = Debug|Win32
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A}.Release|x64.ActiveCfg = Release|x64
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A}.Release|x64.Build.0 = Release|x64
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A}.Release|x86.ActiveCfg = Release|Win32
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A}.Release|x86.Build.0 = Release|Win32
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A}.Test|x64.ActiveCfg = Test|x64
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A}.Test|x64.Build.0 = Test|x64
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A}.Test|x86.ActiveCfg = Test|Win32
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A}.Test|x86.Build.0 = Test|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1737,6 +1751,7 @@ Global
 		{1804B05B-9363-483C-A88A-8CCCBB1D5268} = {4E50D8EF-4119-449A-B2EE-F4FB2E86BCF1}
 		{8EDEE0A4-EBAD-431E-B14D-8CEC79A9EB55} = {4E50D8EF-4119-449A-B2EE-F4FB2E86BCF1}
 		{A5EC6083-EE1A-458A-A7AA-EF1A14D09947} = {4E50D8EF-4119-449A-B2EE-F4FB2E86BCF1}
+		{6A1F6FD4-A021-408C-9A80-946A408A7C4A} = {4E50D8EF-4119-449A-B2EE-F4FB2E86BCF1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C73BC1FB-06D6-478E-B2D0-DE1E761743D4}
