@@ -20,9 +20,15 @@
     <ClCompile Include="Day14-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PolymerizationEquipment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day14-ExtendedPolymerization.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PolymerizationEquipment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
