@@ -14,7 +14,8 @@ namespace Year2021
 namespace Day14
 {
 
-int mostAndLeastCommonElementQuantityDifference(const std::vector<std::string>& polymerFormulaLines);
+int64_t mostAndLeastCommonElementQuantityDifference(const std::vector<std::string>& polymerFormulaLines);
+int64_t mostAndLeastCommonElementQuantityDifferenceReinforced(const std::vector<std::string>& polymerFormulaLines);
 
 }
 }

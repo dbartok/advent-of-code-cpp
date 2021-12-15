@@ -15,29 +15,34 @@ public:
 
     TEST_METHOD(mostAndLeastCommonElementQuantityDifference_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "NNCB",
-            "",
-            "CH -> B",
-            "HH -> N",
-            "CB -> H",
-            "NH -> C",
-            "HB -> C",
-            "HC -> B",
-            "HN -> C",
-            "NN -> C",
-            "BH -> H",
-            "NC -> B",
-            "NB -> B",
-            "BN -> B",
-            "BB -> N",
-            "BC -> B",
-            "CC -> N",
-            "CN -> C"
-        };
-
-        Assert::AreEqual(1588, CurrentDay::mostAndLeastCommonElementQuantityDifference(lines));
+        Assert::AreEqual(1588ll, CurrentDay::mostAndLeastCommonElementQuantityDifference(m_lines));
     }
 
+    TEST_METHOD(mostAndLeastCommonElementQuantityDifferenceReinforced_SimpleTests)
+    {
+        Assert::AreEqual(2188189693529ll, CurrentDay::mostAndLeastCommonElementQuantityDifferenceReinforced(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "NNCB",
+        "",
+        "CH -> B",
+        "HH -> N",
+        "CB -> H",
+        "NH -> C",
+        "HB -> C",
+        "HC -> B",
+        "HN -> C",
+        "NN -> C",
+        "BH -> H",
+        "NC -> B",
+        "NB -> B",
+        "BN -> B",
+        "BB -> N",
+        "BC -> B",
+        "CC -> N",
+        "CN -> C"
+    };
 };

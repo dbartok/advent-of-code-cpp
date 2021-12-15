@@ -12,6 +12,7 @@ namespace
 {
 
 size_t NUM_PAIR_INSERTIONS_PART_ONE = 10;
+size_t NUM_PAIR_INSERTIONS_PART_TWO = 40;
 
 }
 
@@ -24,7 +25,7 @@ namespace Day14
 
 using TextSection = std::vector<std::string>;
 using PolymerPairToInsertedElement = std::unordered_map<std::string, char>;
-using PolymerPairToInt = std::unordered_map<std::string, int>;
+using PolymerPairToInt = std::unordered_map<std::string, int64_t>;
 
 class PolymerizationEquipment
 {
@@ -47,7 +48,7 @@ public:
         }
     }
 
-    int getMostAndLeastCommonElementQuantityDifference() const
+    int64_t getMostAndLeastCommonElementQuantityDifference() const
     {
         auto elementToNumOccurrencesInPairs = getElementToNumOccurrencesInPairs();
 
@@ -56,12 +57,12 @@ public:
                                                                                       return lhs.second < rhs.second;
                                                                                   });
 
-        const int minPolymerNumOccurrencesInPairs = minmaxElementToNumOccurrencesInPairsIter.first->second;
-        const int maxPolymerNumOccurrencesInPairs = minmaxElementToNumOccurrencesInPairsIter.second->second;
+        const int64_t minPolymerNumOccurrencesInPairs = minmaxElementToNumOccurrencesInPairsIter.first->second;
+        const int64_t maxPolymerNumOccurrencesInPairs = minmaxElementToNumOccurrencesInPairsIter.second->second;
 
         // Account for elements at the beginning and end of the polymer
-        const int minPolymerQuantity = std::ceil(static_cast<double>(minPolymerNumOccurrencesInPairs) / 2);
-        const int maxPolymerQuantity = std::ceil(static_cast<double>(maxPolymerNumOccurrencesInPairs) / 2);
+        const int64_t minPolymerQuantity = std::ceil(static_cast<double>(minPolymerNumOccurrencesInPairs) / 2);
+        const int64_t maxPolymerQuantity = std::ceil(static_cast<double>(maxPolymerNumOccurrencesInPairs) / 2);
 
         return maxPolymerQuantity - minPolymerQuantity;
     }
@@ -77,7 +78,7 @@ private:
         for (const auto& polymerPairAndNumOccurrences : m_polymerPairToNumOccurrences)
         {
             const std::string& polymerPair = polymerPairAndNumOccurrences.first;
-            const int numOccurrences = polymerPairAndNumOccurrences.second;
+            const int64_t numOccurrences = polymerPairAndNumOccurrences.second;
 
             const char insertedElement = m_polymerPairToInsertedElement.at(polymerPair);
 
@@ -91,14 +92,14 @@ private:
         m_polymerPairToNumOccurrences = updatedPolymerPairToNumOccurrences;
     }
 
-    std::unordered_map<char, int> getElementToNumOccurrencesInPairs() const
+    std::unordered_map<char, int64_t> getElementToNumOccurrencesInPairs() const
     {
-        std::unordered_map<char, int> elementToNumOccurrencesInPairs;
+        std::unordered_map<char, int64_t> elementToNumOccurrencesInPairs;
 
         for (const auto& polymerPairAndNumOccurrences : m_polymerPairToNumOccurrences)
         {
             const std::string& polymerPair = polymerPairAndNumOccurrences.first;
-            const int numOccurrences = polymerPairAndNumOccurrences.second;
+            const int64_t numOccurrences = polymerPairAndNumOccurrences.second;
 
             elementToNumOccurrencesInPairs[polymerPair.front()] += numOccurrences;
             elementToNumOccurrencesInPairs[polymerPair.back()] += numOccurrences;
@@ -133,10 +134,17 @@ PolymerizationEquipment parsePolymerFormulaLines(const std::vector<std::string>&
     return PolymerizationEquipment{std::move(polymerTemplate), std::move(polymerPairToInsertedElement)};
 }
 
-int mostAndLeastCommonElementQuantityDifference(const std::vector<std::string>& polymerFormulaLines)
+int64_t mostAndLeastCommonElementQuantityDifference(const std::vector<std::string>& polymerFormulaLines)
 {
     PolymerizationEquipment polymerizationEquipment = parsePolymerFormulaLines(polymerFormulaLines);
     polymerizationEquipment.growPolymer(NUM_PAIR_INSERTIONS_PART_ONE);
+    return polymerizationEquipment.getMostAndLeastCommonElementQuantityDifference();
+}
+
+int64_t mostAndLeastCommonElementQuantityDifferenceReinforced(const std::vector<std::string>& polymerFormulaLines)
+{
+    PolymerizationEquipment polymerizationEquipment = parsePolymerFormulaLines(polymerFormulaLines);
+    polymerizationEquipment.growPolymer(NUM_PAIR_INSERTIONS_PART_TWO);
     return polymerizationEquipment.getMostAndLeastCommonElementQuantityDifference();
 }
 

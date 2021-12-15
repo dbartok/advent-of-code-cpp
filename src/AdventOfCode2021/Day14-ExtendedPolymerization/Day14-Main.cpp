@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::mostAndLeastCommonElementQuantityDifference(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::mostAndLeastCommonElementQuantityDifferenceReinforced(lines) << std::endl;
 }
