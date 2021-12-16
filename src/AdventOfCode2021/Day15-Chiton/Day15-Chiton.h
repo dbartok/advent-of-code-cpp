@@ -15,6 +15,7 @@ namespace Day15
 {
 
 int lowestTotalRiskOfAnyPath(const std::vector<std::string>& riskLevelLines);
+int lowestTotalRiskOfAnyPathRepeatedMap(const std::vector<std::string>& riskLevelLines);
 
 }
 }

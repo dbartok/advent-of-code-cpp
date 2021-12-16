@@ -15,21 +15,26 @@ public:
 
     TEST_METHOD(lowestTotalRiskOfAnyPath_SimpleTests)
     {
-        std::vector<std::string> lines =
-        {
-            "1163751742",
-            "1381373672",
-            "2136511328",
-            "3694931569",
-            "7463417111",
-            "1319128137",
-            "1359912421",
-            "3125421639",
-            "1293138521",
-            "2311944581"
-        };
-
-        Assert::AreEqual(40, CurrentDay::lowestTotalRiskOfAnyPath(lines));
+        Assert::AreEqual(40, CurrentDay::lowestTotalRiskOfAnyPath(m_lines));
     }
 
+    TEST_METHOD(lowestTotalRiskOfAnyPathRepeatedMap_SimpleTests)
+    {
+        Assert::AreEqual(315, CurrentDay::lowestTotalRiskOfAnyPathRepeatedMap(m_lines));
+    }
+
+private:
+    std::vector<std::string> m_lines =
+    {
+        "1163751742",
+        "1381373672",
+        "2136511328",
+        "3694931569",
+        "7463417111",
+        "1319128137",
+        "1359912421",
+        "3125421639",
+        "1293138521",
+        "2311944581"
+    };
 };

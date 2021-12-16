@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::lowestTotalRiskOfAnyPath(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::lowestTotalRiskOfAnyPathRepeatedMap(lines) << std::endl;
 }
