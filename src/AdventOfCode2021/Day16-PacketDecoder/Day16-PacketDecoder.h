@@ -13,7 +13,8 @@ namespace Year2021
 namespace Day16
 {
 
-int sumOfAllVersionNumbersInPackets(const std::string& transmissionString);
+int64_t sumOfAllVersionNumbersInPackets(const std::string& transmissionString);
+int64_t evaluateExpression(const std::string& transmissionString);
 
 }
 }

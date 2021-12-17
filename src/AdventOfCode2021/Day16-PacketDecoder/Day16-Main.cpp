@@ -18,4 +18,5 @@ int main()
     std::getline(fileIn, transmissionString);
 
     std::cout << "First part: " << CurrentDay::sumOfAllVersionNumbersInPackets(transmissionString) << std::endl;
+    std::cout << "Second part: " << CurrentDay::evaluateExpression(transmissionString) << std::endl;
 }
