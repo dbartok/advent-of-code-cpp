@@ -15,9 +15,15 @@ public:
 
     TEST_METHOD(highestYPositionToHitTarget_SimpleTests)
     {
-        const std::string input = "target area: x=20..30, y=-10..-5";
 
-        Assert::AreEqual(45, CurrentDay::highestYPositionToHitTarget(input));
+        Assert::AreEqual(45, CurrentDay::highestYPositionToHitTarget(m_input));
     }
 
+    TEST_METHOD(numDistinctInitialVelocityValuesToHitTarget_SimpleTests)
+    {
+        Assert::AreEqual(112u, CurrentDay::numDistinctInitialVelocityValuesToHitTarget(m_input));
+    }
+
+private:
+    const std::string m_input = "target area: x=20..30, y=-10..-5";
 };

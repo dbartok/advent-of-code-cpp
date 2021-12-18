@@ -14,6 +14,7 @@ namespace Day17
 {
 
 int highestYPositionToHitTarget(const std::string& targetAreaString);
+unsigned numDistinctInitialVelocityValuesToHitTarget(const std::string& targetAreaString);
 
 }
 }

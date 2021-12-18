@@ -38,9 +38,27 @@ public:
         {
             throw std::runtime_error("Probe horizontal stop condition violated");
         }
-        const int highestInitialVelocityY = std::abs(m_targetArea.lowerBoundVector.y()) - 1;
+        const int highestInitialVelocityY = getHighestInitialVelocityY();
         const int highestPossibleYPosition = highestInitialVelocityY * (highestInitialVelocityY + 1) / 2;
         return highestPossibleYPosition;
+    }
+
+    unsigned getNumDistinctInitialVelocityValues() const
+    {
+        unsigned numDistinctInitialVelocityValues = 0;
+
+        for (int initialVelocityY = std::min(m_targetArea.lowerBoundVector.y(), 0); initialVelocityY <= getHighestInitialVelocityY(); ++initialVelocityY)
+        {
+            for (int initialVelocityX = std::min(m_targetArea.lowerBoundVector.x(), 0); initialVelocityX <= std::max(0, m_targetArea.upperBoundVector.x()); ++initialVelocityX)
+            {
+                if (isWithinTargetAfterAnyStep({initialVelocityX, initialVelocityY}))
+                {
+                    ++numDistinctInitialVelocityValues;
+                }
+            }
+        }
+
+        return numDistinctInitialVelocityValues;
     }
 
 private:
@@ -59,6 +77,55 @@ private:
 
             ++initialVelocityX;
         }
+    }
+
+    int getHighestInitialVelocityY() const
+    {
+        // Target is completely beneath the surface
+        if (m_targetArea.lowerBoundVector.y() < 0)
+        {
+            return std::abs(m_targetArea.lowerBoundVector.y()) - 1;
+        }
+        else
+        {
+            return m_targetArea.upperBoundVector.y();
+        }
+    }
+
+    bool isWithinTargetAfterAnyStep(const Vector2D& initialVelocityVector) const
+    {
+        Vector2D positionVector{0, 0};
+        Vector2D velocityVector = initialVelocityVector;
+
+        while (true)
+        {
+            positionVector += velocityVector;
+
+            if (isWithinTarget(positionVector))
+            {
+                return true;
+            }
+
+            if (positionVector.y() < m_targetArea.lowerBoundVector.y())
+            {
+                return false;
+            }
+
+            if (velocityVector.x() != 0)
+            {
+                velocityVector.x() = velocityVector.x() > 0 ? velocityVector.x() - 1 : velocityVector.x() + 1;
+            }
+
+            --velocityVector.y();
+        }
+    }
+    
+    bool isWithinTarget(const Vector2D& positionVector) const
+    {
+        return positionVector.x() >= m_targetArea.lowerBoundVector.x() &&
+            positionVector.x() <= m_targetArea.upperBoundVector.x() &&
+            positionVector.y() >= m_targetArea.lowerBoundVector.y() &&
+            positionVector.y() <= m_targetArea.upperBoundVector.y();
     }
 };
 
@@ -82,6 +149,13 @@ int highestYPositionToHitTarget(const std::string& targetAreaString)
     TargetArea targetArea = parseTargetAreaString(targetAreaString);
     ProbeLauncherSimulator probeLauncherSimulator{std::move(targetArea)};
     return probeLauncherSimulator.getHighestPossibleYPosition();
+}
+
+unsigned numDistinctInitialVelocityValuesToHitTarget(const std::string& targetAreaString)
+{
+    TargetArea targetArea = parseTargetAreaString(targetAreaString);
+    ProbeLauncherSimulator probeLauncherSimulator{std::move(targetArea)};
+    return probeLauncherSimulator.getNumDistinctInitialVelocityValues();
 }
 
 }

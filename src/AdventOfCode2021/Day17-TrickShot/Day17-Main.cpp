@@ -18,4 +18,5 @@ int main()
     std::getline(fileIn, targetAreaString);
 
     std::cout << "First part: " << CurrentDay::highestYPositionToHitTarget(targetAreaString) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numDistinctInitialVelocityValuesToHitTarget(targetAreaString) << std::endl;
 }
