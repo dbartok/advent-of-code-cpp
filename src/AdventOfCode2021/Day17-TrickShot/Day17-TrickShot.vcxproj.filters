@@ -20,9 +20,15 @@
     <ClCompile Include="Day17-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ProbeLauncherSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day17-TrickShot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProbeLauncherSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
