@@ -15,6 +15,7 @@ namespace Day18
 {
 
 int magnitudeOfFinalSum(const std::vector<std::string>& snailfishNumberStringLines);
+int largestMagnitudeOfAnyTwoAddendSum(const std::vector<std::string>& snailfishNumberStringLines);
 
 }
 }

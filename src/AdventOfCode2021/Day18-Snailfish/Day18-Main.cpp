@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::magnitudeOfFinalSum(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::largestMagnitudeOfAnyTwoAddendSum(lines) << std::endl;
 }

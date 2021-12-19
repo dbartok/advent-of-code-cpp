@@ -291,6 +291,19 @@ private:
     }
 };
 
+int getSumMagnitude(const std::string& lineOne, const std::string& lineTwo)
+{
+    SnailfishNumberStringParser parserOne{lineOne};
+    Node::SharedPtr firstNumberNodePtr = parserOne.createRootNodePtr();
+    SnailfishNumberCalculator calculator{std::move(firstNumberNodePtr)};
+
+    SnailfishNumberStringParser parserTwo{lineTwo};
+    Node::SharedPtr secondNumberNodePtr = parserTwo.createRootNodePtr();
+    calculator.addNumber(secondNumberNodePtr);
+
+    return calculator.getMagnitude();
+}
+
 int magnitudeOfFinalSum(const std::vector<std::string>& snailfishNumberStringLines)
 {
     SnailfishNumberStringParser parser{snailfishNumberStringLines.front()};
@@ -305,6 +318,25 @@ int magnitudeOfFinalSum(const std::vector<std::string>& snailfishNumberStringLin
     }
 
     return calculator.getMagnitude();
+}
+
+int largestMagnitudeOfAnyTwoAddendSum(const std::vector<std::string>& snailfishNumberStringLines)
+{
+    int maxSumMagnitude = std::numeric_limits<int>::min();
+
+    for (auto lineOneIter = snailfishNumberStringLines.cbegin(); lineOneIter != snailfishNumberStringLines.cend(); ++lineOneIter)
+    {
+        for (auto lineTwoIter = snailfishNumberStringLines.cbegin(); lineTwoIter != snailfishNumberStringLines.cend(); ++lineTwoIter)
+        {
+            if (lineOneIter != lineTwoIter)
+            {
+                const int currentSumMagnitude = getSumMagnitude(*lineOneIter, *lineTwoIter);
+                maxSumMagnitude = std::max(currentSumMagnitude, maxSumMagnitude);
+            }
+        }
+    }
+
+    return maxSumMagnitude;
 }
 
 }
