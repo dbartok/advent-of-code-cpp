@@ -251,6 +251,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day18-Snailfish.cpp" />
+    <ClCompile Include="SnailfishNumberCalculator.cpp" />
+    <ClCompile Include="SnailfishNumberParser.cpp" />
     <ClCompile Include="test_Day18-Snailfish.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -262,6 +264,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day18-Snailfish.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="SnailfishNumberCalculator.h" />
+    <ClInclude Include="SnailfishNumberParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
