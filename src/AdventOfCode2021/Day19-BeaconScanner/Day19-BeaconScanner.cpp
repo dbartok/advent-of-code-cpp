@@ -64,6 +64,7 @@ public:
 
     void applyOffset(const Vector3D& offset)
     {
+        m_offset += offset;
         for (auto& beaconPosition : m_beaconPositions)
         {
             beaconPosition += offset;
@@ -107,9 +108,9 @@ public:
         return beaconPositionsUnion;
     }
 
-    bool operator==(const Scanner& other) const
+    unsigned getManhattanDistanceFrom(const Scanner& other) const
     {
-        return m_id == other.m_id;
+        return (other.m_offset - m_offset).cwiseAbs().sum();
     }
 
     int getId()
@@ -117,9 +118,20 @@ public:
         return m_id;
     }
 
+    const Vector3D& getOffset() const
+    {
+        return m_offset;
+    }
+
+    bool operator==(const Scanner& other) const
+    {
+        return m_id == other.m_id;
+    }
+
 private:
     std::vector<Vector3D> m_beaconPositions;
     int m_id;
+    Vector3D m_offset{0, 0, 0};
 };
 
 void getBaseTransformationMatricesRecursive(const Vector3DSet& baseRows, Matrix3D matrixSoFar, std::vector<Matrix3D>& baseTransformationMatrices)
@@ -184,6 +196,21 @@ public:
         }
 
         return allBeaconPositions.size();
+    }
+
+    unsigned getLargestManhattanDistanceBetweenAnyTwoScanners() const
+    {
+        unsigned largestManhattanDistance = 0;
+
+        for (auto scannerOneIter = m_alignedScanners.cbegin(); scannerOneIter != m_alignedScanners.cend(); ++scannerOneIter)
+        {
+            for (auto scannerTwoIter = std::next(scannerOneIter); scannerTwoIter != m_alignedScanners.cend(); ++scannerTwoIter)
+            {
+                largestManhattanDistance = std::max(largestManhattanDistance, scannerOneIter->getManhattanDistanceFrom(*scannerTwoIter));
+            }
+        }
+        
+        return largestManhattanDistance;
     }
 
 private:
@@ -301,6 +328,14 @@ unsigned numBeacons(const std::vector<std::string>& allBeaconPositionsLines)
     ScannerAligner scannerAligner{std::move(scanners)};
     scannerAligner.alignAll();
     return scannerAligner.getNumTotalBeacons();
+}
+
+unsigned largestManhattanDistanceBetweenAnyTwoScanners(const std::vector<std::string>& allBeaconPositionsLines)
+{
+    std::vector<Scanner> scanners = parseAllBeaconPositionsLines(allBeaconPositionsLines);
+    ScannerAligner scannerAligner{std::move(scanners)};
+    scannerAligner.alignAll();
+    return scannerAligner.getLargestManhattanDistanceBetweenAnyTwoScanners();
 }
 
 }

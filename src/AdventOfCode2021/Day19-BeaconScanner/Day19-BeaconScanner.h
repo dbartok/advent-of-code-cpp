@@ -15,6 +15,7 @@ namespace Day19
 {
 
 unsigned numBeacons(const std::vector<std::string>& allBeaconPositionsLines);
+unsigned largestManhattanDistanceBetweenAnyTwoScanners(const std::vector<std::string>& allBeaconPositionsLines);
 
 }
 }

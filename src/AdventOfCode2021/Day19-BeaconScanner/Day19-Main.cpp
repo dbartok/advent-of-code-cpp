@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numBeacons(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::largestManhattanDistanceBetweenAnyTwoScanners(lines) << std::endl;
 }
