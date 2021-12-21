@@ -15,6 +15,7 @@ namespace Day21
 {
 
 int losingPlayerScoreTimesNumDiceRollsDeterministicDice(const std::vector<std::string>& startingPositionLines);
+uint64_t numUniversesWithMoreWins(const std::vector<std::string>& startingPositionLines);
 
 }
 }

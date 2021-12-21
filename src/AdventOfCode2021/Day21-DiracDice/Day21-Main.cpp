@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::losingPlayerScoreTimesNumDiceRollsDeterministicDice(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numUniversesWithMoreWins(lines) << std::endl;
 }

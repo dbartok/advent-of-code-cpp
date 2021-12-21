@@ -15,13 +15,18 @@ public:
 
     TEST_METHOD(losingPlayerScoreTimesNumDiceRollsDeterministicDice_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "Player 1 starting position : 4",
-            "Player 2 starting position : 8"
-        };
-
-        Assert::AreEqual(739785, CurrentDay::losingPlayerScoreTimesNumDiceRollsDeterministicDice(lines));
+        Assert::AreEqual(739785, CurrentDay::losingPlayerScoreTimesNumDiceRollsDeterministicDice(m_lines));
     }
 
+    TEST_METHOD(numUniversesWithMoreWins_SimpleTests)
+    {
+        Assert::AreEqual(444356092776315ull, CurrentDay::numUniversesWithMoreWins(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "Player 1 starting position : 4",
+        "Player 2 starting position : 8"
+    };
 };
