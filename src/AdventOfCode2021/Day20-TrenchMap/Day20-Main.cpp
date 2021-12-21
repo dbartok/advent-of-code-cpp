@@ -22,5 +22,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << CurrentDay::numPixelsLitAfterEnhancement(lines) << std::endl;
+    std::cout << "First part: " << CurrentDay::numPixelsLitAfterSmallEnhancement(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numPixelsLitAfterLargeEnhancement(lines) << std::endl;
 }

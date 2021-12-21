@@ -14,7 +14,8 @@ namespace Year2021
 namespace Day20
 {
 
-unsigned numPixelsLitAfterEnhancement(const std::vector<std::string>& imageEnhancementAlgorithmAndInputImageLines);
+unsigned numPixelsLitAfterSmallEnhancement(const std::vector<std::string>& imageEnhancementAlgorithmAndInputImageLines);
+unsigned numPixelsLitAfterLargeEnhancement(const std::vector<std::string>& imageEnhancementAlgorithmAndInputImageLines);
 
 }
 }

@@ -10,6 +10,7 @@ namespace
 {
 
 unsigned NUM_ENHANCEMENT_STEPS_PART_ONE = 2;
+unsigned NUM_ENHANCEMENT_STEPS_PART_TWO = 50;
 unsigned SOME_OUT_OF_BOUNDS_COORDINATE = 100000;
 char LIGHT_PIXEL_CHAR = '#';
 
@@ -178,10 +179,17 @@ ImageEnhancer parseImageEnhancementAlgorithmAndInputImageLines(const std::vector
     return ImageEnhancer{std::move(enhancementAlgorithm), std::move(image)};
 }
 
-unsigned numPixelsLitAfterEnhancement(const std::vector<std::string>& imageEnhancementAlgorithmAndInputImageLines)
+unsigned numPixelsLitAfterSmallEnhancement(const std::vector<std::string>& imageEnhancementAlgorithmAndInputImageLines)
 {
     ImageEnhancer imageEnhancer = parseImageEnhancementAlgorithmAndInputImageLines(imageEnhancementAlgorithmAndInputImageLines);
     imageEnhancer.enhanceRepatedly(NUM_ENHANCEMENT_STEPS_PART_ONE);
+    return imageEnhancer.getNumLitPixels();
+}
+
+unsigned numPixelsLitAfterLargeEnhancement(const std::vector<std::string>& imageEnhancementAlgorithmAndInputImageLines)
+{
+    ImageEnhancer imageEnhancer = parseImageEnhancementAlgorithmAndInputImageLines(imageEnhancementAlgorithmAndInputImageLines);
+    imageEnhancer.enhanceRepatedly(NUM_ENHANCEMENT_STEPS_PART_TWO);
     return imageEnhancer.getNumLitPixels();
 }
 
