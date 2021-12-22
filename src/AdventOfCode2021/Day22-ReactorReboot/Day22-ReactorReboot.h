@@ -15,6 +15,7 @@ namespace Day22
 {
 
 uint64_t numCubesOnAfterInititializationProcedure(const std::vector<std::string>& rebootStepLines);
+uint64_t numCubesOnAfterFullRebootProcedure(const std::vector<std::string>& rebootStepLines);
 
 }
 }

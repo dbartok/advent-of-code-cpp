@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numCubesOnAfterInititializationProcedure(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numCubesOnAfterFullRebootProcedure(lines) << std::endl;
 }
