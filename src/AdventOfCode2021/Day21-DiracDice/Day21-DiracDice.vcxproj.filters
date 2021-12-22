@@ -20,9 +20,21 @@
     <ClCompile Include="Day21-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DeterministicDiceGameSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DiracDiceGameSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day21-DiracDice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeterministicDiceGameSimulator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DiracDiceGameSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
