@@ -15,16 +15,21 @@ public:
 
     TEST_METHOD(leastEnergyRequiredToOrganize_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "#############",
-            "#...........#",
-            "###B#C#B#D###",
-            "  #A#D#C#A#",
-            "  #########"
-        };
-
-        Assert::AreEqual(12521u, CurrentDay::leastEnergyRequiredToOrganize(lines));
+        Assert::AreEqual(12521u, CurrentDay::leastEnergyRequiredToOrganize(m_lines));
     }
 
+    TEST_METHOD(leastEnergyRequiredToOrganizeExtendedMap_SimpleTests)
+    {
+        Assert::AreEqual(44169u, CurrentDay::leastEnergyRequiredToOrganizeExtendedMap(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "#############",
+        "#...........#",
+        "###B#C#B#D###",
+        "  #A#D#C#A#",
+        "  #########"
+    };
 };

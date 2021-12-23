@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::leastEnergyRequiredToOrganize(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::leastEnergyRequiredToOrganizeExtendedMap(lines) << std::endl;
 }

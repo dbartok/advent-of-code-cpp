@@ -15,6 +15,7 @@ namespace Day23
 {
 
 unsigned leastEnergyRequiredToOrganize(const std::vector<std::string>& initialPositionsLines);
+unsigned leastEnergyRequiredToOrganizeExtendedMap(const std::vector<std::string>& initialPositionsLines);
 
 }
 }
