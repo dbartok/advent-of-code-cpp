@@ -113,20 +113,21 @@ std::vector<Params> allParams =
     {true, -12, 9},  //                                                                w1 + 12 - 12 = w14             w1 = w14
 };
 
-// w1 = [1..9]           9
-// w2 = w11 - 6          3
-// w3 = [8..9]           9
-// w4 = w5 - 4           5
-// w5 = [5..9]           9
-// w6 = [6..9]           9
-// w7 = [7..9]           9
-// w8 = w7 - 6           3
-// w9 = w6 - 5           4
-// w10 = w3 - 7          2
-// w11 = [6..9]          9
-// w12 = w13 - 1         8
-// w13 = [2..9]          9
-// w14 = w1              9
+//
+// w1 = [1..9]           9      1
+// w2 = w11 - 6          3      1
+// w3 = [8..9]           9      8
+// w4 = w5 - 4           5      1
+// w5 = [5..9]           9      5
+// w6 = [6..9]           9      6
+// w7 = [7..9]           9      7
+// w8 = w7 - 6           3      1
+// w9 = w6 - 5           4      1
+// w10 = w3 - 7          2      1
+// w11 = [7..9]          9      7
+// w12 = w13 - 1         8      1
+// w13 = [2..9]          9      2
+// w14 = w1              9      1
 
 int monadChunkParametrized_v3(int w, int z, Params params)
 {
@@ -142,27 +143,36 @@ int monadChunkParametrized_v3(int w, int z, Params params)
     return z;
 }
 
-uint64_t largestModelNumberAcceptedByMonad()
+void validateSolutionCandidate(uint64_t solutionCandidate)
 {
-    const uint64_t solutionCandidate = 93959993429899ull;
     std::string solutionCandidateString = std::to_string(solutionCandidate);
 
     int z = 0;
-    for (size_t i = 0; i < 14; ++ i)
+    for (size_t i = 0; i < 14; ++i)
     {
         const char c = solutionCandidateString.at(i);
         const int w = c - '0';
         auto params = allParams.at(i);
         z = monadChunkParametrized_v3(w, z, params);
     }
-    if (z == 0)
-    {
-        return solutionCandidate;
-    }
-    else
+    if (z != 0)
     {
         throw std::runtime_error("Nonzero validation result: " + std::to_string(z));
     }
+}
+
+uint64_t largestModelNumberAcceptedByMonad()
+{
+    const uint64_t solutionCandidate = 93959993429899ull;
+    validateSolutionCandidate(solutionCandidate);
+    return solutionCandidate;
+}
+
+uint64_t smallestModelNumberAcceptedByMonad()
+{
+    const uint64_t solutionCandidate = 11815671117121ull;
+    validateSolutionCandidate(solutionCandidate);
+    return solutionCandidate;
 }
 
 }

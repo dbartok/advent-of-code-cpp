@@ -12,4 +12,5 @@ int main()
     namespace CurrentDay = AdventOfCode::Year2021::Day24;
 
     std::cout << "First part: " << CurrentDay::largestModelNumberAcceptedByMonad() << std::endl;
+    std::cout << "Second part: " << CurrentDay::smallestModelNumberAcceptedByMonad() << std::endl;
 }

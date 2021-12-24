@@ -18,4 +18,8 @@ public:
         Assert::AreEqual(93959993429899ull, CurrentDay::largestModelNumberAcceptedByMonad());
     }
 
+    TEST_METHOD(smallestModelNumberAcceptedByMonadd_SimpleTests)
+    {
+        Assert::AreEqual(11815671117121ull, CurrentDay::smallestModelNumberAcceptedByMonad());
+    }
 };

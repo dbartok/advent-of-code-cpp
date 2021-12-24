@@ -15,6 +15,7 @@ namespace Day24
 {
 
 uint64_t largestModelNumberAcceptedByMonad();
+uint64_t smallestModelNumberAcceptedByMonad();
 
 }
 }
