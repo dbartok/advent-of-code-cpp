@@ -6,6 +6,13 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <stdexcept>
 __END_LIBRARIES_DISABLE_WARNINGS
 
+namespace
+{
+
+const size_t NUM_INPUT_INSTRUCTIONS = 14;
+
+}
+
 namespace AdventOfCode
 {
 namespace Year2021
@@ -94,41 +101,6 @@ int monadChunkParametrized_v2(int w, int z, Params params)
     return z;
 }
 
-std::vector<Params> allParams =
-{
-                     // mod 26                                                         // Equation                    // Simplified equation
-    {false, 10, 12}, // w1 + 12
-    {false, 10, 10}, // w1 + 12 -> w2 + 10
-    {false, 12, 8},  // w1 + 12 -> w2 + 10 -> w3 + 8
-    {false, 11, 4},  // w1 + 12 -> w2 + 10 -> w3 + 8 -> w4 + 4
-    {true, 0, 3},    // w1 + 12 -> w2 + 10 -> w3 + 8                                   w4 + 4 + 0 = w5                w4 + 4 = w5
-    {false, 15, 10}, // w1 + 12 -> w2 + 10 -> w3 + 8 -> w6 + 10
-    {false, 13, 6},  // w1 + 12 -> w2 + 10 -> w3 + 8 -> w6 + 10 -> w7 + 6
-    {true, -12, 13}, // w1 + 12 -> w2 + 10 -> w3 + 8 -> w6 + 10                        w7 + 6 - 12 = w8               w7 - 6 = w8
-    {true, -15, 8},  // w1 + 12 -> w2 + 10 -> w3 + 8                                   w6 + 10 - 15 = w9              w6 - 5 = w9
-    {true, -15, 1},  // w1 + 12 -> w2 + 10                                             w3 + 8 - 15 = w10              w3 - 7 = w10
-    {true, -4, 7},   // w1 + 12                                                        w2 + 10 - 4 = w11              w2 + 6 = w11
-    {false, 10, 6},  // w1 + 12 -> w12 + 6
-    {true, -5, 9},   // w1 + 12                                                        w12 + 6 - 5 = w13              w12 + 1 = w13
-    {true, -12, 9},  //                                                                w1 + 12 - 12 = w14             w1 = w14
-};
-
-//
-// w1 = [1..9]           9      1
-// w2 = w11 - 6          3      1
-// w3 = [8..9]           9      8
-// w4 = w5 - 4           5      1
-// w5 = [5..9]           9      5
-// w6 = [6..9]           9      6
-// w7 = [7..9]           9      7
-// w8 = w7 - 6           3      1
-// w9 = w6 - 5           4      1
-// w10 = w3 - 7          2      1
-// w11 = [7..9]          9      7
-// w12 = w13 - 1         8      1
-// w13 = [2..9]          9      2
-// w14 = w1              9      1
-
 int monadChunkParametrized_v3(int w, int z, Params params)
 {
     const bool shouldIncreaseZ = (z % 26 + params.xAdd != w); // mul x 0; add x z; mod x 26; add x (xAdd); eql x w; eql x 0
@@ -143,12 +115,53 @@ int monadChunkParametrized_v3(int w, int z, Params params)
     return z;
 }
 
+// Params from the input file
+std::vector<Params> allParams =
+{
+                     // |   mod 26 stack                                                |   Equation             |   Simplified equation
+                     // |---------------------------------------------------------------|------------------------|-------------------------
+    {false, 10, 12}, // |   w1 + 12                                                     |                        |
+    {false, 10, 10}, // |   w1 + 12 -> w2 + 10                                          |                        |
+    {false, 12, 8},  // |   w1 + 12 -> w2 + 10 -> w3 + 8                                |                        |
+    {false, 11, 4},  // |   w1 + 12 -> w2 + 10 -> w3 + 8 -> w4 + 4                      |                        |
+    {true, 0, 3},    // |   w1 + 12 -> w2 + 10 -> w3 + 8                                |   w4 + 4 + 0 = w5      |   w4 + 4 = w5
+    {false, 15, 10}, // |   w1 + 12 -> w2 + 10 -> w3 + 8 -> w6 + 10                     |                        |
+    {false, 13, 6},  // |   w1 + 12 -> w2 + 10 -> w3 + 8 -> w6 + 10 -> w7 + 6           |                        |
+    {true, -12, 13}, // |   w1 + 12 -> w2 + 10 -> w3 + 8 -> w6 + 10                     |   w7 + 6 - 12 = w8     |   w7 - 6 = w8
+    {true, -15, 8},  // |   w1 + 12 -> w2 + 10 -> w3 + 8                                |   w6 + 10 - 15 = w9    |   w6 - 5 = w9
+    {true, -15, 1},  // |   w1 + 12 -> w2 + 10                                          |   w3 + 8 - 15 = w10    |   w3 - 7 = w10
+    {true, -4, 7},   // |   w1 + 12                                                     |   w2 + 10 - 4 = w11    |   w2 + 6 = w11
+    {false, 10, 6},  // |   w1 + 12 -> w12 + 6                                          |                        |
+    {true, -5, 9},   // |   w1 + 12                                                     |   w12 + 6 - 5 = w13    |   w12 + 1 = w13
+    {true, -12, 9},  // |   <empty>                                                     |   w1 + 12 - 12 = w14   |   w1 = w14
+};
+
+// |   Possible input digit values   |   Largest value   |   Smallest value
+// |---------------------------------|-------------------|--------------------
+// |   w1 = [1..9]                   |   9               |   1
+// |   w2 = w11 - 6                  |   3               |   1
+// |   w3 = [8..9]                   |   9               |   8
+// |   w4 = w5 - 4                   |   5               |   1
+// |   w5 = [5..9]                   |   9               |   5
+// |   w6 = [6..9]                   |   9               |   6
+// |   w7 = [7..9]                   |   9               |   7
+// |   w8 = w7 - 6                   |   3               |   1
+// |   w9 = w6 - 5                   |   4               |   1
+// |   w10 = w3 - 7                  |   2               |   1
+// |   w11 = [7..9]                  |   9               |   7
+// |   w12 = w13 - 1                 |   8               |   1
+// |   w13 = [2..9]                  |   9               |   2
+// |   w14 = w1                      |   9               |   1
+
+const uint64_t SOLUTION_CANDIDATE_PART_ONE = 93959993429899ull;
+const uint64_t SOLUTION_CANDIDATE_PART_TWO = 11815671117121ull;
+
 void validateSolutionCandidate(uint64_t solutionCandidate)
 {
     std::string solutionCandidateString = std::to_string(solutionCandidate);
 
     int z = 0;
-    for (size_t i = 0; i < 14; ++i)
+    for (size_t i = 0; i < NUM_INPUT_INSTRUCTIONS; ++i)
     {
         const char c = solutionCandidateString.at(i);
         const int w = c - '0';
@@ -163,16 +176,14 @@ void validateSolutionCandidate(uint64_t solutionCandidate)
 
 uint64_t largestModelNumberAcceptedByMonad()
 {
-    const uint64_t solutionCandidate = 93959993429899ull;
-    validateSolutionCandidate(solutionCandidate);
-    return solutionCandidate;
+    validateSolutionCandidate(SOLUTION_CANDIDATE_PART_ONE);
+    return SOLUTION_CANDIDATE_PART_ONE;
 }
 
 uint64_t smallestModelNumberAcceptedByMonad()
 {
-    const uint64_t solutionCandidate = 11815671117121ull;
-    validateSolutionCandidate(solutionCandidate);
-    return solutionCandidate;
+    validateSolutionCandidate(SOLUTION_CANDIDATE_PART_TWO);
+    return SOLUTION_CANDIDATE_PART_TWO;
 }
 
 }
