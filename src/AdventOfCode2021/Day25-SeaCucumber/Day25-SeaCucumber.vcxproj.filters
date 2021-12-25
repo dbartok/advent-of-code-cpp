@@ -20,9 +20,15 @@
     <ClCompile Include="Day25-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SeaCucumberMovementSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day25-SeaCucumber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SeaCucumberMovementSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
