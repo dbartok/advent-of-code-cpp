@@ -11,18 +11,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DayX-PuzzleName.cpp">
+    <ClCompile Include="DayXX-PuzzleName.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_DayX-PuzzleName.cpp">
+    <ClCompile Include="test_DayXX-PuzzleName.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DayX-Main.cpp">
+    <ClCompile Include="DayXX-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DayX-PuzzleName.h">
+    <ClInclude Include="DayXX-PuzzleName.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

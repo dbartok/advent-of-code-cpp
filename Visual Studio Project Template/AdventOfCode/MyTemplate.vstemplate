@@ -14,8 +14,8 @@
     <Icon>__TemplateIcon.ico</Icon>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="DayX-PuzzleName.vcxproj" File="DayX-PuzzleName.vcxproj" ReplaceParameters="true">
-      <ProjectItem ReplaceParameters="false" TargetFileName="$projectname$.vcxproj.filters">DayX-PuzzleName.vcxproj.filters</ProjectItem>
+    <Project TargetFileName="DayXX-PuzzleName.vcxproj" File="DayXX-PuzzleName.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="false" TargetFileName="$projectname$.vcxproj.filters">DayXX-PuzzleName.vcxproj.filters</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>
