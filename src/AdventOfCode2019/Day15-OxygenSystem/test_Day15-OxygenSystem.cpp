@@ -1,4 +1,4 @@
-#include "Day15-OxygenSystem.h" //TODO: Change to the name of the puzzle
+#include "Day15-OxygenSystem.h"
 
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
