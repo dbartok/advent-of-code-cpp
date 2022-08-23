@@ -21,7 +21,7 @@ int main()
     while (std::getline(fileIn, lineBuffer))
     {
         CurrentDay::RowOfNumbers row;
-        AdventOfCode::Utils::splitStringIntoTypedVector(lineBuffer, row);
+        AdventOfCode::Utils::splitStringIntoTypedVector(lineBuffer, row, '\t');
         inputRows.push_back(std::move(row));
     }
 
