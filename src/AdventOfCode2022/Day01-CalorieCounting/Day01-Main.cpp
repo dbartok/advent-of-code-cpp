@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::maxTotalCaloriesCarried(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::totalCaloriesCarriedByTopThreeElves(lines) << std::endl;
 }

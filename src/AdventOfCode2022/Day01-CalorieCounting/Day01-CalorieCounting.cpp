@@ -61,6 +61,15 @@ int maxTotalCaloriesCarried(const std::vector<std::string>& calorieLines)
     return *std::max_element(totalCalories.cbegin(), totalCalories.cend());
 }
 
+int totalCaloriesCarriedByTopThreeElves(const std::vector<std::string>& calorieLines)
+{
+    CalorieWriteup calorieWriteup = parseCalorieLines(calorieLines);
+    CalorieSequence totalCalories = flattenCalorieWriteup(calorieWriteup);
+
+    std::sort(totalCalories.begin(), totalCalories.end(), std::greater<int>());
+    return totalCalories.at(0) + totalCalories.at(1) + totalCalories.at(2);
+}
+
 }
 }
 }

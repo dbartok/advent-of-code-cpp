@@ -14,7 +14,8 @@ namespace Year2022
 namespace Day01
 {
 
-int maxTotalCaloriesCarried(const std::vector<std::string>& calorieLines);
+int maxTotalCaloriesCarried(const std::vector<std::string>&calorieLines);
+int totalCaloriesCarriedByTopThreeElves(const std::vector<std::string>& calorieLines);
 
 }
 }
