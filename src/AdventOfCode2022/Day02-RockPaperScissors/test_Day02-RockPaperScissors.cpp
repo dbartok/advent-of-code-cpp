@@ -16,14 +16,19 @@ public:
 
     TEST_METHOD(totalScoreAccordingToStrategyGuide_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "A Y",
-            "B X",
-            "C Z"
-        };
-
-        Assert::AreEqual(15, CurrentDay::totalScoreAccordingToStrategyGuide(lines));
+        Assert::AreEqual(15, CurrentDay::totalScoreAccordingToStrategyGuide(m_lines));
     }
 
+    TEST_METHOD(totalScoreAccordingToElfInstructions_SimpleTests)
+    {
+        Assert::AreEqual(12, CurrentDay::totalScoreAccordingToElfInstructions(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "A Y",
+        "B X",
+        "C Z"
+    };
 };

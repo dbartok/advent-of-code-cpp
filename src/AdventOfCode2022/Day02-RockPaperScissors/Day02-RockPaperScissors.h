@@ -15,6 +15,7 @@ namespace Day02
 {
 
 int totalScoreAccordingToStrategyGuide(const std::vector<std::string>& strategyGuideLines);
+int totalScoreAccordingToElfInstructions(const std::vector<std::string>& strategyGuideLines);
 
 }
 }

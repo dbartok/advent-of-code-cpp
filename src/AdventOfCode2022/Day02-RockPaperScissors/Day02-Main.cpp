@@ -24,4 +24,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::totalScoreAccordingToStrategyGuide(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::totalScoreAccordingToElfInstructions(lines) << std::endl;
 }
