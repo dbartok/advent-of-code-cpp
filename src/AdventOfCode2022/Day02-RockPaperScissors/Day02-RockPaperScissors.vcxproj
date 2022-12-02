@@ -251,6 +251,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day02-RockPaperScissors.cpp" />
+    <ClCompile Include="RockPaperScissorsRound.cpp" />
     <ClCompile Include="test_Day02-RockPaperScissors.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -262,6 +263,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day02-RockPaperScissors.h" />
+    <ClInclude Include="RockPaperScissorsRound.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
