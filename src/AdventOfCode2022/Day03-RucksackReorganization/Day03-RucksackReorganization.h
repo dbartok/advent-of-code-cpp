@@ -15,6 +15,7 @@ namespace Day03
 {
 
 int sumOfSharedItemPriorities(const std::vector<std::string>& rucksackContentsLines);
+int sumOfGroupBadgePriorities(const std::vector<std::string>& rucksackContentsLines);
 
 }
 }

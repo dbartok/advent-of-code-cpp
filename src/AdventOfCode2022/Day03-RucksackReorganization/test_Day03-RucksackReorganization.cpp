@@ -15,17 +15,22 @@ public:
 
     TEST_METHOD(sumOfSharedItemPriorities_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "vJrwpWtwJgWrhcsFMMfFFhFp",
-            "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
-            "PmmdzqPrVvPwwTWBwg",
-            "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
-            "ttgJtRGJQctTZtZT",
-            "CrZsJsPPZsGzwwsLwLmpwMDw"
-        };
-
-        Assert::AreEqual(157, CurrentDay::sumOfSharedItemPriorities(lines));
+        Assert::AreEqual(157, CurrentDay::sumOfSharedItemPriorities(m_lines));
     }
 
+    TEST_METHOD(sumOfGroupBadgePriorities_SimpleTests)
+    {
+        Assert::AreEqual(70, CurrentDay::sumOfGroupBadgePriorities(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "vJrwpWtwJgWrhcsFMMfFFhFp",
+        "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+        "PmmdzqPrVvPwwTWBwg",
+        "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+        "ttgJtRGJQctTZtZT",
+        "CrZsJsPPZsGzwwsLwLmpwMDw"
+    };
 };

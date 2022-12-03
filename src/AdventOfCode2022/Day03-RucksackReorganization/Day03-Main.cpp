@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::sumOfSharedItemPriorities(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumOfGroupBadgePriorities(lines) << std::endl;
 }
