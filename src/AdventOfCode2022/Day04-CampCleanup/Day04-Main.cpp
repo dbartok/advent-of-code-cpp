@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numAssignmentPairsFullyContainingEachOther(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numAssignmentPairsOverlapping(lines) << std::endl;
 }

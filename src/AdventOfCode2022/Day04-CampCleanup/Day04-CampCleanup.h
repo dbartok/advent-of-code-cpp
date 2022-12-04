@@ -15,6 +15,7 @@ namespace Day04
 {
 
 int numAssignmentPairsFullyContainingEachOther(const std::vector<std::string>& assignmentPairLines);
+int numAssignmentPairsOverlapping(const std::vector<std::string>& assignmentPairLines);
 
 }
 }

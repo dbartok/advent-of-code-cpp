@@ -46,9 +46,17 @@ bool areAssignmentsContainedWithinEachOther(const AssignmentPair& assignmentPair
     const Assignment& firstAssignment = assignmentPair.first;
     const Assignment& secondAssignment = assignmentPair.second;
 
-    Assignment extendedAssignment{std::min(firstAssignment.first, secondAssignment.first), std::max(firstAssignment.second, secondAssignment.second)};
+    const Assignment extendedAssignment{std::min(firstAssignment.first, secondAssignment.first), std::max(firstAssignment.second, secondAssignment.second)};
 
     return (extendedAssignment == firstAssignment || extendedAssignment == secondAssignment);
+}
+
+bool areAssignmentsOverlapping(const AssignmentPair& assignmentPair)
+{
+    const Assignment& firstAssignment = assignmentPair.first;
+    const Assignment& secondAssignment = assignmentPair.second;
+
+    return !(firstAssignment.first > secondAssignment.second || secondAssignment.first > firstAssignment.second);
 }
 
 int numAssignmentPairsFullyContainingEachOther(const std::vector<std::string>& assignmentPairLines)
@@ -56,6 +64,13 @@ int numAssignmentPairsFullyContainingEachOther(const std::vector<std::string>& a
     AssignmentPairs assignmentPairs = parseAssignmentPairLines(assignmentPairLines);
 
     return std::count_if(assignmentPairs.cbegin(), assignmentPairs.cend(), areAssignmentsContainedWithinEachOther);
+}
+
+int numAssignmentPairsOverlapping(const std::vector<std::string>& assignmentPairLines)
+{
+    AssignmentPairs assignmentPairs = parseAssignmentPairLines(assignmentPairLines);
+
+    return std::count_if(assignmentPairs.cbegin(), assignmentPairs.cend(), areAssignmentsOverlapping);
 }
 
 }
