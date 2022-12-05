@@ -20,9 +20,15 @@
     <ClCompile Include="Day05-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CargoCrane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day05-SupplyStacks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoCrane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

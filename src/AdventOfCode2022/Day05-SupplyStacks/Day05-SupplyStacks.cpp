@@ -1,11 +1,12 @@
 #include "Day05-SupplyStacks.h"
 
+#include "CargoCrane.h"
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
 
-#include <stack>
 #include <regex>
 __END_LIBRARIES_DISABLE_WARNINGS
 
@@ -15,105 +16,6 @@ namespace Year2022
 {
 namespace Day05
 {
-
-struct MoveInstruction
-{
-    size_t from_index;
-    size_t to_index;
-    size_t quantity;
-};
-
-
-using CrateStack = std::stack<char>;
-
-class CargoCrane
-{
-public:
-    CargoCrane(std::vector<CrateStack> crateStacks, std::vector<MoveInstruction> moveInstructions)
-        : m_crateStacks{std::move(crateStacks)}
-        , m_moveInstructions{std::move(moveInstructions)}
-    {
-
-    }
-
-    void executeMoveInstructions()
-    {
-        for (const auto& moveInstruction : m_moveInstructions)
-        {
-            executeMoveInstruction(moveInstruction);
-        }
-    }
-
-    std::string getCratesOnTopOfEachStack() const
-    {
-        std::string cratesOnTopOfEachStack;
-
-        for (const auto& crateStack : m_crateStacks)
-        {
-            cratesOnTopOfEachStack += crateStack.top();
-        }
-
-        return cratesOnTopOfEachStack;
-    }
-
-protected:
-    std::vector<CrateStack> m_crateStacks;
-    std::vector<MoveInstruction> m_moveInstructions;
-
-    virtual void executeMoveInstruction(const MoveInstruction& moveInstruction) = 0;
-};
-
-class SingleCrateMovingCargoCrane : public CargoCrane
-{
-public:
-    using CargoCrane::CargoCrane;
-
-protected:
-    void executeMoveInstruction(const MoveInstruction& moveInstruction) override
-    {
-        for (size_t iteration = 0; iteration < moveInstruction.quantity; ++iteration)
-        {
-            moveSingleCrate(moveInstruction.from_index, moveInstruction.to_index);
-        }
-    }
-
-private:
-    void moveSingleCrate(size_t from_index, size_t to_index)
-    {
-        const char crate = m_crateStacks.at(from_index).top();
-        m_crateStacks.at(from_index).pop();
-        m_crateStacks.at(to_index).push(crate);
-    }
-};
-
-class MultiCrateMovingCargoCrane : public CargoCrane
-{
-public:
-    using CargoCrane::CargoCrane;
-
-protected:
-    void executeMoveInstruction(const MoveInstruction& moveInstruction) override
-    {
-        std::vector<char> cratesToMove;
-
-        for (size_t iteration = 0; iteration < moveInstruction.quantity; ++iteration)
-        {
-            const char crate = m_crateStacks.at(moveInstruction.from_index).top();
-            m_crateStacks.at(moveInstruction.from_index).pop();
-            cratesToMove.push_back(crate);
-        }
-
-        std::reverse(cratesToMove.begin(), cratesToMove.end());
-
-        for (size_t iteration = 0; iteration < moveInstruction.quantity; ++iteration)
-        {
-            const char crate = cratesToMove.at(iteration);
-            m_crateStacks.at(moveInstruction.to_index).push(crate);
-        }
-    }
-
-private:
-};
 
 using CargoCraneInputTextSection = std::vector<std::string>;
 
