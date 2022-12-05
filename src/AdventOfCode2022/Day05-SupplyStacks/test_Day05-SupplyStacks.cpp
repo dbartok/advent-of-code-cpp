@@ -15,20 +15,25 @@ public:
 
     TEST_METHOD(cratesOnTopOfEachStack_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "    [D]    ",
-            "[N] [C]    ",
-            "[Z] [M] [P]",
-            " 1   2   3 ",
-            "",
-            "move 1 from 2 to 1",
-            "move 3 from 1 to 3",
-            "move 2 from 2 to 1",
-            "move 1 from 1 to 2"
-        };
-
-        Assert::AreEqual(std::string{"CMZ"}, CurrentDay::cratesOnTopOfEachStack(lines));
+        Assert::AreEqual(std::string{"CMZ"}, CurrentDay::cratesOnTopOfEachStack(m_lines));
     }
 
+    TEST_METHOD(cratesOnTopOfEachStackWithNewerTypeCrane_SimpleTests)
+    {
+        Assert::AreEqual(std::string{"MCD"}, CurrentDay::cratesOnTopOfEachStackWithNewerTypeCrane(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "    [D]    ",
+        "[N] [C]    ",
+        "[Z] [M] [P]",
+        " 1   2   3 ",
+        "",
+        "move 1 from 2 to 1",
+        "move 3 from 1 to 3",
+        "move 2 from 2 to 1",
+        "move 1 from 1 to 2"
+    };
 };

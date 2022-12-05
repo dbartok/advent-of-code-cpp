@@ -15,6 +15,7 @@ namespace Day05
 {
 
 std::string cratesOnTopOfEachStack(const std::vector<std::string>& startingStacksAndRearrangementProcedureLines);
+std::string cratesOnTopOfEachStackWithNewerTypeCrane(const std::vector<std::string>& startingStacksAndRearrangementProcedureLines);
 
 }
 }

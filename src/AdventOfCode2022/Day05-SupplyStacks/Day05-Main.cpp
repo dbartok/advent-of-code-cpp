@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::cratesOnTopOfEachStack(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::cratesOnTopOfEachStackWithNewerTypeCrane(lines) << std::endl;
 }

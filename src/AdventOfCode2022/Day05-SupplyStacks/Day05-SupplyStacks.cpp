@@ -56,11 +56,20 @@ public:
         return cratesOnTopOfEachStack;
     }
 
-private:
+protected:
     std::vector<CrateStack> m_crateStacks;
     std::vector<MoveInstruction> m_moveInstructions;
 
-    void executeMoveInstruction(const MoveInstruction& moveInstruction)
+    virtual void executeMoveInstruction(const MoveInstruction& moveInstruction) = 0;
+};
+
+class SingleCrateMovingCargoCrane : public CargoCrane
+{
+public:
+    using CargoCrane::CargoCrane;
+
+protected:
+    void executeMoveInstruction(const MoveInstruction& moveInstruction) override
     {
         for (size_t iteration = 0; iteration < moveInstruction.quantity; ++iteration)
         {
@@ -68,12 +77,42 @@ private:
         }
     }
 
+private:
     void moveSingleCrate(size_t from_index, size_t to_index)
     {
         const char crate = m_crateStacks.at(from_index).top();
         m_crateStacks.at(from_index).pop();
         m_crateStacks.at(to_index).push(crate);
     }
+};
+
+class MultiCrateMovingCargoCrane : public CargoCrane
+{
+public:
+    using CargoCrane::CargoCrane;
+
+protected:
+    void executeMoveInstruction(const MoveInstruction& moveInstruction) override
+    {
+        std::vector<char> cratesToMove;
+
+        for (size_t iteration = 0; iteration < moveInstruction.quantity; ++iteration)
+        {
+            const char crate = m_crateStacks.at(moveInstruction.from_index).top();
+            m_crateStacks.at(moveInstruction.from_index).pop();
+            cratesToMove.push_back(crate);
+        }
+
+        std::reverse(cratesToMove.begin(), cratesToMove.end());
+
+        for (size_t iteration = 0; iteration < moveInstruction.quantity; ++iteration)
+        {
+            const char crate = cratesToMove.at(iteration);
+            m_crateStacks.at(moveInstruction.to_index).push(crate);
+        }
+    }
+
+private:
 };
 
 using CargoCraneInputTextSection = std::vector<std::string>;
@@ -91,7 +130,7 @@ std::vector<CrateStack> parseStartingStacksSection(const CargoCraneInputTextSect
         CrateStack crateStack;
         for (int j = cargoCraneInputTextSection.size() - 1 - LAST_STACK_ROW_OFFSET; j >= 0; --j)
         {
-            char element = cargoCraneInputTextSection.at(j).at(i);
+            const char element = cargoCraneInputTextSection.at(j).at(i);
             if (element != ' ')
             {
                 crateStack.push(element);
@@ -130,7 +169,9 @@ std::vector<MoveInstruction> parseRearrangementProcedureSection(const CargoCrane
     return moveInstructions;
 }
 
-CargoCrane parseStartingStacksAndRearrangementProcedureLines(const std::vector<std::string>& startingStacksAndRearrangementProcedureLines)
+template
+<class CargoCraneClass>
+CargoCraneClass parseStartingStacksAndRearrangementProcedureLines(const std::vector<std::string>& startingStacksAndRearrangementProcedureLines)
 {
     std::vector<CargoCraneInputTextSection> cargoCraneInputTextSections;
     boost::split(cargoCraneInputTextSections, startingStacksAndRearrangementProcedureLines, [](const auto& elem) {return elem.empty(); });
@@ -138,12 +179,21 @@ CargoCrane parseStartingStacksAndRearrangementProcedureLines(const std::vector<s
     std::vector<CrateStack> crateStack = parseStartingStacksSection(cargoCraneInputTextSections.at(0));
     std::vector<MoveInstruction> moveInstructions = parseRearrangementProcedureSection(cargoCraneInputTextSections.at(1));
 
-    return CargoCrane{std::move(crateStack), std::move(moveInstructions)};
+    return CargoCraneClass{crateStack, moveInstructions};
 }
 
 std::string cratesOnTopOfEachStack(const std::vector<std::string>& startingStacksAndRearrangementProcedureLines)
 {
-    CargoCrane cargoCrane = parseStartingStacksAndRearrangementProcedureLines(startingStacksAndRearrangementProcedureLines);
+    SingleCrateMovingCargoCrane cargoCrane = parseStartingStacksAndRearrangementProcedureLines<SingleCrateMovingCargoCrane>(startingStacksAndRearrangementProcedureLines);
+
+    cargoCrane.executeMoveInstructions();
+
+    return cargoCrane.getCratesOnTopOfEachStack();
+}
+
+std::string cratesOnTopOfEachStackWithNewerTypeCrane(const std::vector<std::string>& startingStacksAndRearrangementProcedureLines)
+{
+    MultiCrateMovingCargoCrane cargoCrane = parseStartingStacksAndRearrangementProcedureLines<MultiCrateMovingCargoCrane>(startingStacksAndRearrangementProcedureLines);
 
     cargoCrane.executeMoveInstructions();
 
