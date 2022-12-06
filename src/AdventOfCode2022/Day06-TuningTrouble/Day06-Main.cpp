@@ -18,4 +18,5 @@ int main()
     std::getline(fileIn, line);
 
     std::cout << "First part: " << CurrentDay::numCharactersProcessedBeforeStartOfPacketMarker(line) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numCharactersProcessedBeforeStartOfMessage(line) << std::endl;
 }

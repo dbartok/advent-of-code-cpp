@@ -14,6 +14,7 @@ namespace Day06
 {
 
 int numCharactersProcessedBeforeStartOfPacketMarker(const std::string& data);
+int numCharactersProcessedBeforeStartOfMessage(const std::string& data);
 
 }
 }
