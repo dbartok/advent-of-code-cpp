@@ -15,6 +15,7 @@ namespace Day07
 {
 
 int totalSizeOfSmallDirectories(const std::vector<std::string>& terminalOutputLines);
+int sizeOfSmallestDirectoryToDelete(const std::vector<std::string>& terminalOutputLines);
 
 }
 }

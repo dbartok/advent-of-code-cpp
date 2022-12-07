@@ -13,7 +13,9 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace
 {
 
-int SMALL_FOLDER_SIZE_THRESOLD = 100'000;
+int SMALL_DIRECTORY_SIZE_THRESOLD = 100'000;
+int TOTAL_FILESYSTEM_SIZE = 70'000'000;
+int FREE_SPACE_REQUIRED = 30'000'000;
 
 }
 
@@ -111,20 +113,36 @@ public:
         }
     }
 
-    int getTotalSizeOfSmallFolders()
+    int getTotalSizeOfSmallDirectories() const
     {
         std::vector<DirectoryNode*> allDirectories = m_rootDirectoryNode->getAllSubdirectoriesRecursively();
 
         return std::accumulate(allDirectories.cbegin(), allDirectories.cend(), 0, [](int acc, const auto directoryNodePtr)
                                {
                                    const int totalSize = directoryNodePtr->getTotalSize();
-                                   if (totalSize <= SMALL_FOLDER_SIZE_THRESOLD)
+                                   if (totalSize <= SMALL_DIRECTORY_SIZE_THRESOLD)
                                    {
                                        return acc + totalSize;
                                    }
 
                                    return acc;
                                });
+    }
+
+    int getSizeOfSmallestDirectoryToDelete() const
+    {
+        const int rootDirectorySize = m_rootDirectoryNode->getTotalSize();
+        const int currentFreeSpace = TOTAL_FILESYSTEM_SIZE - rootDirectorySize;
+        const int minDirectorySizeToDelete = FREE_SPACE_REQUIRED - currentFreeSpace;
+
+        std::vector<int> directorySizes = getAllDirectorySizes();
+
+        std::sort(directorySizes.begin(), directorySizes.end());
+
+        return *std::find_if(directorySizes.cbegin(), directorySizes.cend(), [minDirectorySizeToDelete](int directorySize)
+                          {
+                              return directorySize > minDirectorySizeToDelete;
+                          });
     }
 
 private:
@@ -179,6 +197,19 @@ private:
             m_currentDirectoryNode->insertFile(name, size);
         }
     }
+
+    std::vector<int> getAllDirectorySizes() const
+    {
+        std::vector<DirectoryNode*> allDirectories = m_rootDirectoryNode->getAllSubdirectoriesRecursively();
+
+        std::vector<int> allDirectorySizes;
+        std::transform(allDirectories.cbegin(), allDirectories.cend(), std::back_inserter(allDirectorySizes), [](const auto& directory)
+                       {
+                           return directory->getTotalSize();
+                       });
+
+        return allDirectorySizes;
+    }
 };
 
 int totalSizeOfSmallDirectories(const std::vector<std::string>& terminalOutputLines)
@@ -187,7 +218,16 @@ int totalSizeOfSmallDirectories(const std::vector<std::string>& terminalOutputLi
 
     terminalOutputAnalyzer.reconstructFilesystem();
 
-    return terminalOutputAnalyzer.getTotalSizeOfSmallFolders();
+    return terminalOutputAnalyzer.getTotalSizeOfSmallDirectories();
+}
+
+int sizeOfSmallestDirectoryToDelete(const std::vector<std::string>& terminalOutputLines)
+{
+    TerminalOutputAnalyzer terminalOutputAnalyzer{terminalOutputLines};
+
+    terminalOutputAnalyzer.reconstructFilesystem();
+
+    return terminalOutputAnalyzer.getSizeOfSmallestDirectoryToDelete();
 }
 
 }
