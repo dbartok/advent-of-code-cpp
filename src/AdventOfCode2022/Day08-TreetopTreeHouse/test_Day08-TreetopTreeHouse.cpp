@@ -15,16 +15,21 @@ public:
 
     TEST_METHOD(numTreesVisibleFromOutsideTheGrid_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "30373",
-            "25512",
-            "65332",
-            "33549",
-            "35390"
-        };
-
-        Assert::AreEqual(21, CurrentDay::numTreesVisibleFromOutsideTheGrid(lines));
+        Assert::AreEqual(21, CurrentDay::numTreesVisibleFromOutsideTheGrid(m_lines));
     }
 
+    TEST_METHOD(highestPossibleScenicScore_SimpleTests)
+    {
+        Assert::AreEqual(8, CurrentDay::highestPossibleScenicScore(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "30373",
+        "25512",
+        "65332",
+        "33549",
+        "35390"
+    };
 };

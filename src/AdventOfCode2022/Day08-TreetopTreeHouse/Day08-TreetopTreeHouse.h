@@ -15,6 +15,7 @@ namespace Day08
 {
 
 int numTreesVisibleFromOutsideTheGrid(const std::vector<std::string>& heightmapLines);
+int highestPossibleScenicScore(const std::vector<std::string>& heightmapLines);
 
 }
 }
