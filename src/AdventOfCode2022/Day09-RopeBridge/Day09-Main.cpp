@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numPositionsVisitedByTail(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numPositionsVisitedByTailWithLongerRope(lines) << std::endl;
 }

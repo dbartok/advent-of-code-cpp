@@ -30,4 +30,21 @@ public:
         Assert::AreEqual(13, CurrentDay::numPositionsVisitedByTail(lines));
     }
 
+    TEST_METHOD(numPositionsVisitedByTailWithLongerRope_SimpleTests)
+    {
+        const std::vector<std::string>& lines =
+        {
+            "R 5",
+            "U 8",
+            "L 8",
+            "D 3",
+            "R 17",
+            "D 10",
+            "L 25",
+            "U 20"
+        };
+
+        Assert::AreEqual(36, CurrentDay::numPositionsVisitedByTailWithLongerRope(lines));
+    }
+
 };

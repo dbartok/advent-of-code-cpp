@@ -15,6 +15,7 @@ namespace Day09
 {
 
 int numPositionsVisitedByTail(const std::vector<std::string>& motionLines);
+int numPositionsVisitedByTailWithLongerRope(const std::vector<std::string>& motionLines);
 
 }
 }

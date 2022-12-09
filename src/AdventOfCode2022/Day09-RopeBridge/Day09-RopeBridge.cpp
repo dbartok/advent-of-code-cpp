@@ -10,6 +10,14 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <unordered_set>
 __END_LIBRARIES_DISABLE_WARNINGS
 
+namespace
+{
+
+unsigned SHORT_ROPE_NUM_KNOTS = 2;
+unsigned LONG_ROPE_NUM_KNOTS = 10;
+
+}
+
 namespace AdventOfCode
 {
 namespace Year2022
@@ -49,12 +57,13 @@ struct Vector2DHash
 class RopeSimulator
 {
 public:
-    RopeSimulator(std::vector<Motion> motions)
+    RopeSimulator(std::vector<Motion> motions, unsigned numKnots)
         : m_motions{std::move(motions)}
-        , m_headPosition{0, 0}
-        , m_tailPosition{0, 0}
     {
-
+        for (unsigned iteration = 0; iteration < numKnots; ++iteration)
+        {
+            m_knotPositions.emplace_back(0, 0);
+        }
     }
 
     void simulate()
@@ -73,8 +82,7 @@ public:
 private:
     std::vector<Motion> m_motions;
 
-    Vector2D m_headPosition;
-    Vector2D m_tailPosition;
+    std::vector<Vector2D> m_knotPositions;
     std::unordered_set<Vector2D, Vector2DHash> m_positionsVisitedByTail;
 
     void simulateMotion(const Motion& motion)
@@ -88,19 +96,27 @@ private:
     void simulateSingleStep(Direction direction)
     {
         moveHeadBySingleStepTowardsDirection(direction);
-        adjustTail();
-        m_positionsVisitedByTail.insert(m_tailPosition);
+        adjustKnotsBehindHead();
+        m_positionsVisitedByTail.insert(m_knotPositions.back());
     }
 
     void moveHeadBySingleStepTowardsDirection(Direction direction)
     {
         const Vector2D movementVector = getSingleStepMotionVector(direction);
-        m_headPosition += movementVector;
+        m_knotPositions.front() += movementVector;
     }
 
-    void adjustTail()
+    void adjustKnotsBehindHead()
     {
-        const Vector2D tailToHeadVector = m_headPosition - m_tailPosition;
+        for (size_t i = 1; i < m_knotPositions.size(); ++i)
+        {
+            adjustTailAccordingToHead(m_knotPositions.at(i), m_knotPositions.at(i - 1));
+        }
+    }
+
+    static void adjustTailAccordingToHead(Vector2D& tailPosition, const Vector2D& headPosition)
+    {
+        const Vector2D tailToHeadVector = headPosition - tailPosition;
 
         if (abs(tailToHeadVector.x()) > 1 || abs(tailToHeadVector.y()) > 1)
         {
@@ -109,7 +125,7 @@ private:
 
             const Vector2D adjustmentVector = Vector2D{adjustmentX, adjustmentY};
 
-            m_tailPosition += adjustmentVector;
+            tailPosition += adjustmentVector;
         }
     }
 
@@ -177,7 +193,18 @@ int numPositionsVisitedByTail(const std::vector<std::string>& motionLines)
 {
     std::vector<Motion> motions = parseMotionLines(motionLines);
 
-    RopeSimulator ropeSimulator{std::move(motions)};
+    RopeSimulator ropeSimulator{std::move(motions), SHORT_ROPE_NUM_KNOTS};
+
+    ropeSimulator.simulate();
+
+    return ropeSimulator.getNumPositionsVisitedByTail();
+}
+
+int numPositionsVisitedByTailWithLongerRope(const std::vector<std::string>& motionLines)
+{
+    std::vector<Motion> motions = parseMotionLines(motionLines);
+
+    RopeSimulator ropeSimulator{std::move(motions), LONG_ROPE_NUM_KNOTS};
 
     ropeSimulator.simulate();
 
