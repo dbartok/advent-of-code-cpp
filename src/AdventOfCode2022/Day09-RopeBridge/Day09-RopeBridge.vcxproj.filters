@@ -20,9 +20,15 @@
     <ClCompile Include="Day09-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RopeSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day09-RopeBridge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RopeSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
