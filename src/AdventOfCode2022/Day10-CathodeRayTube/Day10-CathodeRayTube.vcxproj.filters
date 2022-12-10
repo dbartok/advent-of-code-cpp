@@ -20,9 +20,15 @@
     <ClCompile Include="Day10-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CommunicationDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day10-CathodeRayTube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommunicationDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
