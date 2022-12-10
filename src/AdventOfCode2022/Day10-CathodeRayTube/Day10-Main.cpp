@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::sumOfInterestingSignalStrengths(lines) << std::endl;
+    std::cout << "Second part:\n" << CurrentDay::imageAppearingOnScreen(lines) << std::endl;
 }

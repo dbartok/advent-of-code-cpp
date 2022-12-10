@@ -15,6 +15,7 @@ namespace Day10
 {
 
 int sumOfInterestingSignalStrengths(const std::vector<std::string>& instructionLines);
+std::string imageAppearingOnScreen(const std::vector<std::string>& instructionLines);
 
 }
 }

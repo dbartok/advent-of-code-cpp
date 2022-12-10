@@ -11,13 +11,17 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace
 {
 
-int REGISTER_STARTING_VALUE = 1;
-unsigned INTERESTING_SIGNAL_STRENGTH_OFFSET = 20;
-unsigned INTERESTING_SIGNAL_STRENGTH_MODULUS = 40;
-unsigned INTERESTING_SIGNAL_STRENGTH_COUNT = 6;
+const int REGISTER_STARTING_VALUE = 1;
+const unsigned INTERESTING_SIGNAL_STRENGTH_OFFSET = 20;
+const unsigned INTERESTING_SIGNAL_STRENGTH_MODULUS = 40;
+const unsigned INTERESTING_SIGNAL_STRENGTH_COUNT = 6;
+const unsigned SCREEN_WIDTH = 40;
+const unsigned SCREEN_HEIGHT = 6;
+const char LIGHT_PIXEL = '#';
+const char DARK_PIXEL = '.';
 
-unsigned ADDX_INSTRUCTION_DURATION = 2;
-unsigned NOOP_INSTRUCTION_DURATION = 1;
+const unsigned ADDX_INSTRUCTION_DURATION = 2;
+const unsigned NOOP_INSTRUCTION_DURATION = 1;
 
 }
 
@@ -41,6 +45,7 @@ public:
         : m_instructions{std::move(instructions)}
         , m_register{REGISTER_STARTING_VALUE}
         , m_cycleCounter{0u}
+        , m_screen(SCREEN_HEIGHT * SCREEN_WIDTH)
     {
 
     }
@@ -63,12 +68,30 @@ public:
         return std::accumulate(m_interestingSignalStrengths.cbegin(), m_interestingSignalStrengths.cbegin() + INTERESTING_SIGNAL_STRENGTH_COUNT, 0);
     }
 
+    std::string getImageAppearingOnScreen() const
+    {
+        std::string output;
+
+        for (size_t i = 0; i < m_screen.size(); ++i)
+        {
+            const char currentChar = m_screen.at(i) ? LIGHT_PIXEL : DARK_PIXEL;
+            output += currentChar;
+            if ((i + 1) % SCREEN_WIDTH == 0 && i != m_screen.size() - 1)
+            {
+                output += "\n";
+            }
+        }
+
+        return output;
+    }
+
 private:
     std::vector<Instruction> m_instructions;
 
     int m_register;
     unsigned m_cycleCounter;
     std::vector<int> m_interestingSignalStrengths;
+    std::vector<bool> m_screen;
 
     void runInstruction(const Instruction& instruction)
     {
@@ -82,12 +105,27 @@ private:
 
     void elapseCycle()
     {
+        drawCurrentPixel();
+
         ++m_cycleCounter;
 
+        captureInterestingSignalStrength();
+    }
+
+    void captureInterestingSignalStrength()
+    {
         if (m_cycleCounter % INTERESTING_SIGNAL_STRENGTH_MODULUS == INTERESTING_SIGNAL_STRENGTH_OFFSET)
         {
             m_interestingSignalStrengths.push_back(m_cycleCounter * m_register);
         }
+    }
+
+    void drawCurrentPixel()
+    {
+        const int currentlyRenderedPixelPositionX = m_cycleCounter % SCREEN_WIDTH;
+        const bool isCurrentPixelLit = std::abs(currentlyRenderedPixelPositionX - m_register) <= 1;
+
+        m_screen.at(m_cycleCounter) = isCurrentPixelLit;
     }
 };
 
@@ -128,6 +166,17 @@ int sumOfInterestingSignalStrengths(const std::vector<std::string>& instructionL
     communicationDevice.runProgram();
 
     return communicationDevice.getSumOfInterestingSignalStrengths();
+}
+
+std::string imageAppearingOnScreen(const std::vector<std::string>& instructionLines)
+{
+    std::vector<Instruction> instructions = parseInstructionLines(instructionLines);
+
+    CommunicationDevice communicationDevice{std::move(instructions)};
+
+    communicationDevice.runProgram();
+
+    return communicationDevice.getImageAppearingOnScreen();
 }
 
 }
