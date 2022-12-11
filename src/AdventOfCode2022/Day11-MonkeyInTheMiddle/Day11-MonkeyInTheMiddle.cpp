@@ -7,16 +7,20 @@
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/integer/common_factor.hpp>
 
 #include <regex>
 #include <memory>
+#include <numeric>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
 {
 
-const int WORRY_LEVEL_DIVISOR_BEFORE_PASSING_ITEM = 3;
-const unsigned NUM_ROUNDS_TO_SIMULATE = 20;
+const int WORRY_LEVEL_DIVISOR_FIRST_PART = 3;
+const int WORRY_LEVEL_DIVISOR_SECOND_PART = 1;
+const unsigned NUM_ROUNDS_TO_SIMULATE_FIRST_PART = 20;
+const unsigned NUM_ROUNDS_TO_SIMULATE_SECOND_PART = 10'000;
 
 }
 
@@ -32,7 +36,7 @@ class Operation
 public:
     using SharedPtr = std::shared_ptr<Operation>;
 
-    virtual int apply(int operand) const = 0;
+    virtual LargeNumberType apply(LargeNumberType operand) const = 0;
 };
 
 class Addition : public Operation
@@ -44,7 +48,7 @@ public:
 
     }
 
-    int apply(int operand) const override
+    LargeNumberType apply(LargeNumberType operand) const override
     {
         return operand + m_factor;
     }
@@ -62,7 +66,7 @@ public:
 
     }
 
-    int apply(int operand) const override
+    LargeNumberType apply(LargeNumberType operand) const override
     {
         return operand * m_factor;
     }
@@ -74,7 +78,7 @@ private:
 class Square : public Operation
 {
 public:
-    int apply(int operand) const override
+    LargeNumberType apply(LargeNumberType operand) const override
     {
         return operand * operand;
     }
@@ -97,13 +101,18 @@ public:
         m_allMonkeys = std::move(allMonkeys);
     }
 
-    void executeTurn()
+    void setStorageModulus(int storageModulus)
+    {
+        m_storageModulus = storageModulus;
+    }
+
+    void executeTurn(int worryLevelDivisor)
     {
         while (!m_currentItems.empty())
         {
-            const int item = m_currentItems.front();
+            const LargeNumberType item = m_currentItems.front();
             m_currentItems.pop_front();
-            processItem(item);
+            processItem(item, worryLevelDivisor);
         }
     }
 
@@ -117,21 +126,29 @@ public:
         return m_numItemsInspected;
     }
 
+    int getTestModulus() const
+    {
+        return m_testModulus;
+    }
+
 private:
-    std::deque<int> m_currentItems;
+    std::deque<LargeNumberType> m_currentItems;
     Operation::SharedPtr m_operation;
     int m_testModulus;
     unsigned m_testTrueTarget;
     unsigned m_testFalseTarget;
 
     std::vector<Monkey>* m_allMonkeys;
+    int m_storageModulus = -1;
 
     int m_numItemsInspected = 0;
 
-    void processItem(int item)
+    void processItem(LargeNumberType item, int worryLevelDivisor)
     {
-        int newWorryLevel = m_operation->apply(item);
-        newWorryLevel /= WORRY_LEVEL_DIVISOR_BEFORE_PASSING_ITEM;
+        LargeNumberType newWorryLevel = m_operation->apply(item);
+        newWorryLevel /= worryLevelDivisor;
+        newWorryLevel %= m_storageModulus;
+
         const unsigned target = (newWorryLevel % m_testModulus == 0) ? m_testTrueTarget : m_testFalseTarget;
         m_allMonkeys->at(target).receiveItem(newWorryLevel);
 
@@ -142,12 +159,16 @@ private:
 class MonkeyGroupSimulator
 {
 public:
-    MonkeyGroupSimulator(std::vector<Monkey> monkeys)
+    MonkeyGroupSimulator(std::vector<Monkey> monkeys, int worryLevelDivisor)
         : m_monkeys{std::move(monkeys)}
+        , m_worryLevelDivisor{worryLevelDivisor}
     {
+        const int storageModulus = determineStorageModulus();
+
         for (auto& monkey : m_monkeys)
         {
             monkey.setAllMonkeys(&m_monkeys);
+            monkey.setStorageModulus(storageModulus);
         }
     }
 
@@ -159,7 +180,7 @@ public:
         }
     }
 
-    int getLevelOfMonkeyBusiness() const
+    int64_t getLevelOfMonkeyBusiness() const
     {
         std::vector<Monkey> monkeysSortedAccordingToNumItemsInspected{m_monkeys.cbegin(), m_monkeys.cend()};
         std::sort(monkeysSortedAccordingToNumItemsInspected.begin(), monkeysSortedAccordingToNumItemsInspected.end(), [](const auto& lhs, const auto& rhs)
@@ -170,18 +191,28 @@ public:
         const Monkey& mostActiveMonkey = *monkeysSortedAccordingToNumItemsInspected.cbegin();
         const Monkey& secondMostActiveMonkey = *(monkeysSortedAccordingToNumItemsInspected.cbegin() + 1);
 
-        return mostActiveMonkey.getNumItemsInspected() * secondMostActiveMonkey.getNumItemsInspected();
+        return int64_t{mostActiveMonkey.getNumItemsInspected()} * secondMostActiveMonkey.getNumItemsInspected();
     }
 
 private:
     std::vector<Monkey> m_monkeys;
+    int m_worryLevelDivisor;
 
     void simulateRound()
     {
         for (auto& monkey : m_monkeys)
         {
-            monkey.executeTurn();
+            monkey.executeTurn(m_worryLevelDivisor);
         }
+    }
+
+    int determineStorageModulus() const
+    {
+        return std::accumulate(m_monkeys.cbegin(), m_monkeys.cend(), 1, [](auto acc, const auto& monkey)
+                               {
+                                   return boost::integer::lcm(acc, monkey.getTestModulus());
+                               });
+
     }
 };
 
@@ -270,15 +301,24 @@ std::vector<Monkey> parseMonkeyDescriptionLines(const std::vector<std::string>& 
     return monkeys;
 }
 
-
-
-int levelOfMonkeyBusiness(const std::vector<std::string>& monkeyDescriptionLines)
+int64_t levelOfMonkeyBusiness(const std::vector<std::string>& monkeyDescriptionLines)
 {
     std::vector<Monkey> monkeys = parseMonkeyDescriptionLines(monkeyDescriptionLines);
 
-    MonkeyGroupSimulator monkeyGroupSimulator{monkeys};
+    MonkeyGroupSimulator monkeyGroupSimulator{monkeys, WORRY_LEVEL_DIVISOR_FIRST_PART};
 
-    monkeyGroupSimulator.simulate(NUM_ROUNDS_TO_SIMULATE);
+    monkeyGroupSimulator.simulate(NUM_ROUNDS_TO_SIMULATE_FIRST_PART);
+
+    return monkeyGroupSimulator.getLevelOfMonkeyBusiness();
+}
+
+int64_t levelOfMonkeyBusinessWithRidiculousWorryLevels(const std::vector<std::string>& monkeyDescriptionLines)
+{
+    std::vector<Monkey> monkeys = parseMonkeyDescriptionLines(monkeyDescriptionLines);
+
+    MonkeyGroupSimulator monkeyGroupSimulator{monkeys, WORRY_LEVEL_DIVISOR_SECOND_PART};
+
+    monkeyGroupSimulator.simulate(NUM_ROUNDS_TO_SIMULATE_SECOND_PART);
 
     return monkeyGroupSimulator.getLevelOfMonkeyBusiness();
 }

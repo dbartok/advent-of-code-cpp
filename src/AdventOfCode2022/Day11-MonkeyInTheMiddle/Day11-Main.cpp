@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::levelOfMonkeyBusiness(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::levelOfMonkeyBusinessWithRidiculousWorryLevels(lines) << std::endl;
 }
