@@ -20,9 +20,15 @@
     <ClCompile Include="Day12-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HillTraverser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day12-HillClimbingAlgorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HillTraverser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
