@@ -15,16 +15,21 @@ public:
 
     TEST_METHOD(fewestStepsFromStartToEnd_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "Sabqponm",
-            "abcryxxl",
-            "accszExk",
-            "acctuvwj",
-            "abdefghi"
-        };
-
-        Assert::AreEqual(31, CurrentDay::fewestStepsFromStartToEnd(lines));
+        Assert::AreEqual(31, CurrentDay::fewestStepsFromStartToEnd(m_lines));
     }
 
+    TEST_METHOD(fewestStepsFromAnyLowestElevationPointToEnd_SimpleTests)
+    {
+        Assert::AreEqual(29, CurrentDay::fewestStepsFromAnyLowestElevationPointToEnd(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "Sabqponm",
+        "abcryxxl",
+        "accszExk",
+        "acctuvwj",
+        "abdefghi"
+    };
 };

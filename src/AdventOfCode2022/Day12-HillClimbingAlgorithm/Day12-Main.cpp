@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::fewestStepsFromStartToEnd(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::fewestStepsFromAnyLowestElevationPointToEnd(lines) << std::endl;
 }

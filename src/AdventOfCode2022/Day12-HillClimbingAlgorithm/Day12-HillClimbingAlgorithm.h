@@ -15,6 +15,7 @@ namespace Day12
 {
 
 int fewestStepsFromStartToEnd(const std::vector<std::string>& heightmapLines);
+int fewestStepsFromAnyLowestElevationPointToEnd(const std::vector<std::string>& heightmapLines);
 
 }
 }

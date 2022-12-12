@@ -33,7 +33,7 @@ using Coordinates = std::pair<int, int>;
 class HillTraverser
 {
 public:
-    HillTraverser(Heightmap heightmap)
+    HillTraverser(Heightmap heightmap, std::unordered_set<char> possibleStartChars)
         : m_heightmap{std::move(heightmap)}
         , m_height{m_heightmap.size()}
         , m_width{m_heightmap.at(0).size()}
@@ -42,9 +42,9 @@ public:
         {
             for (size_t i = 0; i < m_width; ++i)
             {
-                if (heightAt({i, j}) == START_POSITION_CHAR)
+                if (possibleStartChars.find(heightAt({i, j})) != possibleStartChars.cend())
                 {
-                    m_startCoordinates = {i, j};
+                    m_allPossibleStartCoordinates.push_back({i, j});
                     heightAt({i, j}) = HEIGHT_AT_START;
                 }
 
@@ -59,31 +59,9 @@ public:
 
     void traverse()
     {
-        std::queue<BfsNode> bfsQueue;
-        bfsQueue.push({m_startCoordinates, 0});
-        m_visitedCoordinates.insert(m_startCoordinates);
-
-        while (!bfsQueue.empty())
+        for (const auto& startCoordinates : m_allPossibleStartCoordinates)
         {
-            const BfsNode currentNode = bfsQueue.front();
-            bfsQueue.pop();
-
-            if (currentNode.coordinates == m_endCoordinates)
-            {
-                m_minStepsFromStartToEnd = currentNode.numSteps;
-                break;
-            }
-
-            const std::vector<Coordinates> allReachableNeighborCoordinates = getAllReachableNeighborCoordinates(currentNode.coordinates);
-
-            for (const auto& reachableNeighborCoordinates : allReachableNeighborCoordinates)
-            {
-                const bool isPreviouslyUnseen = m_visitedCoordinates.insert(reachableNeighborCoordinates).second;
-                if (isPreviouslyUnseen)
-                {
-                    bfsQueue.push({reachableNeighborCoordinates, currentNode.numSteps + 1});
-                }
-            }
+            traverseFromSingleStartingPoint(startCoordinates);
         }
     }
 
@@ -102,12 +80,42 @@ private:
     Heightmap m_heightmap;
     size_t m_height;
     size_t m_width;
-    Coordinates m_startCoordinates;
+    std::vector<Coordinates> m_allPossibleStartCoordinates;
     Coordinates m_endCoordinates;
 
-    std::unordered_set<Coordinates, boost::hash<Coordinates>> m_visitedCoordinates;
+    int m_minStepsFromStartToEnd = std::numeric_limits<int>::max();
 
-    int m_minStepsFromStartToEnd = 0;
+    void traverseFromSingleStartingPoint(const Coordinates& startCoordinates)
+    {
+        std::queue<BfsNode> bfsQueue;
+        bfsQueue.push({startCoordinates, 0});
+
+        std::unordered_set<Coordinates, boost::hash<Coordinates>> visitedCoordinates;
+        visitedCoordinates.insert(startCoordinates);
+
+        while (!bfsQueue.empty())
+        {
+            const BfsNode currentNode = bfsQueue.front();
+            bfsQueue.pop();
+
+            if (currentNode.coordinates == m_endCoordinates)
+            {
+                m_minStepsFromStartToEnd = std::min(m_minStepsFromStartToEnd, currentNode.numSteps);
+                break;
+            }
+
+            const std::vector<Coordinates> allReachableNeighborCoordinates = getAllReachableNeighborCoordinates(currentNode.coordinates);
+
+            for (const auto& reachableNeighborCoordinates : allReachableNeighborCoordinates)
+            {
+                const bool isPreviouslyUnseen = visitedCoordinates.insert(reachableNeighborCoordinates).second;
+                if (isPreviouslyUnseen)
+                {
+                    bfsQueue.push({reachableNeighborCoordinates, currentNode.numSteps + 1});
+                }
+            }
+        }
+    }
 
     std::vector<Coordinates> getAllReachableNeighborCoordinates(const Coordinates& baseCoordinates) const
     {
@@ -158,7 +166,16 @@ private:
 
 int fewestStepsFromStartToEnd(const std::vector<std::string>& heightmapLines)
 {
-    HillTraverser hillTraverser{heightmapLines};
+    HillTraverser hillTraverser{heightmapLines, {START_POSITION_CHAR}};
+
+    hillTraverser.traverse();
+
+    return hillTraverser.getMinStepsFromStartToEnd();
+}
+
+int fewestStepsFromAnyLowestElevationPointToEnd(const std::vector<std::string>& heightmapLines)
+{
+    HillTraverser hillTraverser{heightmapLines, {START_POSITION_CHAR, HEIGHT_AT_START}};
 
     hillTraverser.traverse();
 
