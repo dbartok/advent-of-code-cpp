@@ -163,8 +163,10 @@ private:
 };
 
 using PacketPairTextSection = std::vector<std::string>;
+const char* firstDividerPacketString = "[[2]]";
+const char* secondDividerPacketString = "[[6]]";
 
-PacketSharedPtr parsePacketLine(const std::string& packetLine)
+PacketSharedPtr parsePacketString(const std::string& packetLine)
 {
     PacketParser packetParser(packetLine);
     packetParser.parse();
@@ -173,8 +175,8 @@ PacketSharedPtr parsePacketLine(const std::string& packetLine)
 
 PacketPair parsePacketPairTextSection(const PacketPairTextSection& packetPairTextSection)
 {
-    PacketSharedPtr firstPacket = parsePacketLine(packetPairTextSection.at(0));
-    PacketSharedPtr secondPacket = parsePacketLine(packetPairTextSection.at(1));
+    PacketSharedPtr firstPacket = parsePacketString(packetPairTextSection.at(0));
+    PacketSharedPtr secondPacket = parsePacketString(packetPairTextSection.at(1));
 
     return PacketPair{std::move(firstPacket), std::move(secondPacket)};
 }
@@ -257,6 +259,19 @@ boost::optional<bool> arePacketsInOrder(const PacketSharedPtr& firstPacket, cons
     }
 }
 
+Packets flattenPacketPairs(const PacketPairs& packetPairs)
+{
+    Packets packets;
+
+    for (const auto& packetPair : packetPairs)
+    {
+        packets.push_back(packetPair.first);
+        packets.push_back(packetPair.second);
+    }
+
+    return packets;
+}
+
 int sumOfIndicesOfPairsInRightOrder(const std::vector<std::string>& distressSignalLines)
 {
     PacketPairs packetPairs = parseDistressSignalLines(distressSignalLines);
@@ -265,14 +280,39 @@ int sumOfIndicesOfPairsInRightOrder(const std::vector<std::string>& distressSign
 
     for (size_t i = 0; i < packetPairs.size(); ++i)
     {
-        const boost::optional<bool> orderResult = arePacketsInOrder(packetPairs.at(i).first, packetPairs.at(i).second);
-        if (orderResult.get_value_or(true))
+        if (arePacketsInOrder(packetPairs.at(i).first, packetPairs.at(i).second))
         {
             sum += (i + 1);
         }
     }
 
     return sum;
+}
+
+int decoderKeyForDistressSignal(const std::vector<std::string>& distressSignalLines)
+{
+    PacketPairs packetPairs = parseDistressSignalLines(distressSignalLines);
+    Packets packets = flattenPacketPairs(packetPairs);
+
+    PacketSharedPtr firstDividerPacket = parsePacketString(firstDividerPacketString);
+    packets.push_back(firstDividerPacket);
+
+    PacketSharedPtr secondDividerPacket = parsePacketString(secondDividerPacketString);
+    packets.push_back(secondDividerPacket);
+
+    std::sort(packets.begin(), packets.end(), arePacketsInOrder);
+
+    int decoderKey = 1;
+
+    for (size_t i = 0; i < packets.size(); ++i)
+    {
+        if (packets.at(i) == firstDividerPacket || packets.at(i) == secondDividerPacket)
+        {
+            decoderKey *= i;
+        }
+    }
+
+    return decoderKey;
 }
 
 }

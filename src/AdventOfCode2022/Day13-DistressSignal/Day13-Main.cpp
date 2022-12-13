@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::sumOfIndicesOfPairsInRightOrder(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::decoderKeyForDistressSignal(lines) << std::endl;
 }

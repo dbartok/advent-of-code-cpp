@@ -15,6 +15,7 @@ namespace Day13
 {
 
 int sumOfIndicesOfPairsInRightOrder(const std::vector<std::string>& distressSignalLines);
+int decoderKeyForDistressSignal(const std::vector<std::string>& distressSignalLines);
 
 }
 }
