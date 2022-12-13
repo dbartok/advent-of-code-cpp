@@ -251,6 +251,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day13-DistressSignal.cpp" />
+    <ClCompile Include="PacketParser.cpp" />
     <ClCompile Include="test_Day13-DistressSignal.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -262,6 +263,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day13-DistressSignal.h" />
+    <ClInclude Include="Packet.h" />
+    <ClInclude Include="PacketParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

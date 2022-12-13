@@ -1,11 +1,22 @@
 #include "Day13-DistressSignal.h"
 
+#include "Packet.h"
+#include "PacketParser.h"
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
 #include <boost/optional.hpp>
 __END_LIBRARIES_DISABLE_WARNINGS
+
+namespace
+{
+
+const char* firstDividerPacketString = "[[2]]";
+const char* secondDividerPacketString = "[[6]]";
+
+}
 
 namespace AdventOfCode
 {
@@ -14,157 +25,9 @@ namespace Year2022
 namespace Day13
 {
 
-class Packet;
-using PacketSharedPtr = std::shared_ptr<Packet>;
-using Packets = std::vector<PacketSharedPtr>;
-
-class Packet
-{
-public:
-    virtual Packets getContainedPackets() const = 0;
-    virtual boost::optional<int> getScalarValue() const = 0;
-
-private:
-};
-
-
-class ListPacket : public Packet
-{
-public:
-    ListPacket(Packets containedPackets)
-        : m_containedPackets{std::move(containedPackets)}
-    {
-
-    }
-
-    Packets getContainedPackets() const override
-    {
-        return m_containedPackets;
-    }
-
-    boost::optional<int> getScalarValue() const override
-    {
-        return boost::none;
-    }
-
-private:
-    Packets m_containedPackets;
-};
-
-class IntegerPacket : public Packet
-{
-public:
-    IntegerPacket(int value)
-        : m_value{value}
-    {
-
-    }
-
-    Packets getContainedPackets() const override
-    {
-        throw std::runtime_error("Integer packets contain no further packets");
-    }
-
-    boost::optional<int> getScalarValue() const override
-    {
-        return m_value;
-    }
-
-private:
-    int m_value;
-};
-
+using PacketPairTextSection = std::vector<std::string>;
 using PacketPair = std::pair<PacketSharedPtr, PacketSharedPtr>;
 using PacketPairs = std::vector<PacketPair>;
-
-class PacketParser
-{
-public:
-    PacketParser(std::string packetString)
-        : m_packetString{std::move(packetString)}
-    {
-        std::string numberTokenBuffer;
-        for (auto c : m_packetString)
-        {
-            if (isdigit(c))
-            {
-                numberTokenBuffer += c;
-            }
-            else
-            {
-                if (!numberTokenBuffer.empty())
-                {
-                    m_tokens.push_back(std::move(numberTokenBuffer));
-                    numberTokenBuffer.clear();
-                }
-                if (c != ',')
-                {
-                    m_tokens.push_back(std::string{c});
-                }
-            }
-        }
-    }
-
-    void parse()
-    {
-        // Skip outermost brackets because the root packet is precreated already
-        getNextToken();
-
-        Packets containedPackets = parseContainedPackets();
-        m_rootPacket = std::make_shared<ListPacket>(std::move(containedPackets));
-    }
-
-    PacketSharedPtr getRootPacket()
-    {
-        return m_rootPacket;
-    }
-
-private:
-    std::string m_packetString;
-    std::vector<std::string> m_tokens;
-    size_t m_currentTokenIndex = 0;
-
-    PacketSharedPtr m_rootPacket = nullptr;
-
-    Packets parseContainedPackets()
-    {
-        Packets containedPackets;
-
-        while (true)
-        {
-            std::string token = getNextToken();
-
-            if (std::all_of(token.cbegin(), token.cend(), isdigit))
-            {
-                PacketSharedPtr packet = std::make_shared<IntegerPacket>(std::stoi(token));
-
-                containedPackets.push_back(std::move(packet));
-            }
-            else if (token == "[")
-            {
-                Packets containedSubpackets = parseContainedPackets();
-                PacketSharedPtr packet = std::make_shared<ListPacket>(std::move(containedSubpackets));
-
-                containedPackets.push_back(std::move(packet));
-            }
-            else if (token == "]")
-            {
-                break;
-            }
-        }
-
-        return containedPackets;
-    }
-
-    std::string getNextToken()
-    {
-        return m_tokens.at(m_currentTokenIndex++);
-    }
-};
-
-using PacketPairTextSection = std::vector<std::string>;
-const char* firstDividerPacketString = "[[2]]";
-const char* secondDividerPacketString = "[[6]]";
 
 PacketSharedPtr parsePacketString(const std::string& packetLine)
 {
@@ -280,7 +143,8 @@ int sumOfIndicesOfPairsInRightOrder(const std::vector<std::string>& distressSign
 
     for (size_t i = 0; i < packetPairs.size(); ++i)
     {
-        if (arePacketsInOrder(packetPairs.at(i).first, packetPairs.at(i).second))
+        const boost::optional<bool> orderResult = arePacketsInOrder(packetPairs.at(i).first, packetPairs.at(i).second);
+        if (orderResult.get_value_or(true))
         {
             sum += (i + 1);
         }
@@ -300,7 +164,11 @@ int decoderKeyForDistressSignal(const std::vector<std::string>& distressSignalLi
     PacketSharedPtr secondDividerPacket = parsePacketString(secondDividerPacketString);
     packets.push_back(secondDividerPacket);
 
-    std::sort(packets.begin(), packets.end(), arePacketsInOrder);
+    std::sort(packets.begin(), packets.end(), [](const auto& lhs, const auto& rhs)
+              {
+                  const boost::optional<bool> orderResult = arePacketsInOrder(lhs, rhs);
+                  return orderResult.get_value_or(true);
+              });
 
     int decoderKey = 1;
 
@@ -308,7 +176,7 @@ int decoderKeyForDistressSignal(const std::vector<std::string>& distressSignalLi
     {
         if (packets.at(i) == firstDividerPacket || packets.at(i) == secondDividerPacket)
         {
-            decoderKey *= i;
+            decoderKey *= (i + 1);
         }
     }
 
