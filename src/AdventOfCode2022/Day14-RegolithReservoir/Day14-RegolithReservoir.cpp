@@ -1,16 +1,19 @@
 #include "Day14-RegolithReservoir.h"
 
+#include "SandFlowSimulator.h"
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
-#include <boost/optional.hpp>
-#include <boost/functional/hash.hpp>
 #include <boost/algorithm/string.hpp>
-
-#include <unordered_set>
-#include <algorithm>
-#include <iterator>
 __END_LIBRARIES_DISABLE_WARNINGS
+
+namespace
+{
+
+const int FLOOR_OFFSET = 2;
+
+}
 
 namespace AdventOfCode
 {
@@ -18,98 +21,6 @@ namespace Year2022
 {
 namespace Day14
 {
-
-using Coordinates = std::pair<int, int>;
-using CoordinatesSet = std::unordered_set<Coordinates, boost::hash<Coordinates>>;
-
-const Coordinates SAND_START_COORDINATES = {500, 0};
-const int SIMULATION_BOUNDARY_COORDINATE = 1'000;
-const int FLOOR_OFFSET = 2;
-
-class SandFlowSimulator
-{
-public:
-    SandFlowSimulator(CoordinatesSet allRockCoordinates)
-        : m_allOccupiedCoordinates{std::move(allRockCoordinates)}
-    {
-
-    }
-
-    void simulate()
-    {
-        while (true)
-        {
-            if (!trySettleNextSandParticle())
-            {
-                break;
-            }
-            ++m_numSettledUnits;
-        }
-    }
-
-    unsigned getNumSettledUnits()
-    {
-        return m_numSettledUnits;
-    }
-
-private:
-    CoordinatesSet m_allOccupiedCoordinates;
-
-    unsigned m_numSettledUnits = 0;
-
-    bool trySettleNextSandParticle()
-    {
-        // Source blocked
-        if (m_allOccupiedCoordinates.find(SAND_START_COORDINATES) != m_allOccupiedCoordinates.cend())
-        {
-            return false;
-        }
-
-        Coordinates currentSandCoordinates = SAND_START_COORDINATES;
-
-        while (true)
-        {
-            boost::optional<Coordinates> nextSandCoordinates = getNextSandCoordinates(currentSandCoordinates);
-
-            // Sand particle has settled
-            if (!nextSandCoordinates)
-            {
-                m_allOccupiedCoordinates.insert(currentSandCoordinates);
-                return true;
-            }
-            // Sand particle will never settle
-            else if (currentSandCoordinates.second > SIMULATION_BOUNDARY_COORDINATE)
-            {
-                return false;
-            }
-            // Move sand particle to next position
-            else
-            {
-                currentSandCoordinates = nextSandCoordinates.get();
-            }
-        }
-    }
-
-    boost::optional<Coordinates> getNextSandCoordinates(const Coordinates& currentCoordinates)
-    {
-        std::vector<Coordinates> nextCoordinatesInOrderOfPreference =
-        {
-            {currentCoordinates.first, currentCoordinates.second + 1}, // Down
-            {currentCoordinates.first - 1, currentCoordinates.second + 1}, // Down-left
-            {currentCoordinates.first + 1, currentCoordinates.second + 1}, // Down-right
-        };
-
-        for (const auto& nextCoordinates : nextCoordinatesInOrderOfPreference)
-        {
-            if (m_allOccupiedCoordinates.find(nextCoordinates) == m_allOccupiedCoordinates.cend())
-            {
-                return nextCoordinates;
-            }
-        }
-
-        return boost::none;
-    }
-};
 
 std::vector<Coordinates> getAllCoordinatesDescribingPath(const std::string& rockPathLine)
 {
