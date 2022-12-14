@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numSettledUnitsBeforeSandFlowsIntoAbyss(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numSettledUnitsWithFloor(lines) << std::endl;
 }

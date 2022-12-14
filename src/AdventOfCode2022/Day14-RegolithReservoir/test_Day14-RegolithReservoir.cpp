@@ -15,13 +15,18 @@ public:
 
     TEST_METHOD(numSettledUnitsBeforeSandFlowsIntoAbyss_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "498,4 -> 498,6 -> 496,6",
-            "503,4 -> 502,4 -> 502,9 -> 494,9"
-        };
-
-        Assert::AreEqual(24u, CurrentDay::numSettledUnitsBeforeSandFlowsIntoAbyss(lines));
+        Assert::AreEqual(24u, CurrentDay::numSettledUnitsBeforeSandFlowsIntoAbyss(m_lines));
     }
 
+    TEST_METHOD(numSettledUnitsWithFloor_SimpleTests)
+    {
+        Assert::AreEqual(93u, CurrentDay::numSettledUnitsWithFloor(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "498,4 -> 498,6 -> 496,6",
+        "503,4 -> 502,4 -> 502,9 -> 494,9"
+    };
 };

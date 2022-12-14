@@ -15,6 +15,7 @@ namespace Day14
 {
 
 unsigned numSettledUnitsBeforeSandFlowsIntoAbyss(const std::vector<std::string>& rockPathLines);
+unsigned numSettledUnitsWithFloor(const std::vector<std::string>& rockPathLines);
 
 }
 }

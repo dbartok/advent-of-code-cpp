@@ -23,7 +23,8 @@ using Coordinates = std::pair<int, int>;
 using CoordinatesSet = std::unordered_set<Coordinates, boost::hash<Coordinates>>;
 
 const Coordinates SAND_START_COORDINATES = {500, 0};
-const int SIMULATION_BOTTOM_Y_COORDINATE = 1'000;
+const int SIMULATION_BOUNDARY_COORDINATE = 1'000;
+const int FLOOR_OFFSET = 2;
 
 class SandFlowSimulator
 {
@@ -58,6 +59,12 @@ private:
 
     bool trySettleNextSandParticle()
     {
+        // Source blocked
+        if (m_allOccupiedCoordinates.find(SAND_START_COORDINATES) != m_allOccupiedCoordinates.cend())
+        {
+            return false;
+        }
+
         Coordinates currentSandCoordinates = SAND_START_COORDINATES;
 
         while (true)
@@ -71,7 +78,7 @@ private:
                 return true;
             }
             // Sand particle will never settle
-            else if (currentSandCoordinates.second > SIMULATION_BOTTOM_Y_COORDINATE)
+            else if (currentSandCoordinates.second > SIMULATION_BOUNDARY_COORDINATE)
             {
                 return false;
             }
@@ -181,9 +188,36 @@ CoordinatesSet parseRockPathLines(const std::vector<std::string>& rockPathLines)
     return allRockCoordinatesInPaths;
 }
 
+void addFloor(CoordinatesSet& allRockCoordinates)
+{
+    const auto elementWithMaxYCoordinateIter = std::max_element(allRockCoordinates.cbegin(), allRockCoordinates.cend(), [](const auto& lhs, const auto& rhs)
+                                                          {
+                                                              return lhs.second < rhs.second;
+                                                          });
+    const int maxY = elementWithMaxYCoordinateIter->second;
+    const int floorY = maxY + FLOOR_OFFSET;
+
+    for (int x = -SIMULATION_BOUNDARY_COORDINATE; x <= SIMULATION_BOUNDARY_COORDINATE; ++x)
+    {
+        allRockCoordinates.emplace(x, floorY);
+    }
+}
+
 unsigned numSettledUnitsBeforeSandFlowsIntoAbyss(const std::vector<std::string>& rockPathLines)
 {
     CoordinatesSet allRockCoordinates = parseRockPathLines(rockPathLines);
+
+    SandFlowSimulator sandFlowSimulator{std::move(allRockCoordinates)};
+
+    sandFlowSimulator.simulate();
+
+    return sandFlowSimulator.getNumSettledUnits();
+}
+
+unsigned numSettledUnitsWithFloor(const std::vector<std::string>& rockPathLines)
+{
+    CoordinatesSet allRockCoordinates = parseRockPathLines(rockPathLines);
+    addFloor(allRockCoordinates);
 
     SandFlowSimulator sandFlowSimulator{std::move(allRockCoordinates)};
 
