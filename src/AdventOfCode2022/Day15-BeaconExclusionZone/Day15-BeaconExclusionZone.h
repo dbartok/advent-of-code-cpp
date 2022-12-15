@@ -15,6 +15,7 @@ namespace Day15
 {
 
 unsigned numPositionsThatCannotContainBeaconInSpecificRow(const std::vector<std::string>& sensorAndBeaconPositionLines, int y);
+int64_t distressBeaconTuningFrequency(const std::vector<std::string>& sensorAndBeaconPositionLines, int distressBeaconCoordinatesLowerBound, int distressBeaconCoordinatesUpperBound);
 
 }
 }

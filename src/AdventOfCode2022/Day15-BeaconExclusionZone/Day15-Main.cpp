@@ -13,6 +13,8 @@ namespace
 {
 
 const int FIRST_PART_Y = 2'000'000;
+const int DISTRESS_BEACON_COORDINATES_LOWER_BOUND = 0;
+const int DISTRESS_BEACON_COORDINATES_UPPER_BOUND = 4'000'000;
 
 }
 
@@ -30,4 +32,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numPositionsThatCannotContainBeaconInSpecificRow(lines, FIRST_PART_Y) << std::endl;
+    std::cout << "Second part: " << CurrentDay::distressBeaconTuningFrequency(lines, DISTRESS_BEACON_COORDINATES_LOWER_BOUND, DISTRESS_BEACON_COORDINATES_UPPER_BOUND) << std::endl;
 }

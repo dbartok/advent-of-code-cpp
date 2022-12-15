@@ -8,6 +8,13 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <regex>
 __END_LIBRARIES_DISABLE_WARNINGS
 
+namespace
+{
+
+const int TUNING_FREQUENCY_X_COORDINATE_FACTOR = 4'000'000;
+
+}
+
 namespace AdventOfCode
 {
 namespace Year2022
@@ -37,24 +44,55 @@ public:
         }
     }
 
-    unsigned getNumPositionsThatCannotContainBeaconInSpecificRow(int y)
+    unsigned getNumPositionsThatCannotContainBeaconInSpecificRow(int y) const
     {
-        IntIntervalSet exclusionZone;
+        IntIntervalSet exclusionZone = getExclusionZoneInSpecificRow(y);
 
-        for (const auto& sensorPositionAndExclusionRadius : m_sensorPositionsAndExclusionRadiuses)
+        unsigned numTotalElementsInExclusionZone = 0;
+
+        for (auto exclusionZoneElementIter = exclusionZone.begin(); exclusionZoneElementIter != exclusionZone.end(); ++exclusionZoneElementIter)
         {
-            IntIntervalSet::interval_type excludedInterval = getExclusionIntervalInSpecificRow(sensorPositionAndExclusionRadius.first, sensorPositionAndExclusionRadius.second, y);
-
-            exclusionZone.insert(excludedInterval);
+            const unsigned numElements = (exclusionZoneElementIter->upper() - 1) - exclusionZoneElementIter->lower();
+            numTotalElementsInExclusionZone += numElements;
         }
 
-        return exclusionZone.iterative_size();
+        return numTotalElementsInExclusionZone;
+    }
+
+    int64_t getDistressBeaconTuningFrequency(int distressBeaconCoordinatesLowerBound, int distressBeaconCoordinatesUpperBound) const
+    {
+        for (int y = distressBeaconCoordinatesLowerBound; y <= distressBeaconCoordinatesUpperBound; ++y)
+        {
+            IntIntervalSet exclusionZone = getExclusionZoneInSpecificRow(y);
+            IntIntervalSet relevantExclusionZone = exclusionZone & IntIntervalSet{{distressBeaconCoordinatesLowerBound, distressBeaconCoordinatesUpperBound}};
+
+            if (relevantExclusionZone.iterative_size() > 1)
+            {
+                const int x = relevantExclusionZone.begin()->upper();
+                return TUNING_FREQUENCY_X_COORDINATE_FACTOR * static_cast<int64_t>(x) + y;
+            }
+        }
+
+        throw std::runtime_error("Unable to find distress beacon");
     }
 
 private:
     std::vector<std::pair<Coordinates, int>> m_sensorPositionsAndExclusionRadiuses;
 
-    static IntIntervalSet::interval_type getExclusionIntervalInSpecificRow(const Coordinates& sensorPosition, int exclusionRadius, int y)
+    IntIntervalSet getExclusionZoneInSpecificRow(int y) const
+    {
+        IntIntervalSet exclusionZone;
+
+        for (const auto& sensorPositionAndExclusionRadius : m_sensorPositionsAndExclusionRadiuses)
+        {
+            IntIntervalSet::interval_type excludedInterval = getExclusionIntervalForSensorInSpecificRow(sensorPositionAndExclusionRadius.first, sensorPositionAndExclusionRadius.second, y);
+            exclusionZone.insert(std::move(excludedInterval));
+        }
+
+        return exclusionZone;
+    }
+
+    static IntIntervalSet::interval_type getExclusionIntervalForSensorInSpecificRow(const Coordinates& sensorPosition, int exclusionRadius, int y)
     {
         const int offsetY = std::abs(sensorPosition.second - y);
         const int remainingExtraRadius = exclusionRadius - offsetY;
@@ -104,6 +142,15 @@ unsigned numPositionsThatCannotContainBeaconInSpecificRow(const std::vector<std:
     SensorReportAnalyzer sensorReportAnalyzer{std::move(sensorAndBeaconPositions)};
 
     return sensorReportAnalyzer.getNumPositionsThatCannotContainBeaconInSpecificRow(y);
+}
+
+int64_t distressBeaconTuningFrequency(const std::vector<std::string>& sensorAndBeaconPositionLines, int distressBeaconCoordinatesLowerBound, int distressBeaconCoordinatesUpperBound)
+{
+    std::vector<CoordinatesPair> sensorAndBeaconPositions = parseSensorAndBeaconPositionLines(sensorAndBeaconPositionLines);
+
+    SensorReportAnalyzer sensorReportAnalyzer{std::move(sensorAndBeaconPositions)};
+
+    return sensorReportAnalyzer.getDistressBeaconTuningFrequency(distressBeaconCoordinatesLowerBound, distressBeaconCoordinatesUpperBound);
 }
 
 }
