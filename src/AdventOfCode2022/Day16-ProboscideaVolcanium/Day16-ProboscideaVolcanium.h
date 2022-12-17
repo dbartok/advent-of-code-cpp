@@ -15,7 +15,7 @@ namespace Day16
 {
 
 int mostPressureThatCanBeReleased(const std::vector<std::string>& valveRoomLines);
-
+int mostPressureThatCanBeReleasedWorkingWithElephant(const std::vector<std::string>& valveRoomLines);
 }
 }
 }

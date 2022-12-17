@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::mostPressureThatCanBeReleased(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::mostPressureThatCanBeReleasedWorkingWithElephant(lines) << std::endl;
 }

@@ -18,7 +18,8 @@ namespace
 
 const char* START_ROOM_NAME = "AA";
 const size_t START_ROOM_INDEX = 0;
-int AVAILABLE_TIME = 30;
+const int AVAILABLE_TIME_FIRST_PART = 30;
+const int AVAILABLE_TIME_SECOND_PART = 26;
 const size_t MAX_NUM_RELEVANT_ROOMS = 75;
 
 }
@@ -139,9 +140,10 @@ private:
 class FlowRateOptimizer
 {
 public:
-    FlowRateOptimizer(CostMatrix costMatrix, std::unordered_map<size_t, int> roomIndexToFlowRate)
+    FlowRateOptimizer(CostMatrix costMatrix, std::unordered_map<size_t, int> roomIndexToFlowRate, int availableTime)
         : m_costMatrix{std::move(costMatrix)}
         , m_roomIndexToFlowRate{std::move(roomIndexToFlowRate)}
+        , m_availableTime{availableTime}
     {
         for (const auto& roomIndexAndFlowRate : m_roomIndexToFlowRate)
         {
@@ -155,7 +157,7 @@ public:
     void createAllStates()
     {
         StateSet openStates;
-        State startState{START_ROOM_INDEX, AVAILABLE_TIME, {}, 0};
+        State startState{START_ROOM_INDEX, m_availableTime, {}, 0};
         openStates.insert(startState);
 
         while (!openStates.empty())
@@ -165,14 +167,11 @@ public:
             for (const auto& currentState : openStates)
             {
                 std::vector<State> nextStates = getNextStates(currentState);
-                if (nextStates.empty())
-                {
-                    insertKeepingHigherTotalPressureReleased(m_closedStates, currentState);
-                }
 
-                for (auto& nextState : nextStates)
+                for (const auto& nextState : nextStates)
                 {
                     insertKeepingHigherTotalPressureReleased(nextOpenStates, nextState);
+                    insertKeepingHigherTotalPressureReleased(m_allSeenStates, nextState);
                 }
             }
 
@@ -180,14 +179,34 @@ public:
         }
     }
 
-    int getMaxPressureReleased() const
+    int getMaxPressureReleasedWithOneWorker() const
     {
-        const auto maxPressureReleasedStateIter = std::max_element(m_closedStates.cbegin(), m_closedStates.cend(), [](const auto& lhs, const auto& rhs)
+        const auto maxPressureReleasedStateIter = std::max_element(m_allSeenStates.cbegin(), m_allSeenStates.cend(), [](const auto& lhs, const auto& rhs)
                                                                    {
                                                                        return lhs.totalPressureReleased < rhs.totalPressureReleased;
                                                                    });
 
         return maxPressureReleasedStateIter->totalPressureReleased;
+    }
+
+    int getMaxPressureReleasedWithTwoWorkers() const
+    {
+        int maxPressureReleased = 0;
+
+        for (const auto& firstWorkerState : m_allSeenStates)
+        {
+            for (const auto& secondWorkerState : m_allSeenStates)
+            {
+                const auto visitedRoomIntersection = firstWorkerState.visitedRoomIndices & secondWorkerState.visitedRoomIndices;
+                if (visitedRoomIntersection.none())
+                {
+                    const int pressureReleased = firstWorkerState.totalPressureReleased + secondWorkerState.totalPressureReleased;
+                    maxPressureReleased = std::max(maxPressureReleased, pressureReleased);
+                }
+            }
+        }
+
+        return maxPressureReleased;
     }
 
 private:
@@ -225,9 +244,10 @@ private:
 
     CostMatrix m_costMatrix;
     std::unordered_map<size_t, int> m_roomIndexToFlowRate;
+    int m_availableTime;
     std::vector<size_t> m_roomIndicesWithNonZeroFlowRate;
 
-    StateSet m_closedStates;
+    StateSet m_allSeenStates;
 
     std::vector<State> getNextStates(const State& currentState) const
     {
@@ -307,7 +327,7 @@ std::vector<ValveRoom> parseValveRoomLines(const std::vector<std::string>& valve
     return valveRooms;
 }
 
-int mostPressureThatCanBeReleased(const std::vector<std::string>& valveRoomLines)
+FlowRateOptimizer createFlowRateOptimizer(const std::vector<std::string>& valveRoomLines, int availableTime)
 {
     std::vector<ValveRoom> valveRooms = parseValveRoomLines(valveRoomLines);
 
@@ -317,10 +337,26 @@ int mostPressureThatCanBeReleased(const std::vector<std::string>& valveRoomLines
     CostMatrix costMatrix = valveNetworkSimplifier.getCostMatrix();
     std::unordered_map<size_t, int> roomIndexToFlowRate = valveNetworkSimplifier.getRoomIndexToFlowRate();
 
-    FlowRateOptimizer flowRateOptimizer{std::move(costMatrix), std::move(roomIndexToFlowRate)};
+    FlowRateOptimizer flowRateOptimizer{std::move(costMatrix), std::move(roomIndexToFlowRate), availableTime};
+    return flowRateOptimizer;
+}
+
+int mostPressureThatCanBeReleased(const std::vector<std::string>& valveRoomLines)
+{
+    FlowRateOptimizer flowRateOptimizer = createFlowRateOptimizer(valveRoomLines, AVAILABLE_TIME_FIRST_PART);
+
     flowRateOptimizer.createAllStates();
 
-    return flowRateOptimizer.getMaxPressureReleased();
+    return flowRateOptimizer.getMaxPressureReleasedWithOneWorker();
+}
+
+int mostPressureThatCanBeReleasedWorkingWithElephant(const std::vector<std::string>& valveRoomLines)
+{
+    FlowRateOptimizer flowRateOptimizer = createFlowRateOptimizer(valveRoomLines, AVAILABLE_TIME_SECOND_PART);
+    
+    flowRateOptimizer.createAllStates();
+
+    return flowRateOptimizer.getMaxPressureReleasedWithTwoWorkers();
 }
 
 }
