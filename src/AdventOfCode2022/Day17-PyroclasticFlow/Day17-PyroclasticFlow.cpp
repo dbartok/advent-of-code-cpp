@@ -8,18 +8,21 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <vector>
 #include <stdexcept>
 #include <unordered_set>
+#include <unordered_map>
 #include <algorithm>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
 {
 
-int CHAMBER_WIDTH = 7;
-int ROCK_SPAWN_OFFSET_FROM_LEFT_OF_CHAMBER = 2;
-int ROCK_SPAWN_OFFSET_FROM_TOP_OF_ROCKS = 4;
-unsigned NUM_ROCKS_TO_SIMULATE = 2022;
-unsigned NUM_ROCK_TYPES = 5;
+const int CHAMBER_WIDTH = 7;
+const int ROCK_SPAWN_OFFSET_FROM_LEFT_OF_CHAMBER = 2;
+const int ROCK_SPAWN_OFFSET_FROM_TOP_OF_ROCKS = 4;
+const unsigned NUM_ROCKS_FIRST_PART = 2022;
+const uint64_t NUM_ROCKS_SECOND_PART = 1'000'000'000'000;
+const unsigned NUM_ROCK_TYPES = 5;
 
+const unsigned MAX_NUM_ROCKS_TO_SIMULATE_BEFORE_REPETITION = 5000;
 }
 
 namespace AdventOfCode
@@ -170,34 +173,88 @@ private:
 class FallingRockSimulator
 {
 public:
-    FallingRockSimulator(std::vector<Direction> jetPattern)
+    FallingRockSimulator(std::vector<Direction> jetPattern, uint64_t numRocksToSimulate)
         : m_jetPattern{std::move(jetPattern)}
+        , m_numRocksToSimulate{numRocksToSimulate}
     {
 
     }
 
     void simulate()
     {
-        for (size_t numRocksSettled = 0; numRocksSettled < NUM_ROCKS_TO_SIMULATE; ++numRocksSettled)
+        for (size_t numRocksSettled = 0; ; ++numRocksSettled)
         {
+            const int maxY = getMaxYCoordinate();
+            const int towerHeight = maxY + 1;
+            m_numRocksSettledToTowerHeight.push_back(towerHeight);
+
+            std::array<int, CHAMBER_WIDTH> highestPointYCoordinatesRelativeToHeight = getHighestPointYCoordinatesRelativeToHeight();
             const RockType nextRockType = static_cast<RockType>(numRocksSettled % NUM_ROCK_TYPES);
-            const int spawnY = getMaxYCoordinate() + ROCK_SPAWN_OFFSET_FROM_TOP_OF_ROCKS;
+            const unsigned jetPatternIndex = m_numPushesSimulated % m_jetPattern.size();
+
+            State currentState{std::move(highestPointYCoordinatesRelativeToHeight), nextRockType, jetPatternIndex, numRocksSettled};
+            const auto insertionResult = m_seenStates.insert(currentState);
+
+            // Cycle found
+            if (!insertionResult.second)
+            {
+                m_towerHeight = determineHeightAtTheEndOfSimulation(*insertionResult.first, currentState);
+                return;
+            }
+
+            const int spawnY = maxY + ROCK_SPAWN_OFFSET_FROM_TOP_OF_ROCKS;
             Rock rock{nextRockType, {ROCK_SPAWN_OFFSET_FROM_LEFT_OF_CHAMBER, spawnY}};
 
             settleRock(std::move(rock));
         }
     }
 
-    int getTowerHeight() const
+    int64_t getTowerHeight() const
     {
-        return getMaxYCoordinate() + 1;
+        return m_towerHeight;
     }
 
 private:
-    CoordinatesSet m_occupiedPositions;
-    size_t m_numPushesSimulated = 0;
+    struct State
+    {
+        std::array<int, CHAMBER_WIDTH> highestPointYCoordinatesRelativeToHeight;
+        RockType nextRock;
+        unsigned jetPatternIndex;
+
+        unsigned numRocksSettled;
+
+        bool operator==(const State& other) const
+        {
+            return highestPointYCoordinatesRelativeToHeight == other.highestPointYCoordinatesRelativeToHeight &&
+                nextRock == other.nextRock &&
+                jetPatternIndex && other.jetPatternIndex;
+
+        }
+    };
+
+    struct StateHash
+    {
+        std::size_t operator()(const State& state) const
+        {
+            std::size_t seed = 0;
+
+            boost::hash_combine(seed, state.highestPointYCoordinatesRelativeToHeight);
+            boost::hash_combine(seed, state.nextRock);
+            boost::hash_combine(seed, state.jetPatternIndex);
+
+            return seed;
+        }
+    };
 
     std::vector<Direction> m_jetPattern;
+    uint64_t m_numRocksToSimulate;
+
+    CoordinatesSet m_occupiedPositions;
+    size_t m_numPushesSimulated = 0;
+    std::unordered_set<State, StateHash> m_seenStates;
+    std::vector<int> m_numRocksSettledToTowerHeight;
+
+    int64_t m_towerHeight;
 
     void settleRock(Rock rock)
     {
@@ -207,9 +264,9 @@ private:
             rock.applyJet(nextJetDirection, m_occupiedPositions);
         } while (rock.applyFallUnit(m_occupiedPositions));
 
-        const auto& rockCoordinates = rock.getAllCoordinates();
+        const auto& allRockCoordinates = rock.getAllCoordinates();
 
-        m_occupiedPositions.insert(rockCoordinates.cbegin(), rockCoordinates.cend());
+        m_occupiedPositions.insert(allRockCoordinates.cbegin(), allRockCoordinates.cend());
     }
 
     bool isColliding(const Rock& rock) const
@@ -226,6 +283,47 @@ private:
     {
         const auto maxYIter = std::max_element(m_occupiedPositions.cbegin(), m_occupiedPositions.cend(), [](const auto& lhs, const auto& rhs) {return lhs.second < rhs.second; });
         return maxYIter != m_occupiedPositions.cend() ? maxYIter->second : -1;
+    }
+
+    std::array<int, CHAMBER_WIDTH> getHighestPointYCoordinatesRelativeToHeight() const
+    {
+        std::array<int, CHAMBER_WIDTH> highestPointYCoordinatesRelativeToHeight;
+        highestPointYCoordinatesRelativeToHeight.fill(std::numeric_limits<int>::min());
+
+        for (const auto& coordinates : m_occupiedPositions)
+        {
+            highestPointYCoordinatesRelativeToHeight.at(coordinates.first) = std::max(highestPointYCoordinatesRelativeToHeight.at(coordinates.first), coordinates.second);
+        }
+
+        const int maxY = *std::max_element(highestPointYCoordinatesRelativeToHeight.cbegin(), highestPointYCoordinatesRelativeToHeight.cend());
+
+        for (auto& coordinate : highestPointYCoordinatesRelativeToHeight)
+        {
+            coordinate -= maxY;
+        }
+
+        return highestPointYCoordinatesRelativeToHeight;
+    }
+
+    int64_t determineHeightAtTheEndOfSimulation(const State& cycleStartState, const State& cycleEndState) const
+    {
+        const unsigned cycleStartNumRocksSettled = cycleStartState.numRocksSettled;
+        const unsigned cycleEndNumRocksSettled = cycleEndState.numRocksSettled;
+        const unsigned cycleLength = cycleEndNumRocksSettled - cycleStartNumRocksSettled;
+
+        const int cycleStartTowerHeight = m_numRocksSettledToTowerHeight.at(cycleStartNumRocksSettled);
+        const int cycleEndTowerHeight = m_numRocksSettledToTowerHeight.at(cycleEndNumRocksSettled);
+        const int cycleTowerHeightDelta = cycleEndTowerHeight - cycleStartTowerHeight;
+
+        const uint64_t numRocksToSimulateAfterCycleStart = m_numRocksToSimulate - cycleStartNumRocksSettled;
+        const uint64_t numFullCyclesInSimulation = numRocksToSimulateAfterCycleStart / cycleLength;
+
+        const uint64_t finalCycleOffsetNumRocksSettledInSimulation = numRocksToSimulateAfterCycleStart % cycleLength;
+
+        // The result here is actually the sum of two height deltas: the delta before the cycle starts, and the delta after the final cycle ends
+        const int finalCycleOffsetTowerHeight = m_numRocksSettledToTowerHeight.at(cycleStartNumRocksSettled + finalCycleOffsetNumRocksSettledInSimulation);
+
+        return numFullCyclesInSimulation * cycleTowerHeightDelta + finalCycleOffsetTowerHeight;
     }
 };
 
@@ -252,15 +350,25 @@ std::vector<Direction> parseJetPatternString(const std::string& jetPatternString
     return jetPattern;
 }
 
-int towerHeightAfterRocksStoppedFalling(const std::string& jetPatternString)
+int64_t getTowerHeightForGivenNumRocks(const std::string& jetPatternString, uint64_t numRocks)
 {
     std::vector<Direction> jetPattern = parseJetPatternString(jetPatternString);
 
-    FallingRockSimulator fallingRockSimulator{std::move(jetPattern)};
+    FallingRockSimulator fallingRockSimulator{std::move(jetPattern), numRocks};
 
     fallingRockSimulator.simulate();
 
     return fallingRockSimulator.getTowerHeight();
+}
+
+int64_t towerHeightAfterRocksStoppedFalling(const std::string& jetPatternString)
+{
+    return getTowerHeightForGivenNumRocks(jetPatternString, NUM_ROCKS_FIRST_PART);
+}
+
+int64_t towerHeightAfterRocksStoppedFallingWithManyRocks(const std::string& jetPatternString)
+{
+    return getTowerHeightForGivenNumRocks(jetPatternString, NUM_ROCKS_SECOND_PART);
 }
 
 }

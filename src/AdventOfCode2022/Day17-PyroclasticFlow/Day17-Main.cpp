@@ -18,4 +18,5 @@ int main()
     std::getline(fileIn, line);
 
     std::cout << "First part: " << CurrentDay::towerHeightAfterRocksStoppedFalling(line) << std::endl;
+    std::cout << "Second part: " << CurrentDay::towerHeightAfterRocksStoppedFallingWithManyRocks(line) << std::endl;
 }
