@@ -251,6 +251,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day16-ProboscideaVolcanium.cpp" />
+    <ClCompile Include="FlowRateOptimizer.cpp" />
     <ClCompile Include="test_Day16-ProboscideaVolcanium.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -259,9 +260,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ValveNetworkSimplifier.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day16-ProboscideaVolcanium.h" />
+    <ClInclude Include="FlowRateOptimizer.h" />
+    <ClInclude Include="ValveNetworkSimplifier.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

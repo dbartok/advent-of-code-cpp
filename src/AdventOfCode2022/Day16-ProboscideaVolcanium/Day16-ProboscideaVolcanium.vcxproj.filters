@@ -20,9 +20,21 @@
     <ClCompile Include="Day16-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ValveNetworkSimplifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FlowRateOptimizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day16-ProboscideaVolcanium.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ValveNetworkSimplifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FlowRateOptimizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
