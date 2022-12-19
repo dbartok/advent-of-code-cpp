@@ -15,24 +15,29 @@ public:
 
     TEST_METHOD(surfaceAreaOfScannedLavaDroplet_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "2,2,2",
-            "1,2,2",
-            "3,2,2",
-            "2,1,2",
-            "2,3,2",
-            "2,2,1",
-            "2,2,3",
-            "2,2,4",
-            "2,2,6",
-            "1,2,5",
-            "3,2,5",
-            "2,1,5",
-            "2,3,5"
-        };
-
-        Assert::AreEqual(64u, CurrentDay::surfaceAreaOfScannedLavaDroplet(lines));
+        Assert::AreEqual(64u, CurrentDay::surfaceAreaOfScannedLavaDroplet(m_lines));
     }
 
+    TEST_METHOD(outerSurfaceAreaOfScannedLavaDroplet_SimpleTests)
+    {
+        Assert::AreEqual(58u, CurrentDay::outerSurfaceAreaOfScannedLavaDroplet(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "2,2,2",
+        "1,2,2",
+        "3,2,2",
+        "2,1,2",
+        "2,3,2",
+        "2,2,1",
+        "2,2,3",
+        "2,2,4",
+        "2,2,6",
+        "1,2,5",
+        "3,2,5",
+        "2,1,5",
+        "2,3,5"
+    };
 };

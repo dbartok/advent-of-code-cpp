@@ -15,6 +15,7 @@ namespace Day18
 {
 
 unsigned surfaceAreaOfScannedLavaDroplet(const std::vector<std::string>& lavaCubeCoordinatesLines);
+unsigned outerSurfaceAreaOfScannedLavaDroplet(const std::vector<std::string>& lavaCubeCoordinatesLines);
 
 }
 }
