@@ -13,6 +13,10 @@ namespace
 {
 
 const std::vector<int> GROVE_OFFSETS{1000, 2000, 3000};
+const int64_t DECRYPTION_KEY_FIRST_PART = 1;
+const int64_t DECRYPTION_KEY_SECOND_PART = 811589153;
+const unsigned NUM_MIXES_FIRST_PART = 1;
+const unsigned NUM_MIXES_SECOND_PART = 10;
 
 }
 
@@ -26,12 +30,12 @@ namespace Day20
 class EncryptedFileMixer
 {
 public:
-    EncryptedFileMixer(const std::vector<int>& encrypedFile)
+    EncryptedFileMixer(const std::vector<int64_t>& encrypedFile, int64_t decryptionKey)
     {
         Node* previousNode = nullptr;
-        for (int value : encrypedFile)
+        for (int64_t value : encrypedFile)
         {
-            m_nodes.push_back(std::make_shared<Node>(value));
+            m_nodes.push_back(std::make_shared<Node>(value * decryptionKey));
             Node* currentNode = m_nodes.back().get();
 
             if (previousNode)
@@ -48,19 +52,19 @@ public:
         m_nodes.front()->previous = m_nodes.back().get();
     }
 
-    void mix()
+    void mix(unsigned numMixes)
     {
-        for (auto& node : m_nodes)
+        for (unsigned i = 0; i < numMixes; ++i)
         {
-            moveNodeForward(node.get(), node->value);
+            mixOnce();
         }
     }
 
-    int getSumOfGroveCoordinates() const
+    int64_t getSumOfGroveCoordinates() const
     {
         Node* baseNode = findNodeWithValue(0);
 
-        int sumOfGroveCoordinates = 0;
+        int64_t sumOfGroveCoordinates = 0;
 
         for (const int groveOffset : GROVE_OFFSETS)
         {
@@ -74,11 +78,11 @@ public:
 private:
     struct Node
     {
-        int value;
+        int64_t value;
         Node* next;
         Node* previous;
 
-        Node(int value)
+        Node(int64_t value)
             : value{value}
             , next{nullptr}
             , previous{nullptr}
@@ -91,7 +95,15 @@ private:
 
     std::vector<NodeSharedPtr> m_nodes;
 
-    void moveNodeForward(Node* node, int numSteps)
+    void mixOnce()
+    {
+        for (auto& node : m_nodes)
+        {
+            moveNodeForward(node.get(), node->value);
+        }
+    }
+
+    void moveNodeForward(Node* node, int64_t numSteps)
     {
         // Unlink node
         node->previous->next = node->next;
@@ -132,7 +144,7 @@ private:
         return offsetNode;
     }
 
-    Node* findNodeWithValue(int value) const
+    Node* findNodeWithValue(int64_t value) const
     {
         Node* node = m_nodes.at(0).get();
 
@@ -145,9 +157,9 @@ private:
     }
 };
 
-std::vector<int> parseEncrypedFileLines(const std::vector<std::string>& encryptedFileLines)
+std::vector<int64_t> parseEncrypedFileLines(const std::vector<std::string>& encryptedFileLines)
 {
-    std::vector<int> encryptedFile;
+    std::vector<int64_t> encryptedFile;
 
     std::transform(encryptedFileLines.cbegin(), encryptedFileLines.end(), std::back_inserter(encryptedFile), [](const auto& line)
                    {
@@ -157,13 +169,24 @@ std::vector<int> parseEncrypedFileLines(const std::vector<std::string>& encrypte
     return encryptedFile;
 }
 
-int sumOfGroveCoordinates(const std::vector<std::string>& encryptedFileLines)
+int64_t sumOfGroveCoordinates(const std::vector<std::string>& encryptedFileLines)
 {
-    std::vector<int> encryptedFile = parseEncrypedFileLines(encryptedFileLines);
+    std::vector<int64_t> encryptedFile = parseEncrypedFileLines(encryptedFileLines);
 
-    EncryptedFileMixer encryptedFileMixer{encryptedFile};
+    EncryptedFileMixer encryptedFileMixer{encryptedFile, DECRYPTION_KEY_FIRST_PART};
 
-    encryptedFileMixer.mix();
+    encryptedFileMixer.mix(NUM_MIXES_FIRST_PART);
+
+    return encryptedFileMixer.getSumOfGroveCoordinates();
+}
+
+int64_t sumOfGroveCoordinatesWithDecryptionRoutine(const std::vector<std::string>& encryptedFileLines)
+{
+    std::vector<int64_t> encryptedFile = parseEncrypedFileLines(encryptedFileLines);
+
+    EncryptedFileMixer encryptedFileMixer{encryptedFile, DECRYPTION_KEY_SECOND_PART};
+
+    encryptedFileMixer.mix(NUM_MIXES_SECOND_PART);
 
     return encryptedFileMixer.getSumOfGroveCoordinates();
 }

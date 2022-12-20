@@ -14,7 +14,8 @@ namespace Year2022
 namespace Day20
 {
 
-int sumOfGroveCoordinates(const std::vector<std::string>& encryptedFileLines);
+int64_t sumOfGroveCoordinates(const std::vector<std::string>& encryptedFileLines);
+int64_t sumOfGroveCoordinatesWithDecryptionRoutine(const std::vector<std::string>& encryptedFileLines);
 
 }
 }

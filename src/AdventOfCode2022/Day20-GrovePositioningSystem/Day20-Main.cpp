@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::sumOfGroveCoordinates(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumOfGroveCoordinatesWithDecryptionRoutine(lines) << std::endl;
 }

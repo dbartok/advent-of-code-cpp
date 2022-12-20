@@ -15,18 +15,23 @@ public:
 
     TEST_METHOD(sumOfGroveCoordinates_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "1",
-            "2",
-            "-3",
-            "3",
-            "-2",
-            "0",
-            "4"
-        };
-
-        Assert::AreEqual(3, CurrentDay::sumOfGroveCoordinates(lines));
+        Assert::AreEqual(3ll, CurrentDay::sumOfGroveCoordinates(m_lines));
     }
 
+    TEST_METHOD(sumOfGroveCoordinatesWithDecryptionRoutine_SimpleTests)
+    {
+        Assert::AreEqual(1623178306ll, CurrentDay::sumOfGroveCoordinatesWithDecryptionRoutine(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "1",
+        "2",
+        "-3",
+        "3",
+        "-2",
+        "0",
+        "4"
+    };
 };
