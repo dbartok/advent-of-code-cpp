@@ -15,6 +15,7 @@ namespace Day19
 {
 
 int sumOfBlueprintQualityLevels(const std::vector<std::string>& blueprintLines);
+int productOfFirstFewBlueprintMaxGeodesWithMoreTime(const std::vector<std::string>& blueprintLines);
 
 }
 }

@@ -14,7 +14,9 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace
 {
 
-const int TOTAL_AVAILABLE_TIME = 24;
+const int TOTAL_AVAILABLE_TIME_FIRST_PART = 24;
+const int TOTAL_AVAILABLE_TIME_SECOND_PART = 32;
+const size_t NUM_MAX_BLUEPRINTS_SECOND_PART = 3;
 
 }
 
@@ -39,8 +41,9 @@ const MineralArray ZERO_MINERAL_ARRAY = {0, 0, 0, 0};
 class GeodeHarvestingSimulator
 {
 public:
-    GeodeHarvestingSimulator(MineralMatrix robotCostMatrix)
+    GeodeHarvestingSimulator(MineralMatrix robotCostMatrix, int totalAvailableTime)
         : m_robotCostMatrix{std::move(robotCostMatrix)}
+        , m_totalAvailableTime{totalAvailableTime}
         , m_maxMineralCosts{ZERO_MINERAL_ARRAY}
     {
         for (const auto& cost : m_robotCostMatrix)
@@ -55,7 +58,7 @@ public:
     void simulate()
     {
         std::stack<State> stateStack;
-        State startState = {INITIAL_MINERAL_PRODUCTION, ZERO_MINERAL_ARRAY, TOTAL_AVAILABLE_TIME};
+        State startState = {INITIAL_MINERAL_PRODUCTION, ZERO_MINERAL_ARRAY, m_totalAvailableTime};
         stateStack.push(startState);
         StateSet seenStates{startState};
 
@@ -115,6 +118,7 @@ private:
     using StateSet = std::unordered_set<State, StateHash>;
 
     MineralMatrix m_robotCostMatrix;
+    int m_totalAvailableTime;
     MineralArray m_maxMineralCosts;
 
     int m_maxNumGeodesHarvested = 0;
@@ -160,7 +164,7 @@ private:
 
         std::copy_if(std::make_move_iterator(nextStates.begin()), std::make_move_iterator(nextStates.end()), std::back_inserter(prunedNextStates), [this](const State& state)
                      {
-                         return !this->isOverproducing(state);
+                         return !this->isOverproducing(state) && this->canStillExceedBestSoFar(state);
                      });
 
         return prunedNextStates;
@@ -207,6 +211,19 @@ private:
         }
 
         return false;
+    }
+
+    bool canStillExceedBestSoFar(const State& state) const
+    {
+        const int currentNumGeodes = state.mineralsAvailable.at(GEODE_INDEX);
+        const int geodeProduction = state.mineralProduction.at(GEODE_INDEX);
+
+        const int numGeodesAtEndWithCurrentProduction = currentNumGeodes + geodeProduction * state.remainingTime;
+
+        const int remainingProductionTime = state.remainingTime - 1;
+        const int numMaxGeodesProducedByNewRobots = remainingProductionTime * (remainingProductionTime + 1) / 2;
+
+        return numGeodesAtEndWithCurrentProduction + numMaxGeodesProducedByNewRobots > m_maxNumGeodesHarvested;
     }
 
     static void elapseMinute(State& state)
@@ -266,7 +283,7 @@ int sumOfBlueprintQualityLevels(const std::vector<std::string>& blueprintLines)
 
     for (size_t i = 0; i < robotCostMatrices.size(); ++i)
     {
-        GeodeHarvestingSimulator geodeHarvestingSimulator{std::move(robotCostMatrices.at(i))};
+        GeodeHarvestingSimulator geodeHarvestingSimulator{std::move(robotCostMatrices.at(i)), TOTAL_AVAILABLE_TIME_FIRST_PART};
         geodeHarvestingSimulator.simulate();
         const int maxNumGeodesHarvested = geodeHarvestingSimulator.getMaxNumGeodesHarvested();
         const int qualityLevel = maxNumGeodesHarvested * (i + 1);
@@ -275,6 +292,23 @@ int sumOfBlueprintQualityLevels(const std::vector<std::string>& blueprintLines)
     }
 
     return totalQualityLevel;
+}
+
+int productOfFirstFewBlueprintMaxGeodesWithMoreTime(const std::vector<std::string>& blueprintLines)
+{
+    std::vector<MineralMatrix> robotCostMatrices = parseBlueprintLines(blueprintLines);
+    int productOfMaxGeodes = 1;
+
+    for (size_t i = 0; i < robotCostMatrices.size() && i < NUM_MAX_BLUEPRINTS_SECOND_PART; ++i)
+    {
+        GeodeHarvestingSimulator geodeHarvestingSimulator{std::move(robotCostMatrices.at(i)), TOTAL_AVAILABLE_TIME_SECOND_PART};
+        geodeHarvestingSimulator.simulate();
+        const int maxNumGeodesHarvested = geodeHarvestingSimulator.getMaxNumGeodesHarvested();
+
+        productOfMaxGeodes *= maxNumGeodesHarvested;
+    }
+
+    return productOfMaxGeodes;
 }
 
 }

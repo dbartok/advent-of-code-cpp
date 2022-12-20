@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::sumOfBlueprintQualityLevels(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::productOfFirstFewBlueprintMaxGeodesWithMoreTime(lines) << std::endl;
 }
