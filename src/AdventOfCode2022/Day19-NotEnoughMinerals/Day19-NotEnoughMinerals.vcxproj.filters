@@ -20,9 +20,15 @@
     <ClCompile Include="Day19-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeodeHarvestingSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day19-NotEnoughMinerals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeodeHarvestingSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
