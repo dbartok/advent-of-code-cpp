@@ -20,9 +20,15 @@
     <ClCompile Include="Day21-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MonkeyParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day21-MonkeyMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MonkeyParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
