@@ -13,6 +13,7 @@ namespace
 {
 
 const char* ROOT_NODE_NAME = "root";
+const char* HUMAN_NODE_NAME = "humn";
 
 }
 
@@ -31,15 +32,42 @@ class MonkeyNode
 public:
     MonkeyNode(std::string name)
         : m_name{std::move(name)}
+        , m_parentNode{nullptr}
+        , m_isAncestorOfHumanNode{false}
     {
 
     }
 
-    virtual void setOperands(MonkeyNodeSharedPtr leftOperand, MonkeyNodeSharedPtr rightOperand) = 0;
+    virtual void setOperandNodes(MonkeyNodeSharedPtr leftOperandNode, MonkeyNodeSharedPtr rightOperandNode) = 0;
+    virtual void forceEvaluateTo(int64_t expectedValue) = 0;
+    virtual MonkeyNodeSharedPtr getLeftOperandNode() const = 0;
+    virtual MonkeyNodeSharedPtr getRightOperandNode() const = 0;
     virtual int64_t evaluate() const = 0;
 
-private:
+    void setParentNode(MonkeyNode* parentNode)
+    {
+        m_parentNode = parentNode;
+    }
+
+    void setIsAncestorOfHumanNode(bool isAncestorOfHumanNode)
+    {
+        m_isAncestorOfHumanNode = isAncestorOfHumanNode;
+    }
+
+    MonkeyNode* getParentNode() const
+    {
+        return m_parentNode;
+    }
+
+    bool getIsAncestorOfHumanNode() const
+    {
+        return m_isAncestorOfHumanNode;
+    }
+
+protected:
     std::string m_name;
+    MonkeyNode* m_parentNode;
+    bool m_isAncestorOfHumanNode;
 };
 
 class IntegerNode : public MonkeyNode
@@ -52,9 +80,29 @@ public:
 
     }
 
-    void setOperands(MonkeyNodeSharedPtr leftOperand, MonkeyNodeSharedPtr rightOperand) override
+    void setOperandNodes(MonkeyNodeSharedPtr leftOperandNode, MonkeyNodeSharedPtr rightOperandNode) override
     {
         throw std::runtime_error("Cannot set operands on an integer node");
+    }
+
+    void forceEvaluateTo(int64_t expectedValue) override
+    {
+        if (m_name != HUMAN_NODE_NAME)
+        {
+            throw std::runtime_error("Cannot force evaluation for a non-human integer node");
+        }
+
+        m_value = expectedValue;
+    }
+
+    MonkeyNodeSharedPtr getLeftOperandNode() const override
+    {
+        throw std::runtime_error("Cannot get operands on an integer node");
+    }
+
+    MonkeyNodeSharedPtr getRightOperandNode() const override
+    {
+        throw std::runtime_error("Cannot get operands on an integer node");
     }
 
     int64_t evaluate() const override
@@ -71,15 +119,52 @@ class TwoOperandNode : public MonkeyNode
 public:
     using MonkeyNode::MonkeyNode;
 
-    void setOperands(MonkeyNodeSharedPtr leftOperand, MonkeyNodeSharedPtr rightOperand) override
+    virtual int64_t getLeftOperandValueForExpectedResult(int64_t expectedValue, int64_t rightOperandValue) const = 0;
+    virtual int64_t getRightOperandValueForExpectedResult(int64_t expectedValue, int64_t leftOperandValue) const = 0;
+
+    void forceEvaluateTo(int64_t expectedValue) override
     {
-        m_leftOperand = std::move(leftOperand);
-        m_rightOperand = std::move(rightOperand);
+        if (m_leftOperandNode->getIsAncestorOfHumanNode() && m_rightOperandNode->getIsAncestorOfHumanNode())
+        {
+            throw std::runtime_error("Ambiguous evaluation: too many human nodes");
+        }
+        else if (m_leftOperandNode->getIsAncestorOfHumanNode())
+        {
+            const int64_t rightOperandValue = m_rightOperandNode->evaluate();
+            const int64_t leftOperandExpectedValue = getLeftOperandValueForExpectedResult(expectedValue, rightOperandValue);
+            m_leftOperandNode->forceEvaluateTo(leftOperandExpectedValue);
+        }
+        else if (m_rightOperandNode->getIsAncestorOfHumanNode())
+        {
+            const int64_t leftOperandValue = m_leftOperandNode->evaluate();
+            const int64_t rightOperandExpectedValue = getRightOperandValueForExpectedResult(expectedValue, leftOperandValue);
+            m_rightOperandNode->forceEvaluateTo(rightOperandExpectedValue);
+        }
+        else
+        {
+            throw std::runtime_error("Ambiguous evaluation: no human nodes");
+        }
+    }
+
+    void setOperandNodes(MonkeyNodeSharedPtr leftOperandNode, MonkeyNodeSharedPtr rightOperandNode) override
+    {
+        m_leftOperandNode = std::move(leftOperandNode);
+        m_rightOperandNode = std::move(rightOperandNode);
+    }
+
+    MonkeyNodeSharedPtr getLeftOperandNode() const override
+    {
+        return m_leftOperandNode;
+    }
+
+    MonkeyNodeSharedPtr getRightOperandNode() const override
+    {
+        return m_rightOperandNode;
     }
 
 protected:
-    MonkeyNodeSharedPtr m_leftOperand = nullptr;
-    MonkeyNodeSharedPtr m_rightOperand = nullptr;
+    MonkeyNodeSharedPtr m_leftOperandNode = nullptr;
+    MonkeyNodeSharedPtr m_rightOperandNode = nullptr;
 };
 
 class AdditionNode : public TwoOperandNode
@@ -87,9 +172,19 @@ class AdditionNode : public TwoOperandNode
 public:
     using TwoOperandNode::TwoOperandNode;
 
+    int64_t getLeftOperandValueForExpectedResult(int64_t expectedValue, int64_t rightOperandValue) const override
+    {
+        return expectedValue - rightOperandValue;
+    }
+
+    int64_t getRightOperandValueForExpectedResult(int64_t expectedValue, int64_t leftOperandValue) const override
+    {
+        return expectedValue - leftOperandValue;
+    }
+
     int64_t evaluate() const override
     {
-        return m_leftOperand->evaluate() + m_rightOperand->evaluate();
+        return m_leftOperandNode->evaluate() + m_rightOperandNode->evaluate();
     }
 };
 
@@ -100,7 +195,17 @@ public:
 
     int64_t evaluate() const override
     {
-        return m_leftOperand->evaluate() - m_rightOperand->evaluate();
+        return m_leftOperandNode->evaluate() - m_rightOperandNode->evaluate();
+    }
+
+    int64_t getLeftOperandValueForExpectedResult(int64_t expectedValue, int64_t rightOperandValue) const override
+    {
+        return expectedValue + rightOperandValue;
+    }
+
+    int64_t getRightOperandValueForExpectedResult(int64_t expectedValue, int64_t leftOperandValue) const override
+    {
+        return leftOperandValue - expectedValue;
     }
 };
 
@@ -111,7 +216,17 @@ public:
 
     int64_t evaluate() const override
     {
-        return m_leftOperand->evaluate() * m_rightOperand->evaluate();
+        return m_leftOperandNode->evaluate() * m_rightOperandNode->evaluate();
+    }
+
+    int64_t getLeftOperandValueForExpectedResult(int64_t expectedValue, int64_t rightOperandValue) const override
+    {
+        return expectedValue / rightOperandValue;
+    }
+
+    int64_t getRightOperandValueForExpectedResult(int64_t expectedValue, int64_t leftOperandValue) const override
+    {
+        return expectedValue / leftOperandValue;
     }
 };
 
@@ -122,7 +237,17 @@ public:
 
     int64_t evaluate() const override
     {
-        return m_leftOperand->evaluate() / m_rightOperand->evaluate();
+        return m_leftOperandNode->evaluate() / m_rightOperandNode->evaluate();
+    }
+
+    int64_t getLeftOperandValueForExpectedResult(int64_t expectedValue, int64_t rightOperandValue) const override
+    {
+        return expectedValue * rightOperandValue;
+    }
+
+    int64_t getRightOperandValueForExpectedResult(int64_t expectedValue, int64_t leftOperandValue) const override
+    {
+        return leftOperandValue / expectedValue;
     }
 };
 
@@ -144,11 +269,17 @@ public:
     {
         createAllNodes();
         setAllChildrenNodes();
+        populateHumanPath();
     }
 
     MonkeyNodeSharedPtr getRootNode() const
     {
         return m_monkeyNameToNode.at(ROOT_NODE_NAME);
+    }
+
+    MonkeyNodeSharedPtr getHumanNode() const
+    {
+        return m_monkeyNameToNode.at(HUMAN_NODE_NAME);
     }
 
 private:
@@ -171,6 +302,16 @@ private:
         for (const auto& monkeyTokens : m_allMonkeyTokens)
         {
             setChildrenNodes(monkeyTokens);
+        }
+    }
+
+    void populateHumanPath()
+    {
+        MonkeyNode* humanNode = m_monkeyNameToNode.at(HUMAN_NODE_NAME).get();
+
+        for (MonkeyNode* node = humanNode; node != nullptr; node = node->getParentNode())
+        {
+            node->setIsAncestorOfHumanNode(true);
         }
     }
 
@@ -216,12 +357,15 @@ private:
             auto& currentNode = m_monkeyNameToNode.at(name);
 
             const std::string& leftOperandName = monkeyTokens.at(1);
-            auto& leftOperand = m_monkeyNameToNode.at(leftOperandName);
+            auto& leftOperandNode = m_monkeyNameToNode.at(leftOperandName);
 
             const std::string& rightOperandName = monkeyTokens.at(3);
-            auto& rightOperand = m_monkeyNameToNode.at(rightOperandName);
+            auto& rightOperandNode = m_monkeyNameToNode.at(rightOperandName);
 
-            currentNode->setOperands(leftOperand, rightOperand);
+            currentNode->setOperandNodes(leftOperandNode, rightOperandNode);
+
+            leftOperandNode->setParentNode(currentNode.get());
+            rightOperandNode->setParentNode(currentNode.get());
         }
     }
 
@@ -246,6 +390,30 @@ int64_t numberYelledByRootMonkey(const std::vector<std::string>& monkeyLines)
     auto rootNode = monkeyParser.getRootNode();
 
     return rootNode->evaluate();
+}
+
+int64_t numberYelledByHumanToPassEqualityTest(const std::vector<std::string>& monkeyLines)
+{
+    MonkeyParser monkeyParser{monkeyLines};
+
+    monkeyParser.parse();
+
+    auto rootNode = monkeyParser.getRootNode();
+    auto humanNode = monkeyParser.getHumanNode();
+
+    auto fixedValueSubtree = rootNode->getLeftOperandNode();
+    auto variableValueSubtree = rootNode->getRightOperandNode();
+
+    if (fixedValueSubtree->getIsAncestorOfHumanNode())
+    {
+        std::swap(fixedValueSubtree, variableValueSubtree);
+    }
+
+    const int64_t equationFixedSideValue = fixedValueSubtree->evaluate();
+
+    variableValueSubtree->forceEvaluateTo(equationFixedSideValue);
+
+    return humanNode->evaluate();
 }
 
 }

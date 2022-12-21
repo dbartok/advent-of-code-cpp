@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numberYelledByRootMonkey(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numberYelledByHumanToPassEqualityTest(lines) << std::endl;
 }

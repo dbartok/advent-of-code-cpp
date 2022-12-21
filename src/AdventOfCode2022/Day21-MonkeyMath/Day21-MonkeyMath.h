@@ -15,6 +15,7 @@ namespace Day21
 {
 
 int64_t numberYelledByRootMonkey(const std::vector<std::string>& monkeyLines);
+int64_t numberYelledByHumanToPassEqualityTest(const std::vector<std::string>& monkeyLines);
 
 }
 }
