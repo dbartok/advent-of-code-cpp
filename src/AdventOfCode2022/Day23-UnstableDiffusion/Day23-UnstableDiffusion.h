@@ -15,6 +15,7 @@ namespace Day23
 {
 
 unsigned numGroundTilesInBoundingRectangle(const std::vector<std::string>& initialPositionsLines);
+unsigned numFirstRoundWhereNoElfMoves(const std::vector<std::string>& initialPositionsLines);
 
 }
 }

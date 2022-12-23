@@ -15,7 +15,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace
 {
 
-const unsigned NUM_DAYS_TO_SIMULATE = 10;
+const unsigned NUM_DAYS_TO_SIMULATE_FIRST_PART = 10;
 const char OCCUPIED_POSITION = '#';
 
 }
@@ -44,11 +44,14 @@ public:
         }
     }
 
-    void simulate()
+    void simulate(unsigned numMaxRoundsToSimulate = 0)
     {
-        for (int iteration = 0; iteration < NUM_DAYS_TO_SIMULATE; ++iteration)
+        for (m_numRoundsSimulated = 1; numMaxRoundsToSimulate == 0 || m_numRoundsSimulated <= numMaxRoundsToSimulate; ++m_numRoundsSimulated)
         {
-            simulateRound();
+            if (!simulateRound())
+            {
+                break;
+            }
         };
     }
 
@@ -86,6 +89,11 @@ public:
         return numGroundTiles;
     }
 
+    unsigned getNumFirstRoundWhereNoElfMoves() const
+    {
+        return m_numRoundsSimulated;
+    }
+
 private:
     using Coordinates = std::pair<int, int>;
 
@@ -96,8 +104,9 @@ private:
 
     std::unordered_set<Coordinates, boost::hash<Coordinates>> m_occupiedPositions;
     std::deque<Coordinates> m_proposedDirectionsInOrder{NORTH, SOUTH, WEST, EAST};
+    unsigned m_numRoundsSimulated = 0;
 
-    void simulateRound()
+    bool simulateRound()
     {
         std::unordered_map<Coordinates, std::vector<Coordinates>, boost::hash<Coordinates>> proposedPositionToCurrentPositions;
 
@@ -108,6 +117,12 @@ private:
             {
                 proposedPositionToCurrentPositions[proposedPosition.get()].push_back(currentPosition);
             }
+        }
+
+        // No more movement
+        if (proposedPositionToCurrentPositions.empty())
+        {
+            return false;
         }
 
         for (const auto& proposedPositionAndCurrentPositions : proposedPositionToCurrentPositions)
@@ -125,6 +140,8 @@ private:
         auto firstProposedDirection = m_proposedDirectionsInOrder.front();
         m_proposedDirectionsInOrder.pop_front();
         m_proposedDirectionsInOrder.push_back(std::move(firstProposedDirection));
+
+        return true;
     }
 
     boost::optional<Coordinates> getProposedPosition(const Coordinates& currentPosition) const
@@ -200,9 +217,18 @@ unsigned numGroundTilesInBoundingRectangle(const std::vector<std::string>& initi
 {
     ElfMovementSimulator elfMovementSimulator{initialPositionsLines};
 
-    elfMovementSimulator.simulate();
+    elfMovementSimulator.simulate(NUM_DAYS_TO_SIMULATE_FIRST_PART);
 
     return elfMovementSimulator.getNumGroundTilesInBoundingRectangle();
+}
+
+unsigned numFirstRoundWhereNoElfMoves(const std::vector<std::string>& initialPositionsLines)
+{
+    ElfMovementSimulator elfMovementSimulator{initialPositionsLines};
+
+    elfMovementSimulator.simulate();
+
+    return elfMovementSimulator.getNumFirstRoundWhereNoElfMoves();
 }
 
 }

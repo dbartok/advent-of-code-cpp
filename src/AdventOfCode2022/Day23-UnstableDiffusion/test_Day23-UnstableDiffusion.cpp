@@ -15,18 +15,23 @@ public:
 
     TEST_METHOD(numGroundTilesInBoundingRectangle_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "....#..",
-            "..###.#",
-            "#...#.#",
-            ".#...##",
-            "#.###..",
-            "##.#.##",
-            ".#..#.."
-        };
-
-        Assert::AreEqual(110u, CurrentDay::numGroundTilesInBoundingRectangle(lines));
+        Assert::AreEqual(110u, CurrentDay::numGroundTilesInBoundingRectangle(m_lines));
     }
 
+    TEST_METHOD(numFirstRoundWhereNoElfMoves_SimpleTests)
+    {
+        Assert::AreEqual(20u, CurrentDay::numFirstRoundWhereNoElfMoves(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "....#..",
+        "..###.#",
+        "#...#.#",
+        ".#...##",
+        "#.###..",
+        "##.#.##",
+        ".#..#.."
+    };
 };
