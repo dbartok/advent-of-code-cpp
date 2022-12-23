@@ -20,9 +20,15 @@
     <ClCompile Include="Day23-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ElfMovementSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day23-UnstableDiffusion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ElfMovementSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
