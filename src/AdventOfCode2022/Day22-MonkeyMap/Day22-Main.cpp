@@ -10,6 +10,13 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <string>
 __END_LIBRARIES_DISABLE_WARNINGS
 
+namespace
+{
+
+unsigned CUBE_SIZE = 50;
+
+}
+
 int main()
 {
     namespace CurrentDay = AdventOfCode::Year2022::Day22;
@@ -24,4 +31,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::finalPassword(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::finalPasswordWithCubeMap(lines, CUBE_SIZE) << std::endl;
 }

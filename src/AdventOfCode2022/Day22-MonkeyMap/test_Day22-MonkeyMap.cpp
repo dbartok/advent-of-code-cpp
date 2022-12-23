@@ -15,25 +15,30 @@ public:
 
     TEST_METHOD(finalPassword_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "        ...#",
-            "        .#..",
-            "        #...",
-            "        ....",
-            "...#.......#",
-            "........#...",
-            "..#....#....",
-            "..........#.",
-            "        ...#....",
-            "        .....#..",
-            "        .#......",
-            "        ......#.",
-            "",
-            "10R5L5R10L4R5L5",
-        };
-
         Assert::AreEqual(6032, CurrentDay::finalPassword(lines));
     }
 
+    TEST_METHOD(finalPasswordWithCubeMap_SimpleTests)
+    {
+        Assert::AreEqual(5031, CurrentDay::finalPasswordWithCubeMap(lines, 4));
+    }
+
+private:
+    const std::vector<std::string> lines =
+    {
+        "        ...#",
+        "        .#..",
+        "        #...",
+        "        ....",
+        "...#.......#",
+        "........#...",
+        "..#....#....",
+        "..........#.",
+        "        ...#....",
+        "        .....#..",
+        "        .#......",
+        "        ......#.",
+        "",
+        "10R5L5R10L4R5L5",
+    };
 };

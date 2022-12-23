@@ -15,6 +15,7 @@ namespace Day22
 {
 
 int finalPassword(const std::vector<std::string>& monkeyNoteLines);
+int finalPasswordWithCubeMap(const std::vector<std::string>& monkeyNoteLines, unsigned cubeSize);
 
 }
 }
