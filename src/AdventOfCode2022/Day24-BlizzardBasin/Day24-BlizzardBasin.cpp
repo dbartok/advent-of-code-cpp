@@ -10,6 +10,14 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <queue>
 __END_LIBRARIES_DISABLE_WARNINGS
 
+namespace
+{
+
+unsigned FIRST_PART_NUM_SEGMENTS = 1;
+unsigned SECOND_PART_NUM_SEGMENTS = 3;
+
+}
+
 namespace AdventOfCode
 {
 namespace Year2022
@@ -38,6 +46,10 @@ Coordinates GAP_OFFSET{1, 0};
 
 struct BlizzardMap
 {
+    unsigned width;
+    unsigned height;
+    Coordinates startPosition;
+    Coordinates endPosition;
     CoordinateToBlizzards xCoordinateToBlizzards;
     CoordinateToBlizzards yCoordinateToBlizzards;
 };
@@ -45,12 +57,9 @@ struct BlizzardMap
 class BlizzardPathfinder
 {
 public:
-    BlizzardPathfinder(BlizzardMap blizzardMap, unsigned width, unsigned height)
+    BlizzardPathfinder(BlizzardMap blizzardMap, unsigned startTime)
         : m_blizzardMap{std::move(blizzardMap)}
-        , m_width{width}
-        , m_height{height}
-        , m_startPosition{GAP_OFFSET}
-        , m_endPosition{width - 1 - GAP_OFFSET.first, height - 1 - GAP_OFFSET.second}
+        , m_startTime{startTime}
         , m_minTimeElapsedToReachGoal{std::numeric_limits<unsigned>::max()}
     {
 
@@ -63,7 +72,7 @@ public:
             return lhs.timeElapsed + lhs.remainingTimeLowerBound > rhs.timeElapsed + rhs.remainingTimeLowerBound;
         };
 
-        const Node startNode{m_startPosition, 0, getRemainingTimeLowerBound(m_startPosition)};
+        const Node startNode{m_blizzardMap.startPosition, m_startTime, getRemainingTimeLowerBound(m_blizzardMap.startPosition)};
 
         std::priority_queue<Node, std::vector<Node>, decltype(cmp)> openNodesPriorityQueue(cmp);
         openNodesPriorityQueue.push(startNode);
@@ -74,7 +83,7 @@ public:
             const Node currentNode = openNodesPriorityQueue.top();
             openNodesPriorityQueue.pop();
 
-            if (currentNode.position == m_endPosition)
+            if (currentNode.position == m_blizzardMap.endPosition)
             {
                 m_minTimeElapsedToReachGoal = currentNode.timeElapsed;
                 break;
@@ -92,9 +101,9 @@ public:
         }
     }
 
-    unsigned getMinTimeElapsedToReachGoal() const
+    unsigned getMinTimeElapsedSinceStartToReachGoal() const
     {
-        return m_minTimeElapsedToReachGoal;
+        return m_minTimeElapsedToReachGoal - m_startTime;
     }
 
 private:
@@ -132,16 +141,13 @@ private:
     };
 
     BlizzardMap m_blizzardMap;
+    unsigned m_startTime;
 
     unsigned m_minTimeElapsedToReachGoal;
-    unsigned m_width;
-    unsigned m_height;
-    Coordinates m_startPosition;
-    Coordinates m_endPosition;
 
     unsigned getRemainingTimeLowerBound(const Coordinates& coordinates) const
     {
-        return std::abs(m_endPosition.first - coordinates.first) + std::abs(m_endPosition.second - coordinates.second);
+        return std::abs(m_blizzardMap.endPosition.first - coordinates.first) + std::abs(m_blizzardMap.endPosition.second - coordinates.second);
     }
 
     std::vector<Node> getNeighborNodes(const Node& currentNode) const
@@ -172,24 +178,24 @@ private:
 
     bool isPositionFreeAtTime(const Coordinates& position, unsigned time) const
     {
-        if (position == m_startPosition || position == m_endPosition)
+        if (position == m_blizzardMap.startPosition || position == m_blizzardMap.endPosition)
         {
             return true;
         }
 
-        if (position.first < 1 || position.first >= m_width - 1 || position.second < 1 || position.second >= m_height - 1)
+        if (position.first < 1 || position.first >= m_blizzardMap.width - 1 || position.second < 1 || position.second >= m_blizzardMap.height - 1)
         {
             return false;
         }
 
         // Vertical blizzards
-        if (!isBlizzardFree(m_blizzardMap.xCoordinateToBlizzards, position.first, position.second, time, m_height))
+        if (!isBlizzardFree(m_blizzardMap.xCoordinateToBlizzards, position.first, position.second, time, m_blizzardMap.height))
         {
             return false;
         }
 
         // Horizontal blizzards
-        if (!isBlizzardFree(m_blizzardMap.yCoordinateToBlizzards, position.second, position.first, time, m_width))
+        if (!isBlizzardFree(m_blizzardMap.yCoordinateToBlizzards, position.second, position.first, time, m_blizzardMap.width))
         {
             return false;
         }
@@ -240,12 +246,15 @@ private:
 
 BlizzardMap parseBlizzardMapLines(const std::vector<std::string>& blizzardMapLines)
 {
+    const unsigned width = blizzardMapLines.at(0).size();
+    const unsigned height = blizzardMapLines.size();
+
     CoordinateToBlizzards xCoordinateToBlizzards;
     CoordinateToBlizzards yCoordinateToBlizzards;
 
-    for (int j = 0; j < blizzardMapLines.size(); ++j)
+    for (int j = 0; j < height; ++j)
     {
-        for (int i = 0; i < blizzardMapLines.at(j).size(); ++i)
+        for (int i = 0; i < width; ++i)
         {
             switch (blizzardMapLines.at(j).at(i))
             {
@@ -267,18 +276,37 @@ BlizzardMap parseBlizzardMapLines(const std::vector<std::string>& blizzardMapLin
         }
     }
 
-    return {xCoordinateToBlizzards, yCoordinateToBlizzards};
+    Coordinates startPosition = GAP_OFFSET;
+    Coordinates endPosition{width - 1 - GAP_OFFSET.first, height - 1 - GAP_OFFSET.second};
+
+    return {width, height, std::move(startPosition), std::move(endPosition), std::move(xCoordinateToBlizzards), std::move(yCoordinateToBlizzards)};
+}
+
+unsigned fewestNumberOfMinutesForGivenNumberOfSegments(const std::vector<std::string>& blizzardMapLines, unsigned numSegments)
+{
+    BlizzardMap blizzardMap = parseBlizzardMapLines(blizzardMapLines);
+    unsigned totalElapsedTime = 0;
+
+    for (unsigned segment = 0; segment < numSegments; ++segment)
+    {
+        BlizzardPathfinder blizzardPathfinder{blizzardMap, totalElapsedTime};
+        blizzardPathfinder.findShortestPath();
+        totalElapsedTime += blizzardPathfinder.getMinTimeElapsedSinceStartToReachGoal();
+
+        std::swap(blizzardMap.startPosition, blizzardMap.endPosition);
+    }
+
+    return totalElapsedTime;
 }
 
 unsigned fewestNumberOfMinutesToReachGoal(const std::vector<std::string>& blizzardMapLines)
 {
-    BlizzardMap blizzardMap = parseBlizzardMapLines(blizzardMapLines);
+    return fewestNumberOfMinutesForGivenNumberOfSegments(blizzardMapLines, 1);
+}
 
-    BlizzardPathfinder blizzardPathfinder{std::move(blizzardMap), blizzardMapLines.at(0).size(), blizzardMapLines.size()};
-
-    blizzardPathfinder.findShortestPath();
-
-    return blizzardPathfinder.getMinTimeElapsedToReachGoal();
+unsigned fewestNumberOfMinutesToReachGoalAfterGoingBackForSnacks(const std::vector<std::string>& blizzardMapLines)
+{
+    return fewestNumberOfMinutesForGivenNumberOfSegments(blizzardMapLines, 3);
 }
 
 }

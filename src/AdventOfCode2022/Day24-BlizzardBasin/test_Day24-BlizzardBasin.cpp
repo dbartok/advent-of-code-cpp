@@ -15,17 +15,22 @@ public:
 
     TEST_METHOD(fewestNumberOfMinutesToReachGoal_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "#.######",
-            "#>>.<^<#",
-            "#.<..<<#",
-            "#>v.><>#",
-            "#<^v^^>#",
-            "######.#"
-        };
-
-        Assert::AreEqual(18u, CurrentDay::fewestNumberOfMinutesToReachGoal(lines));
+        Assert::AreEqual(18u, CurrentDay::fewestNumberOfMinutesToReachGoal(m_lines));
     }
 
+    TEST_METHOD(fewestNumberOfMinutesToReachGoalAfterGoingBackForSnacks_SimpleTests)
+    {
+        Assert::AreEqual(54u, CurrentDay::fewestNumberOfMinutesToReachGoalAfterGoingBackForSnacks(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "#.######",
+        "#>>.<^<#",
+        "#.<..<<#",
+        "#>v.><>#",
+        "#<^v^^>#",
+        "######.#"
+    };
 };

@@ -15,6 +15,8 @@ namespace Day24
 {
 
 unsigned fewestNumberOfMinutesToReachGoal(const std::vector<std::string>& blizzardMapLines);
+unsigned fewestNumberOfMinutesToReachGoalAfterGoingBackForSnacks(const std::vector<std::string>& blizzardMapLines);
+
 
 }
 }

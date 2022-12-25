@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::fewestNumberOfMinutesToReachGoal(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::fewestNumberOfMinutesToReachGoalAfterGoingBackForSnacks(lines) << std::endl;
 }
