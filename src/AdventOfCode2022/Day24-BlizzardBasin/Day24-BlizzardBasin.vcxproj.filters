@@ -20,9 +20,15 @@
     <ClCompile Include="Day24-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BlizzardPathfinder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day24-BlizzardBasin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlizzardPathfinder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
