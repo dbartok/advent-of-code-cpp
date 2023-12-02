@@ -3,6 +3,8 @@
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include <numeric>
+
 #include <boost/algorithm/string.hpp>
 __END_LIBRARIES_DISABLE_WARNINGS
 
@@ -22,6 +24,21 @@ struct CubeSubset
     bool operator<=(const CubeSubset& other) const
     {
         return this->red <= other.red&& this->green <= other.green&& this->blue <= other.blue;
+    }
+
+    CubeSubset operator|(const CubeSubset& other) const
+    {
+        return CubeSubset
+        {
+            std::max(this->red, other.red),
+            std::max(this->green, other.green),
+            std::max(this->blue, other.blue)
+        };
+    }
+
+    int getPower() const
+    {
+        return red * green * blue;
     }
 };
 
@@ -105,7 +122,7 @@ bool isGamePossibleWithPresetBag(const Game& game)
 
 int sumOfIDsOfPossibleGames(const std::vector<std::string>& gameRecordLines)
 {
-    std::vector<Game> games = parseGameRecordLines(gameRecordLines);
+    const std::vector<Game> games = parseGameRecordLines(gameRecordLines);
 
     int sum = 0;
 
@@ -119,6 +136,25 @@ int sumOfIDsOfPossibleGames(const std::vector<std::string>& gameRecordLines)
     }
 
     return sum;
+}
+
+CubeSubset getMinimalCubeSubsetToMakeGamePossible(const Game& game)
+{
+    return std::accumulate(game.cbegin(), game.cend(), CubeSubset{}, [](const CubeSubset& acc, const auto& cubeSubset)
+                           {
+                               return acc | cubeSubset;
+                           });
+}
+
+int sumOfPowerOfMinimalSets(const std::vector<std::string>& gameRecordLines)
+{
+    const std::vector<Game> games = parseGameRecordLines(gameRecordLines);
+
+    return std::accumulate(games.cbegin(), games.cend(), 0, [](int acc, const auto& game)
+                           {
+                               CubeSubset minimalSubset = getMinimalCubeSubsetToMakeGamePossible(game);
+                               return acc + minimalSubset.getPower();
+                           });
 }
 
 }

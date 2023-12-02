@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::sumOfIDsOfPossibleGames(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumOfPowerOfMinimalSets(lines) << std::endl;
 }

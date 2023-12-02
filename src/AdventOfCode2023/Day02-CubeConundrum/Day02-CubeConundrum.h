@@ -15,6 +15,7 @@ namespace Day02
 {
 
 int sumOfIDsOfPossibleGames(const std::vector<std::string>& gameRecordLines);
+int sumOfPowerOfMinimalSets(const std::vector<std::string>& gameRecordLines);
 
 }
 }
