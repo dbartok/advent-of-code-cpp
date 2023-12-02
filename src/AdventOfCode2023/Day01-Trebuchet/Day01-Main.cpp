@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::sumOfAllCalibrationValues(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumOfAllCalibrationValuesSpelledOutWithLetters(lines) << std::endl;
 }

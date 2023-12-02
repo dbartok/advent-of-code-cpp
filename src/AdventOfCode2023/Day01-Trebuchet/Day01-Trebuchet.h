@@ -15,6 +15,7 @@ namespace Day01
 {
 
 int sumOfAllCalibrationValues(const std::vector<std::string>& calibrationDocumentLines);
+int sumOfAllCalibrationValuesSpelledOutWithLetters(const std::vector<std::string>& calibrationDocumentLines);
 
 }
 }

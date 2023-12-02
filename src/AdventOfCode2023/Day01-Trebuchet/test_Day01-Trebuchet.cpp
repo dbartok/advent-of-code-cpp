@@ -26,4 +26,20 @@ public:
         Assert::AreEqual(142, CurrentDay::sumOfAllCalibrationValues(lines));
     }
 
+    TEST_METHOD(sumOfAllCalibrationValuesSpelledOutWithLetters_SimpleTests)
+    {
+        const std::vector<std::string>& lines =
+        {
+            "two1nine",
+            "eightwothree",
+            "abcone2threexyz",
+            "xtwone3four",
+            "4nineeightseven2",
+            "zoneight234",
+            "7pqrstsixteen"
+        };
+
+        Assert::AreEqual(281, CurrentDay::sumOfAllCalibrationValuesSpelledOutWithLetters(lines));
+    }
+
 };
