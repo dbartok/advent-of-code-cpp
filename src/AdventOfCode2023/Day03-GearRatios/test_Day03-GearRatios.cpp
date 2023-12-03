@@ -15,21 +15,26 @@ public:
 
     TEST_METHOD(sumOfAllPartNumbers_SimpleTests)
     {
-        const std::vector<std::string>& lines =
-        {
-            "467..114..",
-            "...*......",
-            "..35..633.",
-            "......#...",
-            "617*......",
-            ".....+.58.",
-            "..592.....",
-            "......755.",
-            "...$.*....",
-            ".664.598.."
-        };
-
-        Assert::AreEqual(4361, CurrentDay::sumOfAllPartNumbers(lines));
+        Assert::AreEqual(4361, CurrentDay::sumOfAllPartNumbers(m_lines));
     }
 
+    TEST_METHOD(sumOfAllGearRatios_SimpleTests)
+    {
+        Assert::AreEqual(467835, CurrentDay::sumOfAllGearRatios(m_lines));
+    }
+
+private:
+    const std::vector<std::string>& m_lines =
+    {
+        "467..114..",
+        "...*......",
+        "..35..633.",
+        "......#...",
+        "617*......",
+        ".....+.58.",
+        "..592.....",
+        "......755.",
+        "...$.*....",
+        ".664.598.."
+    };
 };

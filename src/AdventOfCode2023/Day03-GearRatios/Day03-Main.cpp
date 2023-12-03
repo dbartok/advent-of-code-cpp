@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::sumOfAllPartNumbers(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumOfAllGearRatios(lines) << std::endl;
 }

@@ -15,6 +15,7 @@ namespace Day03
 {
 
 int sumOfAllPartNumbers(const std::vector<std::string>& schematicLines);
+int sumOfAllGearRatios(const std::vector<std::string>& schematicLines);
 
 }
 }

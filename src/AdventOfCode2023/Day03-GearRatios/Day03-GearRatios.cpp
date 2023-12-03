@@ -3,8 +3,11 @@
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
+#include <boost/functional/hash.hpp>
+
 #include <algorithm>
 #include <numeric>
+#include <unordered_set>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -46,6 +49,25 @@ public:
         return sumOfAllPartNumbers;
     }
 
+    int getSumOfAllGearRatios() const
+    {
+        int sumOfAllGearRatios = 0;
+
+        for (int j = 0; j < m_height; ++j)
+        {
+            for (int i = 0; i < m_width; ++i)
+            {
+                if (isGear({i, j}))
+                {
+                    const int gearRatio = getGearRatio({i, j});
+                    sumOfAllGearRatios += gearRatio;
+                }
+            }
+        }
+
+        return sumOfAllGearRatios;
+    }
+
 private:
     const std::vector<std::string> m_schematic;
     const size_t m_width;
@@ -56,6 +78,11 @@ private:
         return isStartOfNumber(coordinates) && isNumberAdjacentToSymbol(coordinates);
     }
 
+    bool isGear(const Coordinates& coordinates) const
+    {
+        return getValueAt(coordinates) == '*' && getAdjacentNumbers(coordinates).size() == 2;
+    }
+
     int getPartNumber(const Coordinates& numberStartCoordinates) const
     {
         std::vector<Coordinates> allDigitCoordinates = getAllDigitCoordinatesForNumber(numberStartCoordinates);
@@ -64,6 +91,13 @@ private:
                                {
                                    return 10 * acc + (getValueAt(coords) - '0');
                                });
+    }
+
+    int getGearRatio(const Coordinates& coordinates) const
+    {
+        std::vector<int> adjacentNumbers = getAdjacentNumbers(coordinates);
+
+        return std::accumulate(adjacentNumbers.cbegin(), adjacentNumbers.cend(), 1, std::multiplies<int>());
     }
 
     bool isStartOfNumber(const Coordinates& coordinates) const
@@ -90,6 +124,33 @@ private:
                     {
                         return this->isPositionAdjacentToSymbol(coords);
                     });
+    }
+
+    std::vector<int> getAdjacentNumbers(const Coordinates& centerCoordinates) const
+    {
+        std::vector<Coordinates> allNeighborCoordinates = getAllNeighborCoordinates(centerCoordinates);
+        std::unordered_set<Coordinates, boost::hash<Coordinates>> allIdentifiedNumberStartCoordinates;
+        std::vector<int> adjacentNumbers;
+
+        for (auto potentionalNumberStartCoordinates : allNeighborCoordinates)
+        {
+            if (!std::isdigit(getValueAt(potentionalNumberStartCoordinates)))
+            {
+                continue;
+            }
+
+            while (!isStartOfNumber(potentionalNumberStartCoordinates))
+            {
+                potentionalNumberStartCoordinates.first -= 1;
+            }
+
+            if (allIdentifiedNumberStartCoordinates.insert(potentionalNumberStartCoordinates).second)
+            {
+                adjacentNumbers.push_back(getPartNumber(potentionalNumberStartCoordinates));
+            }
+        }
+
+        return adjacentNumbers;
     }
 
     std::vector<Coordinates> getAllDigitCoordinatesForNumber(const Coordinates& numberStartCoordinates) const
@@ -130,7 +191,7 @@ private:
         {
             for (int i = coordinates.first - 1; i <= coordinates.first + 1; ++i)
             {
-                if (i >= 0 && i < m_width && j >= 0 && j < m_height)
+                if (Coordinates{i, j} != coordinates && i >= 0 && i < m_width && j >= 0 && j < m_height)
                 {
                     allNeighborCoordinates.push_back({i, j});
                 }
@@ -151,6 +212,13 @@ int sumOfAllPartNumbers(const std::vector<std::string>& schematicLines)
     SchematicAnalyzer schematicAnalyzer = SchematicAnalyzer{schematicLines};
 
     return schematicAnalyzer.getSumOfAllPartNumbers();
+}
+
+int sumOfAllGearRatios(const std::vector<std::string>& schematicLines)
+{
+    SchematicAnalyzer schematicAnalyzer = SchematicAnalyzer{schematicLines};
+
+    return schematicAnalyzer.getSumOfAllGearRatios();
 }
 
 }
