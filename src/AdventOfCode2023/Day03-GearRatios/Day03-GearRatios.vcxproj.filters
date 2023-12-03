@@ -20,9 +20,15 @@
     <ClCompile Include="Day03-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SchematicAnalyzer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day03-GearRatios.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SchematicAnalyzer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
