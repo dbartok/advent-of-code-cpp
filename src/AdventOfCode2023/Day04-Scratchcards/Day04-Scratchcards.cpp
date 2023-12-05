@@ -53,7 +53,7 @@ std::vector<Scratchcard> parseScratchcardLines(const std::vector<std::string>& s
     return scratchcards;
 }
 
-int getValue(const Scratchcard& scratchcard)
+unsigned getNumMatchingNumbers(const Scratchcard& scratchcard)
 {
     Numbers winningNumbers = scratchcard.first;
     std::sort(winningNumbers.begin(), winningNumbers.end());
@@ -66,8 +66,7 @@ int getValue(const Scratchcard& scratchcard)
                           playedNumbers.cbegin(), playedNumbers.cend(),
                           std::back_inserter(successfullyGuessedNumbers));
 
-    const int pointExponent = std::max(successfullyGuessedNumbers.size() - 1, 0u);
-    return static_cast<int>(std::pow(2, pointExponent));
+    return successfullyGuessedNumbers.size();
 }
 
 
@@ -77,8 +76,32 @@ int numPointsWorthInTotal(const std::vector<std::string>& scratchcardLines)
 
     return std::accumulate(scratchcards.cbegin(), scratchcards.cend(), 0, [](int acc, const auto& scratchcard)
                            {
-                               return acc + getValue(scratchcard);
+                               const unsigned numMatchingNumbers = getNumMatchingNumbers(scratchcard);
+                               const int scoreExponent = std::max(numMatchingNumbers - 1, 0u);
+                               const int currentScore = static_cast<int>(std::pow(2, scoreExponent));
+
+                               return acc + currentScore;
                            });
+}
+
+int numTotalScratchcardsIncludingOriginalsAndCopies(const std::vector<std::string>& scratchcardLines)
+{
+    const std::vector<Scratchcard> scratchcards = parseScratchcardLines(scratchcardLines);
+
+    std::vector<int> scratchcardIndexToQuantity(scratchcards.size(), 1);
+
+    for (size_t scratchcardIndex = 0; scratchcardIndex < scratchcards.size(); ++scratchcardIndex)
+    {
+        const int score = getNumMatchingNumbers(scratchcards.at(scratchcardIndex));
+        const int currentQuantity = scratchcardIndexToQuantity.at(scratchcardIndex);
+
+        for (int copyOffset = 1; copyOffset <= score; ++copyOffset)
+        {
+            scratchcardIndexToQuantity.at(scratchcardIndex + copyOffset) += currentQuantity;
+        }
+    }
+
+    return std::accumulate(scratchcardIndexToQuantity.cbegin(), scratchcardIndexToQuantity.cend(), 0);
 }
 
 }

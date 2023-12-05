@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numPointsWorthInTotal(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numTotalScratchcardsIncludingOriginalsAndCopies(lines) << std::endl;
 }

@@ -16,6 +16,7 @@ namespace Day04
 {
 
 int numPointsWorthInTotal(const std::vector<std::string>& scratchcardLines);
+int numTotalScratchcardsIncludingOriginalsAndCopies(const std::vector<std::string>& scratchcardLines);
 
 }
 }
