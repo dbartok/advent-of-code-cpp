@@ -8,6 +8,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
 
 #include <map>
+#include <unordered_set>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -76,6 +77,18 @@ public:
         const auto lowerBoundIter = std::prev(upperBoundIter);
 
         return value + lowerBoundIter->second;
+    }
+
+    std::vector<int64_t> getAllLowerBounds() const
+    {
+        std::vector<int64_t> allLowerBounds;
+
+        for (const auto& mappingElement : m_compressedMapping)
+        {
+            allLowerBounds.push_back(mappingElement.first);
+        }
+
+        return allLowerBounds;
     }
 
 private:
@@ -173,7 +186,19 @@ public:
 
     int64_t getLowestLocationNumberCorrespondingToSeed() const
     {
-        const auto seedWithLowestLocationNumberIter = std::min_element(m_seeds.begin(), m_seeds.cend(), [this](const auto& lhs, const auto& rhs)
+        const auto seedWithLowestLocationNumberIter = std::min_element(m_seeds.cbegin(), m_seeds.cend(), [this](const auto& lhs, const auto& rhs)
+                                                                       {
+                                                                           return this->m_overallMapping.getMappedValue(lhs) < this->m_overallMapping.getMappedValue(rhs);
+                                                                       });
+
+        return this->m_overallMapping.getMappedValue(*seedWithLowestLocationNumberIter);
+    }
+
+    int64_t getLowestLocationNumberCorrespondingToSeedWithSeedRanges() const
+    {
+        const std::unordered_set<int64_t> interestingSeedValues = getInterestingSeedValuesForSeedRanges();
+
+        const auto seedWithLowestLocationNumberIter = std::min_element(interestingSeedValues.cbegin(), interestingSeedValues.cend(), [this](const auto& lhs, const auto& rhs)
                                                                        {
                                                                            return this->m_overallMapping.getMappedValue(lhs) < this->m_overallMapping.getMappedValue(rhs);
                                                                        });
@@ -186,6 +211,42 @@ private:
     std::vector<Mapping> m_mappings;
 
     Mapping m_overallMapping;
+
+    std::unordered_set<int64_t> getInterestingSeedValuesForSeedRanges() const
+    {
+        const std::vector<int64_t> overallMappingLowerBounds = m_overallMapping.getAllLowerBounds();
+
+        auto overallMappingLowerBoundIter = overallMappingLowerBounds.cbegin();
+        auto seedIter = m_seeds.cbegin();
+
+        std::unordered_set<int64_t> interestingSeedValues;
+
+        while (overallMappingLowerBoundIter != overallMappingLowerBounds.cend() && seedIter != m_seeds.cend())
+        {
+            const int64_t overallMappingLowerBound = *overallMappingLowerBoundIter;
+
+            const int64_t seedRangeStart = *seedIter;
+            const int64_t seedRangeEnd = seedRangeStart + *std::next(seedIter) - 1;
+            interestingSeedValues.insert(seedRangeStart);
+            interestingSeedValues.insert(seedRangeEnd);
+
+            if (seedRangeStart > overallMappingLowerBound)
+            {
+                ++overallMappingLowerBoundIter;
+            }
+            else if (overallMappingLowerBound >= seedRangeStart && overallMappingLowerBound <= seedRangeEnd)
+            {
+                interestingSeedValues.insert(overallMappingLowerBound);
+                ++overallMappingLowerBoundIter;
+            }
+            else
+            {
+                seedIter += 2;
+            }
+        }
+
+        return interestingSeedValues;
+    }
 };
 
 using MappingTextSection = std::vector<std::string>;
@@ -247,6 +308,15 @@ int64_t lowestLocationNumberCorrespondingToSeed(const std::vector<std::string>& 
     almanac.buildOverallMapping();
 
     return almanac.getLowestLocationNumberCorrespondingToSeed();
+}
+
+int64_t lowestLocationNumberCorrespondingToSeedWithSeedRanges(const std::vector<std::string>& almanacLines)
+{
+    Almanac almanac = parseAlmanacLines(almanacLines);
+
+    almanac.buildOverallMapping();
+
+    return almanac.getLowestLocationNumberCorrespondingToSeedWithSeedRanges();
 }
 
 }

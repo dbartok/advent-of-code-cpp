@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::lowestLocationNumberCorrespondingToSeed(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::lowestLocationNumberCorrespondingToSeedWithSeedRanges(lines) << std::endl;
 }

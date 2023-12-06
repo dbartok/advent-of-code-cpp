@@ -15,6 +15,7 @@ namespace Day05
 {
 
 int64_t lowestLocationNumberCorrespondingToSeed(const std::vector<std::string>& almanacLines);
+int64_t lowestLocationNumberCorrespondingToSeedWithSeedRanges(const std::vector<std::string>& almanacLines);
 
 }
 }
