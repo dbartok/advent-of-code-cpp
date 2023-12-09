@@ -14,7 +14,8 @@ namespace Year2023
 namespace Day06
 {
 
-int numWaysRecordCanBeBeatenMultipliedTogether(const std::vector<std::string>& raceDescriptionLines);
+int64_t numWaysRecordCanBeBeatenMultipliedTogether(const std::vector<std::string>& raceDescriptionLines);
+int64_t numWaysRecordCanBeBeatenSingleRace(const std::vector<std::string>& raceDescriptionLines);
 
 }
 }

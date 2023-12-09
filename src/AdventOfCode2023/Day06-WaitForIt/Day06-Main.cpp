@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numWaysRecordCanBeBeatenMultipliedTogether(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numWaysRecordCanBeBeatenSingleRace(lines) << std::endl;
 }

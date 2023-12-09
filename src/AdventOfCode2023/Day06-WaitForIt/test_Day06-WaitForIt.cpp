@@ -15,13 +15,18 @@ public:
 
     TEST_METHOD(numWaysRecordCanBeBeatenMultipliedTogether_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "Time:      7  15   30",
-            "Distance:  9  40  200"
-        };
-
-        Assert::AreEqual(288, CurrentDay::numWaysRecordCanBeBeatenMultipliedTogether(lines));
+        Assert::AreEqual(288ll, CurrentDay::numWaysRecordCanBeBeatenMultipliedTogether(m_lines));
     }
 
+    TEST_METHOD(numWaysRecordCanBeBeatenSingleRace_SimpleTests)
+    {
+        Assert::AreEqual(71503ll, CurrentDay::numWaysRecordCanBeBeatenSingleRace(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "Time:      7  15   30",
+        "Distance:  9  40  200"
+    };
 };
