@@ -15,6 +15,7 @@ namespace Day07
 {
 
 int totalWinnings(const std::vector<std::string>& camelCardsLines);
+int totalWinningsWithJokers(const std::vector<std::string>& camelCardsLines);
 
 }
 }

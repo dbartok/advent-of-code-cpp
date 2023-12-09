@@ -15,16 +15,21 @@ public:
 
     TEST_METHOD(totalWinnings_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "32T3K 765",
-            "T55J5 684",
-            "KK677 28",
-            "KTJJT 220",
-            "QQQJA 483"
-        };
-
-        Assert::AreEqual(6440, CurrentDay::totalWinnings(lines));
+        Assert::AreEqual(6440, CurrentDay::totalWinnings(m_lines));
     }
 
+    TEST_METHOD(totalWinningsWithJokers_SimpleTests)
+    {
+        Assert::AreEqual(5905, CurrentDay::totalWinningsWithJokers(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "32T3K 765",
+        "T55J5 684",
+        "KK677 28",
+        "KTJJT 220",
+        "QQQJA 483"
+    };
 };

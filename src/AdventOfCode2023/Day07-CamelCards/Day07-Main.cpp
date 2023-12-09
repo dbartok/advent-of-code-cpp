@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::totalWinnings(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::totalWinningsWithJokers(lines) << std::endl;
 }
