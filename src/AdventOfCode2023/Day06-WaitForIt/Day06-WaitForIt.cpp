@@ -1,5 +1,7 @@
 #include "Day06-WaitForIt.h"
 
+#include "Race.h"
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
@@ -14,55 +16,6 @@ namespace Year2023
 {
 namespace Day06
 {
-
-class Race
-{
-public:
-    Race(int64_t raceDuration, int64_t recordDistance)
-        : m_raceDuration{raceDuration}
-        , m_recordDistance{recordDistance}
-    {
-
-    }
-
-    int64_t getNumWaysToBeatRecord() const
-    {
-        const int64_t lowestButtonPressDurationThatBeatsRecord = getLowestButtonPressDurationThatBeatsRecord();
-        const int64_t highestButtonPressDurationThatBeatsRecord = m_raceDuration - lowestButtonPressDurationThatBeatsRecord;
-        return highestButtonPressDurationThatBeatsRecord - lowestButtonPressDurationThatBeatsRecord + 1;
-    }
-
-private:
-    int64_t m_raceDuration;
-    int64_t m_recordDistance;
-
-    int64_t getLowestButtonPressDurationThatBeatsRecord() const
-    {
-        int64_t lowerBound = 0;
-        int64_t upperBound = m_raceDuration / 2;
-
-        while (lowerBound != upperBound)
-        {
-            const int64_t midpoint = (lowerBound + upperBound) / 2;
-            const int64_t distanceForMidpoint = getDistanceForButtonPressDuration(midpoint);
-            if (distanceForMidpoint > m_recordDistance)
-            {
-                upperBound = midpoint;
-            }
-            else
-            {
-                lowerBound = midpoint + 1;
-            }
-        }
-
-        return lowerBound;
-    }
-
-    int64_t getDistanceForButtonPressDuration(int64_t buttonPressDuration) const
-    {
-        return buttonPressDuration * (m_raceDuration - buttonPressDuration);
-    }
-};
 
 int64_t parseRaceDescriptionLineAsSingleRace(const std::string& raceDescriptionLine)
 {

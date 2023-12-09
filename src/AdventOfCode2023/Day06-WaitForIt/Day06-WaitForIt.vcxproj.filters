@@ -20,9 +20,15 @@
     <ClCompile Include="Day06-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Race.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day06-WaitForIt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Race.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
