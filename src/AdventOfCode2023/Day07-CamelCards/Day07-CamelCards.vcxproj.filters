@@ -20,9 +20,15 @@
     <ClCompile Include="Day07-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HandComparator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day07-CamelCards.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HandComparator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
