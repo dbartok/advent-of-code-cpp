@@ -72,18 +72,35 @@ int extrapolate(const History& history)
     return differentialSequences.front().back();
 }
 
-int sumOfExtrapolatedValues(const std::vector<std::string>& historyLines)
+int sumOfExtrapolatedValues(const std::vector<History>& histories)
 {
-    std::vector<History> histories = parseHistoryLines(historyLines);
-    int sumOfExtrapolatedValues = 0;
+    int sumOfForwardExtrapolatedValues = 0;
 
     for (const auto& history : histories)
     {
         const int extrapolatedValue = extrapolate(history);
-        sumOfExtrapolatedValues += extrapolatedValue;
+        sumOfForwardExtrapolatedValues += extrapolatedValue;
     }
 
-    return sumOfExtrapolatedValues;
+    return sumOfForwardExtrapolatedValues;
+}
+
+int sumOfForwardsExtrapolatedValues(const std::vector<std::string>& historyLines)
+{
+    std::vector<History> histories = parseHistoryLines(historyLines);
+    return sumOfExtrapolatedValues(histories);
+}
+
+int sumOfBackwardsExtrapolatedValues(const std::vector<std::string>& historyLines)
+{
+    std::vector<History> histories = parseHistoryLines(historyLines);
+
+    std::for_each(histories.begin(), histories.end(), [](auto& history)
+                  {
+                      std::reverse(history.begin(), history.end());
+                  });
+
+    return sumOfExtrapolatedValues(histories);
 }
 
 }

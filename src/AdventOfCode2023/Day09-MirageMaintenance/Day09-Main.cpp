@@ -22,5 +22,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << CurrentDay::sumOfExtrapolatedValues(lines) << std::endl;
+    std::cout << "First part: " << CurrentDay::sumOfForwardsExtrapolatedValues(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumOfBackwardsExtrapolatedValues(lines) << std::endl;
 }

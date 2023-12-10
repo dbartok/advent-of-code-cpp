@@ -14,7 +14,9 @@ namespace Year2023
 namespace Day09
 {
 
-int sumOfExtrapolatedValues(const std::vector<std::string>& historyLines);
+int sumOfForwardsExtrapolatedValues(const std::vector<std::string>& historyLines);
+int sumOfBackwardsExtrapolatedValues(const std::vector<std::string>& historyLines);
+
 
 }
 }

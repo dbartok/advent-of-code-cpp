@@ -13,16 +13,21 @@ TEST_CLASS(Day09MirageMaintenance)
 {
 public:
 
-    TEST_METHOD(sumOfExtrapolatedValues_SimpleTests)
+    TEST_METHOD(sumOfForwardsExtrapolatedValues_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "0 3 6 9 12 15",
-            "1 3 6 10 15 21",
-            "10 13 16 21 30 45"
-        };
-
-        Assert::AreEqual(114, CurrentDay::sumOfExtrapolatedValues(lines ));
+        Assert::AreEqual(114, CurrentDay::sumOfForwardsExtrapolatedValues(m_lines));
     }
 
+    TEST_METHOD(sumOfBackwardsExtrapolatedValues_SimpleTests)
+    {
+        Assert::AreEqual(2, CurrentDay::sumOfBackwardsExtrapolatedValues(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "0 3 6 9 12 15",
+        "1 3 6 10 15 21",
+        "10 13 16 21 30 45"
+    };
 };
