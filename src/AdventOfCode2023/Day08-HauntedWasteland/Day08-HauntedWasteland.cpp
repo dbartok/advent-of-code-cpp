@@ -1,12 +1,13 @@
 #include "Day08-HauntedWasteland.h"
 
+#include "NetworkTraverser.h"
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
 #include <boost/math/common_factor_rt.hpp>
 
-#include <unordered_map>
 #include <regex>
 #include <numeric>
 __END_LIBRARIES_DISABLE_WARNINGS
@@ -28,72 +29,6 @@ namespace Year2023
 {
 namespace Day08
 {
-
-using NodeID = std::string;
-
-struct Junction
-{
-    NodeID left;
-    NodeID right;
-};
-
-using NodeIDToJunction = std::unordered_map<NodeID, Junction>;
-
-class NetworkTraverser
-{
-public:
-    NetworkTraverser(std::string instructions, NodeIDToJunction nodeIDToJunction, NodeID startNodeID, std::string endNodeIDRegex)
-        : m_instructions{std::move(instructions)}
-        , m_nodeIDToJunction{std::move(nodeIDToJunction)}
-        , m_currentNodeID{std::move(startNodeID)}
-        , m_endNodeIDRegex{std::move(endNodeIDRegex)}
-    {
-
-    }
-
-    int getNumSteps() const
-    {
-        return m_numSteps;
-    }
-
-    void traverse()
-    {
-        while (!isAtEndpoint())
-        {
-            executeSingleInstruction();
-        }
-    }
-
-private:
-    const std::string m_instructions;
-    const NodeIDToJunction m_nodeIDToJunction;
-    const std::string m_endNodeIDRegex;
-
-    NodeID m_currentNodeID;
-    int m_numSteps = 0;
-
-    void executeSingleInstruction()
-    {
-        const char currentInstruction = m_instructions.at(m_numSteps % m_instructions.size());
-        const Junction& currentJunction = m_nodeIDToJunction.at(m_currentNodeID);
-
-        if (currentInstruction == 'L')
-        {
-            m_currentNodeID = currentJunction.left;
-        }
-        else if (currentInstruction == 'R')
-        {
-            m_currentNodeID = currentJunction.right;
-        }
-
-        ++m_numSteps;
-    }
-
-    bool isAtEndpoint() const
-    {
-        return std::regex_match(m_currentNodeID, std::regex{m_endNodeIDRegex});
-    }
-};
 
 NodeIDToJunction::value_type parseNetworkLine(const std::string& networkLine)
 {

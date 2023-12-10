@@ -20,9 +20,15 @@
     <ClCompile Include="Day08-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NetworkTraverser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day08-HauntedWasteland.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkTraverser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
