@@ -14,7 +14,8 @@ namespace Year2023
 namespace Day08
 {
 
-int numStepsRequiredToReachEndpoint(const std::vector<std::string>& mapLines);
+int64_t numStepsRequiredToReachEndpoint(const std::vector<std::string>& mapLines);
+int64_t numStepsRequiredToReachAllEndpointsSimultaneously(const std::vector<std::string>& mapLines);
 
 }
 }

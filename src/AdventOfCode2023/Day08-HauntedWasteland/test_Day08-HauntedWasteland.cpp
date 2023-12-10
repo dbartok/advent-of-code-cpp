@@ -13,7 +13,7 @@ TEST_CLASS(Day08HauntedWasteland)
 {
 public:
 
-    TEST_METHOD(numStepsRequiredToReachEndpoint_shortRoute)
+    TEST_METHOD(numStepsRequiredToReachEndpoint_ShortRoute)
     {
         const std::vector<std::string> lines =
         {
@@ -28,10 +28,10 @@ public:
             "ZZZ = (ZZZ, ZZZ)"
         };
 
-        Assert::AreEqual(2, CurrentDay::numStepsRequiredToReachEndpoint(lines));
+        Assert::AreEqual(2ll, CurrentDay::numStepsRequiredToReachEndpoint(lines));
     }
 
-    TEST_METHOD(numStepsRequiredToReachEndpoint_longerRoute)
+    TEST_METHOD(numStepsRequiredToReachEndpoint_LongerRoute)
     {
         const std::vector<std::string> lines =
         {
@@ -42,6 +42,25 @@ public:
             "ZZZ = (ZZZ, ZZZ)"
         };
 
-        Assert::AreEqual(6, CurrentDay::numStepsRequiredToReachEndpoint(lines));
+        Assert::AreEqual(6ll, CurrentDay::numStepsRequiredToReachEndpoint(lines));
+    }
+
+    TEST_METHOD(numStepsRequiredToReachAllEndpointsSimultaneously_SimpleTests)
+    {
+        const std::vector<std::string> lines =
+        {
+            "LR",
+            "",
+            "11A = (11B, XXX)",
+            "11B = (XXX, 11Z)",
+            "11Z = (11B, XXX)",
+            "22A = (22B, XXX)",
+            "22B = (22C, 22C)",
+            "22C = (22Z, 22Z)",
+            "22Z = (22B, 22B)",
+            "XXX = (XXX, XXX)"
+        };
+
+        Assert::AreEqual(6ll, CurrentDay::numStepsRequiredToReachAllEndpointsSimultaneously(lines));
     }
 };

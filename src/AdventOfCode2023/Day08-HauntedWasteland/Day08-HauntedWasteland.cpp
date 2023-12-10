@@ -4,15 +4,21 @@
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
+#include <boost/math/common_factor_rt.hpp>
 
 #include <unordered_map>
+#include <regex>
+#include <numeric>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
 {
 
-const std::string START_NODE_ID = "AAA";
-const std::string END_NODE_ID = "ZZZ";
+const std::string FIRST_PART_START_NODE_ID_REGEX = "AAA";
+const std::string FIRST_PART_END_NODE_ID_REGEX = "ZZZ";
+
+const std::string SECOND_PART_START_NODE_ID_REGEX = "..A";
+const std::string SECOND_PART_END_NODE_ID_REGEX = "..Z";
 
 }
 
@@ -36,19 +42,13 @@ using NodeIDToJunction = std::unordered_map<NodeID, Junction>;
 class NetworkTraverser
 {
 public:
-    NetworkTraverser(std::string instructions, NodeIDToJunction nodeIDToJunction)
+    NetworkTraverser(std::string instructions, NodeIDToJunction nodeIDToJunction, NodeID startNodeID, std::string endNodeIDRegex)
         : m_instructions{std::move(instructions)}
         , m_nodeIDToJunction{std::move(nodeIDToJunction)}
+        , m_currentNodeID{std::move(startNodeID)}
+        , m_endNodeIDRegex{std::move(endNodeIDRegex)}
     {
 
-    }
-
-    void traverse()
-    {
-        while (!isFinished())
-        {
-            executeSingleInstruction();
-        }
     }
 
     int getNumSteps() const
@@ -56,11 +56,20 @@ public:
         return m_numSteps;
     }
 
+    void traverse()
+    {
+        while (!isAtEndpoint())
+        {
+            executeSingleInstruction();
+        }
+    }
+
 private:
     const std::string m_instructions;
     const NodeIDToJunction m_nodeIDToJunction;
+    const std::string m_endNodeIDRegex;
 
-    std::string m_currentNodeID = START_NODE_ID;
+    NodeID m_currentNodeID;
     int m_numSteps = 0;
 
     void executeSingleInstruction()
@@ -80,9 +89,9 @@ private:
         ++m_numSteps;
     }
 
-    bool isFinished() const
+    bool isAtEndpoint() const
     {
-        return m_currentNodeID == END_NODE_ID;
+        return std::regex_match(m_currentNodeID, std::regex{m_endNodeIDRegex});
     }
 };
 
@@ -94,26 +103,69 @@ NodeIDToJunction::value_type parseNetworkLine(const std::string& networkLine)
     return {std::move(tokens.at(0)), {std::move(tokens.at(1)), std::move(tokens.at(2))}};
 }
 
-NetworkTraverser parseMapLines(const std::vector<std::string>& mapLines)
+std::string createInstructions(const std::vector<std::string>& mapLines)
 {
-    std::string instructions = mapLines.at(0);
+    return mapLines.at(0);
+}
 
+NodeIDToJunction createNodeIDToJunction(const std::vector<std::string>& mapLines)
+{
     NodeIDToJunction nodeIDToJunction;
     for (int i = 2; i < mapLines.size(); ++i)
     {
         NodeIDToJunction::value_type nodeIDAndJunction = parseNetworkLine(mapLines.at(i));
         nodeIDToJunction.insert(std::move(nodeIDAndJunction));
     }
-    return {std::move(instructions), std::move(nodeIDToJunction)};
+    return nodeIDToJunction;
 }
 
-int numStepsRequiredToReachEndpoint(const std::vector<std::string>& mapLines)
+std::vector<NodeID> getStartNodeIDs(const NodeIDToJunction& nodeIDToJunction, const std::string& startNodeIDsRegex)
 {
-    NetworkTraverser networkTraverser = parseMapLines(mapLines);
+    std::vector<NodeID> startNodeIDs;
 
-    networkTraverser.traverse();
+    for (const auto& nodeIDAndJunction : nodeIDToJunction)
+    {
+        const NodeID& nodeID = nodeIDAndJunction.first;
+        if (std::regex_match(nodeID, std::regex{startNodeIDsRegex}))
+        {
+            startNodeIDs.push_back(nodeID);
+        }
+    }
 
-    return networkTraverser.getNumSteps();
+    return startNodeIDs;
+}
+
+int64_t numStepsRequiredToReachEndpoints(const std::vector<std::string>& mapLines, const std::string& startNodeIDsRegex, const std::string& endNodeIDsRegex)
+{
+    std::string instruction = createInstructions(mapLines);
+    NodeIDToJunction nodeIDToJunction = createNodeIDToJunction(mapLines);
+
+    std::vector<NodeID> startNodeIDs = getStartNodeIDs(nodeIDToJunction, startNodeIDsRegex);
+
+    std::vector<int> cycleTimes;
+
+    for (const NodeID& startNodeID : startNodeIDs)
+    {
+        NetworkTraverser networkTraverser{instruction, nodeIDToJunction, startNodeID, endNodeIDsRegex};
+        networkTraverser.traverse();
+
+        cycleTimes.push_back(networkTraverser.getNumSteps());
+    }
+
+    return std::accumulate(cycleTimes.cbegin(), cycleTimes.cend(), 1ll, [](int64_t total, int64_t current)
+                           {
+                               return boost::math::lcm(total, current);
+                           });
+}
+
+int64_t numStepsRequiredToReachEndpoint(const std::vector<std::string>& mapLines)
+{
+    return numStepsRequiredToReachEndpoints(mapLines, FIRST_PART_START_NODE_ID_REGEX, FIRST_PART_END_NODE_ID_REGEX);
+}
+
+int64_t numStepsRequiredToReachAllEndpointsSimultaneously(const std::vector<std::string>& mapLines)
+{
+    return numStepsRequiredToReachEndpoints(mapLines, SECOND_PART_START_NODE_ID_REGEX, SECOND_PART_END_NODE_ID_REGEX);
 }
 
 }
