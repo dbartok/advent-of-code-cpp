@@ -8,6 +8,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <Eigen/dense>
 
 #include <unordered_map>
+#include <unordered_set>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
@@ -57,27 +58,19 @@ public:
         , m_width{m_pipeNetwork.at(0).size()}
     {
         initializePipeTypeToInwardsFlowMapping();
-
-        for (int j = 0; j < m_height; ++j)
-        {
-            for (int i = 0; i < m_width; ++i)
-            {
-                if (tileAt({i, j}) == STARTING_POSITION)
-                {
-                    m_start = {i, j};
-                }
-            }
-        }
+        findStartPosition();
     }
 
-    int getMainLoopLength() const
+    void traverseMainLoop()
     {
         const std::vector<Vector2D> validStartingDirections = getValidDirectionsFrom(m_start);
+        const Vector2D startingDirection = validStartingDirections.front();
+        m_mainLoopTiles.insert(m_start);
 
         Vector2D currentCoordinates = m_start;
-        Vector2D currentDirection = validStartingDirections.front();
-        int mainLoopLength = 1;
+        Vector2D currentDirection = startingDirection;
 
+        // Go through main loop until tile before start
         while (currentCoordinates + currentDirection != m_start)
         {
             const Vector2D nextCoordinatesWithOneFlow = getStepResultIncludingOneFlow(currentCoordinates, currentDirection).get();
@@ -85,10 +78,47 @@ public:
             currentCoordinates += currentDirection;
             currentDirection = nextCoordinatesWithOneFlow - currentCoordinates;
 
-            ++mainLoopLength;
+            m_mainLoopTiles.insert(currentCoordinates);
         }
 
-        return mainLoopLength;
+        // Fill in start tile
+        for (const auto& pipeTypeAndInwardsFlow : m_pipeTypeToInwardsFlow)
+        {
+            tileAt(m_start) = pipeTypeAndInwardsFlow.first;
+            const boost::optional<Vector2D> maybeNextCoordinatesWithOneFlow = getStepResultIncludingOneFlow(currentCoordinates, currentDirection);
+            if (maybeNextCoordinatesWithOneFlow.has_value() && maybeNextCoordinatesWithOneFlow.get() == m_start + startingDirection)
+            {
+                break;
+            }
+        }
+
+        if (tileAt(m_start) == STARTING_POSITION)
+        {
+            throw std::runtime_error("Unable to fill in start tile");
+        }
+    }
+
+    int getMainLoopLength() const
+    {
+        return m_mainLoopTiles.size();
+    }
+
+    int getNumTilesEnclosedByMainLoop() const
+    {
+        int numTilesEnclosedByMainLoop = 0;
+
+        for (int j = 0; j < m_height; ++j)
+        {
+            for (int i = 0; i < m_width; ++i)
+            {
+                if (isTileEnclosedByMainLoop({i, j}))
+                {
+                    ++numTilesEnclosedByMainLoop;
+                }
+            }
+        }
+
+        return numTilesEnclosedByMainLoop;
     }
 
 private:
@@ -98,6 +128,8 @@ private:
     std::unordered_map<char, Flow> m_pipeTypeToInwardsFlow;
     Vector2D m_start;
 
+    std::unordered_set<Vector2D, Vector2DHash> m_mainLoopTiles;
+
     void initializePipeTypeToInwardsFlowMapping()
     {
         m_pipeTypeToInwardsFlow.emplace(VERTICAL_PIPE, std::make_pair(Vector2D{0, 1}, Vector2D{0, -1}));
@@ -106,6 +138,21 @@ private:
         m_pipeTypeToInwardsFlow.emplace(NORTH_WEST_BEND, std::make_pair(Vector2D{0, 1}, Vector2D{1, 0}));
         m_pipeTypeToInwardsFlow.emplace(SOUTH_EAST_BEND, std::make_pair(Vector2D{0, -1}, Vector2D{-1, 0}));
         m_pipeTypeToInwardsFlow.emplace(SOUTH_WEST_BEND, std::make_pair(Vector2D{0, -1}, Vector2D{1, 0}));
+    }
+
+    void findStartPosition()
+    {
+        for (int j = 0; j < m_height; ++j)
+        {
+            for (int i = 0; i < m_width; ++i)
+            {
+                if (tileAt({i, j}) == STARTING_POSITION)
+                {
+                    m_start = {i, j};
+                    return;
+                }
+            }
+        }
     }
 
     std::vector<Vector2D> getValidDirectionsFrom(const Vector2D& origin) const
@@ -156,7 +203,59 @@ private:
         }
     }
 
+    bool isTileEnclosedByMainLoop(const Vector2D& coordinates) const
+    {
+        // Shoot ray towards the east and count the number of intersections with the loop
+        // | simply counts as an intersection
+        // In the case of corners, only L7 pairs and FJ pairs count as intersections,
+        // because if the ray hits an LJ pair or F7 pair, the ray only "skirts" the loop, not crossing it.
+        // Any number of - between the corners doesn't change the above.
+
+        if (m_mainLoopTiles.count(coordinates))
+        {
+            return false;
+        }
+
+        int numMainLoopCrossings = 0;
+        char lastOpeningCornerSeen = '\0';
+
+        for (int i = coordinates.x() + 1; i < m_width; ++i)
+        {
+            const Vector2D rayPointCoordinates{i, coordinates.y()};
+            if (!m_mainLoopTiles.count(rayPointCoordinates))
+            {
+                continue;
+            }
+
+            char tile = tileAt(rayPointCoordinates);
+
+            if (tile == VERTICAL_PIPE)
+            {
+                ++numMainLoopCrossings;
+            }
+            else if (tile == NORTH_EAST_BEND || tile == SOUTH_EAST_BEND)
+            {
+                lastOpeningCornerSeen = tile;
+            }
+            else if (tile == NORTH_WEST_BEND && lastOpeningCornerSeen == SOUTH_EAST_BEND)
+            {
+                ++numMainLoopCrossings;
+            }
+            else if (tile == SOUTH_WEST_BEND && lastOpeningCornerSeen == NORTH_EAST_BEND)
+            {
+                ++numMainLoopCrossings;
+            }
+        }
+
+        return numMainLoopCrossings % 2 == 1;
+    }
+
     char tileAt(const Vector2D& coordinates) const
+    {
+        return m_pipeNetwork.at(coordinates.y()).at(coordinates.x());
+    }
+
+    char& tileAt(const Vector2D& coordinates)
     {
         return m_pipeNetwork.at(coordinates.y()).at(coordinates.x());
     }
@@ -167,11 +266,22 @@ private:
     }
 };
 
-int numStepsAlongLoopToFarthestPosition(const std::vector<std::string>& pipeNetworkLines)
+int numStepsAlongMainLoopToFarthestPosition(const std::vector<std::string>& pipeNetworkLines)
 {
     PipeNetworkTraverser pipeNetworkTraverser{pipeNetworkLines};
 
+    pipeNetworkTraverser.traverseMainLoop();
+
     return pipeNetworkTraverser.getMainLoopLength() / 2;
+}
+
+int numTilesEnclosedByMainLoop(const std::vector<std::string>& pipeNetworkLines)
+{
+    PipeNetworkTraverser pipeNetworkTraverser{pipeNetworkLines};
+
+    pipeNetworkTraverser.traverseMainLoop();
+
+    return pipeNetworkTraverser.getNumTilesEnclosedByMainLoop();
 }
 
 }

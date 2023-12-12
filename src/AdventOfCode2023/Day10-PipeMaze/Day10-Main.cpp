@@ -22,5 +22,6 @@ int main()
         lines.push_back(std::move(lineBuffer));
     }
 
-    std::cout << "First part: " << CurrentDay::numStepsAlongLoopToFarthestPosition(lines) << std::endl;
+    std::cout << "First part: " << CurrentDay::numStepsAlongMainLoopToFarthestPosition(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numTilesEnclosedByMainLoop(lines) << std::endl;
 }

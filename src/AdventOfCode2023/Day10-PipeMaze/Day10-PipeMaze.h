@@ -14,7 +14,8 @@ namespace Year2023
 namespace Day10
 {
 
-int numStepsAlongLoopToFarthestPosition(const std::vector<std::string>& pipeNetworkLines);
+int numStepsAlongMainLoopToFarthestPosition(const std::vector<std::string>& pipeNetworkLines);
+int numTilesEnclosedByMainLoop(const std::vector<std::string>& pipeNetworkLines);
 
 }
 }
