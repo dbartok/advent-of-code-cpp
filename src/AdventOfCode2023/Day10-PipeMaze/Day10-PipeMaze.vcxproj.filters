@@ -20,9 +20,15 @@
     <ClCompile Include="Day10-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PipeNetworkTraverser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day10-PipeMaze.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PipeNetworkTraverser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
