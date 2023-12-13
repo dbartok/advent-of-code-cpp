@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::sumOfShortestPathsBetweenAllPairs(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumOfShortestPathsBetweenAllPairsWithLargerExpansionRate(lines) << std::endl;
 }

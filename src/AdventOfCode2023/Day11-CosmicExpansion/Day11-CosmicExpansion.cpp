@@ -9,6 +9,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace
 {
 
+const int DEFAULT_EXPANSION_RATE = 2;
 const char GALAXY = '#';
 
 }
@@ -23,10 +24,11 @@ namespace Day11
 class GalaxyImageAnalyzer
 {
 public:
-    GalaxyImageAnalyzer(std::vector<std::string> image)
+    GalaxyImageAnalyzer(std::vector<std::string> image, int expansionRate = DEFAULT_EXPANSION_RATE)
         : m_image{std::move(image)}
         , m_height{m_image.size()}
         , m_width{m_image.front().size()}
+        , m_expansionRate{expansionRate}
     {
 
     }
@@ -57,9 +59,9 @@ public:
         }
     }
 
-    int getSumOfAllShortestPathsBetweenAllPairs() const
+    int64_t getSumOfAllShortestPathsBetweenAllPairs() const
     {
-        int sumOfAllShortestPathsBetweenAllPairs = 0;
+        int64_t sumOfAllShortestPathsBetweenAllPairs = 0;
 
         for (auto firstGalaxyCoordinatesIter = m_galaxyCoordinates.cbegin(); firstGalaxyCoordinatesIter != m_galaxyCoordinates.cend(); ++firstGalaxyCoordinatesIter)
         {
@@ -79,6 +81,7 @@ private:
     std::vector<std::string> m_image;
     size_t m_width;
     size_t m_height;
+    int m_expansionRate;
 
     std::vector<Coordinates> m_galaxyCoordinates;
     std::unordered_set<int> m_emptyRowCoordinates;
@@ -104,13 +107,22 @@ private:
             }
         }
 
-        return std::abs(firstPoint.first - secondPoint.first) + std::abs(firstPoint.second - secondPoint.second) + numStepsWithExtendedLength;
+        return std::abs(firstPoint.first - secondPoint.first) + std::abs(firstPoint.second - secondPoint.second) + numStepsWithExtendedLength * (m_expansionRate - 1);
     }
 };
 
-int sumOfShortestPathsBetweenAllPairs(const std::vector<std::string>& imageLines)
+int64_t sumOfShortestPathsBetweenAllPairs(const std::vector<std::string>& imageLines)
 {
     GalaxyImageAnalyzer galaxyImageAnalyzer{imageLines};
+
+    galaxyImageAnalyzer.analyze();
+
+    return galaxyImageAnalyzer.getSumOfAllShortestPathsBetweenAllPairs();
+}
+
+int64_t sumOfShortestPathsBetweenAllPairsWithLargerExpansionRate(const std::vector<std::string>& imageLines, int expansionRate)
+{
+    GalaxyImageAnalyzer galaxyImageAnalyzer{imageLines, expansionRate};
 
     galaxyImageAnalyzer.analyze();
 

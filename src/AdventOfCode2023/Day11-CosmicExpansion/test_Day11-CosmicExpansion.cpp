@@ -15,21 +15,27 @@ public:
 
     TEST_METHOD(sumOfShortestPathsBetweenAllPairs_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "...#......",
-            ".......#..",
-            "#.........",
-            "..........",
-            "......#...",
-            ".#........",
-            ".........#",
-            "..........",
-            ".......#..",
-            "#...#....."
-        };
-
-        Assert::AreEqual(374, CurrentDay::sumOfShortestPathsBetweenAllPairs(lines));
+        Assert::AreEqual(374ll, CurrentDay::sumOfShortestPathsBetweenAllPairs(m_lines));
     }
 
+    TEST_METHOD(sumOfShortestPathsBetweenAllPairsWithLargerExpansionRate_SimpleTests)
+    {
+        Assert::AreEqual(1030ll, CurrentDay::sumOfShortestPathsBetweenAllPairsWithLargerExpansionRate(m_lines, 10));
+        Assert::AreEqual(8410ll, CurrentDay::sumOfShortestPathsBetweenAllPairsWithLargerExpansionRate(m_lines, 100));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "...#......",
+        ".......#..",
+        "#.........",
+        "..........",
+        "......#...",
+        ".#........",
+        ".........#",
+        "..........",
+        ".......#..",
+        "#...#....."
+    };
 };
