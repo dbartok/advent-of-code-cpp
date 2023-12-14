@@ -20,9 +20,15 @@
     <ClCompile Include="Day13-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MirrorFinder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day13-PointOfIncidence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MirrorFinder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
