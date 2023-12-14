@@ -15,6 +15,7 @@ namespace Day13
 {
 
 int numberAfterSummarizingAllNotes(const std::vector<std::string>& mapLines);
+int numberAfterSummarizingAllNotesWithSmudge(const std::vector<std::string>& mapLines);
 
 }
 }

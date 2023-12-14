@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numberAfterSummarizingAllNotes(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numberAfterSummarizingAllNotesWithSmudge(lines) << std::endl;
 }

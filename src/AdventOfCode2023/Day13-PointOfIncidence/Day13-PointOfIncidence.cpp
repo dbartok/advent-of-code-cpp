@@ -36,11 +36,22 @@ public:
 
     void find()
     {
-        m_horizontalMirrorPositionSubsequentIndex = findHorizontalMirrorPositionSubsequentIndex();
-        m_verticalMirrorPositionSubsequentIndex = findVerticalMirrorPositionSubsequentIndex();
+        const auto exactMatch = [](const Matrix& upperHalf, const Matrix& lowerHalf) { return upperHalf == lowerHalf; };
+        m_horizontalMirrorPositionSubsequentIndex = findHorizontalMirrorPositionSubsequentIndex(exactMatch);
+        m_verticalMirrorPositionSubsequentIndex = findVerticalMirrorPositionSubsequentIndex(exactMatch);
     }
 
-    int getNoteNumber()
+    void findSmudged()
+    {
+        const auto smudgedMatch = [](const Matrix& upperHalf, const Matrix& lowerHalf)
+        {
+            return (upperHalf - lowerHalf).cwiseAbs().sum() == 1;
+        };
+        m_horizontalMirrorPositionSubsequentIndex = findHorizontalMirrorPositionSubsequentIndex(smudgedMatch);
+        m_verticalMirrorPositionSubsequentIndex = findVerticalMirrorPositionSubsequentIndex(smudgedMatch);
+    }
+
+    int getNoteNumber() const
     {
         if (m_horizontalMirrorPositionSubsequentIndex != -1)
         {
@@ -57,12 +68,14 @@ public:
     }
 
 private:
+    using MatrixComparisonFunc = std::function<bool(const Matrix&, const Matrix&)>;
+
     Matrix m_matrix;
 
     int m_horizontalMirrorPositionSubsequentIndex = -1;
     int m_verticalMirrorPositionSubsequentIndex = -1;
 
-    int findHorizontalMirrorPositionSubsequentIndex() const
+    int findHorizontalMirrorPositionSubsequentIndex(const MatrixComparisonFunc& cmp) const
     {
         for (int potentialMirrorPositionSubsequentIndex = 1; potentialMirrorPositionSubsequentIndex < m_matrix.rows(); ++potentialMirrorPositionSubsequentIndex)
         {
@@ -73,7 +86,7 @@ private:
 
             lowerHalf.colwise().reverseInPlace();
 
-            if (upperHalf == lowerHalf)
+            if (cmp(upperHalf, lowerHalf))
             {
                 return potentialMirrorPositionSubsequentIndex;
             }
@@ -82,13 +95,13 @@ private:
         return -1;
     }
 
-    int findVerticalMirrorPositionSubsequentIndex() const
+    int findVerticalMirrorPositionSubsequentIndex(const MatrixComparisonFunc& cmp) const
     {
         auto* non_const_this = const_cast<MirrorFinder*>(this);
 
         non_const_this->m_matrix.transposeInPlace();
 
-        const int verticalMirrorPositionSubsequentIndex = findHorizontalMirrorPositionSubsequentIndex();
+        const int verticalMirrorPositionSubsequentIndex = findHorizontalMirrorPositionSubsequentIndex(cmp);
 
         non_const_this->m_matrix.transposeInPlace();
 
@@ -141,6 +154,18 @@ int numberAfterSummarizingAllNotes(const std::vector<std::string>& mapLines)
                                return acc + mirrorFinder.getNoteNumber();
                            });
 }
+
+int numberAfterSummarizingAllNotesWithSmudge(const std::vector<std::string>& mapLines)
+{
+    std::vector<MirrorFinder> mirrorFinders = parseMapLines(mapLines);
+
+    return std::accumulate(mirrorFinders.begin(), mirrorFinders.end(), 0, [](int acc, auto& mirrorFinder)
+                           {
+                               mirrorFinder.findSmudged();
+                               return acc + mirrorFinder.getNoteNumber();
+                           });
+}
+
 
 }
 }

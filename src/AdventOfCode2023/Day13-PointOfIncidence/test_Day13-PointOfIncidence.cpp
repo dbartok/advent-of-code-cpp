@@ -15,26 +15,31 @@ public:
 
     TEST_METHOD(numberAfterSummarizingAllNotes_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "#.##..##.",
-            "..#.##.#.",
-            "##......#",
-            "##......#",
-            "..#.##.#.",
-            "..##..##.",
-            "#.#.##.#.",
-            "",
-            "#...##..#",
-            "#....#..#",
-            "..##..###",
-            "#####.##.",
-            "#####.##.",
-            "..##..###",
-            "#....#..#"
-        };
-
-        Assert::AreEqual(405, CurrentDay::numberAfterSummarizingAllNotes(lines));
+        Assert::AreEqual(405, CurrentDay::numberAfterSummarizingAllNotes(m_lines));
     }
 
+    TEST_METHOD(numberAfterSummarizingAllNotesWithSmudge_SimpleTests)
+    {
+        Assert::AreEqual(400, CurrentDay::numberAfterSummarizingAllNotesWithSmudge(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "#.##..##.",
+        "..#.##.#.",
+        "##......#",
+        "##......#",
+        "..#.##.#.",
+        "..##..##.",
+        "#.#.##.#.",
+        "",
+        "#...##..#",
+        "#....#..#",
+        "..##..###",
+        "#####.##.",
+        "#####.##.",
+        "..##..###",
+        "#....#..#"
+    };
 };
