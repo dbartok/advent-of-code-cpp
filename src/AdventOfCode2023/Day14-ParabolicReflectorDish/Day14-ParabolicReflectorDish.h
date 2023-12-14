@@ -15,6 +15,7 @@ namespace Day14
 {
 
 int totalLoadOnNorthSupportBeamsAfterNorthSlide(const std::vector<std::string>& platformLines);
+int totalLoadOnNorthSupportBeamsAfterSeveralCycles(const std::vector<std::string>& platformLines);
 
 }
 }

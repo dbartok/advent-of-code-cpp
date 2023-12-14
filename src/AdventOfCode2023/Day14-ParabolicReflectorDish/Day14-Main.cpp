@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::totalLoadOnNorthSupportBeamsAfterNorthSlide(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::totalLoadOnNorthSupportBeamsAfterSeveralCycles(lines) << std::endl;
 }

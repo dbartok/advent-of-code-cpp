@@ -14,21 +14,26 @@ public:
 
     TEST_METHOD(totalLoadOnNorthSupportBeamsAfterNorthSlide_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "O....#....",
-            "O.OO#....#",
-            ".....##...",
-            "OO.#O....O",
-            ".O.....O#.",
-            "O.#..O.#.#",
-            "..O..#O..O",
-            ".......O..",
-            "#....###..",
-            "#OO..#...."
-        };
-
-        Assert::AreEqual(136, CurrentDay::totalLoadOnNorthSupportBeamsAfterNorthSlide(lines));
+        Assert::AreEqual(136, CurrentDay::totalLoadOnNorthSupportBeamsAfterNorthSlide(m_lines));
     }
 
+    TEST_METHOD(totalLoadOnNorthSupportBeamsAfterSeveralCycles_SimpleTests)
+    {
+        Assert::AreEqual(64, CurrentDay::totalLoadOnNorthSupportBeamsAfterSeveralCycles(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "O....#....",
+        "O.OO#....#",
+        ".....##...",
+        "OO.#O....O",
+        ".O.....O#.",
+        "O.#..O.#.#",
+        "..O..#O..O",
+        ".......O..",
+        "#....###..",
+        "#OO..#...."
+    };
 };

@@ -13,6 +13,7 @@ const char ROUND_ROCK = 'O';
 const char STABLE_ROCK = '#';
 const char EMPTY = '.';
 
+const unsigned NUM_SPIN_CYCLES = 1'000'000'000;
 }
 
 namespace AdventOfCode
@@ -49,6 +50,29 @@ public:
         }
     }
 
+    void executeSpinCycles(unsigned numSpinsToExecute)
+    {
+        for (unsigned numSpinsDone = 0; numSpinsDone < numSpinsToExecute; ++numSpinsDone)
+        {
+            const auto findResult = std::find(m_seenMatrices.cbegin(), m_seenMatrices.cend(), m_matrix);
+
+            if (findResult != m_seenMatrices.cend())
+            {
+                const size_t cycleBeginIndex = findResult - m_seenMatrices.cbegin();
+                const size_t cycleLength = m_seenMatrices.cend() - findResult;
+
+                const unsigned numSpinsInsideCycle = numSpinsToExecute - cycleBeginIndex;
+                const unsigned offsetInsideCycle = numSpinsInsideCycle % cycleLength;
+
+                m_matrix = m_seenMatrices.at(cycleBeginIndex + offsetInsideCycle);
+                break;
+            }
+
+            m_seenMatrices.push_back(m_matrix);
+            executeSpinCycle();
+        }
+    }
+
     int getTotalLoadOnNorthSupportBeams() const
     {
         int totalLoadOnNorthSupportBeams = 0;
@@ -69,6 +93,22 @@ public:
 
 private:
     Matrix m_matrix;
+    std::vector<Matrix> m_seenMatrices;
+
+    void executeSpinCycle()
+    {
+        for (int step = 1; step <= 4; ++step)
+        {
+            slideNorth();
+            rotateRight();
+        }
+    }
+
+    void rotateRight()
+    {
+        m_matrix.transposeInPlace();
+        m_matrix.rowwise().reverseInPlace();
+    }
 
     int getNewYCoordinateForRoundRockAt(int x, int y) const
     {
@@ -104,6 +144,15 @@ int totalLoadOnNorthSupportBeamsAfterNorthSlide(const std::vector<std::string>& 
     Platform platform = parsePlatformLines(platformLines);
 
     platform.slideNorth();
+
+    return platform.getTotalLoadOnNorthSupportBeams();
+}
+
+int totalLoadOnNorthSupportBeamsAfterSeveralCycles(const std::vector<std::string>& platformLines)
+{
+    Platform platform = parsePlatformLines(platformLines);
+
+    platform.executeSpinCycles(NUM_SPIN_CYCLES);
 
     return platform.getTotalLoadOnNorthSupportBeams();
 }
