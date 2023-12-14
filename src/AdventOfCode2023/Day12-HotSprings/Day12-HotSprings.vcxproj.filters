@@ -20,9 +20,15 @@
     <ClCompile Include="Day12-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SpringConditionSolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day12-HotSprings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpringConditionSolver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
