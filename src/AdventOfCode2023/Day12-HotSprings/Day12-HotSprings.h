@@ -14,7 +14,8 @@ namespace Year2023
 namespace Day12
 {
 
-int sumOfAllPossibleArrangements(const std::vector<std::string>& springConditionsLines);
+int64_t sumOfAllPossibleArrangements(const std::vector<std::string>& springConditionsLines);
+int64_t sumOfAllPossibleArrangementsUnfolded(const std::vector<std::string>& springConditionsLines);
 
 }
 }

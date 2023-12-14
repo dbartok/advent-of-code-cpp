@@ -15,17 +15,22 @@ public:
 
     TEST_METHOD(sumOfAllPossibleArrangements_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "???.### 1,1,3",
-            ".??..??...?##. 1,1,3",
-            "?#?#?#?#?#?#?#? 1,3,1,6",
-            "????.#...#... 4,1,1",
-            "????.######..#####. 1,6,5",
-            "?###???????? 3,2,1"
-        };
-
-        Assert::AreEqual(21, CurrentDay::sumOfAllPossibleArrangements(lines));
+        Assert::AreEqual(21ll, CurrentDay::sumOfAllPossibleArrangements(m_lines));
     }
 
+    TEST_METHOD(sumOfAllPossibleArrangementsUnfolded_SimpleTests)
+    {
+        Assert::AreEqual(525152ll, CurrentDay::sumOfAllPossibleArrangementsUnfolded(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "???.### 1,1,3",
+        ".??..??...?##. 1,1,3",
+        "?#?#?#?#?#?#?#? 1,3,1,6",
+        "????.#...#... 4,1,1",
+        "????.######..#####. 1,6,5",
+        "?###???????? 3,2,1"
+    };
 };

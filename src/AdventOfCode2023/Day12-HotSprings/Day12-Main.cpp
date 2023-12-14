@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::sumOfAllPossibleArrangements(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumOfAllPossibleArrangementsUnfolded(lines) << std::endl;
 }
