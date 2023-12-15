@@ -15,7 +15,15 @@ public:
 
     TEST_METHOD(sumOfHashResults_SimpleTests)
     {
-        Assert::AreEqual(1320, CurrentDay::sumOfHashResults("rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7"));
+        Assert::AreEqual(1320, CurrentDay::sumOfHashResults(m_initializationSequenceString));
     }
+
+    TEST_METHOD(focusingPowerOfLensConfiguration_SimpleTests)
+    {
+        Assert::AreEqual(145, CurrentDay::focusingPowerOfLensConfiguration(m_initializationSequenceString));
+    }
+
+private:
+    std::string m_initializationSequenceString = "rn=1,cm-,qp=3,cm=2,qp-,pc=4,ot=9,ab=5,pc-,pc=6,ot=7";
 
 };

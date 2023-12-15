@@ -14,6 +14,7 @@ namespace Day15
 {
 
 int sumOfHashResults(const std::string& initializationSequenceString);
+int focusingPowerOfLensConfiguration(const std::string& initializationSequenceString);
 
 }
 }

@@ -17,4 +17,5 @@ int main()
     std::getline(fileIn, line);
 
     std::cout << "First part: " << CurrentDay::sumOfHashResults(line) << std::endl;
+    std::cout << "Second part: " << CurrentDay::focusingPowerOfLensConfiguration(line) << std::endl;
 }
