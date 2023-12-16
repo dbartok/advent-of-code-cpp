@@ -15,6 +15,7 @@ namespace Day16
 {
 
 int numEnergizedTiles(const std::vector<std::string>& contraptionLines);
+int maxNumEnergizedTiles(const std::vector<std::string>& contraptionLines);
 
 }
 }

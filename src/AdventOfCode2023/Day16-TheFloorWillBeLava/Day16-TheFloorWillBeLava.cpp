@@ -35,6 +35,38 @@ const Coordinates RIGHT{1, 0};
 const Coordinates UP{0, -1};
 const Coordinates DOWN{0, 1};
 
+struct BeamHead
+{
+    Coordinates position;
+    Coordinates direction;
+
+    BeamHead(Coordinates position, Coordinates direction)
+        : position{std::move(position)}
+        , direction{std::move(direction)}
+    {
+
+    }
+
+    bool operator==(const BeamHead& other) const
+    {
+        return position == other.position &&
+            direction == other.direction;
+    }
+};
+
+struct BeamHeadHash
+{
+    std::size_t operator()(const BeamHead& beamHead) const
+    {
+        std::size_t seed = 0;
+
+        boost::hash_combine(seed, beamHead.position);
+        boost::hash_combine(seed, beamHead.direction);
+
+        return seed;
+    }
+};
+
 class ContraptionAnalyzer
 {
 public:
@@ -44,9 +76,9 @@ public:
 
     }
 
-    void shootBeamFrom(const Coordinates& origin, const Coordinates& direction)
+    void shootBeamFrom(const BeamHead& beamHead)
     {
-        m_beamHeads.emplace_back(origin, direction);
+        m_beamHeads.push_back(beamHead);
 
         while (!m_beamHeads.empty())
         {
@@ -67,38 +99,6 @@ public:
     }
 
 private:
-    struct BeamHead
-    {
-        Coordinates position;
-        Coordinates direction;
-
-        BeamHead(Coordinates position, Coordinates direction)
-            : position{std::move(position)}
-            , direction{std::move(direction)}
-        {
-
-        }
-
-        bool operator==(const BeamHead& other) const
-        {
-            return position == other.position &&
-                direction == other.direction;
-        }
-    };
-
-    struct BeamHeadHash
-    {
-        std::size_t operator()(const BeamHead& beamHead) const
-        {
-            std::size_t seed = 0;
-
-            boost::hash_combine(seed, beamHead.position);
-            boost::hash_combine(seed, beamHead.direction);
-
-            return seed;
-        }
-    };
-
     const std::vector<std::string> m_map;
 
     std::vector<BeamHead> m_beamHeads;
@@ -233,13 +233,58 @@ private:
     }
 };
 
+std::vector<BeamHead> getInwardsPointingEdgeBeamHeads(const std::vector<std::string>& contraptionLines)
+{
+    std::vector<BeamHead> inwardsPointingEdgeBeamHeads;
+
+    for (int i = 0; i < contraptionLines.front().size(); ++i)
+    {
+        inwardsPointingEdgeBeamHeads.emplace_back(Coordinates{i, 0}, DOWN);
+    }
+
+    for (int i = 0; i < contraptionLines.front().size(); ++i)
+    {
+        inwardsPointingEdgeBeamHeads.emplace_back(Coordinates{i, contraptionLines.size() - 1}, UP);
+    }
+
+    for (int j = 0; j < contraptionLines.size(); ++j)
+    {
+        inwardsPointingEdgeBeamHeads.emplace_back(Coordinates{0, j}, RIGHT);
+    }
+
+    for (int j = 0; j < contraptionLines.size(); ++j)
+    {
+        inwardsPointingEdgeBeamHeads.emplace_back(Coordinates{contraptionLines.front().size() - 1, j}, LEFT);
+    }
+
+    return inwardsPointingEdgeBeamHeads;
+}
+
 int numEnergizedTiles(const std::vector<std::string>& contraptionLines)
 {
     ContraptionAnalyzer contraptionAnalyzer{contraptionLines};
 
-    contraptionAnalyzer.shootBeamFrom(STARTING_POSITION, RIGHT);
+    contraptionAnalyzer.shootBeamFrom({STARTING_POSITION, RIGHT});
 
     return contraptionAnalyzer.getNumEnergizedTiles();
+}
+
+int maxNumEnergizedTiles(const std::vector<std::string>& contraptionLines)
+{
+    std::vector<BeamHead> inwardsPointingEdgeBeamHeads = getInwardsPointingEdgeBeamHeads(contraptionLines);
+
+    int maxNumEnergizedTiles = 0;
+
+    for (const auto& beamHead : inwardsPointingEdgeBeamHeads)
+    {
+        ContraptionAnalyzer contraptionAnalyzer{contraptionLines};
+
+        contraptionAnalyzer.shootBeamFrom(beamHead);
+
+        maxNumEnergizedTiles = std::max(maxNumEnergizedTiles, contraptionAnalyzer.getNumEnergizedTiles());
+    }
+
+    return maxNumEnergizedTiles;
 }
 
 }

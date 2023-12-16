@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numEnergizedTiles(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::maxNumEnergizedTiles(lines) << std::endl;
 }

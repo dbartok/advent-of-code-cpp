@@ -15,21 +15,26 @@ public:
 
     TEST_METHOD(numEnergizedTiles_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            ".|...\\....",
-            "|.-.\\.....",
-            ".....|-...",
-            "........|.",
-            "..........",
-            ".........\\",
-            "..../.\\\\..",
-            ".-.-/..|..",
-            ".|....-|.\\",
-            "..//.|...."
-        };
-
-        Assert::AreEqual(46, CurrentDay::numEnergizedTiles(lines));
+        Assert::AreEqual(46, CurrentDay::numEnergizedTiles(m_lines));
     }
 
+    TEST_METHOD(maxNumEnergizedTiles_SimpleTests)
+    {
+        Assert::AreEqual(51, CurrentDay::maxNumEnergizedTiles(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        ".|...\\....",
+        "|.-.\\.....",
+        ".....|-...",
+        "........|.",
+        "..........",
+        ".........\\",
+        "..../.\\\\..",
+        ".-.-/..|..",
+        ".|....-|.\\",
+        "..//.|...."
+    };
 };
