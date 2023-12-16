@@ -20,9 +20,15 @@
     <ClCompile Include="Day16-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ContraptionAnalyzer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day16-TheFloorWillBeLava.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContraptionAnalyzer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
