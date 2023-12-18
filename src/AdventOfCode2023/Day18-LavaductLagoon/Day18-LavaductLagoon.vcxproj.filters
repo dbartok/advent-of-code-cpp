@@ -20,9 +20,15 @@
     <ClCompile Include="Day18-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DigPlanAnalyzer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day18-LavaductLagoon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DigPlanAnalyzer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
