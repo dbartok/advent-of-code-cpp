@@ -14,7 +14,8 @@ namespace Year2023
 namespace Day18
 {
 
-int amountOfLavaHeld(const std::vector<std::string>& digPlanLines);
+int64_t amountOfLavaHeld(const std::vector<std::string>& digPlanLines);
+int64_t amountOfLavaHeldWithSwappedInstructions(const std::vector<std::string>& digPlanLines);
 
 }
 }

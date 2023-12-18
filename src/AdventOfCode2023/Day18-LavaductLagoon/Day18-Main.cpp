@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::amountOfLavaHeld(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::amountOfLavaHeldWithSwappedInstructions(lines) << std::endl;
 }
