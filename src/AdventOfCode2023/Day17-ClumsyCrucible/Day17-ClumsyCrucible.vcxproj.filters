@@ -20,9 +20,15 @@
     <ClCompile Include="Day17-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CityBlockTraverser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day17-ClumsyCrucible.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CityBlockTraverser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
