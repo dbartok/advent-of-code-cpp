@@ -21,4 +21,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::leastHeatLossIncurred(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::leastHeatLossIncurredForUltraCrucible(lines) << std::endl;
 }

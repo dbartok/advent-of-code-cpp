@@ -84,10 +84,12 @@ struct NodePtrCostCmp
 class CityBlockTraverser
 {
 public:
-    CityBlockTraverser(std::vector<std::vector<int>> map)
+    CityBlockTraverser(std::vector<std::vector<int>> map, int minNumMovesInSingleDirection, int maxNumMovesInSingleDirection)
         : m_map{std::move(map)}
         , m_width{m_map.front().size()}
         , m_height{m_map.size()}
+        , m_minNumMovesInSingleDirection{minNumMovesInSingleDirection}
+        , m_maxNumMovesInSingleDirection{maxNumMovesInSingleDirection}
     {
 
     }
@@ -105,7 +107,7 @@ public:
             const auto closestNodePtr = *closestNodePtrIter;
             m_activeNodes.erase(closestNodePtrIter);
 
-            if (closestNodePtr->position == Coordinates{m_width - 1, m_height - 1})
+            if (closestNodePtr->position == Coordinates{m_width - 1, m_height - 1} && closestNodePtr->numTilesMovedInDirection >= m_minNumMovesInSingleDirection)
             {
                 m_minHeatLoss = closestNodePtr->pathCost;
                 return;
@@ -144,6 +146,8 @@ private:
     std::vector<std::vector<int>> m_map;
     size_t m_width;
     size_t m_height;
+    int m_minNumMovesInSingleDirection;
+    int m_maxNumMovesInSingleDirection;
 
     int m_minHeatLoss = std::numeric_limits<int>::max();
 
@@ -154,7 +158,7 @@ private:
     {
         std::vector<Node> allNeighborNodes;
 
-        if (baseNode.numTilesMovedInDirection < 3)
+        if (baseNode.numTilesMovedInDirection < m_maxNumMovesInSingleDirection)
         {
             auto maybeForwardsNode = getNodeInDirection(baseNode, baseNode.arrivalDirection, baseNode.numTilesMovedInDirection + 1);
             if (maybeForwardsNode)
@@ -163,19 +167,22 @@ private:
             }
         }
 
-        const Coordinates firstTurnDirection = {baseNode.arrivalDirection.second, baseNode.arrivalDirection.first};
-        auto maybeFirstTurnNode = getNodeInDirection(baseNode, firstTurnDirection, 1);
-        if (maybeFirstTurnNode)
+        if (baseNode.numTilesMovedInDirection == 0 || baseNode.numTilesMovedInDirection >= m_minNumMovesInSingleDirection)
         {
-            allNeighborNodes.push_back(maybeFirstTurnNode.get());
-        }
+            const Coordinates firstTurnDirection = {baseNode.arrivalDirection.second, baseNode.arrivalDirection.first};
+            auto maybeFirstTurnNode = getNodeInDirection(baseNode, firstTurnDirection, 1);
+            if (maybeFirstTurnNode)
+            {
+                allNeighborNodes.push_back(maybeFirstTurnNode.get());
+            }
 
 
-        const Coordinates secondTurnDirection = {-baseNode.arrivalDirection.second, -baseNode.arrivalDirection.first};
-        auto maybeSecondTurnNode = getNodeInDirection(baseNode, secondTurnDirection, 1);
-        if (maybeSecondTurnNode)
-        {
-            allNeighborNodes.push_back(maybeSecondTurnNode.get());
+            const Coordinates secondTurnDirection = {-baseNode.arrivalDirection.second, -baseNode.arrivalDirection.first};
+            auto maybeSecondTurnNode = getNodeInDirection(baseNode, secondTurnDirection, 1);
+            if (maybeSecondTurnNode)
+            {
+                allNeighborNodes.push_back(maybeSecondTurnNode.get());
+            }
         }
 
         return allNeighborNodes;
@@ -218,7 +225,18 @@ int leastHeatLossIncurred(const std::vector<std::string>& mapLines)
 {
     std::vector<std::vector<int>> map = parseMapLines(mapLines);
 
-    CityBlockTraverser cityBlockTraverser{std::move(map)};
+    CityBlockTraverser cityBlockTraverser{std::move(map), 1, 3};
+
+    cityBlockTraverser.traverse();
+
+    return cityBlockTraverser.getMinHeatLoss();
+}
+
+int leastHeatLossIncurredForUltraCrucible(const std::vector<std::string>& mapLines)
+{
+    std::vector<std::vector<int>> map = parseMapLines(mapLines);
+
+    CityBlockTraverser cityBlockTraverser{std::move(map), 4, 10};
 
     cityBlockTraverser.traverse();
 

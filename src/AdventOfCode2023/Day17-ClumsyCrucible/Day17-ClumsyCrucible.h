@@ -15,6 +15,7 @@ namespace Day17
 {
 
 int leastHeatLossIncurred(const std::vector<std::string>& mapLines);
+int leastHeatLossIncurredForUltraCrucible(const std::vector<std::string>& mapLines);
 
 }
 }
