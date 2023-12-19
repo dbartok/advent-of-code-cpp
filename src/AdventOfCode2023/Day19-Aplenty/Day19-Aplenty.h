@@ -15,6 +15,7 @@ namespace Day19
 {
 
 int sumOfRatingNumbersOfAllAcceptedParts(const std::vector<std::string>& systemLines);
+int64_t numDistinctCombinationsAccepted(const std::vector<std::string>& systemLines);
 
 }
 }

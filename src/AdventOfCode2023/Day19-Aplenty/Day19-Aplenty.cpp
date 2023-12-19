@@ -13,7 +13,7 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace
 {
 
-const std::pair<int, int> DEFAULT_RANGE = {0, std::numeric_limits<int>::max()};
+const std::pair<int, int> DEFAULT_RANGE = {1, 4000};
 
 }
 
@@ -180,6 +180,18 @@ public:
                            });
     }
 
+    int64_t getNumDistinctCombinationsAccepted() const
+    {
+        return std::accumulate(m_acceptedRanges.cbegin(), m_acceptedRanges.cend(), 0ll, [](auto acc, const auto& acceptedRange)
+                               {
+                                   return acc + std::accumulate(acceptedRange.cbegin(), acceptedRange.cend(), 1ll, [](auto acc, const auto& categoryAndRatingRange)
+                                                                {
+                                                                    const auto& ratingRange = categoryAndRatingRange.second;
+                                                                    return acc * (ratingRange.second - ratingRange.first + 1);
+                                                                });
+                               });
+    }
+
 private:
     WorkflowNameToWorkflow m_workflowNameToWorkflow;
 
@@ -282,6 +294,16 @@ int sumOfRatingNumbersOfAllAcceptedParts(const std::vector<std::string>& systemL
                                }
                                return acc;
                            });
+}
+
+int64_t numDistinctCombinationsAccepted(const std::vector<std::string>& systemLines)
+{
+    WorkflowAnalyzer workflowAnalyzer = createWorkflowAnalyzer(systemLines);
+    std::vector<CategoryToRating> parts = createParts(systemLines);
+
+    workflowAnalyzer.analyze();
+
+    return workflowAnalyzer.getNumDistinctCombinationsAccepted();
 }
 
 }

@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::sumOfRatingNumbersOfAllAcceptedParts(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numDistinctCombinationsAccepted(lines) << std::endl;
 }
