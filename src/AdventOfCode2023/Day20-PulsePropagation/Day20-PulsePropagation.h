@@ -15,6 +15,7 @@ namespace Day20
 {
 
 int numLowAndHighPulsesMultipliedTogether(const std::vector<std::string>& moduleLines);
+int64_t fewestNumButtonPressesToDeliverLowPulseToRx(const std::vector<std::string>& moduleLines);
 
 }
 }
