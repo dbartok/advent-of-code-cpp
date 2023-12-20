@@ -251,6 +251,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Test|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Day20-PulsePropagation.cpp" />
+    <ClCompile Include="Module.cpp" />
+    <ClCompile Include="PulseProcessor.cpp" />
     <ClCompile Include="test_Day20-PulsePropagation.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -262,6 +264,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day20-PulsePropagation.h" />
+    <ClInclude Include="Module.h" />
+    <ClInclude Include="PulseProcessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
