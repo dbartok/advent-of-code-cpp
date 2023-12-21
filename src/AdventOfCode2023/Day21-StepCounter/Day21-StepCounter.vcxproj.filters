@@ -20,9 +20,15 @@
     <ClCompile Include="Day21-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GardenTraverser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day21-StepCounter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GardenTraverser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
