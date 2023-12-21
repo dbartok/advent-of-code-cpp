@@ -33,4 +33,18 @@ public:
         Assert::AreEqual(16, CurrentDay::numGardenPlotsReachableAfterSteps(lines, 6));
     }
 
+    TEST_METHOD(numGardenPlotsReachableAfterSeveralSteps_SimpleCustomTest)
+    {
+        const std::vector<std::string> lines =
+        {
+            ".....",
+            ".#...",
+            "..S..",
+            "...#.",
+            ".....",
+        };
+
+        Assert::AreEqual(292ll, CurrentDay::numGardenPlotsReachableAfterSeveralSteps(lines, 3 * 5 + 2));
+    }
+
 };

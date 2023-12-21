@@ -10,7 +10,8 @@ __END_LIBRARIES_DISABLE_WARNINGS
 namespace
 {
 
-unsigned NUM_STEPS_PART_ONE = 64;
+int NUM_STEPS_PART_ONE = 64;
+int NUM_STEPS_PART_TWO = 26501365;
 
 }
 
@@ -21,7 +22,8 @@ namespace Year2023
 namespace Day21
 {
 
-int numGardenPlotsReachableAfterSteps(const std::vector<std::string>& mapLines, unsigned numSteps = NUM_STEPS_PART_ONE);
+int numGardenPlotsReachableAfterSteps(const std::vector<std::string>& mapLines, int numSteps = NUM_STEPS_PART_ONE);
+int64_t numGardenPlotsReachableAfterSeveralSteps(const std::vector<std::string>& mapLines, int numSteps = NUM_STEPS_PART_TWO);
 
 }
 }

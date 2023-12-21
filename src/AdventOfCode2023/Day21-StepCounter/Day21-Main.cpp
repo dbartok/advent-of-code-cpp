@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numGardenPlotsReachableAfterSteps(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numGardenPlotsReachableAfterSeveralSteps(lines) << std::endl;
 }

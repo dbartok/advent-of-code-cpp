@@ -7,6 +7,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 
 #include <algorithm>
 #include <unordered_set>
+#include <iostream>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
@@ -46,13 +47,13 @@ public:
         }
     }
 
-    void traverse(unsigned numSteps)
+    void traverse(int numSteps)
     {
         CoordinatesSet currentReachableCoordinatesQueue;
         CoordinatesSet nextReachableCoordinatesQueue;
         nextReachableCoordinatesQueue.insert(m_startCoordinates);
 
-        for (unsigned step = 0; step < numSteps; ++step)
+        for (int step = 0; step < numSteps; ++step)
         {
             std::swap(currentReachableCoordinatesQueue, nextReachableCoordinatesQueue);
 
@@ -91,7 +92,7 @@ private:
 
     char getSoilTypeAt(const Coordinates& coordinates) const
     {
-        return m_map.at(coordinates.second).at(coordinates.first);
+        return m_map.at(mod(coordinates.second, m_height)).at(mod(coordinates.first, m_width));
     }
 
     std::vector<Coordinates> getAllReachableNeighborCoordinates(const Coordinates& baseCoordinates)
@@ -116,15 +117,76 @@ private:
 
         return reachableNeighborCoordinates;
     }
+
+    static int mod(int dividend, int divisor)
+    {
+        int modulus = dividend % divisor;
+
+        if (modulus < 0)
+        {
+            modulus += divisor;
+        }
+
+        return modulus;
+    }
 };
 
-int numGardenPlotsReachableAfterSteps(const std::vector<std::string>& mapLines, unsigned numSteps)
+// Calculate value at x according to Lagrange interpolation based on an array of known points in the function
+// https://en.wikipedia.org/wiki/Polynomial_interpolation#Constructing_the_interpolation_polynomial
+int64_t getInterpolatedValue(std::vector<Coordinates> knownPoints, int x)
+{
+    int64_t interpolatedValue = 0;
+
+    for (int i = 0; i < knownPoints.size(); ++i)
+    {
+        int64_t currentTerm = 1;
+
+        for (int j = 0; j < knownPoints.size(); ++j)
+        {
+            if (j != i)
+            {
+                currentTerm *= (x - knownPoints.at(j).first) / (knownPoints.at(i).first - knownPoints.at(j).first);
+            }
+        }
+
+        currentTerm *= knownPoints.at(i).second;
+        interpolatedValue += currentTerm;
+    }
+
+    return interpolatedValue;
+}
+
+int numGardenPlotsReachableAfterSteps(const std::vector<std::string>& mapLines, int numSteps)
 {
     GardenTraverser gardenTraverser{mapLines};
 
     gardenTraverser.traverse(numSteps);
 
     return gardenTraverser.getNumReachablePositions();
+}
+
+int64_t numGardenPlotsReachableAfterSeveralSteps(const std::vector<std::string>& mapLines, int numSteps)
+{
+    const int gridSize = mapLines.size();
+    const int offset = gridSize / 2;
+
+    assert(numSteps % gridSize == offset);
+
+    std::vector<Coordinates> firstFewCoordinatesOfGrowthFunction;
+    for (int x = 0; x < 3; ++x)
+    {
+        const unsigned numCurrentSteps = x * gridSize + offset;
+
+        GardenTraverser gardenTraverser{mapLines};
+        gardenTraverser.traverse(numCurrentSteps);
+        const int numReachablePositions = gardenTraverser.getNumReachablePositions();
+
+        firstFewCoordinatesOfGrowthFunction.emplace_back(x, numReachablePositions);
+    }
+
+    const int desiredXCoordinateOfGrowthFunction = (numSteps - offset) / gridSize;
+
+    return getInterpolatedValue(firstFewCoordinatesOfGrowthFunction, desiredXCoordinateOfGrowthFunction);
 }
 
 }
