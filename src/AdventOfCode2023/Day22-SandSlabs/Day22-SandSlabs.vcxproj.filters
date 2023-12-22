@@ -20,9 +20,15 @@
     <ClCompile Include="Day22-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BrickFallingSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day22-SandSlabs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BrickFallingSimulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
