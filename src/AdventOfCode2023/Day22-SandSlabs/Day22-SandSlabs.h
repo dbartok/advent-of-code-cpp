@@ -14,6 +14,7 @@ namespace Day22
 {
 
 int numBricksSafeToDisintegrate(const std::vector<std::string>& brickSnapshotLines);
+int sumOfNumBricksFallingAcrossAllDisintegrations(const std::vector<std::string>& brickSnapshotLines);
 
 }
 }

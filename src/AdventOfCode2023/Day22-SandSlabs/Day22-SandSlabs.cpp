@@ -11,6 +11,7 @@ __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <Eigen/dense>
 
 #include <unordered_set>
+#include <numeric>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace AdventOfCode
@@ -70,10 +71,12 @@ public:
 
         std::vector<Vector3D> allOccupiedPositions;
 
-        for (Vector3D position = m_startPosition; position != m_endPosition + difference; position += difference)
+        for (Vector3D position = m_startPosition; position != m_endPosition; position += difference)
         {
             allOccupiedPositions.push_back(position);
         }
+
+        allOccupiedPositions.push_back(m_endPosition);
 
         return allOccupiedPositions;
     }
@@ -81,6 +84,11 @@ public:
     bool operator==(const Brick& other) const
     {
         return m_startPosition == other.m_startPosition && m_endPosition == other.m_endPosition;
+    }
+
+    bool operator!=(const Brick& other) const
+    {
+        return !(*this == other);
     }
 
 private:
@@ -94,42 +102,18 @@ public:
     BrickFallingSimulator(std::vector<Brick> bricks)
         : m_bricks{std::move(bricks)}
     {
-
-    }
-
-    int determineNumBricksSafeToDisintegrate()
-    {
-        settleAllIgnoring(boost::none);
-
-        int numBricksSafeToDisintegrate = 0;
-
-        std::vector<Brick> brickCandidatesForDisintegration{m_bricks.begin(), m_bricks.end()};
-        for (const auto& brickCandidateForDisintegration : brickCandidatesForDisintegration)
+        for (const auto& brick : m_bricks)
         {
-            auto bricksBeforeDisintegration = m_bricks;
-
-            int numBricksMoved = settleAllIgnoring(brickCandidateForDisintegration);
-
-            if (numBricksMoved == 0)
+            for (const auto& position : brick.getAllOccupiedPositions())
             {
-                ++numBricksSafeToDisintegrate;
+                m_occupiedPositions.insert(position);
             }
-
-            m_bricks = bricksBeforeDisintegration;
         }
-
-        return numBricksSafeToDisintegrate;
     }
-
-private:
-    std::vector<Brick> m_bricks;
-    std::unordered_set<Vector3D, Vector3DHash> m_occupiedPositions;
 
     // Returns the number of bricks moved during the settling process
-    int settleAllIgnoring(boost::optional<const Brick&> ignoredBrick)
+    int settle()
     {
-        setOccupiedPositions(ignoredBrick);
-
         std::sort(m_bricks.begin(), m_bricks.end(), [](const auto& lhs, const auto& rhs)
                   {
                       return lhs.getLowestZCoordinate() < rhs.getLowestZCoordinate();
@@ -139,11 +123,6 @@ private:
 
         for (auto& brick : m_bricks)
         {
-            if (ignoredBrick.has_value() && ignoredBrick.get() == brick)
-            {
-                continue;
-            }
-
             if (settleBrick(brick))
             {
                 ++numBricksMoved;
@@ -153,46 +132,38 @@ private:
         return numBricksMoved;
     }
 
+    const std::vector<Brick>& getBricks() const
+    {
+        return m_bricks;
+    }
+
+private:
+    std::vector<Brick> m_bricks;
+    std::unordered_set<Vector3D, Vector3DHash> m_occupiedPositions;
+
     // Returns true if the brick has moved as part of settling
     bool settleBrick(Brick& brick)
     {
-        eraseBrick(brick);
+        eraseBrickFromOccupiedPositions(brick);
 
-        int numDownMovements = 0;
+        int numDownwardsMovements = 0;
 
         while (!isBrickColliding(brick))
         {
             brick.moveDown();
-            ++numDownMovements;
+            ++numDownwardsMovements;
         }
 
-        // We deliberately moved the brick one step too far to find the contradiction, so the settled position is actually the previous position
+        // We deliberately moved the brick one step too far to find the collision, so the settled position is actually the previous position
         brick.moveUp();
-        --numDownMovements;
+        --numDownwardsMovements;
 
-        insertBrick(brick);
+        insertBrickIntoOccupiedPositions(brick);
 
-        return numDownMovements > 0;
+        return numDownwardsMovements > 0;
     }
 
-    void setOccupiedPositions(boost::optional<const Brick&> ignoredBrick)
-    {
-        m_occupiedPositions.clear();
-        for (const auto& brick : m_bricks)
-        {
-            if (ignoredBrick.has_value() && ignoredBrick.get() == brick)
-            {
-                continue;
-            }
-
-            for (const auto& position : brick.getAllOccupiedPositions())
-            {
-                m_occupiedPositions.insert(position);
-            }
-        }
-    }
-
-    void eraseBrick(const Brick& brick)
+    void eraseBrickFromOccupiedPositions(const Brick& brick)
     {
         for (const Vector3D& position : brick.getAllOccupiedPositions())
         {
@@ -200,7 +171,7 @@ private:
         }
     }
 
-    void insertBrick(const Brick& brick)
+    void insertBrickIntoOccupiedPositions(const Brick& brick)
     {
         for (const Vector3D& position : brick.getAllOccupiedPositions())
         {
@@ -257,12 +228,55 @@ std::vector<Brick> parseBrickSnapshotLines(const std::vector<std::string>& brick
     return bricks;
 }
 
+std::vector<Brick> createCopyWithOneElementRemoved(const std::vector<Brick>& initiallySettledBricks, const Brick& brickToDisintegrate)
+{
+    std::vector<Brick> copyWithOneElementRemoved;
+
+    for (const auto& brick : initiallySettledBricks)
+    {
+        if (brick != brickToDisintegrate)
+        {
+            copyWithOneElementRemoved.push_back(brick);
+        }
+    }
+
+    return copyWithOneElementRemoved;
+}
+
+std::vector<int> getNumBricksFallingForAllDisintegrations(const std::vector<std::string>& brickSnapshotLines)
+{
+    std::vector<Brick> inputBricks = parseBrickSnapshotLines(brickSnapshotLines);
+    BrickFallingSimulator brickFallingSimulator{std::move(inputBricks)};
+
+    brickFallingSimulator.settle();
+
+    std::vector<Brick> initiallySettledBricks = brickFallingSimulator.getBricks();
+
+    std::vector<int> numBricksFallingForAllDisintegrations;
+
+    for (const auto& brickToDisintegrate : initiallySettledBricks)
+    {
+        std::vector<Brick> bricksWithOneBrickDisintegrated = createCopyWithOneElementRemoved(initiallySettledBricks, brickToDisintegrate);
+        BrickFallingSimulator brickFallingSimulator{std::move(bricksWithOneBrickDisintegrated)};
+        int numBricksMoved = brickFallingSimulator.settle();
+        numBricksFallingForAllDisintegrations.push_back(numBricksMoved);
+    }
+
+    return numBricksFallingForAllDisintegrations;
+}
+
 int numBricksSafeToDisintegrate(const std::vector<std::string>& brickSnapshotLines)
 {
-    std::vector<Brick> bricks = parseBrickSnapshotLines(brickSnapshotLines);
-    BrickFallingSimulator brickFallingSimulator{std::move(bricks)};
+    std::vector<int> numBricksFallingForAllDisintegrations = getNumBricksFallingForAllDisintegrations(brickSnapshotLines);
 
-    return brickFallingSimulator.determineNumBricksSafeToDisintegrate();
+    return std::count(numBricksFallingForAllDisintegrations.cbegin(), numBricksFallingForAllDisintegrations.cend(), 0);
+}
+
+int sumOfNumBricksFallingAcrossAllDisintegrations(const std::vector<std::string>& brickSnapshotLines)
+{
+    std::vector<int> numBricksFallingForAllDisintegrations = getNumBricksFallingForAllDisintegrations(brickSnapshotLines);
+
+    return std::accumulate(numBricksFallingForAllDisintegrations.cbegin(), numBricksFallingForAllDisintegrations.cend(), 0);
 }
 
 }

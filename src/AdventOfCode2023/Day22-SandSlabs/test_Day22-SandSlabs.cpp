@@ -15,18 +15,23 @@ public:
 
     TEST_METHOD(numBricksSafeToDisintegrate_SimpleTests)
     {
-        const std::vector<std::string> lines =
-        {
-            "1,0,1~1,2,1",
-            "0,0,2~2,0,2",
-            "0,2,3~2,2,3",
-            "0,0,4~0,2,4",
-            "2,0,5~2,2,5",
-            "0,1,6~2,1,6",
-            "1,1,8~1,1,9"
-        };
-
-        Assert::AreEqual(5, CurrentDay::numBricksSafeToDisintegrate(lines));
+        Assert::AreEqual(5, CurrentDay::numBricksSafeToDisintegrate(m_lines));
     }
 
+    TEST_METHOD(sumOfNumBricksFallingAcrossAllDisintegrations_SimpleTests)
+    {
+        Assert::AreEqual(7, CurrentDay::sumOfNumBricksFallingAcrossAllDisintegrations(m_lines));
+    }
+
+private:
+    const std::vector<std::string> m_lines =
+    {
+        "1,0,1~1,2,1",
+        "0,0,2~2,0,2",
+        "0,2,3~2,2,3",
+        "0,0,4~0,2,4",
+        "2,0,5~2,2,5",
+        "0,1,6~2,1,6",
+        "1,1,8~1,1,9"
+    };
 };

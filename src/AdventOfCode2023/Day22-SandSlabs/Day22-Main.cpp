@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numBricksSafeToDisintegrate(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumOfNumBricksFallingAcrossAllDisintegrations(lines) << std::endl;
 }
