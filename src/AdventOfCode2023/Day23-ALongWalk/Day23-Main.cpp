@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numStepsInLongestHike(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::numStepsInLongestHikeWithoutSlopes(lines) << std::endl;
 }

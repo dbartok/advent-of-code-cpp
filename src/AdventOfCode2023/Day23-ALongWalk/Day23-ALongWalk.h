@@ -15,6 +15,7 @@ namespace Day23
 {
 
 int numStepsInLongestHike(const std::vector<std::string>& forestMapLines);
+int numStepsInLongestHikeWithoutSlopes(const std::vector<std::string>& forestMapLines);
 
 }
 }
