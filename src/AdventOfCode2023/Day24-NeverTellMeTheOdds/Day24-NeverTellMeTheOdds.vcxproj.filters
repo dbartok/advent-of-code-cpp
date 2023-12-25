@@ -20,9 +20,15 @@
     <ClCompile Include="Day24-Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HailstoneSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day24-NeverTellMeTheOdds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HailstoneSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
