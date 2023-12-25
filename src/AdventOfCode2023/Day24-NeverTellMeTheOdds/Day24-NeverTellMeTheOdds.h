@@ -23,6 +23,7 @@ namespace Day24
 {
 
 int numXYIntersectionsWithinTestArea(const std::vector<std::string>& hailstoneLines, double testAreaMin = TEST_AREA_MIN, double testAreaMax = TEST_AREA_MAX);
+int64_t sumOfCoordinatesOfIniitialRockPosition(const std::vector<std::string>& hailstoneLines);
 
 }
 }

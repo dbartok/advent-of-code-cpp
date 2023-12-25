@@ -23,4 +23,5 @@ int main()
     }
 
     std::cout << "First part: " << CurrentDay::numXYIntersectionsWithinTestArea(lines) << std::endl;
+    std::cout << "Second part: " << CurrentDay::sumOfCoordinatesOfIniitialRockPosition(lines) << std::endl;
 }
