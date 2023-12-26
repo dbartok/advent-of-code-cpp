@@ -1,13 +1,11 @@
 #include "Day25-Snowverload.h"
 
+#include "ComponentGraphAnalyzer.h"
+
 #include <AdventOfCodeCommon/DisableLibraryWarningsMacros.h>
 
 __BEGIN_LIBRARIES_DISABLE_WARNINGS
 #include <boost/algorithm/string.hpp>
-
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
 __END_LIBRARIES_DISABLE_WARNINGS
 
 namespace
@@ -23,139 +21,6 @@ namespace Year2023
 {
 namespace Day25
 {
-
-struct Edge;
-using EdgePtrs = std::vector<Edge*>;
-using EdgeSharedPtr = std::shared_ptr<Edge>;
-using EdgeSharedPtrs = std::vector<EdgeSharedPtr>;
-using NodeNameToEdgeSharedPtrs = std::unordered_map<std::string, EdgeSharedPtrs>;
-
-struct Edge
-{
-    std::string sourceNodeName;
-    std::string destinationNodeName;
-    int capacity = 1;
-    int flow = 0;
-    Edge* reverse = nullptr;
-
-    Edge(std::string sourceNodeName, std::string destinationNodeName)
-        : sourceNodeName{std::move(sourceNodeName)}
-        , destinationNodeName{std::move(destinationNodeName)}
-    {
-
-    }
-
-    bool hasFreeCapacity() const
-    {
-        return capacity - flow > 0;
-    }
-};
-
-class ComponentGraphAnalyzer
-{
-public:
-    ComponentGraphAnalyzer(NodeNameToEdgeSharedPtrs nodeNameToEdgeSharedPtrs, std::string startNodeName, std::string endNodeName)
-        : m_nodeNameToEdgeSharedPtrs{std::move(nodeNameToEdgeSharedPtrs)}
-        , m_startNodeName{std::move(startNodeName)}
-        , m_endNodeName{std::move(endNodeName)}
-    {
-
-    }
-
-    void determineMaxFlow()
-    {
-        int maxFlowValue = 0;
-
-        while (true)
-        {
-            EdgePtrs augmentingPath = createAugmentingPath();
-            if (augmentingPath.empty())
-            {
-                break;
-            }
-
-            processAugmentingPath(augmentingPath);
-
-            ++maxFlowValue;
-        }
-
-        m_maxFlowValue = maxFlowValue;
-    }
-
-    int getMaxFlowValue() const
-    {
-        return m_maxFlowValue;
-    }
-
-    int getMinCutPartitionSizesProduct() const
-    {
-        return m_visitedNodeNames.size() * (m_nodeNameToEdgeSharedPtrs.size() - m_visitedNodeNames.size());
-    }
-
-private:
-    struct TraversalNode
-    {
-        std::string name;
-        EdgePtrs path;
-
-        TraversalNode(std::string name, EdgePtrs path)
-            : name{std::move(name)}
-            , path{std::move(path)}
-        {
-
-        }
-    };
-
-    NodeNameToEdgeSharedPtrs m_nodeNameToEdgeSharedPtrs;
-    std::string m_startNodeName;
-    std::string m_endNodeName;
-
-    std::unordered_set<std::string> m_visitedNodeNames;
-    int m_maxFlowValue = 0;
-
-    EdgePtrs createAugmentingPath()
-    {
-        std::queue<TraversalNode> queue;
-        queue.emplace(m_startNodeName, EdgePtrs{});
-
-        m_visitedNodeNames.clear();
-        m_visitedNodeNames.insert(m_startNodeName);
-
-        while (!queue.empty())
-        {
-            TraversalNode currentTraversalNode = queue.front();
-            queue.pop();
-
-            if (currentTraversalNode.name == m_endNodeName)
-            {
-                return currentTraversalNode.path;
-            }
-
-            const EdgeSharedPtrs& neighborEdgeSharedPtrs = m_nodeNameToEdgeSharedPtrs.at(currentTraversalNode.name);
-
-            for (const EdgeSharedPtr& neighborEdgeSharedPtr : neighborEdgeSharedPtrs)
-            {
-                if (neighborEdgeSharedPtr->hasFreeCapacity() && m_visitedNodeNames.insert(neighborEdgeSharedPtr->destinationNodeName).second)
-                {
-                    EdgePtrs newPath{currentTraversalNode.path};
-                    newPath.push_back(neighborEdgeSharedPtr.get());
-                    queue.emplace(neighborEdgeSharedPtr->destinationNodeName, std::move(newPath));
-                }
-            }
-        }
-
-        return {};
-    }
-
-    void processAugmentingPath(const EdgePtrs& augmentingPath)
-    {
-        for (Edge* edgePtr : augmentingPath)
-        {
-            edgePtr->flow += 1;
-            edgePtr->reverse->flow -= 1;
-        }
-    }
-};
 
 NodeNameToEdgeSharedPtrs parseConnectionLines(const std::vector<std::string>& connectionLines)
 {
